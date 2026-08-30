@@ -13,7 +13,6 @@ const { height = 34, onDark = false, style = '' } = Astro.props;
 <Image
   src={logoSrc}
   alt="Secret Spots Iceland"
-  height={height}
   loading="eager"
   style={`height:${height}px;width:auto;filter:${onDark ? 'brightness(0) invert(1)' : 'none'};${style}`}
 />

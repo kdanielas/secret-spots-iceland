@@ -31,7 +31,7 @@
 --surface-dark:var(--ink-800);
 --surface-dark-panel:var(--ink-700);
 --surface-dark-field:rgba(251,246,240,.06);
---scrim-image:linear-gradient(180deg,rgba(23,32,40,.55) 0%,rgba(23,32,40,.28) 45%,rgba(23,32,40,.62) 100%); /* @kind other */
+--scrim-image:linear-gradient(180deg,rgba(23,32,40,.68) 0%,rgba(23,32,40,.48) 45%,rgba(23,32,40,.74) 100%); /* @kind other */
 --scrim-chip:rgba(29,45,68,.55);
 
 /* --- semantic: borders --- */

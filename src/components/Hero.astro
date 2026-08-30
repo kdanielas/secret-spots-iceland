@@ -34,10 +34,10 @@ const {
     class="hero-inner"
     style={`position:relative;display:flex;flex-direction:column;gap:var(--space-6);align-items:${align === 'center' ? 'center' : 'flex-start'};text-align:${align};margin:0 auto;max-width:var(--container-max);width:100%`}
   >
-    <h1 class="hero-title" style="color:var(--cream-50);margin:0;max-width:720px">
+    <h1 class="hero-title" style="color:var(--cream-50);margin:0;max-width:720px;text-shadow:0 2px 4px rgba(0,0,0,.55),0 8px 28px rgba(0,0,0,.5)">
       <slot name="title" />
     </h1>
-    {subtitle ? <p style="font:var(--type-body);color:rgba(251,250,248,.88);margin:0;max-width:620px">{subtitle}</p> : null}
+    {subtitle ? <p style="font:var(--type-body);font-size:1.125rem;color:rgba(251,250,248,.92);margin:0;max-width:620px;text-shadow:0 1px 3px rgba(0,0,0,.55),0 4px 18px rgba(0,0,0,.5)">{subtitle}</p> : null}
     <div class="hero-ctas" style={`justify-content:${align === 'center' ? 'center' : 'flex-start'}`}>
       {primaryCta ? <Button variant="primary" href={primaryHref}>{primaryCta}</Button> : null}
       {secondaryCta ? <Button variant="outlineLight" href={secondaryHref}>{secondaryCta}</Button> : null}

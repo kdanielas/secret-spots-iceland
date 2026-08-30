@@ -8,13 +8,15 @@ interface Props {
   onDark?: boolean;
   maxWidth?: string;
   style?: string;
+  'data-reveal'?: boolean | string;
 }
-const { eyebrow, align = 'left', size = 'lg', onDark = false, maxWidth, style = '' } = Astro.props;
+const { eyebrow, align = 'left', size = 'lg', onDark = false, maxWidth, style = '', ...rest } = Astro.props;
 const sizeClass: Record<string, string> = { xl: 'sh-xl', lg: 'sh-lg', md: 'sh-md' };
 const hasLead = Astro.slots.has('lead');
 ---
 
 <div
+  {...rest}
   style={`display:flex;flex-direction:column;gap:var(--space-4);align-items:${align === 'center' ? 'center' : 'flex-start'};text-align:${align};${maxWidth ? `max-width:${maxWidth};` : ''}${align === 'center' ? 'margin-left:auto;margin-right:auto;' : ''}${style}`}
 >
   {eyebrow ? <Eyebrow tone={onDark ? 'amber' : 'accent'}>{eyebrow}</Eyebrow> : null}

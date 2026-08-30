@@ -1,0 +1,18 @@
+/* Scroll-triggered entrance animation. Gated behind .js-reveal-ready (set by
+   an inline script in <head>) so content is never hidden without JS. */
+.js-reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+}
+.js-reveal-ready [data-reveal].revealed {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
