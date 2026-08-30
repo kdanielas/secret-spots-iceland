@@ -1,0 +1,72 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'primary' | 'dark' | 'outline' | 'outlineLight' | 'link';
+  size?: 'sm' | 'md' | 'lg';
+  icon?: string;
+  iconAfter?: string;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  href?: string;
+  type?: 'button' | 'submit';
+  style?: string;
+  class?: string;
+}
+const {
+  variant = 'primary',
+  size = 'md',
+  icon,
+  iconAfter,
+  fullWidth = false,
+  disabled = false,
+  href,
+  type = 'button',
+  style = '',
+  class: className,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const isLink = variant === 'link';
+const sizeFontSize = size === 'lg' || size === 'md' ? '.9375rem' : '.8125rem';
+const iconSize = size === 'sm' ? 14 : 16;
+
+const base = `display:${fullWidth ? 'flex' : 'inline-flex'};align-items:center;justify-content:center;gap:${isLink ? '8px' : '10px'};width:${fullWidth ? '100%' : 'auto'};font:var(--type-button);font-size:${sizeFontSize};letter-spacing:${isLink ? 'var(--tracking-eyebrow)' : '0'};text-transform:${isLink ? 'uppercase' : 'none'};border-radius:var(--radius-pill);cursor:${disabled ? 'not-allowed' : 'pointer'};text-decoration:none;white-space:nowrap;transition:var(--transition-control);opacity:${disabled ? 0.45 : 1};${style}`;
+---
+
+<Tag
+  href={href}
+  type={Tag === 'button' ? type : undefined}
+  disabled={Tag === 'button' ? disabled : undefined}
+  class:list={[`btn`, `btn-${variant}`, `btn-${size}`, className]}
+  style={base}
+>
+  {icon ? <Icon name={icon} size={iconSize} /> : null}
+  <slot />
+  {iconAfter ? <Icon name={iconAfter} size={iconSize} /> : null}
+</Tag>
+
+<style>
+  .btn-sm { height: var(--control-h-sm); padding: 0 var(--control-px-sm); }
+  .btn-md { height: var(--control-h-md); padding: 0 var(--control-px-md); }
+  .btn-lg { height: var(--control-h-lg); padding: 0 var(--control-px-lg); }
+
+  .btn-primary { background: var(--action-primary-bg); color: var(--action-primary-fg); border: 1px solid transparent; }
+  .btn-primary:hover:not(:disabled) { background: var(--action-primary-bg-hover); }
+  .btn-primary:active:not(:disabled) { transform: var(--press-scale); }
+
+  .btn-dark { background: var(--action-dark-bg); color: var(--action-dark-fg); border: 1px solid transparent; }
+  .btn-dark:hover:not(:disabled) { background: var(--action-dark-bg-hover); }
+  .btn-dark:active:not(:disabled) { transform: var(--press-scale); }
+
+  .btn-outline { background: transparent; color: var(--action-outline-fg); border: 1px solid var(--action-outline-border); }
+  .btn-outline:hover:not(:disabled) { background: rgba(29,45,68,.05); border-color: var(--ink-900); }
+  .btn-outline:active:not(:disabled) { transform: var(--press-scale); }
+
+  .btn-outlineLight { background: rgba(23,32,40,.18); color: var(--cream-50); border: 1px solid var(--border-on-dark); }
+  .btn-outlineLight:hover:not(:disabled) { background: rgba(251,246,240,.16); border-color: var(--cream-50); }
+  .btn-outlineLight:active:not(:disabled) { transform: var(--press-scale); }
+
+  .btn-link { background: transparent; color: var(--ink-900); border: 1px solid transparent; padding: 0; height: auto; }
+  .btn-link:hover:not(:disabled) { color: var(--blue-500); }
+</style>

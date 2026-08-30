@@ -1,0 +1,55 @@
+:root{
+/* --- base palette, sampled from the Secret Spots Iceland mockups --- */
+--amber-300:#F8C877;--amber-400:#F4B04B;--amber-500:#E5A038;--amber-600:#C9862A;
+--blue-500:#396280;--blue-400:#4C7593;--blue-300:#69889D;--blue-200:#98AEBB;
+--ink-900:#1D2D44;--ink-800:#23343E;--ink-700:#324856;--ink-600:#465C6B;
+--espresso-900:#291F1E;--espresso-800:#3A2D2B;
+--gray-600:#5C6570;--gray-500:#7A828C;--gray-400:#9AA1A9;
+--cream-50:#FBFAF8;--cream-100:#FBF6F0;--sand-100:#F1F0EC;--sand-200:#E9E6DD;--sand-300:#DCD8CC;
+--white:#FFFFFF;
+--star-gold:#F4B04B;
+
+/* --- semantic: text --- */
+--text-heading:var(--ink-900);
+--text-body:var(--gray-600);
+--text-muted:var(--gray-500);
+--text-eyebrow:var(--blue-500);
+--text-accent:var(--blue-500);
+--text-link:var(--ink-900);
+--text-link-hover:var(--blue-500);
+--text-on-dark:var(--cream-100);
+--text-on-dark-muted:rgba(251,246,240,.70);
+--text-on-amber:var(--espresso-900);
+
+/* --- semantic: surfaces --- */
+--surface-page:var(--cream-100);
+--surface-page-alt:var(--sand-200);
+--surface-raised:var(--cream-50);
+--surface-card:var(--sand-200);
+--surface-card-light:var(--cream-50);
+--surface-chip:var(--sand-100);
+--surface-dark:var(--ink-800);
+--surface-dark-panel:var(--ink-700);
+--surface-dark-field:rgba(251,246,240,.06);
+--scrim-image:linear-gradient(180deg,rgba(23,32,40,.55) 0%,rgba(23,32,40,.28) 45%,rgba(23,32,40,.62) 100%); /* @kind other */
+--scrim-chip:rgba(29,45,68,.55);
+
+/* --- semantic: borders --- */
+--border-subtle:rgba(29,45,68,.12);
+--border-strong:rgba(29,45,68,.28);
+--border-field:rgba(29,45,68,.16);
+--border-on-dark:rgba(251,246,240,.28);
+--border-on-dark-field:rgba(251,246,240,.14);
+
+/* --- semantic: actions --- */
+--action-primary-bg:var(--amber-400);
+--action-primary-bg-hover:var(--amber-500);
+--action-primary-fg:var(--espresso-900);
+--action-dark-bg:var(--espresso-900);
+--action-dark-bg-hover:var(--espresso-800);
+--action-dark-fg:var(--cream-50);
+--action-outline-fg:var(--ink-900);
+--action-outline-border:var(--border-strong);
+--action-ghost-fg:var(--blue-500);
+--focus-ring:0 0 0 3px rgba(57,98,128,.35);
+}

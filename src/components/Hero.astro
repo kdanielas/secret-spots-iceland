@@ -1,0 +1,45 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  image: string;
+  subtitle?: string;
+  primaryCta?: string;
+  secondaryCta?: string;
+  primaryHref?: string;
+  secondaryHref?: string;
+  height?: number;
+  align?: 'center' | 'left';
+  style?: string;
+}
+const {
+  image,
+  subtitle,
+  primaryCta = 'Check Availability',
+  secondaryCta = 'Explore Iceland Photography Tours',
+  primaryHref = '/tours',
+  secondaryHref = '/tours',
+  height = 420,
+  align = 'center',
+  style = '',
+} = Astro.props;
+---
+
+<section class="hero-section" style={`--hero-h:${height}px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;${style}`}>
+  <img src={image} alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+  <div style="position:absolute;inset:0;background:var(--scrim-image)"></div>
+  <div
+    class="hero-inner"
+    style={`position:relative;display:flex;flex-direction:column;gap:var(--space-6);align-items:${align === 'center' ? 'center' : 'flex-start'};text-align:${align};margin:0 auto;max-width:var(--container-max);width:100%`}
+  >
+    <h1 class="hero-title" style="color:var(--cream-50);margin:0;max-width:720px">
+      <slot name="title" />
+    </h1>
+    {subtitle ? <p style="font:var(--type-body);color:rgba(251,250,248,.88);margin:0;max-width:620px">{subtitle}</p> : null}
+    <div class="hero-ctas" style={`justify-content:${align === 'center' ? 'center' : 'flex-start'}`}>
+      {primaryCta ? <Button variant="primary" href={primaryHref}>{primaryCta}</Button> : null}
+      {secondaryCta ? <Button variant="outlineLight" href={secondaryHref}>{secondaryCta}</Button> : null}
+    </div>
+    <slot />
+  </div>
+</section>

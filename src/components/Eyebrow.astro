@@ -1,0 +1,20 @@
+---
+interface Props {
+  tone?: 'accent' | 'amber' | 'muted' | 'onDark';
+  align?: string;
+  style?: string;
+}
+const { tone = 'accent', align, style = '' } = Astro.props;
+const colors: Record<string, string> = {
+  accent: 'var(--text-eyebrow)',
+  amber: 'var(--amber-400)',
+  muted: 'var(--text-muted)',
+  onDark: 'var(--amber-400)',
+};
+---
+
+<div
+  style={`font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:${colors[tone]};${align ? `text-align:${align};` : ''}${style}`}
+>
+  <slot />
+</div>

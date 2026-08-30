@@ -1,0 +1,130 @@
+/* Breakpoints: 1024px (tablet) and 640px (mobile). No mobile/tablet comps were
+   supplied in the design system — these rules extrapolate from the token scale
+   (see HANDOFF.md) rather than introducing new visual language. */
+
+/* --- layout primitives --- */
+.container-pad { padding-left: var(--space-9); padding-right: var(--space-9); }
+@media (max-width: 640px) {
+  .container-pad { padding-left: var(--space-6); padding-right: var(--space-6); }
+}
+
+.section-py { padding-top: var(--section-py); padding-bottom: var(--section-py); }
+.section-py-tight { padding-top: var(--section-py-tight); padding-bottom: var(--section-py-tight); }
+@media (max-width: 1024px) {
+  .section-py { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+  .section-py-tight { padding-top: var(--space-11); padding-bottom: var(--space-11); }
+}
+@media (max-width: 640px) {
+  .section-py { padding-top: var(--space-10); padding-bottom: var(--space-10); }
+  .section-py-tight { padding-top: var(--space-9); padding-bottom: var(--space-9); }
+}
+
+/* --- responsive grid pairs (two-column layouts that stack on tablet) --- */
+.rg-380-1fr { display: grid; grid-template-columns: 380px 1fr; gap: var(--space-13); align-items: start; }
+.rg-1fr-420 { display: grid; grid-template-columns: 1fr 420px; gap: var(--space-13); align-items: center; }
+.rg-1fr-1_2fr { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-13); align-items: start; }
+.rg-contact { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-13); align-items: start; }
+@media (max-width: 1024px) {
+  .rg-380-1fr, .rg-1fr-420, .rg-1fr-1_2fr, .rg-contact {
+    grid-template-columns: 1fr;
+    gap: var(--space-9);
+  }
+}
+
+/* --- 4-up grids (reviews, steps, image strips) --- */
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
+.grid-4-plain { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-9); }
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4-plain { grid-template-columns: repeat(2, 1fr); gap: var(--space-7); }
+}
+@media (max-width: 560px) {
+  .grid-4 { grid-template-columns: 1fr; }
+  .grid-4-plain { grid-template-columns: 1fr; }
+}
+
+.image-strip { display: grid; grid-template-columns: repeat(var(--strip-cols, 4), 1fr); }
+@media (max-width: 1024px) {
+  .image-strip { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .image-strip { grid-template-columns: 1fr; }
+}
+
+.stat-bar { display: grid; grid-template-columns: repeat(var(--stat-cols, 4), 1fr); }
+@media (max-width: 640px) {
+  .stat-bar { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-6); }
+}
+
+/* --- hero --- */
+.hero-section { min-height: var(--hero-h); }
+@media (max-width: 1024px) {
+  .hero-section { min-height: calc(var(--hero-h) * 0.82); }
+}
+@media (max-width: 640px) {
+  .hero-section { min-height: auto; }
+}
+.hero-inner { padding: var(--space-13) var(--space-9) var(--space-9); }
+@media (max-width: 640px) {
+  .hero-inner { padding: var(--space-10) var(--space-6) var(--space-8); }
+}
+.hero-title { font: var(--type-display-xl); }
+@media (max-width: 1024px) {
+  .hero-title { font-size: 2.75rem; line-height: 1.12; }
+}
+@media (max-width: 640px) {
+  .hero-title { font-size: 2rem; line-height: 1.16; }
+}
+.hero-ctas { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .hero-ctas { flex-direction: column; width: 100%; }
+  .hero-ctas > a, .hero-ctas > button { width: 100%; }
+}
+
+/* --- section headings --- */
+.sh-xl { font: var(--type-display-lg); }
+.sh-lg { font: var(--type-display-md); }
+.sh-md { font: var(--type-display-sm); }
+@media (max-width: 640px) {
+  .sh-xl { font-size: 2rem; line-height: 1.18; }
+  .sh-lg { font-size: 1.65rem; line-height: 1.22; }
+  .sh-md { font-size: 1.4rem; line-height: 1.24; }
+}
+
+/* --- featured-on bar --- */
+.featured-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); flex-wrap: wrap; }
+.featured-bar-platforms { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+@media (max-width: 640px) {
+  .featured-bar { flex-direction: column; align-items: flex-start; gap: var(--space-4); padding-left: var(--space-6) !important; padding-right: var(--space-6) !important; }
+}
+
+/* --- inquiry form --- */
+.inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+@media (max-width: 640px) {
+  .inquiry-grid { grid-template-columns: 1fr; }
+}
+
+/* --- site nav --- */
+.nav-toggle { display: none; }
+@media (max-width: 1024px) {
+  .site-header { position: relative; z-index: 50; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; background: none; border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm); cursor: pointer; color: var(--ink-900); padding: 0;
+  }
+  .site-nav {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
+    background: var(--surface-raised);
+    flex-direction: column; align-items: flex-start;
+    gap: var(--space-6); padding: var(--space-7) var(--space-9);
+    border-top: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-float);
+    max-height: calc(100vh - 100%);
+    overflow-y: auto;
+    opacity: 0; transform: translateY(-6px);
+    pointer-events: none;
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
+}

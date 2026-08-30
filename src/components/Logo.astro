@@ -1,0 +1,15 @@
+---
+interface Props {
+  height?: number;
+  src?: string;
+  onDark?: boolean;
+  style?: string;
+}
+const { height = 34, src = '/logo.png', onDark = false, style = '' } = Astro.props;
+---
+
+<img
+  src={src}
+  alt="Secret Spots Iceland"
+  style={`height:${height}px;width:auto;filter:${onDark ? 'brightness(0) invert(1)' : 'none'};${style}`}
+/>

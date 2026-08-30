@@ -1,0 +1,30 @@
+---
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow?: string;
+  align?: 'left' | 'center';
+  size?: 'xl' | 'lg' | 'md';
+  onDark?: boolean;
+  maxWidth?: string;
+  style?: string;
+}
+const { eyebrow, align = 'left', size = 'lg', onDark = false, maxWidth, style = '' } = Astro.props;
+const sizeClass: Record<string, string> = { xl: 'sh-xl', lg: 'sh-lg', md: 'sh-md' };
+const hasLead = Astro.slots.has('lead');
+---
+
+<div
+  style={`display:flex;flex-direction:column;gap:var(--space-4);align-items:${align === 'center' ? 'center' : 'flex-start'};text-align:${align};${maxWidth ? `max-width:${maxWidth};` : ''}${align === 'center' ? 'margin-left:auto;margin-right:auto;' : ''}${style}`}
+>
+  {eyebrow ? <Eyebrow tone={onDark ? 'amber' : 'accent'}>{eyebrow}</Eyebrow> : null}
+  <h2 class={sizeClass[size]} style={`color:${onDark ? 'var(--text-on-dark)' : 'var(--text-heading)'};margin:0`}>
+    <slot name="title" />
+  </h2>
+  {hasLead ? (
+    <p style={`font:var(--type-lead);color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-body)'};margin:0;max-width:620px`}>
+      <slot name="lead" />
+    </p>
+  ) : null}
+  <slot />
+</div>

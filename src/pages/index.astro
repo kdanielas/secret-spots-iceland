@@ -1,0 +1,152 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Hero from '../components/Hero.astro';
+import StatBar from '../components/StatBar.astro';
+import FeaturedOnBar from '../components/FeaturedOnBar.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import IconBullet from '../components/IconBullet.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import Chip from '../components/Chip.astro';
+import Button from '../components/Button.astro';
+import ImageStrip from '../components/ImageStrip.astro';
+import StepItem from '../components/StepItem.astro';
+import FaqItem from '../components/FaqItem.astro';
+
+const BULLETS = [
+  { icon: 'user', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
+  { icon: 'clock', title: 'Flexible, weather-adaptive itineraries', description: 'The plan changes with the weather and the light — never the other way around.' },
+  { icon: 'briefcase', title: 'Professional photography guidance', description: 'Luke is a photographer first — every stop is timed and framed for the shot.' },
+  { icon: 'truck', title: 'Comfortable, capable vehicles', description: "Built for Iceland's terrain, so weather and road conditions don't cancel the day." },
+  { icon: 'heart', title: 'Real local recommendations', description: 'Restaurants, hot springs and viewpoints Luke actually uses — not a sponsored list.' },
+];
+
+const TOUR_PREVIEW_IMAGES = [
+  '/images/helicopter-glacier-tour-iceland.webp',
+  '/images/south-coast-glacier-snowmobile.webp',
+  '/images/katla-glacier-hike-south-coast.webp',
+  '/images/plane-wreck-south-coast.webp',
+];
+
+const GALLERY_IMAGES = [
+  '/images/diamond-beach-iceland-woman-ice.webp',
+  '/images/glacier-lagoon-south-coast-drone.webp',
+  '/images/skogafoss-iceland-rainbow.webp',
+  '/images/kerid-crater-golden-circle.webp',
+];
+
+const REVIEWS = [
+  { name: 'Britta Hormann', date: 'August 2026', quote: 'Luke was seriously the best guide we could have asked for! He was knowledgeable, funny, easygoing, and somehow always knew where we should go' },
+  { name: 'Alexandra Klinke', date: 'August 2026', quote: 'An unforgettable day exploring Iceland! Luke took us to breathtaking places away from the crowds, including a beautiful waterfall hike that felt' },
+  { name: 'Ronald Ashby', date: 'August 2026', initial: 'R', quote: 'The whole process with Secret Spots of Iceland from the beginning to the end could not have been done better. Luke and Fifi were very responsive wit' },
+  { name: 'Marta Nowak', date: 'July 2026', initial: 'M', quote: 'We had two private days with Luke and both were completely different — he read the forecast and rebuilt the route each morning' },
+];
+
+const STEPS = [
+  { number: '01', title: 'Tell us your dates', description: 'Send your travel dates, group size and interests via WhatsApp or the form below.' },
+  { number: '02', title: 'Get a custom plan', description: 'Luke builds a route around the forecast, the light, and what you actually want to see.' },
+  { number: '03', title: 'Private tour day', description: 'Pickup in a comfortable vehicle, flexible pace, and stops most visitors never find.' },
+  { number: '04', title: 'Photos, delivered', description: 'Your best moments, shot and shared after the tour — not just memories on a phone.' },
+];
+
+const FAQS = [
+  { question: 'Are your tours private, or do you join a group?', answer: "Every Secret Spots tour is 100% private — it's just you (and whoever you bring), Luke, and the vehicle. No strangers, no fixed bus schedule.", defaultOpen: true },
+  { question: "What's included in the price?", answer: 'Private guiding, the vehicle and fuel, photography guidance, and edited photos after the tour.' },
+  { question: 'What happens if the weather is bad?', answer: 'The route changes, not the day. Luke rebuilds the plan around the forecast every morning.' },
+  { question: 'Do I need to be in good physical shape?', answer: 'No. Tours are all levels — walks are short and optional unless you ask for something harder.' },
+  { question: 'Can you customize a multi-day itinerary?', answer: 'Yes. Multi-day routes are built from scratch around your dates and interests.' },
+  { question: 'How far in advance should I book?', answer: 'Summer dates fill months ahead; winter is often possible within a couple of weeks.' },
+];
+---
+
+<Layout title="Private Iceland Tours with a Local Guide & Photographer | Secret Spots Iceland" active="Home">
+  <Hero image="/images/south-coast-vestrahorn-photographer.webp" height={480} subtitle="Discover Iceland through photography tours designed around your pace, interests, and the best light. Explore hidden landscapes with a local Iceland private tour guide.">
+    <Fragment slot="title">Private Iceland Tours with a Local Guide &amp; Photographer</Fragment>
+    <StatBar style="width:100%;margin-top:var(--space-9)" items={[
+      { value: '99%', label: 'Would recommend' },
+      { value: '7+', label: 'Years in Iceland' },
+      { value: '5.0 ☆', label: 'Average rating' },
+      { value: '300+', label: 'Travelers guided' },
+    ]} />
+  </Hero>
+
+  <FeaturedOnBar platforms={[{ name: 'Tripadvisor', rating: 5 }, { name: 'Airbnb Experiences' }, { name: 'GetYourGuide' }, { name: 'Viator' }]} />
+
+  <Section tight>
+    <div class="rg-380-1fr">
+      <img src="/images/engagement-couple-reykjanes.webp" alt="Couple embracing on a private Reykjanes tour" style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover" />
+      <div style="display:flex;flex-direction:column;gap:var(--space-7)">
+        <SectionHeading size="xl" eyebrow="Why choose a private tour">
+          <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
+          <Fragment slot="lead">Our private tours of Iceland are created for travelers who want flexibility, comfort, and a deeper connection with the country. Every tour is just you and your group — designed around what you want to see, how you want to move, and what the weather and light make possible that day.</Fragment>
+        </SectionHeading>
+        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+          {BULLETS.map((b) => <IconBullet icon={b.icon} title={b.title} description={b.description} />)}
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <section class="container-pad section-py" style="background:var(--surface-dark)">
+    <div style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-10);align-items:center">
+      <ImageStrip images={TOUR_PREVIEW_IMAGES} ratio="1 / 1" style="width:100%" />
+      <SectionHeading align="center" eyebrow="Tours in Iceland" size="xl" onDark maxWidth="760px">
+        <Fragment slot="title">Photography Iceland Tours</Fragment>
+        <Fragment slot="lead">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</Fragment>
+      </SectionHeading>
+      <div style="display:flex;align-items:baseline;gap:var(--space-2);color:var(--cream-50)">
+        <span style="font:var(--type-body-sm)">Tours from</span>
+        <span style="font:var(--type-price)">€149</span>
+      </div>
+      <Button href="/tours" style="background:var(--sand-200);color:var(--ink-800);border-color:transparent" iconAfter="arrow-right">Check our Photography Tours</Button>
+    </div>
+  </section>
+
+  <Section tight id="reviews">
+    <h2 class="sh-lg" style="text-align:center;margin:0 0 var(--space-9)">What our customers say</h2>
+    <div class="grid-4">
+      {REVIEWS.map((r) => <ReviewCard name={r.name} date={r.date} initial={r.initial} quote={r.quote} />)}
+    </div>
+  </Section>
+
+  <Section tight>
+    <div class="rg-1fr-420">
+      <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start">
+        <SectionHeading size="xl" eyebrow="Meet your guide">
+          <Fragment slot="title">Luke — Local Guide &amp;<br />Photographer</Fragment>
+          <Fragment slot="lead">For nearly 20 years, I've been exploring Iceland's most dramatic landscapes, hidden waterfalls, remote highlands, and lesser-known corners of the island. Through my <a href="/tours" style="text-decoration:underline">Iceland photography tours</a>, I help travelers capture waterfalls, glaciers, volcanic landscapes, and the Northern Lights at their best — showcasing the lesser-known locations that most visitors never find.</Fragment>
+        </SectionHeading>
+        <Button variant="primary" href="/about">Meet the man behind the lens</Button>
+      </div>
+      <div style="position:relative">
+        <img src="/images/luke-portrait.jpg" alt="Luke on location in the Icelandic highlands" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover" />
+        <div style="position:absolute;top:-14px;left:-14px"><Chip tone="light">~20 Years in Iceland</Chip></div>
+      </div>
+    </div>
+  </Section>
+
+  <Section tight style="padding-top:0">
+    <ImageStrip ratio="5 / 4" images={GALLERY_IMAGES} />
+  </Section>
+
+  <Section tight style="padding-top:0" id="how-it-works">
+    <SectionHeading align="center" eyebrow="How it works">
+      <Fragment slot="title">From first message to the<br />photos in your hands</Fragment>
+    </SectionHeading>
+    <div class="grid-4-plain" style="margin-top:var(--space-12)">
+      {STEPS.map((s) => <StepItem number={s.number} title={s.title} description={s.description} />)}
+    </div>
+  </Section>
+
+  <Section tone="alt" tight id="faq">
+    <div class="rg-1fr-1_2fr">
+      <SectionHeading eyebrow="Questions">
+        <Fragment slot="title">Frequently Asked<br />Questions</Fragment>
+        <Fragment slot="lead">Starter answers below — flag any that need a fact-check against your real policies before this goes live.</Fragment>
+      </SectionHeading>
+      <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+        {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
+      </div>
+    </div>
+  </Section>
+</Layout>

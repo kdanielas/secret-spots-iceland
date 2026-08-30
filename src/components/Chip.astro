@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  tone?: 'sand' | 'onImage' | 'light' | 'amber';
+  icon?: string;
+  style?: string;
+}
+const { tone = 'sand', icon, style = '' } = Astro.props;
+const tones: Record<string, string> = {
+  sand: 'background:var(--surface-chip);color:var(--ink-900);border:1px solid var(--border-subtle);',
+  onImage: 'background:var(--scrim-chip);color:var(--cream-50);border:1px solid rgba(251,246,240,.18);backdrop-filter:var(--blur-chip);',
+  light: 'background:var(--cream-50);color:var(--ink-900);border:1px solid var(--border-subtle);box-shadow:var(--shadow-card);',
+  amber: 'background:var(--amber-400);color:var(--espresso-900);border:1px solid transparent;',
+};
+---
+
+<span
+  style={`display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:var(--radius-pill);font:var(--type-body-sm);white-space:nowrap;${tones[tone]}${style}`}
+>
+  {icon ? <Icon name={icon} size={14} /> : null}<slot />
+</span>

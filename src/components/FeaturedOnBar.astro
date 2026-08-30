@@ -1,0 +1,22 @@
+---
+import Rating from './Rating.astro';
+
+interface Platform { name: string; rating?: number; }
+interface Props {
+  label?: string;
+  platforms?: Platform[];
+  style?: string;
+}
+const { label = 'As featured & booked on', platforms = [], style = '' } = Astro.props;
+---
+
+<div class="featured-bar" style={`background:var(--sand-100);padding:var(--space-5) var(--space-8);${style}`}>
+  <span style="font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-muted)">{label}</span>
+  <div class="featured-bar-platforms">
+    {platforms.map((p) => (
+      <span style="display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 16px;border-radius:var(--radius-pill);background:var(--surface-raised);border:1px solid var(--border-subtle);font:var(--type-body-sm);color:var(--text-heading)">
+        {p.name}{p.rating ? <Rating value={p.rating} size={11} /> : null}
+      </span>
+    ))}
+  </div>
+</div>

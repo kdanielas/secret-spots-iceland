@@ -1,0 +1,40 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  question: string;
+  answer: string;
+  defaultOpen?: boolean;
+  style?: string;
+}
+const { question, answer, defaultOpen = false, style = '' } = Astro.props;
+---
+
+<div class="faq-item" data-open={defaultOpen ? 'true' : 'false'} style={`background:var(--surface-raised);border-radius:var(--radius-md);border:1px solid var(--border-subtle);padding:var(--space-5) var(--space-6);${style}`}>
+  <button class="faq-toggle" type="button" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);width:100%;background:none;border:none;padding:0;cursor:pointer;text-align:left">
+    <span style="font:var(--type-body);font-weight:var(--weight-bold);color:var(--text-heading)">{question}</span>
+    <span class="faq-icon" style="width:26px;height:26px;flex:0 0 auto;border-radius:var(--radius-pill);border:1px solid var(--border-subtle);display:inline-flex;align-items:center;justify-content:center;color:var(--ink-900)">
+      <Icon name={defaultOpen ? 'minus' : 'plus'} size={13} />
+    </span>
+  </button>
+  <p class="faq-answer" style={`font:var(--type-body);color:var(--text-body);margin:var(--space-4) 0 0;padding-right:40px;display:${defaultOpen ? 'block' : 'none'}`}>{answer}</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.faq-item').forEach((item) => {
+    const toggle = item.querySelector('.faq-toggle');
+    const answer = item.querySelector<HTMLElement>('.faq-answer');
+    const iconWrap = item.querySelector('.faq-icon');
+    toggle?.addEventListener('click', () => {
+      const isOpen = item.dataset.open === 'true';
+      const next = !isOpen;
+      item.dataset.open = String(next);
+      if (answer) answer.style.display = next ? 'block' : 'none';
+      if (iconWrap) iconWrap.innerHTML = '';
+      const img = document.createElement('span');
+      img.setAttribute('role', 'img');
+      img.style.cssText = `display:inline-block;width:13px;height:13px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/${next ? 'minus' : 'plus'}.svg);mask-image:url(/icons/${next ? 'minus' : 'plus'}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;`;
+      iconWrap?.appendChild(img);
+    });
+  });
+</script>

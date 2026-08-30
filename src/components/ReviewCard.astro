@@ -1,0 +1,39 @@
+---
+import Rating from './Rating.astro';
+
+interface Props {
+  name: string;
+  date: string;
+  avatar?: string;
+  initial?: string;
+  rating?: number;
+  quote: string;
+  readMore?: string;
+  tone?: 'sand' | 'light';
+  style?: string;
+}
+const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', tone = 'sand', style = '' } = Astro.props;
+const tones: Record<string, string> = {
+  sand: 'background:var(--surface-card);color:var(--text-body);',
+  light: 'background:var(--surface-card-light);color:var(--text-body);',
+};
+---
+
+<article style={`display:flex;flex-direction:column;gap:var(--space-4);border-radius:var(--radius-card);padding:var(--card-pad);${tones[tone]}${style}`}>
+  <header style="display:flex;align-items:center;gap:var(--space-4)">
+    {avatar ? (
+      <img src={avatar} alt={name} style="width:34px;height:34px;border-radius:var(--radius-pill);object-fit:cover" />
+    ) : (
+      <span style="width:34px;height:34px;border-radius:var(--radius-pill);background:#A32B2B;color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:var(--type-label)">{initial || name?.[0]}</span>
+    )}
+    <div style="display:flex;flex-direction:column">
+      <span style="font:var(--type-body-sm);font-weight:var(--weight-bold);color:var(--text-heading)">{name}</span>
+      <span style="font:var(--type-body-xs);color:var(--amber-600)">{date}</span>
+    </div>
+  </header>
+  <Rating value={rating} size={12} />
+  <p style="font:var(--type-body-sm);color:var(--text-body);margin:0">
+    {quote}{' '}
+    <a href="#" style="color:var(--ink-900);font-weight:var(--weight-bold)">{readMore}</a>
+  </p>
+</article>

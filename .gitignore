@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# environment
+.env
+.env.*
+!.env.example
+
+# editor/OS
+.DS_Store
+
+# large source bundle (already extracted into design-system/)
+Secret Spots Iceland Design System.zip

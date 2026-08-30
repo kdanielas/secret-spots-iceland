@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro';
+
+interface Props { style?: string; }
+const { style = '' } = Astro.props;
+
+const links = [
+  { label: 'secretspotsoficeland', href: '/' },
+  { label: 'About Luke', href: '/about' },
+  { label: 'Our Tours', href: '/tours' },
+  { label: 'Contact', href: '/#contact' },
+  { label: 'Follow', href: '#' },
+];
+const legal = [
+  'Address: Tangabryggja 18, 110 Reykjavík, Iceland',
+  'Kennitala: 610823-2030',
+  'VAT Number: 152431',
+  '+354 8454057',
+];
+const socials = ['instagram', 'facebook', 'youtube', 'linkedin', 'twitter', 'send'];
+---
+
+<footer style={`background:var(--surface-dark);border-top:1px solid rgba(251,246,240,.10);padding:var(--space-10) var(--space-9);display:flex;flex-direction:column;align-items:center;gap:var(--space-6);${style}`}>
+  <nav style="display:flex;gap:var(--space-6);flex-wrap:wrap;justify-content:center">
+    {links.map((l) => (
+      <a href={l.href} style="font:var(--type-body-sm);color:var(--text-on-dark);text-decoration:underline;text-underline-offset:3px">{l.label}</a>
+    ))}
+  </nav>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+    <span style="font:var(--type-body-sm);font-weight:var(--weight-bold);color:var(--text-on-dark)">Secretspotsiceland EHF</span>
+    {legal.map((l) => (
+      <span style="font:var(--type-body-xs);color:var(--text-on-dark-muted)">{l}</span>
+    ))}
+  </div>
+  <div style="display:flex;gap:var(--space-4)">
+    {socials.map((s) => (
+      <a href="#" aria-label={s} style="width:32px;height:32px;border-radius:var(--radius-pill);background:var(--cream-50);color:var(--ink-800);display:inline-flex;align-items:center;justify-content:center">
+        <Icon name={s} size={15} />
+      </a>
+    ))}
+  </div>
+</footer>

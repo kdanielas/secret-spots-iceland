@@ -1,0 +1,21 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Forms — fields and enquiry panel" subtitle="Labelled controls on navy and on cream" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{background:var(--surface-page);padding:20px;font:var(--type-body)}.two{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}.stack{display:flex;flex-direction:column;gap:16px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel">
+const { Field, InquiryForm } = window.SecretSpotsIcelandDesignSystem_2d8cbc;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <div className="two">
+    <InquiryForm tours={['Secret Reykjanes (7h)','South Coast (10h)','Highlands 3-day']} />
+    <div className="stack">
+      <Field onDark={false} label="First name" placeholder="Jane" />
+      <Field onDark={false} label="Which tour interests you?" type="select" options={['Secret Reykjanes (7h)','South Coast (10h)']} />
+      <Field onDark={false} label="Tell us about your trip" type="textarea" rows={3} placeholder="Group size, interests, anything special you'd like to see..." />
+    </div>
+  </div>
+);
+</script></body></html>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  tone?: 'page' | 'alt' | 'dark' | 'raised';
+  tight?: boolean;
+  id?: string;
+  style?: string;
+}
+const { tone = 'page', tight = false, id, style = '' } = Astro.props;
+const bg: Record<string, string> = {
+  page: 'var(--surface-page)',
+  alt: 'var(--surface-page-alt)',
+  dark: 'var(--surface-dark)',
+  raised: 'var(--surface-raised)',
+};
+---
+
+<section id={id} class:list={['container-pad', tight ? 'section-py-tight' : 'section-py']} style={`background:${bg[tone]};${style}`}>
+  <div style="max-width:var(--container-max);margin:0 auto">
+    <slot />
+  </div>
+</section>

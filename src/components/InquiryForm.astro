@@ -1,0 +1,43 @@
+---
+import Field from './Field.astro';
+import Button from './Button.astro';
+
+interface Props {
+  tours?: string[];
+  cta?: string;
+  note?: string;
+  style?: string;
+}
+const {
+  tours = ['Secret Reykjanes (7h)'],
+  cta = 'Check Availability',
+  note = "This form is a design mock-up — connect it to your real inbox / CRM before publishing.",
+  style = '',
+} = Astro.props;
+---
+
+<form
+  class="inquiry-form"
+  style={`display:flex;flex-direction:column;gap:var(--space-6);background:var(--surface-dark-panel);border-radius:var(--radius-panel);padding:var(--panel-pad);${style}`}
+>
+  <div class="inquiry-grid">
+    <Field label="First name" name="firstName" placeholder="Jane" />
+    <Field label="Last name" name="lastName" placeholder="Doe" />
+    <Field label="Email" type="email" name="email" placeholder="jane@email.com" />
+    <Field label="Travel dates" name="travelDates" placeholder="e.g. 12–18 June 2027" />
+  </div>
+  <Field label="Which tour interests you?" type="select" name="tour" options={tours} />
+  <Field label="Tell us about your trip" type="textarea" name="notes" rows={4} placeholder="Group size, interests, anything special you'd like to see..." />
+  <Button variant="primary" fullWidth type="submit" class="inquiry-submit">{cta}</Button>
+  <p style="font:var(--type-body-xs);color:var(--text-on-dark-muted);margin:0;text-align:center">{note}</p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('.inquiry-form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = form.querySelector<HTMLButtonElement>('.inquiry-submit');
+      if (btn) btn.textContent = 'Thanks — Luke will reply within 24 hours';
+    });
+  });
+</script>

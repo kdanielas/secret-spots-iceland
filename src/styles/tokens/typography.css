@@ -1,0 +1,33 @@
+:root{
+--font-display:"Prata",'Times New Roman',Georgia,serif;
+--font-sans:"Lato",'Helvetica Neue',Helvetica,Arial,sans-serif;
+--font-body:var(--font-sans);
+
+--weight-light:300;--weight-regular:400;--weight-bold:700;--weight-black:900;
+
+/* display / Prata — always regular weight, tight leading, no letterspacing */
+--type-display-xl:400 3.5rem/1.08 var(--font-display);      /* 56px hero */
+--type-display-lg:400 2.75rem/1.14 var(--font-display);     /* 44px h1 */
+--type-display-md:400 2.25rem/1.18 var(--font-display);     /* 36px h2 */
+--type-display-sm:400 1.75rem/1.22 var(--font-display);      /* 28px h3 / card title */
+--type-display-xs:400 1.375rem/1.3 var(--font-display);      /* 22px h4 */
+--type-numeral:400 3rem/1 var(--font-display);               /* 48px step numbers, stats */
+--type-price:400 1.875rem/1 var(--font-display);             /* 30px price */
+
+/* body / Lato */
+--type-lead:400 1.0625rem/1.65 var(--font-sans);            /* 17px intro paragraph */
+--type-body:400 0.96875rem/1.7 var(--font-sans);            /* 15.5px default */
+--type-body-sm:400 0.875rem/1.6 var(--font-sans);           /* 14px */
+--type-body-xs:400 0.8125rem/1.55 var(--font-sans);         /* 13px fine print */
+--type-label:700 0.875rem/1.4 var(--font-sans);             /* 14px bold label */
+--type-button:700 0.9375rem/1 var(--font-sans);             /* 15px */
+--type-nav:400 0.875rem/1 var(--font-sans);
+
+/* eyebrow / overline — uppercase Lato bold, wide tracking */
+--type-eyebrow:700 0.75rem/1.2 var(--font-sans);            /* 12px */
+--tracking-eyebrow:0.14em;
+--tracking-label:0.06em;
+--tracking-tight:-0.01em;
+
+--leading-tight:1.14;--leading-snug:1.35;--leading-normal:1.6;--leading-loose:1.75;
+}

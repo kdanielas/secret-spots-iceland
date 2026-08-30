@@ -1,0 +1,71 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+interface NavItem { label: string; href?: string; hasChevron?: boolean; }
+interface Props {
+  active?: string;
+  style?: string;
+}
+const { active, style = '' } = Astro.props;
+const NAV: NavItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Tours', href: '/tours', hasChevron: true },
+  { label: 'About', href: '/about' },
+  { label: 'How it works', href: '/#how-it-works' },
+  { label: 'Photography Guide', href: '#' },
+  { label: 'Our Vehicles', href: '#' },
+  { label: 'Blog', href: '#' },
+  { label: 'Reviews', href: '/#reviews' },
+  { label: 'FAQ', href: '/#faq' },
+];
+---
+
+<header class="site-header container-pad" style={`display:flex;align-items:center;justify-content:space-between;background:var(--surface-raised);padding-top:14px;padding-bottom:14px;gap:var(--space-8);${style}`}>
+  <a href="/">
+    <Logo height={30} />
+  </a>
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+    <Icon name="menu" size={20} />
+  </button>
+  <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;align-items:center;gap:var(--space-7)">
+    {NAV.map((it) => (
+      <a
+        href={it.href || '#'}
+        style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:var(--ink-900);white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
+      >
+        {it.label}
+        {it.hasChevron ? <Icon name="chevron-down" size={16} /> : null}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const isOpen = nav.dataset.open === 'true';
+      const next = !isOpen;
+      nav.dataset.open = String(next);
+      toggle.setAttribute('aria-expanded', String(next));
+      toggle.innerHTML = '';
+      const img = document.createElement('span');
+      img.setAttribute('role', 'img');
+      img.style.cssText = `display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;`;
+      toggle.appendChild(img);
+    });
+    nav.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        nav.dataset.open = 'false';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.innerHTML = '';
+        const img = document.createElement('span');
+        img.setAttribute('role', 'img');
+        img.style.cssText = 'display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/menu.svg);mask-image:url(/icons/menu.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;';
+        toggle.appendChild(img);
+      });
+    });
+  }
+</script>

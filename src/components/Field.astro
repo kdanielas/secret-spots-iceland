@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  label?: string;
+  type?: 'text' | 'email' | 'select' | 'textarea';
+  name?: string;
+  placeholder?: string;
+  options?: string[];
+  rows?: number;
+  onDark?: boolean;
+  style?: string;
+}
+const { label, type = 'text', name, placeholder, options, rows = 4, onDark = true, style = '' } = Astro.props;
+
+const labelStyle = `font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:${onDark ? 'var(--text-on-dark)' : 'var(--text-heading)'}`;
+const controlStyle = `width:100%;box-sizing:border-box;font:var(--type-body);color:${onDark ? 'var(--cream-50)' : 'var(--ink-900)'};background:${onDark ? 'transparent' : 'var(--surface-raised)'};border:1px solid ${onDark ? 'var(--border-on-dark-field)' : 'var(--border-field)'};border-radius:var(--radius-sm);padding:0 14px;height:var(--control-h-md);outline:none;transition:var(--transition-control)`;
+---
+
+<label class="field" style={`display:flex;flex-direction:column;gap:var(--space-3);${style}`} data-ondark={onDark ? 'true' : 'false'}>
+  {label ? <span style={labelStyle}>{label}</span> : null}
+  {type === 'textarea' ? (
+    <textarea name={name} placeholder={placeholder} rows={rows} class="field-control" style={`${controlStyle};height:auto;padding:12px 14px;resize:vertical;font-family:var(--font-sans)`}></textarea>
+  ) : type === 'select' ? (
+    <span style="position:relative;display:block">
+      <select name={name} class="field-control" style={`${controlStyle};appearance:none;padding-right:40px;font-family:var(--font-sans)`}>
+        {(options || []).map((o) => <option value={o}>{o}</option>)}
+      </select>
+      <span style={`position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'}`}>
+        <Icon name="chevron-down" size={16} />
+      </span>
+    </span>
+  ) : (
+    <input type={type} name={name} placeholder={placeholder} class="field-control" style={controlStyle} />
+  )}
+</label>
+
+<style>
+  .field-control:focus { border-color: var(--blue-500); }
+  .field[data-ondark="true"] .field-control:focus { border-color: var(--cream-50); }
+</style>

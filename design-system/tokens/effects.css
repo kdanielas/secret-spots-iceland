@@ -1,0 +1,23 @@
+:root{
+--radius-xs:4px;--radius-sm:6px;--radius-md:10px;--radius-lg:12px;--radius-xl:16px;--radius-2xl:20px;--radius-pill:999px;
+--radius-card:12px;--radius-image:12px;--radius-panel:16px;--radius-field:8px;
+
+--shadow-none:none;
+--shadow-card:0 1px 2px rgba(29,45,68,.04),0 8px 24px rgba(29,45,68,.06);
+--shadow-float:0 12px 40px rgba(29,45,68,.10);
+--shadow-bar:0 2px 4px rgba(29,45,68,.04),0 18px 44px rgba(29,45,68,.10);
+--shadow-inset-field:inset 0 1px 0 rgba(29,45,68,.04);
+
+--ease-out:cubic-bezier(.22,.61,.36,1); /* @kind other */
+--ease-in-out:cubic-bezier(.4,0,.2,1); /* @kind other */
+--dur-fast:140ms; /* @kind other */
+--dur-base:220ms; /* @kind other */
+--dur-slow:420ms; /* @kind other */
+--image-zoom-hover:scale(1.035); /* @kind other */
+--press-scale:scale(.985); /* @kind other */
+
+--blur-chip:blur(8px); /* @kind other */
+
+--transition-control:background-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),transform var(--dur-fast) var(--ease-out);
+--transition-image:transform var(--dur-slow) var(--ease-out);
+}

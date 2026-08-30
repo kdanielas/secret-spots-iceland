@@ -1,0 +1,51 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import IconChip from './IconChip.astro';
+import Button from './Button.astro';
+import InquiryForm from './InquiryForm.astro';
+
+interface Row { icon: string; label: string; value: string; }
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+  tours?: string[];
+  style?: string;
+}
+const {
+  eyebrow = 'Get in touch',
+  title = "Let's plan your Iceland tour",
+  lead = "Tell us what you'd like to experience and we'll create a personalized Iceland itinerary designed around your interests, pace and travel dates.",
+  tours,
+  style = '',
+} = Astro.props;
+
+const ROWS: Row[] = [
+  { icon: 'phone', label: 'Call or WhatsApp', value: '+354 845 4057' },
+  { icon: 'map-pin', label: 'Based in', value: 'Tangabryggja 18, 110 Reykjavík, Iceland' },
+  { icon: 'clock', label: 'Response time', value: 'Usually within 24 hours, personally from Luke.' },
+];
+---
+
+<section class="container-pad section-py-tight" style={`background:var(--surface-dark);${style}`}>
+  <div class="rg-contact" style="max-width:var(--container-max);margin:0 auto">
+    <div style="display:flex;flex-direction:column;gap:var(--space-6)">
+      <Eyebrow tone="amber">{eyebrow}</Eyebrow>
+      <h2 style="font:var(--type-display-md);color:var(--text-on-dark);margin:0">{title}</h2>
+      <p style="font:var(--type-body);color:var(--text-on-dark-muted);margin:0;max-width:460px">{lead}</p>
+      <div style="display:flex;flex-direction:column;gap:var(--space-6);margin-top:var(--space-4)">
+        {ROWS.map((r) => (
+          <div style="display:flex;gap:var(--space-5);align-items:flex-start">
+            <IconChip name={r.icon} size={32} onDark />
+            <div style="display:flex;flex-direction:column">
+              <span style="font:var(--type-body-xs);color:var(--text-on-dark-muted)">{r.label}</span>
+              <span style="font:var(--type-body-sm);color:var(--text-on-dark)">{r.value}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Button variant="primary" icon="message-circle" href="https://wa.me/3548454057" style="align-self:flex-start;margin-top:var(--space-4)">Message on WhatsApp</Button>
+    </div>
+    <InquiryForm tours={tours} />
+  </div>
+</section>
