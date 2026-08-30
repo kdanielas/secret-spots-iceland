@@ -29,6 +29,18 @@
     grid-template-columns: 1fr;
     gap: var(--space-9);
   }
+  /* text comes first in the source for the "meet your guide" pair, but the
+     photo should lead once the columns stack. */
+  .luke-image-wrap { order: -1; }
+}
+
+/* tall portrait crops (3/4, 4/5) get uncomfortably long once the column is
+   full viewport width on phones — shorten them without losing the subject. */
+@media (max-width: 640px) {
+  /* the img's height="" attribute (set by Astro for CLS prevention) otherwise
+     wins over aspect-ratio once both width and height are independently
+     specified, so height must be reset to auto here too. */
+  .portrait-media { aspect-ratio: 1 / 1 !important; height: auto !important; }
 }
 
 /* --- 4-up grids (reviews, steps, image strips) --- */

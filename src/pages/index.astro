@@ -78,7 +78,7 @@ const FAQS = [
 
   <Section tight>
     <div class="rg-380-1fr">
-      <Image src={privateTourImg} alt="Couple embracing on a private Reykjanes tour" width={760} quality={80} loading="lazy" data-reveal style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover" />
+      <Image src={privateTourImg} alt="Couple embracing on a private Reykjanes tour" width={760} quality={80} loading="lazy" data-reveal class="portrait-media" style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover;object-position:center 75%" />
       <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7)">
         <SectionHeading size="xl" eyebrow="Why choose a private tour">
           <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
@@ -131,8 +131,8 @@ const FAQS = [
         </SectionHeading>
         <Button variant="primary" href="/about">Meet the man behind the lens</Button>
       </div>
-      <div data-reveal style="position:relative">
-        <Image src={lukePortraitImg} alt="Luke on location in the Icelandic highlands" width={840} quality={80} loading="lazy" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover" />
+      <div data-reveal class="luke-image-wrap" style="position:relative">
+        <Image src={lukePortraitImg} alt="Luke on location in the Icelandic highlands" width={840} quality={80} loading="lazy" class="portrait-media" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover;object-position:center 55%" />
         <div style="position:absolute;top:-14px;left:-14px"><Chip tone="light">~20 Years in Iceland</Chip></div>
       </div>
     </div>
