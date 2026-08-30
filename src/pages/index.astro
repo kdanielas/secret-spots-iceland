@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import Hero from '../components/Hero.astro';
@@ -13,6 +14,18 @@ import ImageStrip from '../components/ImageStrip.astro';
 import StepItem from '../components/StepItem.astro';
 import FaqItem from '../components/FaqItem.astro';
 
+import heroImg from '../assets/images/south-coast-vestrahorn-photographer.webp';
+import privateTourImg from '../assets/images/engagement-couple-reykjanes.webp';
+import lukePortraitImg from '../assets/images/luke-portrait.jpg';
+import helicopterTourImg from '../assets/images/helicopter-glacier-tour-iceland.webp';
+import snowmobileImg from '../assets/images/south-coast-glacier-snowmobile.webp';
+import katlaHikeImg from '../assets/images/katla-glacier-hike-south-coast.webp';
+import planeWreckImg from '../assets/images/plane-wreck-south-coast.webp';
+import diamondBeachImg from '../assets/images/diamond-beach-iceland-woman-ice.webp';
+import glacierLagoonImg from '../assets/images/glacier-lagoon-south-coast-drone.webp';
+import skogafossImg from '../assets/images/skogafoss-iceland-rainbow.webp';
+import keridCraterImg from '../assets/images/kerid-crater-golden-circle.webp';
+
 const BULLETS = [
   { icon: 'user', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
   { icon: 'clock', title: 'Flexible, weather-adaptive itineraries', description: 'The plan changes with the weather and the light — never the other way around.' },
@@ -21,19 +34,9 @@ const BULLETS = [
   { icon: 'heart', title: 'Real local recommendations', description: 'Restaurants, hot springs and viewpoints Luke actually uses — not a sponsored list.' },
 ];
 
-const TOUR_PREVIEW_IMAGES = [
-  '/images/helicopter-glacier-tour-iceland.webp',
-  '/images/south-coast-glacier-snowmobile.webp',
-  '/images/katla-glacier-hike-south-coast.webp',
-  '/images/plane-wreck-south-coast.webp',
-];
+const TOUR_PREVIEW_IMAGES = [helicopterTourImg, snowmobileImg, katlaHikeImg, planeWreckImg];
 
-const GALLERY_IMAGES = [
-  '/images/diamond-beach-iceland-woman-ice.webp',
-  '/images/glacier-lagoon-south-coast-drone.webp',
-  '/images/skogafoss-iceland-rainbow.webp',
-  '/images/kerid-crater-golden-circle.webp',
-];
+const GALLERY_IMAGES = [diamondBeachImg, glacierLagoonImg, skogafossImg, keridCraterImg];
 
 const REVIEWS = [
   { name: 'Britta Hormann', date: 'August 2026', quote: 'Luke was seriously the best guide we could have asked for! He was knowledgeable, funny, easygoing, and somehow always knew where we should go' },
@@ -60,7 +63,7 @@ const FAQS = [
 ---
 
 <Layout title="Private Iceland Tours with a Local Guide & Photographer | Secret Spots Iceland" active="Home">
-  <Hero image="/images/south-coast-vestrahorn-photographer.webp" height={480} subtitle="Discover Iceland through photography tours designed around your pace, interests, and the best light. Explore hidden landscapes with a local Iceland private tour guide.">
+  <Hero image={heroImg} height={480} subtitle="Discover Iceland through photography tours designed around your pace, interests, and the best light. Explore hidden landscapes with a local Iceland private tour guide.">
     <Fragment slot="title">Private Iceland Tours with a Local Guide &amp; Photographer</Fragment>
     <StatBar style="width:100%;margin-top:var(--space-9)" items={[
       { value: '99%', label: 'Would recommend' },
@@ -74,7 +77,7 @@ const FAQS = [
 
   <Section tight>
     <div class="rg-380-1fr">
-      <img src="/images/engagement-couple-reykjanes.webp" alt="Couple embracing on a private Reykjanes tour" style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover" />
+      <Image src={privateTourImg} alt="Couple embracing on a private Reykjanes tour" width={760} quality={80} loading="lazy" style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover" />
       <div style="display:flex;flex-direction:column;gap:var(--space-7)">
         <SectionHeading size="xl" eyebrow="Why choose a private tour">
           <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
@@ -119,7 +122,7 @@ const FAQS = [
         <Button variant="primary" href="/about">Meet the man behind the lens</Button>
       </div>
       <div style="position:relative">
-        <img src="/images/luke-portrait.jpg" alt="Luke on location in the Icelandic highlands" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover" />
+        <Image src={lukePortraitImg} alt="Luke on location in the Icelandic highlands" width={840} quality={80} loading="lazy" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover" />
         <div style="position:absolute;top:-14px;left:-14px"><Chip tone="light">~20 Years in Iceland</Chip></div>
       </div>
     </div>
