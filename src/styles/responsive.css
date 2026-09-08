@@ -31,8 +31,15 @@
    1025px the image stacks in normal flow above the text instead. */
 .hero-framed-image { position: static; width: 100%; aspect-ratio: 3 / 4; max-height: 360px; overflow: hidden; border-radius: var(--radius-image); flex: 0 0 auto; }
 .hero-inner-row { padding-top: var(--space-11); padding-bottom: var(--space-11); }
-.hero-text-col { display: flex; flex-direction: column; gap: var(--space-7); align-items: flex-start; max-width: 100%; }
+.hero-text-col { display: flex; flex-direction: column; gap: var(--space-7); align-items: flex-start; max-width: 100%; min-width: 0; }
 .hero-rating { margin-top: var(--space-9); }
+/* the title's own font-size (--type-display-lg, 52px) doesn't shrink on its
+   own — without this a single long word (e.g. "Photographer") is wider than
+   a phone viewport and forces horizontal scroll. */
+.hero-title { overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .hero-title { font-size: 2.25rem; line-height: 1.2; }
+}
 @media (min-width: 1025px) {
   .hero-inner, .hero-inner-row { position: static; padding: 0; max-width: none; }
   .hero-framed-image {
@@ -66,13 +73,16 @@
 /* --- 4-up grids (reviews, steps, image strips) --- */
 .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
 .grid-4-plain { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-9); }
+.grid-tours { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); width: 100%; }
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-4-plain { grid-template-columns: repeat(2, 1fr); gap: var(--space-7); }
+  .grid-tours { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
   .grid-4 { grid-template-columns: 1fr; }
   .grid-4-plain { grid-template-columns: 1fr; }
+  .grid-tours { grid-template-columns: 1fr; }
 }
 
 .image-strip { display: grid; grid-template-columns: repeat(var(--strip-cols, 4), 1fr); }

@@ -1,0 +1,119 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+
+import reykjanesImg from '../assets/images/reykjanes-eruption-night.webp';
+import southCoastImg from '../assets/images/vestrahorn-black-sand-dunes.webp';
+import goldenCircleImg from '../assets/images/kerid-crater-golden-circle.webp';
+import snaefellsnesImg from '../assets/images/glacier-crevasse-aerial.webp';
+import highlandsImg from '../assets/images/south-coast-glacier-snowmobile.webp';
+import ringRoadImg from '../assets/images/glacier-lagoon-south-coast-drone.webp';
+import testimonialImg from '../assets/images/highlands-couple-overlook.webp';
+import guideVideoUrl from '../assets/images/hidden-waterfall-canyon-hiker-iceland.mp4?url';
+
+const TOURS = [
+  { image: reykjanesImg, duration: '7 hours', title: 'Secret Reykjanes', level: 'All levels', description: 'Volcanic craters, geothermal fields and dramatic sea cliffs near Reykjavik, with professional photography guidance.', price: '€149' },
+  { image: southCoastImg, duration: '7 hours', title: 'South Coast & Waterfalls', level: 'All levels', description: 'Black sand beaches, glacier lagoons and thundering waterfalls along the Ring Road, timed for the best light.', price: '€149' },
+  { image: goldenCircleImg, duration: '7 hours', title: 'Golden Circle Secrets', level: 'All levels', description: 'The classic route reimagined — geysers, waterfalls and craters, with detours to the spots most visitors skip.', price: '€149' },
+  { image: snaefellsnesImg, duration: '7 hours', title: 'Snæfellsnes Peninsula', level: 'All levels', description: "Iceland in miniature: glaciers, black-sand coves and mountains, away from the south coast crowds.", price: '€149' },
+  { image: highlandsImg, duration: '3 days', title: 'Highlands 3-Day Adventure', level: 'Moderate fitness', description: 'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — with two nights on the road.', price: '€890' },
+  { image: ringRoadImg, duration: '6 days', title: 'Ring Road & Northern Lights', level: 'All levels', description: 'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.', price: '€1,690' },
+];
+---
+
+<Layout title="Iceland Photography Tours — Book Now | Secret Spots Iceland" active="Tours" transparentNav>
+  <section style="background:#081824;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:44vh;padding:var(--space-11) var(--space-9)">
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:900px">
+      <h1 style="font:400 4rem/1.1 var(--font-display);color:var(--cream-50);margin:0">Iceland Photography Tours — Book Now</h1>
+      <p style="font:var(--type-lead);font-size:1.125rem;color:rgba(255,255,255,.9);margin:0;max-width:780px">From day trips to multi-day adventures, every tour is fully private and built around you. Choose a classic private Iceland tour or a dedicated photography tour with Luke — a local guide and professional photographer with nearly 20 years exploring Iceland's most remote landscapes — and go home with the trip, and the photos, you actually wanted.</p>
+      <a href="#tours" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none;margin-top:var(--space-6)">
+        <span style="font:700 15px/1 var(--font-sans)">Check our tours</span>
+        <Icon name="chevron-down" size={20} color="var(--amber-400)" />
+      </a>
+    </div>
+  </section>
+
+  <Section id="tours" tight style="padding-top:var(--space-7)">
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+      <div class="grid-tours">
+        {TOURS.map((t) => (
+          <article style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:4px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7)">
+            <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
+              <Image src={t.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+              <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-5);padding:0 var(--space-6);flex:1">
+              <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <h3 style="font:700 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">{t.title}</h3>
+                <p style="font:400 16px/1.5 var(--font-sans);color:var(--text-heading);margin:0">{t.description}</p>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding-top:var(--space-3);margin-top:auto">
+                <Button variant="dark" href="#">Check Availability</Button>
+                <span style="display:flex;align-items:baseline;gap:6px;color:var(--text-heading)">
+                  <span style="font:700 12px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase">From</span>
+                  <span style="font:600 20px/1 var(--font-sans)">{t.price}</span>
+                </span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="alt">
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+      <div style="width:100%;aspect-ratio:16/9;border-radius:4px;overflow:hidden">
+        <video class="lazy-video" data-src={guideVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:center;text-align:center">
+        <h2 style="font:400 2rem/1.2 var(--font-sans);color:var(--text-heading);margin:0">Our photography guide &amp; tips</h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</p>
+        <Button variant="outline" href="#">See Our Photography Guide</Button>
+      </div>
+    </div>
+  </Section>
+
+  <section style="position:relative;overflow:hidden;min-height:600px;display:flex;align-items:center">
+    <Image src={testimonialImg} alt="A couple overlooking the Icelandic highlands" width={1800} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+    <div style="position:absolute;inset:0;background:linear-gradient(93deg, rgba(19,37,51,.85) 45%, rgba(19,37,51,.1) 90%)"></div>
+    <div class="container-pad" style="position:relative;max-width:var(--container-max);margin:0 auto;width:100%;padding-top:var(--space-13);padding-bottom:var(--space-13)">
+      <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start;max-width:640px">
+        <div style="display:flex;align-items:center;gap:var(--space-4)">
+          <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 18px/1 var(--font-sans)">B</span>
+          <div style="display:flex;flex-direction:column">
+            <span style="font:700 16px/1.2 var(--font-sans);color:var(--cream-50)">Britta Hormann</span>
+            <span style="font:400 13px/1.4 var(--font-sans);color:rgba(255,255,255,.6)">August 2026</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:4px">
+          {Array.from({ length: 5 }).map(() => <span style={`display:inline-block;width:16px;height:16px;background:var(--star-gold);-webkit-mask-image:url(/icons/star.svg);mask-image:url(/icons/star.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat`}></span>)}
+        </div>
+        <p style="font:400 16px/1.5 var(--font-sans);color:var(--cream-50);margin:0">We recently completed a trip to Iceland from Reykjavik to the south coast with Luke as our guide throughout. We had a range of ages in our group from tween to 80+ and Luke did a fantastic job of accommodating capabilities and interests throughout. He had us well equipped with the secret spots he is known for along with the must see big destinations. Luke also carried a solid knowledge of food choices from the must have Icelandic hot dog to restaurants in the cities to small farmhouse spots along the way. Luke is a great find and we look forward to seeing him again on a return trip!</p>
+        <p style="font:400 16px/1.5 var(--font-sans);color:var(--cream-50);margin:0">— David Kotz</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video.lazy-video[data-src]');
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const video = entry.target as HTMLVideoElement;
+          video.src = video.dataset.src ?? '';
+          video.load();
+          video.play().catch(() => {});
+          io.unobserve(video);
+        }
+      });
+    },
+    { rootMargin: '200px' }
+  );
+  lazyVideos.forEach((video) => io.observe(video));
+</script>
