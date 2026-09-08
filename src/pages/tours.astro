@@ -25,8 +25,8 @@ const TOURS = [
 ---
 
 <Layout title="Iceland Photography Tours — Book Now | Secret Spots Iceland" active="Tours" transparentNav>
-  <section style="background:#081824;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:44vh;padding:var(--space-14) var(--space-9) var(--space-11)">
-    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:900px">
+  <section style="background:#081824;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:var(--space-14) var(--space-9) var(--space-11)">
+    <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:900px">
       <h1 style="font:400 4rem/1.1 var(--font-display);color:var(--cream-50);margin:0">Iceland Photography Tours — Book Now</h1>
       <p style="font:var(--type-lead);font-size:1.125rem;color:rgba(255,255,255,.9);margin:0;max-width:780px">From day trips to multi-day adventures, every tour is fully private and built around you. Choose a classic private Iceland tour or a dedicated photography tour with Luke — a local guide and professional photographer with nearly 20 years exploring Iceland's most remote landscapes — and go home with the trip, and the photos, you actually wanted.</p>
       <a href="#tours" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none;margin-top:var(--space-6)">
@@ -37,7 +37,7 @@ const TOURS = [
   </section>
 
   <Section id="tours" tight style="padding-top:var(--space-7)">
-    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+    <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
       <div class="grid-tours">
         {TOURS.map((t) => (
           <article style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:4px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7)">
@@ -51,10 +51,10 @@ const TOURS = [
                 <p style="font:400 16px/1.5 var(--font-sans);color:var(--text-heading);margin:0">{t.description}</p>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;padding-top:var(--space-3);margin-top:auto">
-                <Button variant="dark" href="#">Check Availability</Button>
+                <Button variant="dark" href="#" style="height:auto;padding:9.5px 24px">Check Availability</Button>
                 <span style="display:flex;align-items:baseline;gap:6px;color:var(--text-heading)">
                   <span style="font:700 12px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase">From</span>
-                  <span style="font:600 20px/1 var(--font-sans)">{t.price}</span>
+                  <span style="font:700 12px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase">{t.price}</span>
                 </span>
               </div>
             </div>
