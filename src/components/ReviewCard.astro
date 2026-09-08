@@ -9,31 +9,27 @@ interface Props {
   rating?: number;
   quote: string;
   readMore?: string;
-  tone?: 'sand' | 'light';
+  onDark?: boolean;
   style?: string;
 }
-const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', tone = 'sand', style = '' } = Astro.props;
-const tones: Record<string, string> = {
-  sand: 'background:var(--surface-card);color:var(--text-body);',
-  light: 'background:var(--surface-card-light);color:var(--text-body);',
-};
+const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', onDark = false, style = '' } = Astro.props;
 ---
 
-<article style={`display:flex;flex-direction:column;gap:var(--space-4);border-radius:var(--radius-card);padding:var(--card-pad);${tones[tone]}${style}`}>
+<article style={`display:flex;flex-direction:column;gap:var(--space-5);background:${onDark ? 'rgba(251,250,248,.04)' : 'var(--surface-card-light)'};border-radius:var(--radius-card);padding:${onDark ? '12px' : '28px'};box-shadow:var(--shadow-review-card);${style}`}>
   <header style="display:flex;align-items:center;gap:var(--space-4)">
     {avatar ? (
-      <img src={avatar} alt={name} style="width:34px;height:34px;border-radius:var(--radius-pill);object-fit:cover" />
+      <img src={avatar} alt={name} style="width:48px;height:48px;border-radius:var(--radius-pill);object-fit:cover" />
     ) : (
-      <span style="width:34px;height:34px;border-radius:var(--radius-pill);background:#A32B2B;color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:var(--type-label)">{initial || name?.[0]}</span>
+      <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 18px/1 var(--font-sans)">{initial || name?.[0]}</span>
     )}
-    <div style="display:flex;flex-direction:column">
-      <span style="font:var(--type-body-sm);font-weight:var(--weight-bold);color:var(--text-heading)">{name}</span>
-      <span style="font:var(--type-body-xs);color:var(--amber-600)">{date}</span>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <span style={`font:700 16px/1.2 var(--font-sans);color:${onDark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>{name}</span>
+      <span style="font:var(--type-body-xs);color:rgba(56,98,127,.6)">{date}</span>
     </div>
   </header>
-  <Rating value={rating} size={12} />
-  <p style="font:var(--type-body-sm);color:var(--text-body);margin:0">
-    {quote}{' '}
-    <a href="#" style="color:var(--ink-900);font-weight:var(--weight-bold)">{readMore}</a>
+  <Rating value={rating} size={16} />
+  <p style={`font:400 14px/1.5 var(--font-sans);color:${onDark ? 'rgba(251,255,255,.8)' : 'rgba(39,51,60,.8)'};margin:0`}>
+    {quote}
+    <a href="#" style="color:var(--blue-500);font-weight:600">{' '}{readMore}</a>
   </p>
 </article>

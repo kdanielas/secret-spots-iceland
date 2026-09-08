@@ -1,5 +1,5 @@
 ---
-interface Item { value: string; label: string; }
+interface Item { value: string; label: string; href?: string; }
 interface Props {
   items?: Item[];
   onDark?: boolean;
@@ -9,10 +9,21 @@ const { items = [], onDark = true, style = '' } = Astro.props;
 ---
 
 <div class="stat-bar" style={`--stat-cols:${items.length};gap:var(--grid-gap);${style}`}>
-  {items.map((it) => (
-    <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-      <span style={`font:var(--type-display-md);color:${onDark ? 'var(--cream-50)' : 'var(--text-heading)'};${onDark ? 'text-shadow:0 1px 10px rgba(0,0,0,.35)' : ''}`}>{it.value}</span>
-      <span style={`font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'};${onDark ? 'text-shadow:0 1px 8px rgba(0,0,0,.35)' : ''}`}>{it.label}</span>
-    </div>
-  ))}
+  {items.map((it) => {
+    const Tag = it.href ? 'a' : 'div';
+    return (
+      <Tag
+        href={it.href}
+        style={`display:flex;flex-direction:column;gap:var(--space-3);${it.href ? 'cursor:pointer;text-decoration:none;' : ''}`}
+      >
+        <span style={`font:var(--type-display-md);color:${onDark ? 'var(--cream-50)' : 'var(--text-heading)'};${onDark ? 'text-shadow:0 1px 10px rgba(0,0,0,.35)' : ''}`}>{it.value}</span>
+        <span style={`font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'};${onDark ? 'text-shadow:0 1px 8px rgba(0,0,0,.35)' : ''}`}>{it.label}</span>
+      </Tag>
+    );
+  })}
 </div>
+
+<style>
+  .stat-bar a { transition: opacity var(--dur-base) var(--ease-out); }
+  .stat-bar a:hover { opacity: 0.75; }
+</style>

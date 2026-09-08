@@ -1,17 +1,19 @@
 :root{
-/* --- base palette, sampled from the Secret Spots Iceland mockups --- */
+/* --- base palette, re-sampled from the updated Secret Spots Iceland Figma --- */
 --amber-300:#F8C877;--amber-400:#F4B04B;--amber-500:#E5A038;--amber-600:#C9862A;
---blue-500:#396280;--blue-400:#4C7593;--blue-300:#69889D;--blue-200:#98AEBB;
---ink-900:#1D2D44;--ink-800:#23343E;--ink-700:#324856;--ink-600:#465C6B;
+--blue-500:#38627F;--blue-400:#4C7593;--blue-300:#69889D;--blue-200:#98AEBB;
+--ink-900:#27333C;--ink-800:#293238;--ink-700:#324856;--ink-600:#465C6B;
 --espresso-900:#291F1E;--espresso-800:#3A2D2B;
 --gray-600:#5C6570;--gray-500:#7A828C;--gray-400:#9AA1A9;
 --cream-50:#FBFAF8;--cream-100:#FBF6F0;--sand-100:#F1F0EC;--sand-200:#E9E6DD;--sand-300:#DCD8CC;
 --white:#FFFFFF;
 --star-gold:#F4B04B;
+--avatar-red:#9B2C2C;
+--surface-footer:#081824;
 
 /* --- semantic: text --- */
 --text-heading:var(--ink-900);
---text-body:var(--gray-600);
+--text-body:rgba(39,51,60,.7);
 --text-muted:var(--gray-500);
 --text-eyebrow:var(--blue-500);
 --text-accent:var(--blue-500);
@@ -28,16 +30,16 @@
 --surface-card:var(--sand-200);
 --surface-card-light:var(--cream-50);
 --surface-chip:var(--sand-100);
---surface-dark:var(--ink-800);
+--surface-dark:#132533;
 --surface-dark-panel:var(--ink-700);
 --surface-dark-field:rgba(251,246,240,.06);
 --scrim-image:linear-gradient(180deg,rgba(23,32,40,.68) 0%,rgba(23,32,40,.48) 45%,rgba(23,32,40,.74) 100%); /* @kind other */
---scrim-chip:rgba(29,45,68,.55);
+--scrim-chip:rgba(39,51,60,.55);
 
 /* --- semantic: borders --- */
---border-subtle:rgba(29,45,68,.12);
---border-strong:rgba(29,45,68,.28);
---border-field:rgba(29,45,68,.16);
+--border-subtle:rgba(39,51,60,.12);
+--border-strong:rgba(39,51,60,.28);
+--border-field:rgba(39,51,60,.16);
 --border-on-dark:rgba(251,246,240,.28);
 --border-on-dark-field:rgba(251,246,240,.14);
 
@@ -51,5 +53,5 @@
 --action-outline-fg:var(--ink-900);
 --action-outline-border:var(--border-strong);
 --action-ghost-fg:var(--blue-500);
---focus-ring:0 0 0 3px rgba(57,98,128,.35);
+--focus-ring:0 0 0 3px rgba(56,98,127,.35);
 }

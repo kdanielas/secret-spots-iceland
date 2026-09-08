@@ -14,7 +14,7 @@ const { icon, title, description, onDark = false, style = '' } = Astro.props;
 <div style={`display:flex;gap:var(--space-5);align-items:flex-start;${style}`}>
   <IconChip name={icon} size={40} onDark={onDark} />
   <div style="display:flex;flex-direction:column;gap:2px;padding-top:2px">
-    <span style={`font:var(--type-body);font-weight:var(--weight-bold);color:${onDark ? 'var(--text-on-dark)' : 'var(--text-heading)'}`}>{title}</span>
-    <span style={`font:var(--type-body-sm);color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'}`}>{description}</span>
+    <span style={`font:var(--type-body-lg);color:${onDark ? 'var(--text-on-dark)' : 'var(--text-heading)'}`}>{title}</span>
+    <span style={`font:var(--type-body);color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'}`}>{description}</span>
   </div>
 </div>

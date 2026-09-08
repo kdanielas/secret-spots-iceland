@@ -7,7 +7,7 @@
 
 /* display / Prata — always regular weight, tight leading, no letterspacing */
 --type-display-xl:400 3.5rem/1.08 var(--font-display);      /* 56px hero */
---type-display-lg:400 2.75rem/1.14 var(--font-display);     /* 44px h1 */
+--type-display-lg:400 3.25rem/1.2 var(--font-display);      /* 52px h1 / section headline */
 --type-display-md:400 2.25rem/1.18 var(--font-display);     /* 36px h2 */
 --type-display-sm:400 1.75rem/1.22 var(--font-display);      /* 28px h3 / card title */
 --type-display-xs:400 1.375rem/1.3 var(--font-display);      /* 22px h4 */
@@ -16,6 +16,7 @@
 
 /* body / Lato */
 --type-lead:400 1.0625rem/1.65 var(--font-sans);            /* 17px intro paragraph */
+--type-body-lg:600 1.25rem/1.3 var(--font-sans);            /* 20px benefit-row title */
 --type-body:400 0.96875rem/1.7 var(--font-sans);            /* 15.5px default */
 --type-body-sm:400 0.875rem/1.6 var(--font-sans);           /* 14px */
 --type-body-xs:400 0.8125rem/1.55 var(--font-sans);         /* 13px fine print */

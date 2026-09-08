@@ -1,3 +1,8 @@
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
 /* Scroll-triggered entrance animation. Gated behind .js-reveal-ready (set by
    an inline script in <head>) so content is never hidden without JS. */
 .js-reveal-ready [data-reveal] {

@@ -8,14 +8,15 @@ interface Props {
   title: string;
   description?: string;
   active?: string;
+  transparentNav?: boolean;
 }
 const {
   title,
   description = 'Private, photography-led Iceland tours with local guide Luke — hidden landscapes, flexible itineraries, no crowds.',
   active,
+  transparentNav = false,
 } = Astro.props;
 
-const TOURS = ['Secret Reykjanes (7h)', 'South Coast & Waterfalls (10h)', 'Highlands 3-day', 'Northern Lights Night'];
 ---
 
 <!doctype html>
@@ -28,9 +29,11 @@ const TOURS = ['Secret Reykjanes (7h)', 'South Coast & Waterfalls (10h)', 'Highl
     <script is:inline>document.documentElement.classList.add('js-reveal-ready');</script>
   </head>
   <body style="background:var(--surface-page)">
-    <Navbar active={active} />
-    <slot />
-    <ContactPanel tours={TOURS} />
+    <div style={transparentNav ? 'position:relative' : undefined}>
+      <Navbar active={active} transparent={transparentNav} style={transparentNav ? 'position:absolute;top:0;left:0;right:0;z-index:20' : undefined} />
+      <slot />
+    </div>
+    <ContactPanel />
     <Footer />
 
     <script>

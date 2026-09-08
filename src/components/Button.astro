@@ -9,6 +9,7 @@ interface Props {
   fullWidth?: boolean;
   disabled?: boolean;
   href?: string;
+  target?: string;
   type?: 'button' | 'submit';
   style?: string;
   class?: string;
@@ -21,6 +22,7 @@ const {
   fullWidth = false,
   disabled = false,
   href,
+  target,
   type = 'button',
   style = '',
   class: className,
@@ -36,6 +38,8 @@ const base = `display:${fullWidth ? 'flex' : 'inline-flex'};align-items:center;j
 
 <Tag
   href={href}
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   type={Tag === 'button' ? type : undefined}
   disabled={Tag === 'button' ? disabled : undefined}
   class:list={[`btn`, `btn-${variant}`, `btn-${size}`, className]}

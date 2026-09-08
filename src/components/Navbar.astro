@@ -5,11 +5,11 @@ import Icon from './Icon.astro';
 interface NavItem { label: string; href?: string; hasChevron?: boolean; }
 interface Props {
   active?: string;
+  transparent?: boolean;
   style?: string;
 }
-const { active, style = '' } = Astro.props;
+const { active, transparent = false, style = '' } = Astro.props;
 const NAV: NavItem[] = [
-  { label: 'Home', href: '/' },
   { label: 'Tours', href: '/tours', hasChevron: true },
   { label: 'About', href: '/about' },
   { label: 'How it works', href: '/#how-it-works' },
@@ -19,20 +19,25 @@ const NAV: NavItem[] = [
   { label: 'Reviews', href: '/#reviews' },
   { label: 'FAQ', href: '/#faq' },
 ];
+const textColor = transparent ? 'var(--cream-50)' : 'var(--ink-900)';
 ---
 
-<header class="site-header container-pad" style={`display:flex;align-items:center;justify-content:space-between;background:var(--surface-raised);padding-top:14px;padding-bottom:14px;gap:var(--space-8);${style}`}>
+<header
+  class="site-header container-pad"
+  data-transparent={transparent ? 'true' : 'false'}
+  style={`display:flex;align-items:center;justify-content:space-between;background:${transparent ? 'transparent' : 'var(--surface-raised)'};padding-top:14px;padding-bottom:14px;gap:var(--space-8);${style}`}
+>
   <a href="/">
-    <Logo height={30} />
+    <Logo height={46} onDark={transparent} />
   </a>
-  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav">
+  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
     <Icon name="menu" size={20} />
   </button>
   <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;align-items:center;gap:var(--space-7)">
     {NAV.map((it) => (
       <a
         href={it.href || '#'}
-        style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:var(--ink-900);white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
+        style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
       >
         {it.label}
         {it.hasChevron ? <Icon name="chevron-down" size={16} /> : null}

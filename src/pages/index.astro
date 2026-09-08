@@ -3,41 +3,43 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
 import Hero from '../components/Hero.astro';
-import StatBar from '../components/StatBar.astro';
-import FeaturedOnBar from '../components/FeaturedOnBar.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import IconBullet from '../components/IconBullet.astro';
+import IconChip from '../components/IconChip.astro';
 import ReviewCard from '../components/ReviewCard.astro';
-import Rating from '../components/Rating.astro';
-import Chip from '../components/Chip.astro';
+import Icon from '../components/Icon.astro';
+import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
-import ImageStrip from '../components/ImageStrip.astro';
-import StepItem from '../components/StepItem.astro';
 import FaqItem from '../components/FaqItem.astro';
 
-import heroImg from '../assets/images/south-coast-vestrahorn-photographer.webp';
-import privateTourImg from '../assets/images/engagement-couple-reykjanes.webp';
-import lukePortraitImg from '../assets/images/luke-portrait.jpg';
-import helicopterTourImg from '../assets/images/helicopter-glacier-tour-iceland.webp';
-import snowmobileImg from '../assets/images/south-coast-glacier-snowmobile.webp';
-import katlaHikeImg from '../assets/images/katla-glacier-hike-south-coast.webp';
-import planeWreckImg from '../assets/images/plane-wreck-south-coast.webp';
-import diamondBeachImg from '../assets/images/diamond-beach-iceland-woman-ice.webp';
-import glacierLagoonImg from '../assets/images/glacier-lagoon-south-coast-drone.webp';
-import skogafossImg from '../assets/images/skogafoss-iceland-rainbow.webp';
-import keridCraterImg from '../assets/images/kerid-crater-golden-circle.webp';
+import lukePhotographerImg from '../assets/images/reykjanes-photographer-luke.jpg';
+import waterfallImg from '../assets/images/highlands-traveller-waterfall.webp';
+import haifossImg from '../assets/images/haifoss-waterfall.jpg';
+import coastImg from '../assets/images/vestrahorn-black-sand-dunes.webp';
+import highlandsImg from '../assets/images/highlands-aerial-rainbow-mountains.webp';
+import auroraImg from '../assets/images/northern-lights-iceland.webp';
+import toursVideoUrl from '../assets/images/skogafoss-waterfall-group-photo-a-iceland.mp4?url';
+import lavaVideoUrl from '../assets/images/volcano-eruption-lava-flow-vertical-iceland.mp4?url';
+
+const GALLERY = [
+  { image: haifossImg, caption: 'Chase the sound of Iceland' },
+  { image: coastImg, caption: 'Where the ocean meets the wild' },
+  { image: highlandsImg, caption: "Into Iceland's untamed interior" },
+  { image: auroraImg, caption: 'A night worth waiting for' },
+];
 
 const BULLETS = [
-  { icon: 'user', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
+  { icon: 'heart', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
   { icon: 'clock', title: 'Flexible, weather-adaptive itineraries', description: 'The plan changes with the weather and the light — never the other way around.' },
   { icon: 'briefcase', title: 'Professional photography guidance', description: 'Luke is a photographer first — every stop is timed and framed for the shot.' },
   { icon: 'truck', title: 'Comfortable, capable vehicles', description: "Built for Iceland's terrain, so weather and road conditions don't cancel the day." },
-  { icon: 'heart', title: 'Real local recommendations', description: 'Restaurants, hot springs and viewpoints Luke actually uses — not a sponsored list.' },
 ];
 
-const TOUR_PREVIEW_IMAGES = [helicopterTourImg, snowmobileImg, katlaHikeImg, planeWreckImg];
-
-const GALLERY_IMAGES = [diamondBeachImg, glacierLagoonImg, skogafossImg, keridCraterImg];
+const REVIEW_PLATFORMS = [
+  { label: 'ALL', rating: '5.0', dark: true },
+  { label: 'Trustpilot', rating: '5.0', icon: 'trustpilot' },
+  { label: 'Google Reviews', rating: '5.0', icon: 'google' },
+  { label: 'Tripadvisor', rating: '5.0', icon: 'tripadvisor' },
+];
 
 const REVIEWS = [
   { name: 'Britta Hormann', date: 'August 2026', quote: 'Luke was seriously the best guide we could have asked for! He was knowledgeable, funny, easygoing, and somehow always knew where we should go' },
@@ -63,108 +65,171 @@ const FAQS = [
 ];
 ---
 
-<Layout title="Private Iceland Tours with a Local Guide & Photographer | Secret Spots Iceland" active="Home">
-  <Hero image={heroImg} height={480} subtitle="Discover Iceland through photography tours designed around your pace, interests, and the best light. Explore hidden landscapes with a local Iceland private tour guide.">
+<Layout title="Private Iceland Tours with a Local Guide & Photographer | Secret Spots Iceland" active="Home" transparentNav>
+  <Hero
+    fullHeight
+    framedImage={waterfallImg}
+    framedImageAlt="Waterfall in the Icelandic highlands"
+    subtitle="Discover Iceland through photography tours in Iceland designed around your pace, interests, and the best light. Explore hidden landscapes with a local Iceland private tour guide."
+    ratingText="5.0 from 100+ guests"
+    tagline="Private experiences · Local guide · Professional photography"
+  >
     <Fragment slot="title">Private Iceland Tours with a Local Guide &amp; Photographer</Fragment>
-    <StatBar style="width:100%;margin-top:var(--space-9)" items={[
-      { value: '99%', label: 'Would recommend' },
-      { value: '7+', label: 'Years in Iceland' },
-      { value: '5.0 ☆', label: 'Average rating' },
-      { value: '300+', label: 'Travelers guided' },
-    ]} />
   </Hero>
 
-  <FeaturedOnBar platforms={[{ name: 'Tripadvisor', rating: 5 }, { name: 'Airbnb Experiences' }, { name: 'GetYourGuide' }, { name: 'Viator' }]} />
+  <Section tight style="padding-top:calc(var(--section-py-tight) + 96px)">
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+      <SectionHeading align="center" eyebrow="What to expect" size="lg" maxWidth="784px">
+        <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
+        <Fragment slot="lead">Our private tours of Iceland are created for travelers who want flexibility, comfort, and a deeper connection with the country. Every tour is just you and your group — designed around what you want to see, how you want to move, and what the weather and light make possible that day.</Fragment>
+      </SectionHeading>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--space-9);justify-content:center">
+        {BULLETS.map((b) => (
+          <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:flex-start;width:240px">
+            <IconChip name={b.icon} size={48} />
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <span style="font:600 16px/1.3 var(--font-sans);color:var(--text-heading)">{b.title}</span>
+              <span style="font:400 12px/1.6 var(--font-sans);color:var(--text-body)">{b.description}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
 
-  <Section tight>
-    <div class="rg-380-1fr">
-      <Image src={privateTourImg} alt="Couple embracing on a private Reykjanes tour" width={760} quality={80} loading="lazy" data-reveal class="portrait-media" style="width:100%;border-radius:var(--radius-image);aspect-ratio:3/4;object-fit:cover;object-position:center 75%" />
-      <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7)">
-        <SectionHeading size="xl" eyebrow="Why choose a private tour">
-          <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
-          <Fragment slot="lead">Our private tours of Iceland are created for travelers who want flexibility, comfort, and a deeper connection with the country. Every tour is just you and your group — designed around what you want to see, how you want to move, and what the weather and light make possible that day.</Fragment>
-        </SectionHeading>
-        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-          {BULLETS.map((b) => <IconBullet icon={b.icon} title={b.title} description={b.description} />)}
+  <Section tone="dark" tight>
+    <div data-reveal class="rg-1fr-420">
+      <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+          <h2 class="sh-xl" style="color:var(--cream-50);margin:0">Our Iceland Tours</h2>
+          <p style="font:600 1.0625rem/1.7 var(--font-sans);color:var(--star-gold);margin:0">Private experiences tailored to your trip</p>
+        </div>
+        <p style="font:var(--type-lead);color:var(--text-on-dark-muted);margin:0;max-width:620px">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</p>
+        <Button variant="primary" href="/tours" iconAfter="arrow-right">Check our Photography Tours</Button>
+        <div style="display:flex;align-items:baseline;gap:var(--space-2);color:var(--cream-50)">
+          <span style="font:var(--type-body-sm)">Tours from</span>
+          <span style="font:var(--type-price)">€1,300</span>
         </div>
       </div>
+      <div style="overflow:hidden;border-radius:var(--radius-image);aspect-ratio:433/770">
+        <video class="lazy-video" data-src={toursVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
+      </div>
     </div>
   </Section>
 
-  <section class="container-pad section-py" style="background:var(--surface-dark)">
-    <div data-reveal style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-10);align-items:center">
-      <ImageStrip images={TOUR_PREVIEW_IMAGES} ratio="1 / 1" style="width:100%" />
-      <SectionHeading align="center" eyebrow="Tours in Iceland" size="xl" onDark maxWidth="760px">
-        <Fragment slot="title">Photography Iceland Tours</Fragment>
-        <Fragment slot="lead">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</Fragment>
-      </SectionHeading>
-      <div style="display:flex;align-items:baseline;gap:var(--space-2);color:var(--cream-50)">
-        <span style="font:var(--type-body-sm)">Tours from</span>
-        <span style="font:var(--type-price)">€149</span>
-      </div>
-      <Button href="/tours" style="background:var(--sand-200);color:var(--ink-800);border-color:transparent" iconAfter="arrow-right">Check our Photography Tours</Button>
-    </div>
-  </section>
-
-  <Section tight id="reviews">
-    <h2 class="sh-lg" data-reveal style="text-align:center;margin:0 0 var(--space-6)">What our customers say</h2>
-    <div data-reveal style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);margin-bottom:var(--space-9)">
-      <Rating value={5} size={18} />
-      <span style="font:var(--type-body);color:var(--text-body)">5.0 average from 420 reviews</span>
-      <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;justify-content:center;margin-top:var(--space-2)">
-        <Button variant="outline" size="sm" href="#">Tripadvisor</Button>
-        <Button variant="outline" size="sm" href="#">Google Reviews</Button>
-        <Button variant="outline" size="sm" href="#">Trustpilot</Button>
-      </div>
+  <Section tone="dark" tight id="reviews" style="padding-top:0;border-top:1px solid rgba(255,255,255,.1)">
+    <h2 class="sh-lg" data-reveal style="text-align:center;color:var(--cream-50);margin:0 0 var(--space-7)">What our customers say</h2>
+    <div data-reveal style="display:flex;gap:var(--space-3);flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-9)">
+      {REVIEW_PLATFORMS.map((p) => (
+        <a
+          href="#"
+          target="_blank"
+          style={`display:inline-flex;align-items:center;gap:var(--space-2);height:38px;padding:${p.icon ? '3px 16px 3px 3px' : '3px 16px'};border-radius:var(--radius-pill);background:${p.dark ? 'var(--cream-50)' : 'var(--surface-dark-field)'};text-decoration:none`}
+        >
+          {p.icon ? (
+            <span style="width:32px;height:32px;border-radius:var(--radius-pill);background:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;overflow:hidden">
+              <img src={`/icons/${p.icon}-color.svg`} alt="" width="18" height="18" style="width:18px;height:18px;object-fit:contain" />
+            </span>
+          ) : null}
+          <span style={`font:600 13px/1 var(--font-sans);color:${p.dark ? 'var(--ink-900)' : 'var(--cream-50)'}`}>{p.label}</span>
+          <span style={`display:inline-flex;align-items:center;gap:4px;font:700 13px/1 var(--font-sans);color:${p.dark ? 'var(--ink-900)' : 'var(--cream-50)'}`}>
+            {p.rating}<Icon name="star" size={12} color="var(--star-gold)" />
+          </span>
+        </a>
+      ))}
     </div>
     <div class="grid-4" data-reveal>
-      {REVIEWS.map((r) => <ReviewCard name={r.name} date={r.date} initial={r.initial} quote={r.quote} />)}
+      {REVIEWS.map((r) => <ReviewCard name={r.name} date={r.date} initial={r.initial} quote={r.quote} onDark />)}
     </div>
   </Section>
 
-  <Section tight>
-    <div class="rg-1fr-420">
-      <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start">
-        <SectionHeading size="xl" eyebrow="Meet your guide">
-          <Fragment slot="title">Luke — Local Guide &amp;<br />Photographer</Fragment>
-          <Fragment slot="lead">For nearly 20 years, I've been exploring Iceland's most dramatic landscapes, hidden waterfalls, remote highlands, and lesser-known corners of the island. Through my <a href="/tours" style="text-decoration:underline">Iceland photography tours</a>, I help travelers capture waterfalls, glaciers, volcanic landscapes, and the Northern Lights at their best — showcasing the lesser-known locations that most visitors never find.</Fragment>
+  <section style="position:relative;overflow:hidden;min-height:600px;display:flex;align-items:center">
+    <Image src={lukePhotographerImg} alt="Luke, local guide and photographer, in the Reykjanes peninsula" width={1600} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%" />
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(19,37,51,.95) 5%, rgba(19,37,51,.55) 55%, rgba(19,37,51,.15) 100%)"></div>
+    <div class="container-pad" style="position:relative;max-width:var(--container-max);margin:0 auto;width:100%;padding-top:var(--space-13);padding-bottom:var(--space-13)">
+      <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start;max-width:640px">
+        <SectionHeading size="xl" eyebrow="Meet your guide" onDark>
+          <Fragment slot="title">Luke — Local Guide &amp; Photographer</Fragment>
+          <Fragment slot="lead">For nearly 20 years, I've been exploring Iceland's most dramatic landscapes, hidden waterfalls, remote highlands, and lesser-known corners of the island. Through my <a href="https://secretspotsoficeland.com/iceland-photography-tours" target="_blank" style="text-decoration:underline;color:inherit">Iceland photography tours</a>, I help travelers capture waterfalls, glaciers, volcanic landscapes, and the Northern Lights at their best — showcasing the lesser-known locations that most visitors never find.</Fragment>
         </SectionHeading>
         <Button variant="primary" href="/about">Meet the man behind the lens</Button>
       </div>
-      <div data-reveal class="luke-image-wrap" style="position:relative">
-        <Image src={lukePortraitImg} alt="Luke on location in the Icelandic highlands" width={840} quality={80} loading="lazy" class="portrait-media" style="width:100%;border-radius:var(--radius-image);aspect-ratio:4/5;object-fit:cover;object-position:center 55%" />
-        <div style="position:absolute;top:-14px;left:-14px"><Chip tone="light">~20 Years in Iceland</Chip></div>
+    </div>
+  </section>
+
+  <section class="container-pad section-py">
+    <div data-reveal style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-10);align-items:center">
+      <h2 style="font:400 2rem/1.2 var(--font-sans);color:var(--ink-900);margin:0;text-align:center">Your Iceland, not the usual Iceland</h2>
+      <div class="image-strip" style="--strip-cols:4;gap:var(--space-5);width:100%">
+        {GALLERY.map((g) => (
+          <div style="display:flex;flex-direction:column;border-radius:var(--radius-image);overflow:hidden">
+            <div style="aspect-ratio:340/466;overflow:hidden">
+              <Image src={g.image} alt="" width={500} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+            </div>
+            <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-6);background:var(--surface-chip)">
+              <span style="font:400 16px/1.5 var(--font-sans);color:var(--ink-900)">{g.caption}</span>
+              <a href="#" style="font:600 15px/1 var(--font-sans);color:var(--ink-900);text-decoration:none">Explore →</a>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  </Section>
+  </section>
 
-  <Section tight style="padding-top:0">
-    <div data-reveal>
-      <ImageStrip ratio="5 / 4" images={GALLERY_IMAGES} />
+  <section class="container-pad section-py" style="background:var(--surface-chip)" id="how-it-works">
+    <div data-reveal class="rg-380-1fr">
+      <div style="overflow:hidden;border-radius:var(--radius-image);aspect-ratio:437/776">
+        <video class="lazy-video" data-src={lavaVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+          <Eyebrow>How it works</Eyebrow>
+          <h2 style="font:400 2rem/1.2 var(--font-sans);color:var(--text-heading);margin:0">From first message to the photos in your hands</h2>
+        </div>
+        <div style="display:flex;flex-direction:column;width:100%">
+          {STEPS.map((s) => (
+            <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-bottom:1px solid var(--blue-500)">
+              <span style="font:700 16px/1 var(--font-sans);color:var(--blue-500)">{s.number}</span>
+              <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <span style="font:var(--type-body-lg);color:var(--text-heading)">{s.title}</span>
+                <p style="font:var(--type-lead);color:var(--text-body);margin:0">{s.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Button variant="outline" href="#" iconAfter="arrow-right">How It Works</Button>
+      </div>
     </div>
-  </Section>
+  </section>
 
-  <Section tight style="padding-top:0" id="how-it-works">
-    <SectionHeading align="center" eyebrow="How it works" data-reveal>
-      <Fragment slot="title">From first message to the<br />photos in your hands</Fragment>
-    </SectionHeading>
-    <div class="grid-4-plain" data-reveal style="margin-top:var(--space-12)">
-      {STEPS.map((s) => <StepItem number={s.number} title={s.title} description={s.description} />)}
-    </div>
-    <div style="display:flex;justify-content:center;margin-top:var(--space-11)">
-      <Button variant="outline" href="#">See How It Works</Button>
-    </div>
-  </Section>
-
-  <Section tone="alt" tight id="faq">
-    <div class="rg-1fr-1_2fr">
-      <SectionHeading eyebrow="Questions" data-reveal>
-        <Fragment slot="title">Frequently Asked<br />Questions</Fragment>
+  <Section tone="raised" tight id="faq">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-11)">
+      <SectionHeading align="center" eyebrow="Questions" maxWidth="600px" data-reveal>
+        <Fragment slot="title">Frequently Asked Questions</Fragment>
         <Fragment slot="lead">Starter answers below — flag any that need a fact-check against your real policies before this goes live.</Fragment>
       </SectionHeading>
-      <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-4)">
+      <div data-reveal style="display:flex;flex-direction:column;width:100%;max-width:854px">
         {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
       </div>
     </div>
   </Section>
 </Layout>
+
+<script>
+  const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video.lazy-video[data-src]');
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const video = entry.target as HTMLVideoElement;
+          video.src = video.dataset.src ?? '';
+          video.load();
+          video.play().catch(() => {});
+          io.unobserve(video);
+        }
+      });
+    },
+    { rootMargin: '200px' }
+  );
+  lazyVideos.forEach((video) => io.observe(video));
+</script>
