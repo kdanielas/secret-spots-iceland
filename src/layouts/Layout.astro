@@ -25,6 +25,24 @@ const {
   contactPanelStyle = '',
 } = Astro.props;
 
+// ─── Medición: variables de página (#84) ───────────────────────────────────
+// Se quita la barra final: Vercel sirve /tours y /tours/ igual.
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const pageType =
+  path === '/'                                        ? 'home'
+  : path.startsWith('/tours/')                        ? 'tour'
+  : path === '/tours' || path === '/accessible-tours' ? 'listado_tours'
+  : path === '/blog' || /^\/blog\/\d+$/.test(path)    ? 'blog_listado'   // /blog/2 es listado
+  : path.startsWith('/blog/')                         ? 'blog_articulo'
+  : path === '/contact'                               ? 'contacto'
+  : path === '/faq'                                   ? 'faq'
+  : 'informativa';
+// En las páginas de tour, el slug: no cambia aunque cambie el nombre del tour.
+const tourName = path.startsWith('/tours/') ? path.split('/')[2] : undefined;
+
+// Contenedor de Tag Manager (#88). Si la variable no está definida, no se carga.
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+
 ---
 
 <!doctype html>
@@ -32,6 +50,21 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Medición (#84): el dataLayer y las variables de página, ANTES que Tag Manager.
+         Si van después, la primera página vista llega a GA4 sin page_type. -->
+    <script define:vars={{ pageType, tourName }}>
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ page_type: pageType, tour_name: tourName });
+    </script>
+    <!-- Tag Manager (#88). Solo se carga si PUBLIC_GTM_ID está definido. -->
+    {GTM_ID && (
+      <script is:inline define:vars={{ GTM_ID }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer',GTM_ID);
+      </script>
+    )}
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
@@ -39,6 +72,9 @@ const {
     <script is:inline>document.documentElement.classList.add('js-reveal-ready');</script>
   </head>
   <body style="background:var(--surface-page)">
+    {GTM_ID && (
+      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    )}
     <div style={transparentNav ? 'position:relative' : undefined}>
       {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact style={transparentNav ? 'position:absolute;top:0;left:0;right:0;z-index:20' : undefined} />}
       <slot />
@@ -66,6 +102,123 @@ const {
         );
         items.forEach((el) => observer.observe(el));
       }
+    </script>
+    <script>
+      // ─── Medición (#85): un único listener para toda la web ──────────────────
+      // Lee los atributos data-ev* del elemento pulsado y empuja el evento al
+      // dataLayer. Vive SOLO aquí: copiado en un componente que se repite,
+      // cada clic mandaría el evento varias veces.
+
+      type Datos = Record<string, string | number | undefined>;
+      const dl = (): Datos[] => ((window as any).dataLayer = (window as any).dataLayer || []);
+
+      // Variable de página (page_type, tour_name): el valor más reciente, leyendo SOLO
+      // las entradas sin "event". Si leyera también los eventos, tras pulsar la tarjeta
+      // de un tour todos los clics siguientes heredarían su tour_name.
+      const varPagina = (clave: string): string | undefined => {
+        const arr = dl();
+        for (let i = arr.length - 1; i >= 0; i--) {
+          const entrada = arr[i];
+          if (!entrada || entrada.event) continue;
+          const v = entrada[clave];
+          if (v !== undefined && v !== '') return String(v);
+        }
+        return undefined;
+      };
+
+      // Empuja quitando vacíos y recortando a 100 caracteres (límite de GA4).
+      const empujar = (event: string, datos: Datos) => {
+        const out: Datos = { event };
+        for (const [k, v] of Object.entries(datos)) {
+          if (v === undefined || v === '') continue;
+          out[k] = typeof v === 'string' ? v.slice(0, 100) : v;
+        }
+        dl().push(out);
+      };
+
+      // Zona de la página, sin tocar ningún componente.
+      const zona = (el: Element): string => {
+        if (el.closest('#site-nav[data-open="true"]')) return 'menu_movil';
+        if (el.closest('.site-header')) return 'cabecera';
+        if (el.closest('footer')) return 'pie';
+        return 'cuerpo';
+      };
+
+      // Destino a partir del href.
+      const destino = (a: HTMLAnchorElement | null): string | undefined => {
+        const href = a?.getAttribute('href');
+        if (!href || href === '#') return undefined;
+        if (href === '/') return 'home';
+        if (href.startsWith('tel:')) return 'telefono';
+        if (href.startsWith('mailto:')) return 'correo';
+        if (/^https?:\/\//.test(href) && !href.includes(location.host)) return 'externo';
+        if (href === '/tours' || href === '/accessible-tours') return 'listado_tours';
+        if (href.startsWith('/tours/')) return 'tour';
+        if (href.startsWith('/blog')) return 'blog';
+        if (href.startsWith('/contact')) return 'contacto';
+        return 'otra';
+      };
+
+      // Clics: click_button, click_link, click_nav, click_image, phone_click, email_click.
+      // En fase de captura (true): algunos componentes cortan la propagación del clic
+      // (los desplegables del menú hacen stopPropagation) y en fase normal no llegaría.
+      document.addEventListener('click', (e) => {
+        const el = (e.target as Element | null)?.closest<HTMLElement>('[data-ev]');
+        if (!el) return;
+        const evento = el.dataset.ev!;
+        const enlace = el.closest<HTMLAnchorElement>('a[href]');
+        // data-ev-text manda: en una tarjeta, el texto completo traería la descripción entera.
+        const texto = (el.dataset.evText ?? el.textContent ?? '').trim().replace(/\s+/g, ' ');
+        const campoTexto = evento === 'click_button' ? 'button_text'
+                         : evento === 'click_image'  ? 'image_alt'
+                         : 'link_text';
+        empujar(evento, {
+          page_type: varPagina('page_type'),
+          page_zone: zona(el),
+          destino: el.dataset.evDest ?? destino(enlace),
+          [campoTexto]: texto,
+          tour_name: el.dataset.evTour ?? varPagina('tour_name'),
+        });
+      }, true);
+
+      // toggle_faq. Atributo propio (data-ev-faq), nunca data-ev en el mismo elemento.
+      // Este listener está en document, así que corre después del de FaqItem:
+      // data-open ya tiene el estado nuevo.
+      document.addEventListener('click', (e) => {
+        const boton = (e.target as Element | null)?.closest<HTMLElement>('[data-ev-faq]');
+        if (!boton) return;
+        const abierto = boton.closest<HTMLElement>('.faq-item')?.dataset.open === 'true';
+        empujar('toggle_faq', {
+          page_type: varPagina('page_type'),
+          page_zone: zona(boton),
+          toggle_action: abierto ? 'abrir' : 'cerrar',
+          toggle_question: boton.dataset.evFaq,
+          tour_name: varPagina('tour_name'),
+        });
+      });
+
+      // scroll_depth: 25, 50, 75 y 90 %, una vez cada uno por página.
+      (() => {
+        const umbrales = [25, 50, 75, 90];
+        const vistos = new Set<number>();
+        let pendiente = false;
+        const medir = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (window.scrollY / max) * 100 : 100;
+          for (const u of umbrales) {
+            if (pct >= u && !vistos.has(u)) {
+              vistos.add(u);
+              empujar('scroll_depth', { page_type: varPagina('page_type'), percent_scrolled: u, tour_name: varPagina('tour_name') });
+            }
+          }
+          if (vistos.size === umbrales.length) window.removeEventListener('scroll', alHacerScroll);
+          pendiente = false;
+        };
+        const alHacerScroll = () => { if (!pendiente) { pendiente = true; requestAnimationFrame(medir); } };
+        window.addEventListener('scroll', alHacerScroll, { passive: true });
+        medir();   // en páginas cortas, el 90 % ya se ve al cargar
+      })();
     </script>
   </body>
 </html>

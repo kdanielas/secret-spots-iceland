@@ -90,7 +90,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       <div class="locations-carousel">
         {LOCATIONS.map((l) => (
           <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
-            <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
+            <div data-ev="click_image" data-ev-text={l.title} style="position:relative;aspect-ratio:2/1;overflow:hidden">
               <Image src={l.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">

@@ -13,6 +13,11 @@ interface Props {
   type?: 'button' | 'submit';
   style?: string;
   class?: string;
+  /** Evento de medición (#86). false = no medir este botón. */
+  ev?: string | false;
+  evText?: string;
+  evDest?: string;
+  evTour?: string;
 }
 const {
   variant = 'primary',
@@ -26,6 +31,10 @@ const {
   type = 'button',
   style = '',
   class: className,
+  ev = 'click_button',
+  evText,
+  evDest,
+  evTour,
 } = Astro.props;
 
 const Tag = href ? 'a' : 'button';
@@ -43,6 +52,10 @@ const base = `display:${fullWidth ? 'flex' : 'inline-flex'};align-items:center;j
   type={Tag === 'button' ? type : undefined}
   disabled={Tag === 'button' ? disabled : undefined}
   class:list={[`btn`, `btn-${variant}`, `btn-${size}`, className]}
+  data-ev={ev || undefined}
+  data-ev-text={evText}
+  data-ev-dest={evDest}
+  data-ev-tour={evTour}
   style={base}
 >
   {icon ? <Icon name={icon} size={iconSize} /> : null}
