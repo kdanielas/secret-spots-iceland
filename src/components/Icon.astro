@@ -11,35 +11,38 @@ interface Props {
   color?: string;
   style?: string;
   class?: string;
+  label?: string;
 }
-const { name, size = 20, color, style = '', class: className } = Astro.props;
+
+// Icons are decorative by default: the file name ("arrow-right", "star") is not
+// meaningful to a screen reader. Pass `label` only when the icon is the sole
+// carrier of meaning and nothing around it already names the control.
+const { name, size = 20, color, style = '', class: className, label } = Astro.props;
 
 const raw = ICONS[`../icons/${name}.svg`];
 if (!raw) {
   throw new Error(`<Icon name="${name}" /> has no matching file — add src/icons/${name}.svg.`);
 }
 
-// Split the root tag off so its attributes can be normalised; `body` keeps the
-// paths and the closing </svg> untouched.
 const source = raw.slice(raw.indexOf('<svg'));
 const openTagEnd = source.indexOf('>');
 const body = source.slice(openTagEnd + 1);
 
 let attrs = source
   .slice('<svg'.length, openTagEnd)
-  // these are all set explicitly below
-  .replace(/\s(?:width|height|class|role|aria-label|style)="[^"]*"/g, '')
-  // the lucide files are pretty-printed one attribute per line
+  .replace(/\s(?:width|height|class|role|aria-label|aria-hidden|style)="[^"]*"/g, '')
   .replace(/\s+/g, ' ')
   .trim();
-// lucide files declare fill/stroke themselves; the simple-icons ones don't and
-// would paint black instead of inheriting the surrounding text colour.
+
 if (!/\b(?:fill|stroke)=/.test(attrs)) attrs += ' fill="currentColor"';
 
+const a11y = label ? `role="img" aria-label="${label}"` : `aria-hidden="true"`;
+
 const inlineStyle = `display:inline-block;flex:0 0 auto;${color ? `color:${color};` : ''}${style}`;
-const svg = `<svg ${attrs} width="${size}" height="${size}" role="img" aria-label="${name}"${
+const svg = `<svg ${attrs} width="${size}" height="${size}" ${a11y}${
   className ? ` class="${className}"` : ''
 } style="${inlineStyle}">${body}`;
 ---
 
 <Fragment set:html={svg} />
+
