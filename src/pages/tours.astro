@@ -18,8 +18,8 @@ const TOURS = [
   { slug: 'south-coast-waterfalls', image: southCoastImg, duration: '7 hours', title: 'South Coast & Waterfalls', level: 'All levels', description: 'Black sand beaches, glacier lagoons and thundering waterfalls along the Ring Road, timed for the best light.', price: '€149', href: '/tours/south-coast-adventure' },
   { slug: 'golden-circle-secrets', image: goldenCircleImg, duration: '7 hours', title: 'Golden Circle Secrets', level: 'All levels', description: 'The classic route reimagined — geysers, waterfalls and craters, with detours to the spots most visitors skip.', price: '€149', href: '/tours/golden-circle' },
   { slug: 'snaefellsnes-peninsula', image: snaefellsnesImg, duration: '7 hours', title: 'Snæfellsnes Peninsula', level: 'All levels', description: "Iceland in miniature: glaciers, black-sand coves and mountains, away from the south coast crowds.", price: '€149', href: '/contact' },
-  { slug: 'highlands-3-day-adventure', image: highlandsImg, duration: '3 days', title: 'Highlands 3-Day Adventure', level: 'Moderate fitness', description: 'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — with two nights on the road.', price: '€890', href: '/tours/highlands-adventure' },
-  { slug: 'ring-road-northern-lights', image: ringRoadImg, duration: '6 days', title: 'Ring Road & Northern Lights', level: 'All levels', description: 'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.', price: '€1,690', href: '/tours/6-days-ultimate-adventure' },
+  { slug: 'highlands-3-day-adventure', image: highlandsImg, duration: '3 days', title: 'Highlands Adventure', level: 'Moderate fitness', description: 'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — with two nights on the road.', price: '€890', href: '/tours/highlands-adventure' },
+  { slug: 'ring-road-northern-lights', image: ringRoadImg, duration: '6 days', title: 'Ultimate Iceland Adventure', level: 'All levels', description: 'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.', price: '€1,690', href: '/tours/6-days-ultimate-adventure' },
 ];
 ---
 
@@ -61,7 +61,7 @@ const TOURS = [
             </a>
             <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding-top:var(--space-3);margin-top:auto;padding-left:var(--space-6);padding-right:var(--space-6)">
               <a href="/contact" class="cta-pill" style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
-              <a href={t.href} class="info-pill" style="display:inline-flex;align-items:center;justify-content:center;padding:9px 23px;border:1px solid var(--ink-900);color:var(--ink-900);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">More Info</a>
+              <a href={t.href} class="info-pill" aria-label={`More info about the ${t.title} tour`} style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Tour details<Icon name="chevron-right" size={16} /></a>
             </div>
           </div>
         ))}
@@ -77,7 +77,7 @@ const TOURS = [
       <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:center;text-align:center">
         <h2 style="font:400 2rem/1.2 var(--font-sans);color:var(--text-heading);margin:0">Our photography guide &amp; tips</h2>
         <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</p>
-        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
+        <Button variant="outline" href="/iceland-photography" iconAfter="chevron-right">See Our Photography Guide</Button>
       </div>
     </div>
   </Section>
@@ -94,10 +94,10 @@ const TOURS = [
       </div>
       <div style="display:flex;gap:var(--space-4)">
         <button type="button" class="testimonial-arrow" aria-label="Previous review">
-          <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
+          <Icon name="chevron-right" size={18} style="transform:rotate(180deg)" />
         </button>
         <button type="button" class="testimonial-arrow" aria-label="Next review">
-          <Icon name="arrow-right" size={18} />
+          <Icon name="chevron-right" size={18} />
         </button>
       </div>
     </div>
@@ -108,7 +108,7 @@ const TOURS = [
   .card-clickable { transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
   .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
   .cta-pill:hover { background: var(--action-dark-bg-hover); }
-  .info-pill:hover { background: rgba(39,51,60,.05); }
+  .info-pill:hover { color: var(--blue-500); }
   .card-clickable:active { transform: var(--press-scale); }
 
   .testimonial-arrow {
