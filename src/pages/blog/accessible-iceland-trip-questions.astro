@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -96,29 +98,29 @@ const QUESTIONS = [
     ],
   },
 ];
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="10 Questions to Ask Before Booking an Accessible Iceland Tour | Secret Spots Iceland"
   description="Before booking an accessible trip to Iceland, here are the questions to ask any operator — from vehicles and cancellation policies to handling changes."
   active="Blog"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Traveller in a wheelchair by a glacier lagoon in Iceland"
-    subtitle="By Luke EM · September 23, 2026"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Planning an Accessible Trip to Iceland: 10 Questions You Should Ask Any Operator</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">We have organized trips through some of the most remote parts of Iceland, including a 12-day tour with a guest in a wheelchair, and many others with older travelers and guests with limited mobility. Before any trip, the planning starts the same way: a conversation about what actually matters to you. <a href="/contact" style="color:var(--blue-500);text-decoration:underline">See how we approach accessible tours</a>.</p>

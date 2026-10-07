@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -26,29 +28,29 @@ const MISTAKES = [
   'Skipping golden hour — many fixed-schedule tours operate on hours that miss the best light of the day',
   'Relying on autofocus at night — it almost always fails in near-total darkness; manual focus is essential for aurora and night shots',
 ];
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="Iceland Photography Tips | Secret Spots Iceland"
   description="When to visit for the photography you're after, what to pack, and the mistakes most visitors make with their cameras in Iceland's unpredictable conditions."
   active="Blog"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Luke, local guide and photographer, exploring Iceland's highlands"
-    subtitle="By Luke EM · June 24, 2026"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Iceland Photography Tips</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Iceland is one of the most photographed countries on Earth — and one of the easiest places to come home with disappointing photos. The difference between a snapshot and a portfolio-worthy image almost always comes down to the same three things: timing, light, and the right gear.</p>

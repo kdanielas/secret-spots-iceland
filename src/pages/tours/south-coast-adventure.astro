@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { tourPageSchema } from '../../lib/tour';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -65,12 +67,24 @@ const REVIEWS = [
   { quote: 'Luke created a flexible, weather-adaptable adventure that combined well-known sites with hidden treasures. His expert photography let us enjoy the moment instead of fumbling with our phones. Highly recommend!', name: 'Mehul P', type: 'Family' },
   { quote: "Luke provided a meaningful, personal, and dynamic tour! His energy was amazing and he kept us engaged during long drives. We sang, laughed, and shared incredible moments. I'm so thankful for the memories he captured!", name: 'Tanja P', type: 'Friends' },
 ];
+
+const TOUR_NAME = 'South Coast Private Iceland';
+const TOUR_INTRO = `This is a fully private tour — just your group, no strangers, no fixed schedule. You'll depart Reykjavík early, drive the scenic Ring Road southeast, and experience the South Coast at a relaxed pace. Optional stops let you customize the day — visit museums, hike a glacier, explore coastal cliffs, or simply find the perfect light for photography.`;
+
+const schema = await tourPageSchema(Astro.url.pathname, {
+  name: TOUR_NAME,
+  description: TOUR_INTRO,
+  heroImage: heroImg,
+  duration: STATS[0].label,
+  highlights: HIGHLIGHTS.map((h) => h.title),
+});
 ---
 
 <Layout
   title="South Coast Iceland Tour | Waterfalls, Glaciers & Black Sand"
   description="10-hour private South Coast tour. Seljalandsfoss, Skógafoss, Reynisfjara black sand beach & glacier views. Flexible itinerary, professional photography, no tour buses."
   active="Tours"
+  schema={schema}
   hideContactPanel
   footerStyle="margin:0;border:none;border-radius:0"
 >
@@ -81,7 +95,7 @@ const REVIEWS = [
     primaryCta=""
     secondaryCta=""
   >
-    <Fragment slot="title">South Coast Private Iceland</Fragment>
+    <Fragment slot="title">{TOUR_NAME}</Fragment>
     <div class="tour-info-bar">
       <div class="tour-info-bar-stats">
         {STATS.map((s, i) => (
@@ -103,6 +117,8 @@ const REVIEWS = [
     </div>
   </Hero>
 
+  <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: TOUR_NAME }]} />
+
   <section class="tour-block tour-block-row">
     <div class="tour-row">
       <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:450/800">
@@ -111,7 +127,7 @@ const REVIEWS = [
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the South Coast Tour</h2>
-          <p style="font:var(--type-lead);color:#081824;margin:0">This is a fully private tour — just your group, no strangers, no fixed schedule. You'll depart Reykjavík early, drive the scenic Ring Road southeast, and experience the South Coast at a relaxed pace. Optional stops let you customize the day — visit museums, hike a glacier, explore coastal cliffs, or simply find the perfect light for photography.</p>
+          <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
           {EXPECT.map((item) => (
@@ -242,17 +258,17 @@ const REVIEWS = [
 
   .tour-info-bar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-6);
+    justify-content: space-between;
+    gap: var(--space-7);
     background: var(--cream-50);
-    border-radius: 32px;
-    padding: var(--space-7);
+    border-radius: 100px;
+    padding: var(--space-5) var(--space-7);
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: wrap;
   }
-  .tour-info-bar-stats { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
-  .tour-info-bar-dot { display: none; }
+  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
   .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
 
   .highlights-carousel {
@@ -295,6 +311,9 @@ const REVIEWS = [
   @media (max-width: 768px) {
     .tour-row { flex-direction: column; align-items: stretch; }
     .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; }
+    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
+    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
+    .tour-info-bar-dot { display: none; }
   }
   @media (max-width: 640px) {
     .highlight-card { flex-basis: 78vw; }

@@ -1,0 +1,10 @@
+---
+/** Renders one JSON-LD block. `<` is escaped so page copy can never close the script early. */
+interface Props {
+  schema: unknown;
+}
+const { schema } = Astro.props;
+const json = JSON.stringify(schema).replace(/</g, '\\u003c');
+---
+
+<script type="application/ld+json" is:inline set:html={json}></script>
