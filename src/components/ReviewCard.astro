@@ -8,11 +8,10 @@ interface Props {
   initial?: string;
   rating?: number;
   quote: string;
-  readMore?: string;
   onDark?: boolean;
   style?: string;
 }
-const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', onDark = false, style = '' } = Astro.props;
+const { name, date, avatar, initial, rating = 5, quote, onDark = false, style = '' } = Astro.props;
 ---
 
 <article style={`display:flex;flex-direction:column;gap:var(--space-5);background:${onDark ? 'rgba(251,250,248,.04)' : 'var(--surface-card-light)'};border-radius:var(--radius-card);padding:${onDark ? '12px' : '28px'};box-shadow:var(--shadow-review-card);${style}`}>
@@ -30,6 +29,5 @@ const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', 
   <Rating value={rating} size={16} />
   <p style={`font:400 14px/1.5 var(--font-sans);color:${onDark ? 'rgba(251,255,255,.8)' : 'rgba(39,51,60,.8)'};margin:0`}>
     {quote}
-    <a href="#" style="color:var(--blue-500);font-weight:600">{' '}{readMore}</a>
   </p>
 </article>
