@@ -7,9 +7,9 @@ import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
-import heroImg from '../../assets/images/Web images/blog/compressed/wheelchair-glacier-lagoon-portrait-iceland.webp';
+import heroImg from '../../assets/images/Web images/blog/compressed/godafoss-waterfall-wheelchair-tour-iceland.webp';
 import helicopterImg from '../../assets/images/Web images/blog/compressed/helicopter-glacier-tour-iceland.webp';
-import godafossImg from '../../assets/images/Web images/blog/compressed/godafoss-waterfall-wheelchair-tour-iceland.webp';
+import glacierLagoonImg from '../../assets/images/Web images/blog/compressed/wheelchair-glacier-lagoon-portrait-iceland.webp';
 
 const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
@@ -18,11 +18,13 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   title="How We Made Iceland Accessible: A 12-Day Wheelchair Tour | Secret Spots Iceland"
   description="The story of a 12-day private tour with a guest who uses a wheelchair — and how we ended up in a helicopter to make sure nothing was off-limits."
   active="Blog"
+  image={heroImg}
+  imageAlt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall"
   schema={schema}
 >
   <Hero
     framedImage={heroImg}
-    framedImageAlt="Traveller in a wheelchair by a glacier lagoon in Iceland"
+    framedImageAlt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall"
     primaryCta=""
     secondaryCta=""
   >
@@ -86,7 +88,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
       <figure style="margin:var(--space-11) 0">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={godafossImg} alt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+          <Image src={glacierLagoonImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
         </div>
       </figure>
 
