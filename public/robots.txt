@@ -1,0 +1,5 @@
+# The site is not launched yet, so keep every crawler out of the preview domain.
+# At launch, drop these rules (plus the X-Robots-Tag header in vercel.json and the
+# robots meta tag in src/layouts/Layout.astro) and add the production sitemap.
+User-agent: *
+Disallow: /

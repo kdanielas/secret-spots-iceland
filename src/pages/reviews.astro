@@ -126,9 +126,24 @@ const REVIEWS = [
   { name: 'Heidi', avatar: heidiAvatar, quote: 'We visited Iceland in October 2021 and had such a wonderful time. Luke was a fantastic guide and brought us to some unique and beautiful locations — a much better option for anyone who wants a personalized, small group setting. Luke is a phenomenal photographer and we are so happy with the pictures he took.' },
   { name: 'Michelle Chang', avatar: michelleAvatar, quote: 'A Truly Professional Tour and Photographer — 100% Recommend! Luke caught the moment perfectly in both video and photos which we will treasure forever. He had so many great ideas for photo locations and it was very easy and natural to have him take our photo.' },
 ];
+
+// Where these reviews were originally left, so guests can read the full,
+// unedited set on the platform itself.
+const REVIEW_SOURCES = [
+  {
+    platform: 'Tripadvisor',
+    icon: 'tripadvisor-color',
+    href: 'https://www.tripadvisor.com/AttractionProductReview-g189970-d23569612-Private_Iceland_Tour_Hidden_Gems_Local_Experience-Reykjavik_Capital_Region.html',
+  },
+  {
+    platform: 'Google',
+    icon: 'google-color',
+    href: 'https://www.google.com/maps/place/Secret+Spots+Of+Iceland/@64.1338111,-21.8213431,17z/data=!3m1!4b1!4m6!3m5!1s0x48d675481deb0d47:0x3e7adf7b877b8953!8m2!3d64.1338111!4d-21.8213431!16s%2Fg%2F11pv6bm7q3',
+  },
+];
 ---
 
-<Layout title="Iceland Private Tours Reviews | Secret Spots Iceland" active="Reviews">
+<Layout title="Iceland private tours reviews | Secret Spots" description="Read honest reviews from travelers who explored Iceland's hidden gems with Luke. Private tours and photography experiences — see what others discovered." active="Reviews">
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
@@ -224,11 +239,77 @@ const REVIEWS = [
           </div>
         ))}
       </div>
+
+      <div class="review-sources">
+        <h3 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">Read them where guests left them</h3>
+        <p style="font:400 16px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:620px">The reviews above are a selection. Every one of them is public on Tripadvisor and Google, unedited and in full.</p>
+        <div class="review-sources-links">
+          {REVIEW_SOURCES.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="review-source-link"
+              aria-label={`Read all Secret Spots Iceland reviews on ${s.platform} (opens in a new tab)`}
+              data-ev="click_link"
+              data-ev-text={`reviews_${s.platform.toLowerCase()}`}
+            >
+              <span class="review-source-icon">
+                <img src={`/icons/${s.icon}.svg`} alt="" width="20" height="20" style="width:20px;height:20px;object-fit:contain" />
+              </span>
+              All reviews on {s.platform}
+              <Icon name="arrow-up-right" size={16} />
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </Section>
 </Layout>
 
 <style>
+  .review-sources {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-5);
+  }
+  .review-sources-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+  .review-source-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 10px 20px 10px 10px;
+    border: 1px solid var(--ink-900);
+    border-radius: var(--radius-pill);
+    background: var(--cream-50);
+    color: var(--ink-900);
+    font: var(--type-button);
+    font-size: .9375rem;
+    text-decoration: none;
+    transition: var(--transition-control);
+  }
+  .review-source-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-chip);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    overflow: hidden;
+  }
+  .review-source-link:hover { background: var(--cream-100); }
+  .review-source-link:active { transform: var(--press-scale); }
+
   .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-6); width: 100%; }
   .why-card {
     background: #EDEBE2;

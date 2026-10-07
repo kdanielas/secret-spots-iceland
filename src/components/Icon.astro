@@ -1,4 +1,10 @@
 ---
+// Every icon in src/icons is read at build time and inlined into the page, so
+// an icon costs no HTTP request. Sizing, colour and a11y attributes are
+// rebuilt onto the root <svg> below so the whole set behaves the same way
+// regardless of which library an individual file came from.
+const ICONS = import.meta.glob<string>('../icons/*.svg', { query: '?raw', import: 'default', eager: true });
+
 interface Props {
   name: string;
   size?: number;
@@ -7,16 +13,36 @@ interface Props {
   class?: string;
   label?: string;
 }
+
 // Icons are decorative by default: the file name ("arrow-right", "star") is not
 // meaningful to a screen reader. Pass `label` only when the icon is the sole
 // carrier of meaning and nothing around it already names the control.
 const { name, size = 20, color, style = '', class: className, label } = Astro.props;
+
+const raw = ICONS[`../icons/${name}.svg`];
+if (!raw) {
+  throw new Error(`<Icon name="${name}" /> has no matching file — add src/icons/${name}.svg.`);
+}
+
+const source = raw.slice(raw.indexOf('<svg'));
+const openTagEnd = source.indexOf('>');
+const body = source.slice(openTagEnd + 1);
+
+let attrs = source
+  .slice('<svg'.length, openTagEnd)
+  .replace(/\s(?:width|height|class|role|aria-label|aria-hidden|style)="[^"]*"/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+if (!/\b(?:fill|stroke)=/.test(attrs)) attrs += ' fill="currentColor"';
+
+const a11y = label ? `role="img" aria-label="${label}"` : `aria-hidden="true"`;
+
+const inlineStyle = `display:inline-block;flex:0 0 auto;${color ? `color:${color};` : ''}${style}`;
+const svg = `<svg ${attrs} width="${size}" height="${size}" ${a11y}${
+  className ? ` class="${className}"` : ''
+} style="${inlineStyle}">${body}`;
 ---
 
-<span
-  role={label ? 'img' : undefined}
-  aria-label={label}
-  aria-hidden={label ? undefined : 'true'}
-  class={className}
-  style={`display:inline-block;width:${size}px;height:${size}px;flex:0 0 auto;background:${color || 'currentColor'};-webkit-mask-image:url(/icons/${name}.svg);mask-image:url(/icons/${name}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;${style}`}
-></span>
+<Fragment set:html={svg} />
+

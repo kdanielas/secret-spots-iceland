@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Section from '../components/Section.astro';
 import Icon from '../components/Icon.astro';
 import Button from '../components/Button.astro';
@@ -44,7 +45,7 @@ const MOMENTS = [moment1, moment2, moment3, moment4, moment5, moment6];
 const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
 ---
 
-<Layout title="Iceland Photography Guide — Best Locations & Photo Spots | Secret Spots Iceland" active="Photography Guide">
+<Layout title="How to Photograph Iceland: Seasons, Light, Gear & Timing" description="A photographer's guide to Iceland's best locations — Northern Lights, glaciers, black sand beaches and hidden waterfalls, from local guide Luke." active="Photography Guide">
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
@@ -56,6 +57,8 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       </div>
     </section>
   </div>
+
+  <Breadcrumbs trail={[{ label: 'Photography Guide' }]} />
 
   <Section tight style="padding-top:var(--space-7)">
     <div class="photo-row">
@@ -90,7 +93,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       <div class="locations-carousel">
         {LOCATIONS.map((l) => (
           <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
-            <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
+            <div data-ev="click_image" data-ev-text={l.title} style="position:relative;aspect-ratio:2/1;overflow:hidden">
               <Image src={l.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">

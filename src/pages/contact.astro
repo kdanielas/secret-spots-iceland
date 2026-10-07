@@ -184,13 +184,13 @@ const TOUR_OPTIONS = [
   'South Coast & Waterfalls',
   'Golden Circle Secrets',
   'Snæfellsnes Peninsula',
-  'Highlands 3-Day Adventure',
-  'Ring Road & Northern Lights',
+  'Highlands Adventure',
+  'Ultimate Iceland Adventure',
   "Not sure yet / custom itinerary",
 ];
 ---
 
-<Layout title="Contact Us | Secret Spots Iceland" active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
+<Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
   <script src="https://www.google.com/recaptcha/api.js" async defer is:inline></script>
   <section class="contact-hero" style="position:relative;overflow:hidden;background:#081824;padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
     <Image src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
@@ -231,7 +231,7 @@ const TOUR_OPTIONS = [
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Email <span class="req-mark">*</span></span>
                 <span style="position:relative;display:block">
-                  <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)">
+                  <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="mail" size={16} />
                   </span>
                   <input type="email" name="email" required class="contact-input" placeholder="you@domain.com" style="padding-left:40px" />
@@ -250,7 +250,7 @@ const TOUR_OPTIONS = [
                     <select name="countryCode" required class="contact-input" style="padding-right:34px">
                       {COUNTRY_CODES.map((c) => <option value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
                     </select>
-                    <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)">
+                    <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="chevron-down" size={16} />
                     </span>
                   </span>
@@ -258,7 +258,7 @@ const TOUR_OPTIONS = [
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Phone <span class="req-mark">*</span></span>
                   <span style="position:relative;display:block">
-                    <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)">
+                    <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="phone" size={16} />
                     </span>
                     <input type="tel" name="phone" required class="contact-input" placeholder="Your phone number" style="padding-left:40px" />
@@ -291,7 +291,7 @@ const TOUR_OPTIONS = [
                   <select name="tour" required class="contact-input" style="padding-right:34px">
                     {TOUR_OPTIONS.map((t) => <option value={t}>{t}</option>)}
                   </select>
-                  <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)">
+                  <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="chevron-down" size={16} />
                   </span>
                 </span>
@@ -301,7 +301,7 @@ const TOUR_OPTIONS = [
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Preferred tour date <span class="req-mark">*</span></span>
                 <span style="position:relative;display:block">
                   <input type="text" name="tourDate" placeholder="dd/mm/yyyy" required class="contact-input" style="padding-right:40px" />
-                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text-muted)">
+                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="chevron-down" size={16} />
                   </span>
                 </span>
@@ -448,7 +448,7 @@ const TOUR_OPTIONS = [
     font: 400 15px/1.4 var(--font-sans);
     color: var(--ink-900);
     background: var(--surface-raised);
-    border: 1px solid #CCC6B0;
+    border: 1px solid var(--border-field);
     border-radius: 8px;
     padding: 0 14px;
     height: var(--control-h-md);

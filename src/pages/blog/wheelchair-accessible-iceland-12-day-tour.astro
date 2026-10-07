@@ -2,35 +2,39 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
-import heroImg from '../../assets/images/Web images/blog/compressed/wheelchair-glacier-lagoon-portrait-iceland.webp';
+import heroImg from '../../assets/images/Web images/blog/compressed/godafoss-waterfall-wheelchair-tour-iceland.webp';
 import helicopterImg from '../../assets/images/Web images/blog/compressed/helicopter-glacier-tour-iceland.webp';
-import godafossImg from '../../assets/images/Web images/blog/compressed/godafoss-waterfall-wheelchair-tour-iceland.webp';
+import glacierLagoonImg from '../../assets/images/Web images/blog/compressed/wheelchair-glacier-lagoon-portrait-iceland.webp';
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="How We Made Iceland Accessible: A 12-Day Wheelchair Tour | Secret Spots Iceland"
   description="The story of a 12-day private tour with a guest who uses a wheelchair — and how we ended up in a helicopter to make sure nothing was off-limits."
   active="Blog"
+  image={heroImg}
+  imageAlt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
-    framedImageAlt="Traveller in a wheelchair by a glacier lagoon in Iceland"
-    subtitle="By Luke EM · July 17, 2026"
+    framedImageAlt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">How We Made Iceland Accessible: A 12-Day Wheelchair Tour</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Iceland has a reputation for being hard to explore if you have limited mobility. Rough terrain, gravel roads, unpaved paths to waterfalls — a lot of the country's most iconic sights weren't built with accessibility in mind.</p>
@@ -84,7 +88,7 @@ import godafossImg from '../../assets/images/Web images/blog/compressed/godafoss
 
       <figure style="margin:var(--space-11) 0">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={godafossImg} alt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+          <Image src={glacierLagoonImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
         </div>
       </figure>
 

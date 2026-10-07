@@ -22,9 +22,10 @@ interface Props {
   active?: string;
   transparent?: boolean;
   showContact?: boolean;
-  style?: string;
+  /* float the header over the hero behind it instead of letting it push the page down */
+  overlay?: boolean;
 }
-const { active, transparent = false, showContact = false, style = '' } = Astro.props;
+const { active, transparent = false, showContact = false, overlay = false } = Astro.props;
 
 const NAV: NavItem[] = [
   {
@@ -55,7 +56,7 @@ const NAV: NavItem[] = [
           eyebrow: 'Multi-Day Tours',
           items: [
             { label: '3 Days South Coast', href: '/tours/3-days-south-coast' },
-            { label: '6 Days Ultimate Iceland Adventure', href: '/tours/6-days-ultimate-adventure' },
+            { label: 'Ultimate Iceland Adventure', href: '/tours/6-days-ultimate-adventure' },
           ],
         },
       ],
@@ -113,15 +114,15 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 ---
 
 <header
-  class="site-header container-pad"
+  class:list={['site-header', 'container-pad', { 'site-header-overlay': overlay }]}
   data-transparent={transparent ? 'true' : 'false'}
-  style={`position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;background:${transparent ? 'transparent' : 'var(--surface-page)'};padding-top:14px;padding-bottom:14px;gap:var(--space-8);${style}`}
 >
   <a href="/">
     <Logo height={54} onDark={transparent} />
   </a>
-  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
-    <Icon name="menu" size={20} />
+  <button class="nav-toggle" type="button" data-ev="click_nav" data-ev-text="Menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
+    <span class="nav-toggle-icon-closed"><Icon name="menu" size={20} /></span>
+    <span class="nav-toggle-icon-open"><Icon name="x" size={20} /></span>
   </button>
   <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;gap:var(--space-7)">
     {NAV.map((it) => (
@@ -130,6 +131,9 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           <button
             type="button"
             class="nav-dropdown-trigger"
+            aria-expanded="false"
+            data-ev="click_nav"
+            data-ev-text={it.label}
             data-menu={it.label}
             data-href={it.href}
             style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:0`}
@@ -146,6 +150,8 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       ) : (
         <a
           href={it.href || '#'}
+          data-ev="click_nav"
+          data-ev-text={it.label}
           style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
         >
           {it.label}
@@ -166,7 +172,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           col.type === 'intro' ? (
             <div class="nav-megamenu-col">
               {col.secondary && col.secondary.href === col.href ? (
-                <a href={col.href} class="nav-megamenu-intro">
+                <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
                   <div>
                     <span class="nav-megamenu-title">{col.title}</span>
                     <p class="nav-megamenu-desc">{col.description}</p>
@@ -178,7 +184,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                 </a>
               ) : (
                 <>
-                  <a href={col.href} class="nav-megamenu-intro">
+                  <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
                     <div>
                       <span class="nav-megamenu-title-row">
                         <span class="nav-megamenu-title">{col.title}</span>
@@ -188,7 +194,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                     </div>
                   </a>
                   {col.secondary ? (
-                    <a href={col.secondary.href} class="nav-megamenu-secondary">
+                    <a href={col.secondary.href} class="nav-megamenu-secondary" data-ev="click_nav" data-ev-text={col.secondary.label}>
                       <span>{col.secondary.label}</span>
                       <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                     </a>
@@ -200,7 +206,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
             <div class="nav-megamenu-col">
               <span class="nav-megamenu-eyebrow">{col.eyebrow}</span>
               {col.items.map((link) => (
-                <a href={link.href} class="nav-megamenu-link">
+                <a href={link.href} class="nav-megamenu-link" data-ev="click_nav" data-ev-text={link.label}>
                   <span>{link.label}</span>
                   <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                 </a>
@@ -216,13 +222,37 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 <style>
   .site-nav { align-items: center; }
 
-  :global(.site-header) { transition: transform 320ms ease; }
+  /* z-index comes from the shared scale in tokens/effects.css: the header sits on
+     the sticky layer, the mega-menu and the mobile panel on the dropdown layer */
+  :global(.site-header) {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-page);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: var(--space-8);
+    transition: transform 320ms ease;
+  }
+  :global(.site-header[data-transparent="true"]) { background: transparent; }
+  /* overlay headers lift out of the flow so the hero shows through behind them */
+  :global(.site-header.site-header-overlay) { position: absolute; top: 0; left: 0; right: 0; }
   :global(.site-header.nav-hidden) { transform: translateY(-100%); }
   :global(.site-header:has(.nav-dropdown-item[data-open="true"])) { background: #F8F7F3 !important; }
   /* mobile: the whole menu panel shares one background, so the header row
      above it should switch to that same color while it's open instead of
      staying transparent over the hero image behind it */
   :global(.site-header:has(.site-nav[data-open="true"])) { background: var(--surface-raised) !important; }
+
+  /* The menu and close glyphs are both inlined in the button, so swapping them
+     is a CSS toggle rather than a fetch for a second icon file. */
+  .nav-toggle-icon-closed { display: inline-flex; }
+  .nav-toggle-icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-closed { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-open { display: inline-flex; }
 
   :global(.nav-dropdown-chevron) { transition: transform var(--dur-base, 180ms) ease; }
   :global(.nav-dropdown-item[data-open="true"] .nav-dropdown-chevron) { transform: rotate(180deg); }
@@ -233,7 +263,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 40;
+    z-index: var(--z-dropdown);
     background: #F8F7F3;
     border-radius: 0 0 24px 24px;
     padding: var(--space-9);
@@ -328,22 +358,13 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       const isOpen = nav.dataset.open === 'true';
       const next = !isOpen;
       nav.dataset.open = String(next);
+      // both glyphs are already in the button; CSS picks one off aria-expanded
       toggle.setAttribute('aria-expanded', String(next));
-      toggle.innerHTML = '';
-      const img = document.createElement('span');
-      img.setAttribute('role', 'img');
-      img.style.cssText = `display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;`;
-      toggle.appendChild(img);
     });
     nav.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
         nav.dataset.open = 'false';
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.innerHTML = '';
-        const img = document.createElement('span');
-        img.setAttribute('role', 'img');
-        img.style.cssText = 'display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/menu.svg);mask-image:url(/icons/menu.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;';
-        toggle.appendChild(img);
       });
     });
   }
@@ -356,6 +377,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     function closeAll() {
       items.forEach((el) => (el.dataset.open = 'false'));
       panels.forEach((el) => (el.dataset.open = 'false'));
+      triggers.forEach((el) => el.setAttribute('aria-expanded', 'false'));
     }
 
     triggers.forEach((trigger) => {
@@ -371,6 +393,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
         closeAll();
         if (item && !isOpen) {
           item.dataset.open = 'true';
+          trigger.setAttribute('aria-expanded', 'true');
           if (panel) panel.dataset.open = 'true';
         }
       });

@@ -21,3 +21,4 @@ Secret Spots Iceland Design System.zip
 # site's code are force-added individually (see git commit history)
 src/assets/images/
 .env*
+!.env.example

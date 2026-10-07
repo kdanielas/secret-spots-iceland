@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Hero from '../components/Hero.astro';
 
 import heroImg from '../assets/images/south-coast-vestrahorn-tour.webp';
@@ -34,7 +35,7 @@ const VEHICLES = [
 ];
 ---
 
-<Layout title="Our Vehicles — Travel Iceland in Comfort | Secret Spots Iceland" active="Our Vehicles">
+<Layout title="Our Vehicles | Luxury Transportation for Private Iceland Tours" description="Comfortable, private 4x4 vehicles for Iceland tours — built for highland roads, glacier access and flexible stops, with a guide who knows the terrain." active="Our Vehicles">
   <Hero
     framedImage={heroImg}
     framedImageAlt="4x4 vehicle driving past snow-capped mountains in Iceland"
@@ -44,6 +45,8 @@ const VEHICLES = [
   >
     <Fragment slot="title">Travel Iceland in Comfort</Fragment>
   </Hero>
+
+  <Breadcrumbs trail={[{ label: 'Our Vehicles' }]} />
 
   <section class="section-py">
     <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-11);align-items:center;padding:0 var(--space-8)">

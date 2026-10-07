@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import FaqItem from '../../components/FaqItem.astro';
@@ -31,30 +33,32 @@ const FAQS = [
   { question: 'When is Iceland least crowded?', answer: 'November and early December, and again in April–May. Both offer excellent photography with the locations largely to yourself.' },
   { question: 'Do I need a guide to photograph Iceland?', answer: 'You can self-drive much of the ring road. Where a local guide changes everything is timing and weather: knowing which side of a mountain has clear sky tonight, when the light will hit a canyon wall, and which "famous" spot to skip for the better one ten minutes away.' },
 ];
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="Best Time to Photograph Iceland: A Month-by-Month Guide | Secret Spots Iceland"
-  description="There is no bad time to photograph Iceland, but there is a best time for the photographs you want to take. A month-by-month breakdown of light, access and crowds."
+  description="There is no bad time to photograph Iceland, but there is a best time for your shot. A month-by-month breakdown of light, access and crowds."
   active="Blog"
+  image={heroImg}
+  imageAlt="Northern lights over an Icelandic landscape"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Northern lights over an Icelandic landscape"
-    subtitle="By Luke EM · September 1, 2026"
     primaryCta=""
     secondaryCta=""
     compact
   >
     <Fragment slot="title">Best Time to Photograph Iceland: A Month-by-Month Guide</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">After nearly 20 years photographing Iceland, the question I hear most often is simple: when should I come? The honest answer is that there is no bad time to photograph Iceland, but there absolutely is a best time for the photographs you want to take. Northern lights and ice caves belong to one half of the year; the midnight sun and the highlands belong to the other. This guide breaks it down so you can plan your trip around the light, not around luck.</p>

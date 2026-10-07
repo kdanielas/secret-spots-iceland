@@ -2,8 +2,11 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { tourPageSchema } from '../../lib/tour';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
+import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
 
 import heroImg from '../../assets/images/highlands-couple-overlook-wide.webp';
 import expectImg from '../../assets/images/Web images/6-days-ultimate-adventure/reykjanes-post-eruption-landscape.jpg';
@@ -149,11 +152,26 @@ const WHO_FOR = [
   'Photographers pursuing the full range of Icelandic landscapes and light',
   'Groups wanting flexibility — each day can be customized based on interests and energy',
 ];
+
+const TOUR_NAME = 'Ultimate Iceland Adventure';
+const TOUR_INTRO = `This is a fully private, customizable 6-day journey — just your group, no strangers, no fixed schedule. Each day is adapted to weather, light conditions, and your interests. You'll experience Iceland's most dramatic landscapes, stay in comfortable accommodations, and go home with professional photographs and memories that last a lifetime.`;
+
+const schema = await tourPageSchema(Astro.url.pathname, {
+  name: TOUR_NAME,
+  description: TOUR_INTRO,
+  heroImage: heroImg,
+  duration: STATS[0].label,
+  highlights: HIGHLIGHTS.map((h) => h.title),
+});
 ---
 
 <Layout
-  title="6 Days Ultimate Iceland | Complete Private Adventure | Secret Spots Iceland"
+  title="6 Days Ultimate Iceland | Complete Private Adventure"
+  description="6-day private Iceland tour. Reykjanes, Snæfellsnes, Golden Circle, South Coast & Highlands. Everything Iceland is famous for + hidden gems. Photography & flexibility included."
   active="Tours"
+  image={heroImg}
+  imageAlt="Travelers overlooking a river and dramatic mountain peaks in the Icelandic Highlands"
+  schema={schema}
   hideContactPanel
   footerStyle="margin:0;border:none;border-radius:0"
 >
@@ -164,7 +182,7 @@ const WHO_FOR = [
     primaryCta=""
     secondaryCta=""
   >
-    <Fragment slot="title">6 Days Ultimate Iceland Adventure</Fragment>
+    <Fragment slot="title">{TOUR_NAME}</Fragment>
     <div class="tour-info-bar">
       <div class="tour-info-bar-stats">
         {STATS.map((s, i) => (
@@ -186,6 +204,8 @@ const WHO_FOR = [
     </div>
   </Hero>
 
+  <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: TOUR_NAME }]} />
+
   <section class="tour-block tour-block-row">
     <div class="tour-row">
       <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:450/800">
@@ -194,7 +214,7 @@ const WHO_FOR = [
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the 6-Day Adventure</h2>
-          <p style="font:var(--type-lead);color:#081824;margin:0">This is a fully private, customizable 6-day journey — just your group, no strangers, no fixed schedule. Each day is adapted to weather, light conditions, and your interests. You'll experience Iceland's most dramatic landscapes, stay in comfortable accommodations, and go home with professional photographs and memories that last a lifetime.</p>
+          <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
           {EXPECT.map((item) => (
@@ -209,34 +229,7 @@ const WHO_FOR = [
     </div>
   </section>
 
-  <section style="padding:var(--space-13) 0;background:var(--ink-900);overflow:hidden">
-    <div style="display:flex;flex-direction:column;gap:var(--space-11);max-width:var(--container-max);margin:0 auto">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-8)">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--cream-100);margin:0">6-Day Tour Highlights</h2>
-        <div style="display:flex;gap:var(--space-4)">
-          <button type="button" class="highlights-arrow" data-dir="prev" aria-label="Previous highlight">
-            <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
-          </button>
-          <button type="button" class="highlights-arrow" data-dir="next" aria-label="Next highlight">
-            <Icon name="arrow-right" size={18} />
-          </button>
-        </div>
-      </div>
-      <div class="highlights-carousel">
-        {HIGHLIGHTS.map((h) => (
-          <div class="highlight-card">
-            <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/10">
-              <Image src={h.image} alt="" width={500} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
-            </div>
-            <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-              <span style="font:600 24px/1.2 var(--font-sans);color:var(--cream-100)">{h.title}</span>
-              <p style="font:400 14px/1.5 var(--font-sans);color:rgba(244,237,225,.7);margin:0">{h.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <HighlightsCarousel title="6-Day Tour Highlights" highlights={HIGHLIGHTS} />
 
   <section class="tour-block">
     <div style="display:flex;flex-direction:column;gap:var(--space-10);max-width:var(--container-max);margin:0 auto">
@@ -329,7 +322,7 @@ const WHO_FOR = [
       <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(251,246,240,.97) 40%, rgba(251,246,240,.15) 90%)"></div>
       <div style="position:relative;display:flex;flex-direction:column;gap:var(--space-9);align-items:flex-start;max-width:600px">
         <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your 6 Days Ultimate Iceland Adventure?</h2>
+          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your Ultimate Iceland Adventure?</h2>
           <p style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0">This is not just a tour — it's a complete private Iceland experience designed for travellers who want to see everything, experience everything, and come home with unforgettable memories and professional photographs. Tell Luke's team your preferred dates and group size and we'll customize every detail of your Icelandic journey.</p>
         </div>
         <Button variant="primary" href="/contact">Contact us</Button>
@@ -344,51 +337,18 @@ const WHO_FOR = [
 
   .tour-info-bar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-6);
+    justify-content: space-between;
+    gap: var(--space-7);
     background: var(--cream-50);
-    border-radius: 32px;
-    padding: var(--space-7);
+    border-radius: 100px;
+    padding: var(--space-5) var(--space-7);
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: wrap;
   }
-  .tour-info-bar-stats { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
-  .tour-info-bar-dot { display: none; }
+  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
   .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
-
-  .highlights-carousel {
-    display: flex;
-    gap: var(--space-7);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: 0 var(--space-8);
-    scroll-padding: 0 var(--space-8);
-    scrollbar-width: none;
-  }
-  .highlights-carousel::-webkit-scrollbar { display: none; }
-  .highlight-card {
-    flex: 0 0 clamp(260px, 30vw, 420px);
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-  }
-  .highlights-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-    border: 1px solid rgba(255,255,255,.25);
-    background: transparent;
-    color: var(--cream-100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-control);
-  }
-  .highlights-arrow:hover { background: rgba(255,255,255,.1); }
-  .highlights-arrow:active { transform: var(--press-scale); }
 
   @media (max-width: 1024px) {
     .tour-row { gap: var(--space-8); }
@@ -397,47 +357,12 @@ const WHO_FOR = [
   @media (max-width: 768px) {
     .tour-row { flex-direction: column; align-items: stretch; }
     .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; }
+    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
+    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
+    .tour-info-bar-dot { display: none; }
   }
   @media (max-width: 640px) {
-    .highlight-card { flex-basis: 78vw; }
     .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
   }
 </style>
 
-<script>
-  const track = document.querySelector<HTMLElement>('.highlights-carousel');
-  const arrows = document.querySelectorAll<HTMLButtonElement>('.highlights-arrow');
-  if (track) {
-    // duplicate the set once so we can loop seamlessly — scrolling past the
-    // end (or before the start) lands on identical cloned cards, then we
-    // silently rewind by one set width so it feels infinite
-    const originalCards = Array.from(track.children);
-    originalCards.forEach((card) => {
-      const clone = card.cloneNode(true) as HTMLElement;
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
-    });
-
-    const setWidth = () => track.scrollWidth / 2;
-
-    arrows.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const card = track.querySelector<HTMLElement>('.highlight-card');
-        const step = card ? card.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
-        if (btn.dataset.dir === 'prev' && track.scrollLeft - step < 0) {
-          track.scrollLeft += setWidth();
-        }
-        track.scrollBy({ left: btn.dataset.dir === 'prev' ? -step : step, behavior: 'smooth' });
-      });
-    });
-
-    let settleTimer: ReturnType<typeof setTimeout>;
-    track.addEventListener('scroll', () => {
-      clearTimeout(settleTimer);
-      settleTimer = setTimeout(() => {
-        const width = setWidth();
-        if (track.scrollLeft >= width) track.scrollLeft -= width;
-      }, 120);
-    });
-  }
-</script>
