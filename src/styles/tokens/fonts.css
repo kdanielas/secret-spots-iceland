@@ -1,6 +1,11 @@
-@font-face{font-family:"Prata";src:url("/fonts/Prata-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Lato";src:url("/fonts/Lato-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap}
-@font-face{font-family:"Lato";src:url("/fonts/Lato-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Lato";src:url("/fonts/Lato-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
-@font-face{font-family:"Lato";src:url("/fonts/Lato-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap}
-@font-face{font-family:"Lato";src:url("/fonts/Lato-Black.ttf") format("truetype");font-weight:900;font-style:normal;font-display:swap}
+/* woff2 only: a third of the ttf's weight, same glyph coverage, and every
+   browser the site supports reads it (#40).
+   Lato ships no 500 or 600 cut — the family is 100/300/400/700/900 — so the
+   weights the CSS actually asks for are pinned to the two files we ship:
+   500 to Regular, 600 to Bold. Without the ranges the browser picks the same
+   files by proximity, but may fake the weight on top. Light (300) and Black
+   (900) are declared nowhere outside typography.css, and nothing is italic,
+   so those three files are gone. */
+@font-face{font-family:"Prata";src:url("/fonts/Prata-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Lato";src:url("/fonts/Lato-Regular.woff2") format("woff2");font-weight:400 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Lato";src:url("/fonts/Lato-Bold.woff2") format("woff2");font-weight:600 700;font-style:normal;font-display:swap}

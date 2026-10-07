@@ -98,6 +98,11 @@ const ogUrl = canonicalUrl(path);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts (#40): the three faces every page paints with, fetched alongside
+         the stylesheet instead of after the browser has parsed it. -->
+    <link rel="preload" href="/fonts/Prata-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lato-Bold.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Medición (#84): el dataLayer y las variables de página, ANTES que Tag Manager.
          Si van después, la primera página vista llega a GA4 sin page_type. -->
     <script define:vars={{ pageType, tourName }}>
