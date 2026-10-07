@@ -2,34 +2,36 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
 import heroImg from '../../assets/images/south-coast-horse-skogafoss-tour.webp';
 import puffinImg from '../../assets/images/puffin-dyrholaey-iceland.jpg';
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="Iceland in 3 Days or Just 1? The South Coast of Iceland | Secret Spots Iceland"
   description="Even in under 24 hours, you can feel the magic of Iceland's South Coast. Here's what a one-day tour includes, and what to add if you have three."
   active="Blog"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Horseback riding near Skógafoss waterfall on Iceland's South Coast"
-    subtitle="By Luke EM · July 15, 2025"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Iceland in 3 Days or Just 1? The South Coast of Iceland</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Your journey through Iceland can last six days, three days — or even just one. Regardless of how much time you have or the style of travel you choose, every well-organized tour lets you experience the most important, beautiful, and unique highlights of Iceland.</p>

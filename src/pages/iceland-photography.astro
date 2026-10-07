@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Section from '../components/Section.astro';
 import Icon from '../components/Icon.astro';
 import Button from '../components/Button.astro';
@@ -56,6 +57,8 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       </div>
     </section>
   </div>
+
+  <Breadcrumbs trail={[{ label: 'Photography Guide' }]} />
 
   <Section tight style="padding-top:var(--space-7)">
     <div class="photo-row">

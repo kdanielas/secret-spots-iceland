@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import FaqItem from '../components/FaqItem.astro';
 
 import heroImg from '../assets/images/highlands-couple-overlook-wide.webp';
+import { canonicalUrl, faqPageNode } from '../lib/schema';
 
 const NEEDS_REAL_ANSWER = 'Starter answer — this needs your real policy or details before the page goes live.';
 
@@ -67,12 +68,17 @@ const FAQ_CATEGORIES = [
     ],
   },
 ];
+
+// Questions still carrying the placeholder answer stay out of the structured data —
+// publishing "this needs your real policy" as an answer is worse than publishing nothing.
+const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items).filter((item) => item.answer !== NEEDS_REAL_ANSWER);
 ---
 
 <Layout
   title="Iceland Tours FAQ — Frequently Asked Questions | Secret Spots Iceland"
   active="FAQ"
   footerStyle="border:none"
+  schema={[faqPageNode(canonicalUrl(Astro.url.pathname), faqEntries)]}
 >
   <Hero framedImage={heroImg} framedImageAlt="Couple overlooking the Icelandic highlands" subtitle="Frequently Asked Questions" primaryCta="" secondaryCta="">
     <Fragment slot="title">FAQs</Fragment>

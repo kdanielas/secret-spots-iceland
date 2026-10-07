@@ -48,7 +48,12 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
         <h1 class="hero-title hero-anim" style="font:400 36px/1.25 var(--font-display);color:var(--text-heading);margin:0;max-width:60%;animation-delay:200ms">
           <slot name="title" />
         </h1>
-        {subtitle ? <p class="hero-anim" style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:600px;animation-delay:900ms">{subtitle}</p> : null}
+        {subtitle || Astro.slots.has('subtitle') ? (
+          <p class="hero-anim" style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:600px;animation-delay:900ms">
+            {subtitle}
+            <slot name="subtitle" />
+          </p>
+        ) : null}
       </div>
       <div class="hero-ctas hero-anim" style="justify-content:center;animation-delay:1600ms">
         {primaryCta ? <Button variant={primaryVariant} href={primaryHref}>{primaryCta}</Button> : null}

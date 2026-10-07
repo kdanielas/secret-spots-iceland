@@ -2,34 +2,36 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
 import heroImg from '../../assets/images/haifoss-waterfall-couple-rainbow-iceland.jpg';
 import highlandsImg from '../../assets/images/highlands-aerial-rainbow-mountains.webp';
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="Þjóðveldisbærinn Stöng - The Commonwealth Farm | Secret Spots Iceland"
   description="A reconstructed Viking-age farmstead buried by the 1104 eruption of Mount Hekla — one of the Highlands' quieter historical stops."
   active="Blog"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Couple by a waterfall in the Icelandic Highlands near Þjóðveldisbærinn Stöng"
-    subtitle="By Luke EM · June 16, 2025"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Þjóðveldisbærinn Stöng - The Commonwealth Farm</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Are you fascinated by Vikings? Know very little about them and want to learn more? Or maybe you're already well-versed in Viking history, but have never had a chance to experience the physical remnants of their everyday life? In either case, a trip to Þjóðveldisbærinn Stöng (The Commonwealth Farm) is the perfect solution. This reconstructed Viking farm lets you walk in the footsteps of Norsemen who once talked, ate, and prepared for battle here nearly a thousand years ago!</p>
