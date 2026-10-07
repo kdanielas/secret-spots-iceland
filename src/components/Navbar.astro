@@ -22,9 +22,10 @@ interface Props {
   active?: string;
   transparent?: boolean;
   showContact?: boolean;
-  style?: string;
+  /* float the header over the hero behind it instead of letting it push the page down */
+  overlay?: boolean;
 }
-const { active, transparent = false, showContact = false, style = '' } = Astro.props;
+const { active, transparent = false, showContact = false, overlay = false } = Astro.props;
 
 const NAV: NavItem[] = [
   {
@@ -113,9 +114,8 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 ---
 
 <header
-  class="site-header container-pad"
+  class:list={['site-header', 'container-pad', { 'site-header-overlay': overlay }]}
   data-transparent={transparent ? 'true' : 'false'}
-  style={`position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;background:${transparent ? 'transparent' : 'var(--surface-page)'};padding-top:14px;padding-bottom:14px;gap:var(--space-8);${style}`}
 >
   <a href="/">
     <Logo height={54} onDark={transparent} />
@@ -222,7 +222,24 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 <style>
   .site-nav { align-items: center; }
 
-  :global(.site-header) { transition: transform 320ms ease; }
+  /* z-index comes from the shared scale in tokens/effects.css: the header sits on
+     the sticky layer, the mega-menu and the mobile panel on the dropdown layer */
+  :global(.site-header) {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface-page);
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: var(--space-8);
+    transition: transform 320ms ease;
+  }
+  :global(.site-header[data-transparent="true"]) { background: transparent; }
+  /* overlay headers lift out of the flow so the hero shows through behind them */
+  :global(.site-header.site-header-overlay) { position: absolute; top: 0; left: 0; right: 0; }
   :global(.site-header.nav-hidden) { transform: translateY(-100%); }
   :global(.site-header:has(.nav-dropdown-item[data-open="true"])) { background: #F8F7F3 !important; }
   /* mobile: the whole menu panel shares one background, so the header row
@@ -246,7 +263,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     top: 100%;
     left: 0;
     right: 0;
-    z-index: 40;
+    z-index: var(--z-dropdown);
     background: #F8F7F3;
     border-radius: 0 0 24px 24px;
     padding: var(--space-9);
