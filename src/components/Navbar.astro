@@ -120,7 +120,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   <a href="/">
     <Logo height={54} onDark={transparent} />
   </a>
-  <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
+  <button class="nav-toggle" type="button" data-ev="click_nav" data-ev-text="Menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
     <Icon name="menu" size={20} />
   </button>
   <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;gap:var(--space-7)">
@@ -130,6 +130,8 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           <button
             type="button"
             class="nav-dropdown-trigger"
+            data-ev="click_nav"
+            data-ev-text={it.label}
             data-menu={it.label}
             data-href={it.href}
             style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:0`}
@@ -146,6 +148,8 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       ) : (
         <a
           href={it.href || '#'}
+          data-ev="click_nav"
+          data-ev-text={it.label}
           style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
         >
           {it.label}
@@ -166,7 +170,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           col.type === 'intro' ? (
             <div class="nav-megamenu-col">
               {col.secondary && col.secondary.href === col.href ? (
-                <a href={col.href} class="nav-megamenu-intro">
+                <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
                   <div>
                     <span class="nav-megamenu-title">{col.title}</span>
                     <p class="nav-megamenu-desc">{col.description}</p>
@@ -178,7 +182,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                 </a>
               ) : (
                 <>
-                  <a href={col.href} class="nav-megamenu-intro">
+                  <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
                     <div>
                       <span class="nav-megamenu-title-row">
                         <span class="nav-megamenu-title">{col.title}</span>
@@ -188,7 +192,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                     </div>
                   </a>
                   {col.secondary ? (
-                    <a href={col.secondary.href} class="nav-megamenu-secondary">
+                    <a href={col.secondary.href} class="nav-megamenu-secondary" data-ev="click_nav" data-ev-text={col.secondary.label}>
                       <span>{col.secondary.label}</span>
                       <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                     </a>
@@ -200,7 +204,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
             <div class="nav-megamenu-col">
               <span class="nav-megamenu-eyebrow">{col.eyebrow}</span>
               {col.items.map((link) => (
-                <a href={link.href} class="nav-megamenu-link">
+                <a href={link.href} class="nav-megamenu-link" data-ev="click_nav" data-ev-text={link.label}>
                   <span>{link.label}</span>
                   <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                 </a>

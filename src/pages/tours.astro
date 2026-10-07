@@ -21,6 +21,8 @@ const TOURS = [
   { slug: 'highlands-3-day-adventure', image: highlandsImg, duration: '3 days', title: 'Highlands Adventure', level: 'Moderate fitness', description: 'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — with two nights on the road.', price: '€890', href: '/tours/highlands-adventure' },
   { slug: 'ring-road-northern-lights', image: ringRoadImg, duration: '6 days', title: 'Ultimate Iceland Adventure', level: 'All levels', description: 'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.', price: '€1,690', href: '/tours/6-days-ultimate-adventure' },
 ];
+// Medición (#86): slug del tour al que lleva una tarjeta, para tour_name.
+const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')[2] : undefined);
 ---
 
 <Layout title="Iceland Photography Tours — Book Now | Secret Spots Iceland" active="Tours">
@@ -44,8 +46,8 @@ const TOURS = [
       <div class="grid-tours">
         {TOURS.map((t) => (
           <div id={t.slug} class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);scroll-margin-top:110px">
-            <a href={t.href} style="display:contents;text-decoration:none;color:inherit">
-              <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
+            <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
+              <div data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="position:relative;aspect-ratio:2/1;overflow:hidden">
                 <Image src={t.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
                 <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)"></div>
                 <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
@@ -60,8 +62,8 @@ const TOURS = [
               </div>
             </a>
             <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding-top:var(--space-3);margin-top:auto;padding-left:var(--space-6);padding-right:var(--space-6)">
-              <a href="/contact" class="cta-pill" style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
-              <a href={t.href} class="info-pill" aria-label={`More info about the ${t.title} tour`} style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Tour details<Icon name="chevron-right" size={16} /></a>
+              <a href="/contact" class="cta-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
+              <a href={t.href} class="info-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9px 23px;border:1px solid var(--ink-900);color:var(--ink-900);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">More Info</a>
             </div>
           </div>
         ))}
