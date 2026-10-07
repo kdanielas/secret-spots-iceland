@@ -24,6 +24,9 @@ export const BUSINESS = {
   founder: 'Luke EM',
 } as const;
 
+/** X handle, for the twitter:site attribution on the social cards. */
+export const TWITTER_HANDLE = '@LukeInIceland';
+
 export const SOCIALS = [
   { icon: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/secretspotsiceland/' },
   { icon: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/SecretspotsofIceland' },

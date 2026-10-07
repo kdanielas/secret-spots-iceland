@@ -6,7 +6,8 @@ import ContactPanel from '../components/ContactPanel.astro';
 import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
 import logoImg from '../assets/images/secret-spots-iceland-logo.webp';
-import { absoluteUrl, siteNodes } from '../lib/schema';
+import { absoluteUrl, canonicalUrl, siteNodes } from '../lib/schema';
+import { BUSINESS, TWITTER_HANDLE } from '../data/site';
 
 interface Props {
   title: string;
@@ -19,6 +20,10 @@ interface Props {
   contactPanelStyle?: string;
   /** Page-specific JSON-LD nodes, merged into the site-wide @graph. */
   schema?: Record<string, unknown>[];
+  /** Image for the social card. Defaults to /og-default.jpg. */
+  image?: ImageMetadata;
+  /** What the social card image shows, for screen readers. */
+  imageAlt?: string;
 }
 const {
   title,
@@ -30,6 +35,8 @@ const {
   footerStyle = '',
   contactPanelStyle = '',
   schema = [],
+  image,
+  imageAlt,
 } = Astro.props;
 
 // ─── Medición: variables de página (#84) ───────────────────────────────────
@@ -58,6 +65,32 @@ const jsonLd = {
   '@graph': [...siteNodes(logoUrl), ...schema],
 };
 
+// ─── Tarjeta social (#38) ──────────────────────────────────────────────────
+// Sin estas etiquetas, un tour compartido en WhatsApp, Facebook o un grupo de
+// viajes sale como un enlace pelado, sin imagen ni título.
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
+const DEFAULT_OG_ALT = 'Two travellers looking out over the Icelandic highlands on a private tour.';
+
+// Las redes recortan la tarjeta a 1,91:1 y Astro 4 solo sabe redimensionar por
+// ancho, no recortar. Una imagen vertical saldría en una franja central que
+// corta cabezas, y una de menos de 1200 px saldría ampliada y borrosa: en esos
+// casos vale más /og-default.jpg, que ya viene recortada a 1200x630.
+const cardImage =
+  image && image.width >= OG_WIDTH && image.width / image.height >= 1.3 ? image : undefined;
+const ogImage = cardImage && (await getImage({ src: cardImage, width: OG_WIDTH, format: 'jpeg', quality: 80 }));
+
+const ogImageUrl = absoluteUrl(ogImage ? ogImage.src : '/og-default.jpg');
+// Las medidas reales: si no cuadran con la imagen, Facebook la recorta a su aire.
+const ogImageHeight = cardImage
+  ? Math.round((OG_WIDTH * cardImage.height) / cardImage.width)
+  : OG_HEIGHT;
+// El texto alternativo describe la imagen que acaba en la tarjeta, no la de la página.
+const ogImageAlt = (cardImage && imageAlt) || DEFAULT_OG_ALT;
+// Los artículos del blog son 'article'; el resto de la web, 'website'.
+const ogType = pageType === 'blog_articulo' ? 'article' : 'website';
+const ogUrl = canonicalUrl(path);
+
 ---
 
 <!doctype html>
@@ -81,6 +114,23 @@ const jsonLd = {
       </script>
     )}
     <meta name="description" content={description} />
+    <!-- Tarjeta social (#38): Open Graph para WhatsApp, Facebook y LinkedIn;
+         Twitter Card para X. Las dos leen el mismo título, texto e imagen. -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={BUSINESS.name} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(OG_WIDTH)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={TWITTER_HANDLE} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <!-- Not launched yet: keep the preview domain out of search results. Remove at launch. -->
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="/favicon.png" />
