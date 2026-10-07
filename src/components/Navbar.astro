@@ -121,7 +121,8 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     <Logo height={54} onDark={transparent} />
   </a>
   <button class="nav-toggle" type="button" data-ev="click_nav" data-ev-text="Menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
-    <Icon name="menu" size={20} />
+    <span class="nav-toggle-icon-closed"><Icon name="menu" size={20} /></span>
+    <span class="nav-toggle-icon-open"><Icon name="x" size={20} /></span>
   </button>
   <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;gap:var(--space-7)">
     {NAV.map((it) => (
@@ -228,6 +229,13 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
      staying transparent over the hero image behind it */
   :global(.site-header:has(.site-nav[data-open="true"])) { background: var(--surface-raised) !important; }
 
+  /* The menu and close glyphs are both inlined in the button, so swapping them
+     is a CSS toggle rather than a fetch for a second icon file. */
+  .nav-toggle-icon-closed { display: inline-flex; }
+  .nav-toggle-icon-open { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-closed { display: none; }
+  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-open { display: inline-flex; }
+
   :global(.nav-dropdown-chevron) { transition: transform var(--dur-base, 180ms) ease; }
   :global(.nav-dropdown-item[data-open="true"] .nav-dropdown-chevron) { transform: rotate(180deg); }
   .nav-dropdown-item[data-open="true"] .nav-dropdown-trigger { color: #38627F !important; }
@@ -332,22 +340,13 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       const isOpen = nav.dataset.open === 'true';
       const next = !isOpen;
       nav.dataset.open = String(next);
+      // both glyphs are already in the button; CSS picks one off aria-expanded
       toggle.setAttribute('aria-expanded', String(next));
-      toggle.innerHTML = '';
-      const img = document.createElement('span');
-      img.setAttribute('role', 'img');
-      img.style.cssText = `display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);mask-image:url(/icons/${next ? 'x' : 'menu'}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;`;
-      toggle.appendChild(img);
     });
     nav.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
         nav.dataset.open = 'false';
         toggle.setAttribute('aria-expanded', 'false');
-        toggle.innerHTML = '';
-        const img = document.createElement('span');
-        img.setAttribute('role', 'img');
-        img.style.cssText = 'display:inline-block;width:20px;height:20px;flex:0 0 auto;background:currentColor;-webkit-mask-image:url(/icons/menu.svg);mask-image:url(/icons/menu.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;';
-        toggle.appendChild(img);
       });
     });
   }

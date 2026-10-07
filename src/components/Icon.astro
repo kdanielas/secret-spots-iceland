@@ -1,4 +1,10 @@
 ---
+// Every icon in src/icons is read at build time and inlined into the page, so
+// an icon costs no HTTP request. Sizing, colour and a11y attributes are
+// rebuilt onto the root <svg> below so the whole set behaves the same way
+// regardless of which library an individual file came from.
+const ICONS = import.meta.glob<string>('../icons/*.svg', { query: '?raw', import: 'default', eager: true });
+
 interface Props {
   name: string;
   size?: number;
@@ -7,11 +13,33 @@ interface Props {
   class?: string;
 }
 const { name, size = 20, color, style = '', class: className } = Astro.props;
+
+const raw = ICONS[`../icons/${name}.svg`];
+if (!raw) {
+  throw new Error(`<Icon name="${name}" /> has no matching file — add src/icons/${name}.svg.`);
+}
+
+// Split the root tag off so its attributes can be normalised; `body` keeps the
+// paths and the closing </svg> untouched.
+const source = raw.slice(raw.indexOf('<svg'));
+const openTagEnd = source.indexOf('>');
+const body = source.slice(openTagEnd + 1);
+
+let attrs = source
+  .slice('<svg'.length, openTagEnd)
+  // these are all set explicitly below
+  .replace(/\s(?:width|height|class|role|aria-label|style)="[^"]*"/g, '')
+  // the lucide files are pretty-printed one attribute per line
+  .replace(/\s+/g, ' ')
+  .trim();
+// lucide files declare fill/stroke themselves; the simple-icons ones don't and
+// would paint black instead of inheriting the surrounding text colour.
+if (!/\b(?:fill|stroke)=/.test(attrs)) attrs += ' fill="currentColor"';
+
+const inlineStyle = `display:inline-block;flex:0 0 auto;${color ? `color:${color};` : ''}${style}`;
+const svg = `<svg ${attrs} width="${size}" height="${size}" role="img" aria-label="${name}"${
+  className ? ` class="${className}"` : ''
+} style="${inlineStyle}">${body}`;
 ---
 
-<span
-  role="img"
-  aria-label={name}
-  class={className}
-  style={`display:inline-block;width:${size}px;height:${size}px;flex:0 0 auto;background:${color || 'currentColor'};-webkit-mask-image:url(/icons/${name}.svg);mask-image:url(/icons/${name}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;${style}`}
-></span>
+<Fragment set:html={svg} />
