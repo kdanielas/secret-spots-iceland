@@ -131,6 +131,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           <button
             type="button"
             class="nav-dropdown-trigger"
+            aria-expanded="false"
             data-ev="click_nav"
             data-ev-text={it.label}
             data-menu={it.label}
@@ -359,6 +360,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     function closeAll() {
       items.forEach((el) => (el.dataset.open = 'false'));
       panels.forEach((el) => (el.dataset.open = 'false'));
+      triggers.forEach((el) => el.setAttribute('aria-expanded', 'false'));
     }
 
     triggers.forEach((trigger) => {
@@ -374,6 +376,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
         closeAll();
         if (item && !isOpen) {
           item.dataset.open = 'true';
+          trigger.setAttribute('aria-expanded', 'true');
           if (panel) panel.dataset.open = 'true';
         }
       });
