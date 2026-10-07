@@ -4,6 +4,7 @@ import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import licenseImg from '../assets/images/2024-086.webp';
 import { BUSINESS, SOCIALS } from '../data/site';
+import CookieSettingsButton from './CookieSettingsButton.astro';
 
 interface Props { style?: string; }
 const { style = '' } = Astro.props;
@@ -20,6 +21,14 @@ const legal = [
   `Kennitala: ${BUSINESS.taxID}`,
   `VAT Number: ${BUSINESS.vatID}`,
   BUSINESS.telephone,
+];
+// Legal links (#27). GDPR wants the privacy and cookie information reachable
+// from every page. The cookie settings control is a component because it has
+// to talk to the CMP. The US "do not sell or share" wording stays on the
+// Cookie Policy page rather than in this bar.
+const legalLinks = [
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Cookie Policy', href: '/cookie-policy' },
 ];
 ---
 
@@ -66,6 +75,15 @@ const legal = [
     </div>
     <Image src={licenseImg} alt="Icelandic Tourist Board authorized day tour provider badge" width={120} quality={85} style="width:96px;height:96px;object-fit:contain;flex:0 0 auto" />
   </div>
+
+  <div class="footer-divider"></div>
+
+  <nav class="footer-legal" aria-label="Legal and privacy">
+    {legalLinks.map((l) => (
+      <a href={l.href} class="footer-nav-link" style="font:600 14px/1 var(--font-sans);color:var(--text-on-dark);text-decoration:none;opacity:.85">{l.label}</a>
+    ))}
+    <CookieSettingsButton />
+  </nav>
   </div>
 </footer>
 
@@ -88,9 +106,17 @@ const legal = [
     padding-top: var(--space-8);
   }
   .footer-nav-link:hover { opacity: 1; text-decoration: underline; }
+  .footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    padding-top: var(--space-6);
+  }
 
   @media (max-width: 560px) {
     .footer-top { flex-direction: column; gap: var(--space-8); }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: var(--space-5); }
+    .footer-legal { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
   }
 </style>

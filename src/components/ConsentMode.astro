@@ -1,0 +1,66 @@
+---
+import { CATEGORIES, CONSENT_COOKIE, CONSENT_VERSION, DENIED_SIGNALS } from '../lib/consent';
+
+// Consent Mode v2 defaults (#26). This has to be the FIRST script in <head>:
+// above the dataLayer page variables and above the Tag Manager snippet. If it
+// runs after them, GA4 fires once with no consent state recorded and writes its
+// cookies before the visitor has said anything.
+//
+// Only the ids and signals travel to the browser; the copy stays in the dialog.
+const GRANTABLE = CATEGORIES.map((c) => ({
+  id: c.id,
+  required: c.required === true,
+  signals: c.signals,
+}));
+---
+
+<script is:inline define:vars={{ GRANTABLE, DENIED_SIGNALS, CONSENT_COOKIE, CONSENT_VERSION }}>
+  window.dataLayer = window.dataLayer || [];
+  // Consent Mode needs the arguments object itself in the dataLayer, not an
+  // object literal — that is how Tag Manager recognises a consent command.
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = window.gtag || gtag;
+
+  // The decision the visitor made on an earlier visit. Anything malformed or
+  // left over from an older CONSENT_VERSION counts as no decision at all.
+  var stored = null;
+  try {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + CONSENT_COOKIE + '=([^;]*)'));
+    var parsed = match ? JSON.parse(decodeURIComponent(match[1])) : null;
+    if (parsed && parsed.v === CONSENT_VERSION && parsed.c && typeof parsed.c === 'object') {
+      stored = parsed.c;
+    }
+  } catch (e) {
+    stored = null;
+  }
+
+  // Global Privacy Control: a browser-level opt-out we are required to honour.
+  // It is a choice the visitor has already expressed, so we record it as
+  // "necessary only" instead of asking again — CookieConsent.astro writes the
+  // cookie on load, since the writing lives there with the rest of the logic.
+  var gpc = !stored && navigator.globalPrivacyControl === true;
+
+  var defaults = {};
+  DENIED_SIGNALS.forEach(function (signal) { defaults[signal] = 'denied'; });
+  GRANTABLE.forEach(function (category) {
+    var granted = category.required || (stored ? stored[category.id] === true : false);
+    category.signals.forEach(function (signal) {
+      defaults[signal] = granted ? 'granted' : 'denied';
+    });
+  });
+  // No wait_for_update: the decision is read synchronously right here, so there
+  // is nothing for the tags to wait for.
+  gtag('consent', 'default', defaults);
+
+  // Keeps ad click identifiers out of the requests Google receives while
+  // ad_storage is denied. We run no advertising tags, so this stays on.
+  gtag('set', 'ads_data_redaction', true);
+
+  // Drives the banner's visibility from CSS. Doing it here, before the body is
+  // parsed, is what stops returning visitors seeing the banner flash before a
+  // script could hide it.
+  document.documentElement.setAttribute(
+    'data-consent',
+    stored ? 'set' : gpc ? 'gpc' : 'ask'
+  );
+</script>

@@ -1,0 +1,110 @@
+---
+// Reopens the cookie consent choices (#27). The banner and the CMP itself land
+// in #26, and the CMP has not been picked yet, so this button talks to a single
+// agreed contract — window.openCookieSettings() — and the adapters in the
+// script below cover the certified CMPs we are choosing between. Whichever one
+// #26 installs, this file keeps working untouched.
+interface Props {
+  /** Inline styles for the button. Defaults to the dark-footer link treatment. */
+  style?: string;
+  label?: string;
+  /**
+   * What to do when no CMP is on the page yet.
+   * 'navigate' — send the visitor to the Cookie Policy, which explains how to
+   *   opt out through the browser. Right for the footer, on every page.
+   * 'hide' — stay hidden until a CMP shows up. Right for a button that already
+   *   sits on the Cookie Policy, where navigating there would do nothing.
+   */
+  fallback?: 'navigate' | 'hide';
+}
+const {
+  style = 'font:600 14px/1 var(--font-sans);color:var(--text-on-dark);opacity:.85',
+  label = 'Cookie settings',
+  fallback = 'navigate',
+} = Astro.props;
+---
+
+<button
+  type="button"
+  data-cookie-settings
+  data-cookie-fallback={fallback}
+  hidden={fallback === 'hide'}
+  class="cookie-settings-btn"
+  style={style}
+>{label}</button>
+
+<style>
+  .cookie-settings-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  .cookie-settings-btn:hover { opacity: 1; text-decoration: underline; }
+  .cookie-settings-btn[hidden] { display: none; }
+</style>
+
+<script>
+  const POLICY_PATH = '/cookie-policy';
+  const MANAGE_HASH = '#manage-cookies';
+
+  /** The CMP's "reopen preferences" call, or null while no CMP is loaded. */
+  function findReopen(): (() => void) | null {
+    const w = window as any;
+    // Our own contract first — #26 should expose this and nothing else here
+    // needs to change. Then the certified CMPs we are choosing between.
+    const fn =
+      w.openCookieSettings ??
+      w.Cookiebot?.renew?.bind(w.Cookiebot) ??
+      w.revisitCkyConsent ??
+      w._iub?.cs?.api?.openPreferences?.bind(w._iub.cs.api) ??
+      w.klaro?.show?.bind(w.klaro);
+    return typeof fn === 'function' ? fn : null;
+  }
+
+  // Buttons marked fallback="hide" stay hidden until a CMP actually turns up.
+  // CMPs load asynchronously, so poll briefly rather than checking once.
+  const hidden = document.querySelectorAll<HTMLElement>(
+    '[data-cookie-settings][data-cookie-fallback="hide"]'
+  );
+  if (hidden.length) {
+    let tries = 0;
+    const reveal = () => {
+      if (findReopen()) {
+        hidden.forEach((el) => el.removeAttribute('hidden'));
+        return;
+      }
+      if (++tries < 20) setTimeout(reveal, 250); // give a CMP ~5s to load
+    };
+    reveal();
+  }
+
+  // Delegated listener: Astro injects this script once per page, so several
+  // buttons on the same page share it and no click fires twice.
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement | null;
+    const button = target?.closest<HTMLElement>('[data-cookie-settings]');
+    if (!button) return;
+    event.preventDefault();
+
+    const reopen = findReopen();
+    if (reopen) {
+      reopen();
+      return;
+    }
+
+    if (button.dataset.cookieFallback === 'hide') return;
+
+    // No CMP: send people to the part of the Cookie Policy that explains what
+    // we set and how to turn it off in the browser. If they are already on that
+    // page, assigning the same URL would be a no-op, so scroll instead.
+    if (window.location.pathname.replace(/\/+$/, '') === POLICY_PATH) {
+      document.querySelector(MANAGE_HASH)?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    window.location.href = POLICY_PATH + MANAGE_HASH;
+  });
+</script>
