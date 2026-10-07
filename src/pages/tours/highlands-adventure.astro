@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { tourPageSchema } from '../../lib/tour';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -59,11 +61,23 @@ const REVIEWS = [
   { quote: 'He took us to spectacular places we would have never found on our own. We got some amazing photos and got to see such varied areas. He helped us avoid the crowds as much as possible. I would not hesitate to use him for a much longer tour.', name: 'Jennifer D', type: 'Family' },
   { quote: 'While we booked a certain route, as we discussed what really interested us, we changed course and did not see a large tour bus the entire journey. The tour exceeded expectations, was personal, and we learned and saw a lot of what makes Iceland so interesting.', name: 'Mark Andrews', type: 'Family' },
 ];
+
+const TOUR_NAME = 'Highlands Adventure';
+const TOUR_INTRO = `This is a fully private tour — just your group, no strangers, no fixed schedule. Every stop is adapted to your pace, the weather, and the light conditions. You'll travel in a heavy-duty 4x4 vehicle capable of handling remote F-roads, allowing access to locations completely unreachable by standard cars. Be prepared for an adventure — this tour combines hiking, exploring remote terrain, and witnessing some of Iceland's most dramatic natural phenomena.`;
+
+const schema = await tourPageSchema(Astro.url.pathname, {
+  name: TOUR_NAME,
+  description: TOUR_INTRO,
+  heroImage: heroImg,
+  duration: STATS[0].label,
+  highlights: HIGHLIGHTS.map((h) => h.title),
+});
 ---
 
 <Layout
   title="Highlands Iceland Tour | Remote Waterfalls & Viking History | Secret Spots Iceland"
   active="Tours"
+  schema={schema}
   hideContactPanel
   footerStyle="margin:0;border:none;border-radius:0"
 >
@@ -74,7 +88,7 @@ const REVIEWS = [
     primaryCta=""
     secondaryCta=""
   >
-    <Fragment slot="title">Highlands Adventure</Fragment>
+    <Fragment slot="title">{TOUR_NAME}</Fragment>
     <div class="tour-info-bar">
       <div class="tour-info-bar-stats">
         {STATS.map((s, i) => (
@@ -96,6 +110,8 @@ const REVIEWS = [
     </div>
   </Hero>
 
+  <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: TOUR_NAME }]} />
+
   <section class="tour-block tour-block-row">
     <div class="tour-row">
       <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:450/800">
@@ -104,7 +120,7 @@ const REVIEWS = [
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Highlands Tour</h2>
-          <p style="font:var(--type-lead);color:#081824;margin:0">This is a fully private tour — just your group, no strangers, no fixed schedule. Every stop is adapted to your pace, the weather, and the light conditions. You'll travel in a heavy-duty 4x4 vehicle capable of handling remote F-roads, allowing access to locations completely unreachable by standard cars. Be prepared for an adventure — this tour combines hiking, exploring remote terrain, and witnessing some of Iceland's most dramatic natural phenomena.</p>
+          <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
           {EXPECT.map((item) => (

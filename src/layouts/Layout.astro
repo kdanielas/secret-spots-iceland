@@ -1,8 +1,12 @@
 ---
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import ContactPanel from '../components/ContactPanel.astro';
 import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import logoImg from '../assets/images/secret-spots-iceland-logo.webp';
+import { absoluteUrl, siteNodes } from '../lib/schema';
 
 interface Props {
   title: string;
@@ -13,6 +17,8 @@ interface Props {
   hideContactPanel?: boolean;
   footerStyle?: string;
   contactPanelStyle?: string;
+  /** Page-specific JSON-LD nodes, merged into the site-wide @graph. */
+  schema?: Record<string, unknown>[];
 }
 const {
   title,
@@ -23,6 +29,7 @@ const {
   hideContactPanel = false,
   footerStyle = '',
   contactPanelStyle = '',
+  schema = [],
 } = Astro.props;
 
 // ─── Medición: variables de página (#84) ───────────────────────────────────
@@ -42,6 +49,14 @@ const tourName = path.startsWith('/tours/') ? path.split('/')[2] : undefined;
 
 // Contenedor de Tag Manager (#88). Si la variable no está definida, no se carga.
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+
+// Structured data (#39): the business and the site on every page, plus whatever
+// the page itself describes (article, tour, FAQ), in a single @graph.
+const logoUrl = absoluteUrl((await getImage({ src: logoImg, width: 512, quality: 90 })).src);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [...siteNodes(logoUrl), ...schema],
+};
 
 ---
 
@@ -71,6 +86,7 @@ const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>{title}</title>
+    <JsonLd schema={jsonLd} />
     <script is:inline>document.documentElement.classList.add('js-reveal-ready');</script>
   </head>
   <body style="background:var(--surface-page)">

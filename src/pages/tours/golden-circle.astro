@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { tourPageSchema } from '../../lib/tour';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -61,11 +63,23 @@ const REVIEWS = [
   { quote: "Luke made sure to show us many cool spots and tailored the trip to our requests very well. He's a friendly, knowledgeable tour guide and takes excellent photos throughout the whole trip. We definitely recommend booking with Luke!", name: 'PH', type: 'Family' },
   { quote: "We had a fantastic day with Luke on the Golden Circle tour. The sights are amazing and he took fantastic photos of us capturing the waterfalls and geysers. Luke's knowledge of the island was impressive and throughout the trip made sure we were always comfortable.", name: 'Peter D', type: 'Family' },
 ];
+
+const TOUR_NAME = 'Golden Circle';
+const TOUR_INTRO = `This is a fully private tour — just your group, no strangers, no rushing. Every stop is adapted to your pace, the weather, and the light conditions. You'll start and finish in Reykjavík, with time to relax in Iceland's oldest natural hot spring and enjoy a unique greenhouse lunch at a working tomato farm.`;
+
+const schema = await tourPageSchema(Astro.url.pathname, {
+  name: TOUR_NAME,
+  description: TOUR_INTRO,
+  heroImage: heroImg,
+  duration: STATS[0].label,
+  highlights: HIGHLIGHTS.map((h) => h.title),
+});
 ---
 
 <Layout
   title="Golden Circle Private Tour | Iceland's Iconic Route Reimagined | Secret Spots Iceland"
   active="Tours"
+  schema={schema}
   hideContactPanel
   footerStyle="margin:0;border:none;border-radius:0"
 >
@@ -76,7 +90,7 @@ const REVIEWS = [
     primaryCta=""
     secondaryCta=""
   >
-    <Fragment slot="title">Golden Circle</Fragment>
+    <Fragment slot="title">{TOUR_NAME}</Fragment>
     <div class="tour-info-bar">
       <div class="tour-info-bar-stats">
         {STATS.map((s, i) => (
@@ -98,11 +112,13 @@ const REVIEWS = [
     </div>
   </Hero>
 
+  <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: TOUR_NAME }]} />
+
   <section class="tour-block" style="padding-bottom:var(--space-13)">
     <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-7);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center">
         <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Golden Circle Tour</h2>
-        <p style="font:var(--type-lead);color:#081824;margin:0">This is a fully private tour — just your group, no strangers, no rushing. Every stop is adapted to your pace, the weather, and the light conditions. You'll start and finish in Reykjavík, with time to relax in Iceland's oldest natural hot spring and enjoy a unique greenhouse lunch at a working tomato farm.</p>
+        <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
       </div>
       <div style="display:flex;flex-direction:column;width:100%">
         {EXPECT.map((item) => (

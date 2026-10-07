@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Icon from '../components/Icon.astro';
 import FaqItem from '../components/FaqItem.astro';
 
@@ -42,6 +43,8 @@ const SERVICES = [
       </div>
     </section>
   </div>
+
+  <Breadcrumbs trail={[{ label: 'How it works' }]} />
 
   <section class="how-row" style="background:var(--surface-page)">
     <div class="how-row-inner">

@@ -1,0 +1,87 @@
+---
+import JsonLd from './JsonLd.astro';
+import { breadcrumbNode, canonicalUrl, type Crumb } from '../lib/schema';
+
+interface Props {
+  /** The trail below Home — the last item is the current page and needs no href. */
+  trail: Crumb[];
+  /** Set when the trail sits inside a content column that already handles width and padding. */
+  inline?: boolean;
+  style?: string;
+}
+const { trail, inline = false, style = '' } = Astro.props;
+
+const crumbs: Crumb[] = [{ label: 'Home', href: '/' }, ...trail];
+const schema = { '@context': 'https://schema.org', ...breadcrumbNode(canonicalUrl(Astro.url.pathname), crumbs) };
+---
+
+<nav class:list={['breadcrumbs', !inline && 'container-pad breadcrumbs-page']} aria-label="Breadcrumb" style={style}>
+  <ol>
+    {crumbs.map((crumb, i) => (
+      <li>
+        {i > 0 ? <span class="breadcrumbs-sep" aria-hidden="true">/</span> : null}
+        {crumb.href && i < crumbs.length - 1 ? (
+          <a href={crumb.href}>{crumb.label}</a>
+        ) : (
+          <span aria-current="page">{crumb.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<JsonLd schema={schema} />
+
+<style>
+  .breadcrumbs-page {
+    max-width: calc(var(--container-max) + 6rem);
+    margin: 0 auto;
+    padding-top: var(--space-6);
+  }
+  .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .breadcrumbs ol {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 0 0 auto;
+    font: 500 14px/1.4 var(--font-sans);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  /* The current page can be a long article title — keep the trail on one line. */
+  .breadcrumbs li:last-child {
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .breadcrumbs-sep {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+  .breadcrumbs a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    color: var(--text-heading);
+    text-decoration: underline;
+  }
+  .breadcrumbs [aria-current='page'] {
+    color: var(--text-heading);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

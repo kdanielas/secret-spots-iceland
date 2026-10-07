@@ -2,35 +2,37 @@
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
 import heroImg from '../../assets/images/katla-glacier-hike-south-coast.webp';
 import planeWreckImg from '../../assets/images/plane-wreck-south-coast.webp';
 import diamondBeachImg from '../../assets/images/diamond-beach-iceland.jpg';
+
+const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
 ---
 
 <Layout
   title="3 Days in South Iceland – What Can You See? | Secret Spots Iceland"
   description="A three-day private itinerary based in Vík — waterfalls, black sand beaches, glacier lagoons, canyons and Vestrahorn, all covered without rushing."
   active="Blog"
+  schema={schema}
 >
   <Hero
     framedImage={heroImg}
     framedImageAlt="Glacier hike on Iceland's South Coast"
-    subtitle="By Luke EM · June 16, 2025"
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">3 Days in South Iceland – What Can You See?</Fragment>
+    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;font:700 14px/1 var(--font-sans);color:var(--text-heading);text-decoration:none;margin-bottom:var(--space-8)">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-        Back to the blog
-      </a>
+      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">South Iceland is full of attractions worth seeing — and worth spending more than a single day exploring. In this article, I'll walk you through what's worth seeing over three days in the area around Vík, the southernmost village on Iceland's mainland. Vík is located just under 200 km from Reykjavík, which is where we'll start our journey for convenience. If Icelandic waterfalls, canyons, and caves fascinate you, this article and trip are made for you!</p>

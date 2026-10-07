@@ -4,6 +4,7 @@ import Eyebrow from './Eyebrow.astro';
 import IconChip from './IconChip.astro';
 import Button from './Button.astro';
 import contactImg from '../assets/images/north-iceland-hot-steam-family.jpg';
+import { BUSINESS } from '../data/site';
 
 interface Row { icon: string; label: string; value: string; }
 interface Props {
@@ -20,8 +21,8 @@ const {
 } = Astro.props;
 
 const ROWS: Row[] = [
-  { icon: 'phone', label: 'Call or WhatsApp', value: '+354 845 4057' },
-  { icon: 'map-pin', label: 'Based in', value: 'Tangabryggja 18, 110 Reykjavík, Iceland' },
+  { icon: 'phone', label: 'Call or WhatsApp', value: BUSINESS.telephone },
+  { icon: 'map-pin', label: 'Based in', value: `${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland` },
   { icon: 'clock', label: 'Response time', value: 'Usually within 24 hours, personally from Luke.' },
 ];
 ---

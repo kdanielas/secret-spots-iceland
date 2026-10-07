@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import Logo from './Logo.astro';
 import licenseImg from '../assets/images/2024-086.webp';
+import { BUSINESS, SOCIALS } from '../data/site';
 
 interface Props { style?: string; }
 const { style = '' } = Astro.props;
@@ -15,18 +16,10 @@ const footerLinks = [
   { label: 'FAQ', href: '/faq' },
 ];
 const legal = [
-  'Address: Tangabryggja 18, 110 Reykjavík, Iceland',
-  'Kennitala: 610823-2030',
-  'VAT Number: 152431',
-  '+354 8454057',
-];
-const socials = [
-  { icon: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/secretspotsiceland/' },
-  { icon: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/SecretspotsofIceland' },
-  { icon: 'x-logo', label: 'X', href: 'https://x.com/LukeInIceland' },
-  { icon: 'tripadvisor', label: 'Tripadvisor', href: 'https://www.tripadvisor.com/Attraction_Review-g189970-d23560580-Reviews-Secretspotsiceland-Reykjavik_Capital_Region.html#REVIEWS' },
-  { icon: 'tiktok', label: 'TikTok', href: 'https://www.tiktok.com/@secretspotsiceland?_r=1&_t=ZN-95aTyX3mpsc' },
-  { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@lukeem477' },
+  `Address: ${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland`,
+  `Kennitala: ${BUSINESS.taxID}`,
+  `VAT Number: ${BUSINESS.vatID}`,
+  BUSINESS.telephone,
 ];
 ---
 
@@ -36,7 +29,7 @@ const socials = [
     <div style="display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-6)">
       <Logo height={56} onDark />
       <div style="display:flex;gap:var(--space-3)">
-        {socials.map((s) => (
+        {SOCIALS.map((s) => (
           <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style="width:36px;height:36px;border-radius:var(--radius-pill);background:var(--cream-50);color:var(--ink-800);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
             <Icon name={s.icon} size={16} />
           </a>
