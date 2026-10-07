@@ -63,7 +63,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
             </a>
             <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding-top:var(--space-3);margin-top:auto;padding-left:var(--space-6);padding-right:var(--space-6)">
               <a href="/contact" class="cta-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
-              <a href={t.href} class="info-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9px 23px;border:1px solid var(--ink-900);color:var(--ink-900);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">More Info</a>
+              <a href={t.href} class="info-pill" aria-label={`More info about the ${t.title} tour`} data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Tour details<Icon name="chevron-right" size={16} /></a>
             </div>
           </div>
         ))}
