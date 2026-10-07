@@ -24,7 +24,7 @@ const { name, date, avatar, initial, rating = 5, quote, readMore = 'Read More', 
     )}
     <div style="display:flex;flex-direction:column;gap:2px">
       <span style={`font:700 16px/1.2 var(--font-sans);color:${onDark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>{name}</span>
-      <span style="font:var(--type-body-xs);color:rgba(56,98,127,.6)">{date}</span>
+      <span style={`font:var(--type-body-xs);color:${onDark ? 'var(--text-on-dark-muted)' : 'var(--text-muted)'}`}>{date}</span>
     </div>
   </header>
   <Rating value={rating} size={16} />

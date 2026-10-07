@@ -4,7 +4,7 @@
 --blue-500:#38627F;--blue-400:#4C7593;--blue-300:#69889D;--blue-200:#98AEBB;
 --ink-900:#27333C;--ink-800:#293238;--ink-700:#324856;--ink-600:#465C6B;
 --espresso-900:#291F1E;--espresso-800:#3A2D2B;
---gray-600:#5C6570;--gray-500:#7A828C;--gray-400:#9AA1A9;
+--gray-700:#525B66;--gray-600:#5C6570;--gray-500:#7A828C;--gray-400:#9AA1A9;
 --cream-50:#FBFAF8;--cream-100:#FBF6F0;--sand-100:#F1F0EC;--sand-200:#E9E6DD;--sand-300:#DCD8CC;
 --white:#FFFFFF;
 --star-gold:#F4B04B;
@@ -13,8 +13,8 @@
 
 /* --- semantic: text --- */
 --text-heading:var(--ink-900);
---text-body:rgba(39,51,60,.7);
---text-muted:var(--gray-500);
+--text-body:rgba(39,51,60,.82);
+--text-muted:var(--gray-700);
 --text-eyebrow:var(--blue-500);
 --text-accent:var(--blue-500);
 --text-link:var(--ink-900);
@@ -39,9 +39,9 @@
 /* --- semantic: borders --- */
 --border-subtle:rgba(39,51,60,.12);
 --border-strong:rgba(39,51,60,.28);
---border-field:rgba(39,51,60,.16);
+--border-field:rgba(39,51,60,.55);
 --border-on-dark:rgba(251,246,240,.28);
---border-on-dark-field:rgba(251,246,240,.14);
+--border-on-dark-field:rgba(251,246,240,.45);
 
 /* --- semantic: actions --- */
 --action-primary-bg:var(--amber-400);
