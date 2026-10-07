@@ -5,13 +5,18 @@ interface Props {
   color?: string;
   style?: string;
   class?: string;
+  label?: string;
 }
-const { name, size = 20, color, style = '', class: className } = Astro.props;
+// Icons are decorative by default: the file name ("arrow-right", "star") is not
+// meaningful to a screen reader. Pass `label` only when the icon is the sole
+// carrier of meaning and nothing around it already names the control.
+const { name, size = 20, color, style = '', class: className, label } = Astro.props;
 ---
 
 <span
-  role="img"
-  aria-label={name}
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
   class={className}
   style={`display:inline-block;width:${size}px;height:${size}px;flex:0 0 auto;background:${color || 'currentColor'};-webkit-mask-image:url(/icons/${name}.svg);mask-image:url(/icons/${name}.svg);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;${style}`}
 ></span>

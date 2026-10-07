@@ -10,11 +10,16 @@ interface Props {
 }
 const { value = 5, max = 5, size = 14, label, style = '' } = Astro.props;
 const stars = Array.from({ length: max }, (_, i) => i);
+// One announcement for the whole row ("4.9 out of 5 stars") instead of one per
+// star icon. Trailing zeroes are dropped so 5.0 reads as "5".
+const ariaLabel = `${Number(value.toFixed(1))} out of ${max} ${max === 1 ? 'star' : 'stars'}`;
 ---
 
 <div style={`display:inline-flex;align-items:center;gap:4px;color:var(--star-gold);${style}`}>
-  {stars.map((i) => (
-    <Icon name="star" size={size} style={`opacity:${i < Math.round(value) ? 1 : 0.3}`} />
-  ))}
+  <span role="img" aria-label={ariaLabel} style="display:inline-flex;align-items:center;gap:4px">
+    {stars.map((i) => (
+      <Icon name="star" size={size} style={`opacity:${i < Math.round(value) ? 1 : 0.3}`} />
+    ))}
+  </span>
   {label ? <span style="font:var(--type-body-sm);color:var(--text-muted);margin-left:6px">{label}</span> : null}
 </div>
