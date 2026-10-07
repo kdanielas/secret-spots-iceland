@@ -15,7 +15,7 @@ const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
 const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
 ---
 
-<Layout title={`Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots Iceland${page.currentPage > 1 ? ` | Page ${page.currentPage}` : ''}`} active="Blog">
+<Layout title={`Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots${page.currentPage > 1 ? ` | Page ${page.currentPage}` : ''}`} description="Discover Iceland through Luke's eyes — travel guides, hidden locations, photography spots and local tips to help you plan the perfect Iceland trip." active="Blog">
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
