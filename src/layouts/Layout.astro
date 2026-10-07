@@ -144,7 +144,7 @@ const ogUrl = canonicalUrl(path);
       <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     )}
     <div style={transparentNav ? 'position:relative' : undefined}>
-      {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact style={transparentNav ? 'position:absolute;top:0;left:0;right:0;z-index:20' : undefined} />}
+      {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} />}
       <slot />
     </div>
     {hideContactPanel ? null : <ContactPanel style={contactPanelStyle} />}
