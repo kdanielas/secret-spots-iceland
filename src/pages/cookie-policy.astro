@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CookieSettingsButton from '../components/CookieSettingsButton.astro';
+
+// Cookie inventory (#27). Grouped by the consent category the cookie falls in:
+// "necessary" is set without asking, "analytics" only loads once consent is given.
+const GROUPS = [
+  {
+    id: 'necessary',
+    title: 'Strictly necessary',
+    intro:
+      'These are needed for the site to work and to stay free of spam. They are set without asking, because the site cannot do its job without them.',
+    cookies: [
+      {
+        name: 'Consent record',
+        provider: 'Secret Spots of Iceland',
+        purpose:
+          'Stores which cookie categories you accepted, so the banner does not ask again on every page. The exact cookie name is set by our consent tool and is shown to you in the banner itself.',
+        duration: 'Up to 12 months',
+      },
+      {
+        name: '_GRECAPTCHA',
+        provider: 'Google',
+        purpose:
+          'Set when the contact form loads, so Google reCAPTCHA can tell a person apart from an automated script and keep spam submissions out.',
+        duration: '6 months',
+      },
+    ],
+  },
+  {
+    id: 'analytics',
+    title: 'Analytics and measurement',
+    intro:
+      'These tell us how visitors find and use the site, in aggregate. They are only set once you have given consent, and you can withdraw it at any time.',
+    cookies: [
+      {
+        name: '_ga',
+        provider: 'Google Analytics',
+        purpose:
+          'Assigns a randomly generated identifier to your device so that repeat visits are counted as one visitor rather than several.',
+        duration: '2 years',
+      },
+      {
+        name: '_ga_<container ID>',
+        provider: 'Google Analytics',
+        purpose:
+          'Keeps session state, so a visit is measured as a single session instead of restarting on every page you open.',
+        duration: '2 years',
+      },
+    ],
+  },
+];
+
+const SECTIONS = [
+  {
+    id: 'what-cookies-are',
+    title: 'What cookies are',
+    body: [
+      'A cookie is a small file that a website asks your browser to store. Cookies set by this site are called first-party cookies; cookies set by another company whose code runs on a page — Google, in our case — are called third-party cookies. The same rules apply to similar technologies such as pixels and browser local storage, and everything on this page covers those too.',
+    ],
+  },
+  {
+    id: 'how-we-use-cookies',
+    title: 'How this site uses them',
+    body: [
+      'We use cookies for two things: to make the site work and keep the contact form free of spam, and — only with your consent — to measure how the site is used so we can improve it.',
+      'For measurement we use Google Tag Manager, which loads and manages our measurement tags, and Google Analytics 4, which records pages viewed, approximate location derived from your IP address, device and browser type, and interactions such as which tour pages you open, how far you scroll and whether you submit the contact form. Google Tag Manager does not set cookies of its own; Google Analytics does, and they are listed below.',
+      'We do not use advertising, remarketing or cross-site tracking cookies, and we do not build advertising profiles about you.',
+    ],
+  },
+];
+---
+
+<Layout
+  title="Cookie Policy | Secret Spots Iceland"
+  description="Which cookies Secret Spots of Iceland sets, who provides them, what they are for and how long they last — plus how to change or withdraw your consent."
+  active="Contact us"
+>
+  <section class="section-py container-pad">
+    <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
+      <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <h1 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Cookie Policy</h1>
+        <p style="font:var(--type-body-sm);color:var(--text-muted);margin:0">Last updated: October 2026</p>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          This page lists every cookie this website uses and what each one is for. It sits alongside our <a href="/privacy-policy" style="color:var(--blue-500)">Privacy Policy</a>, which explains how we handle personal information more generally. Have both reviewed by a qualified professional for your specific legal obligations before publishing the site.
+        </p>
+      </div>
+
+      {SECTIONS.map((s) => (
+        <div id={s.id} style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <h2 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">{s.title}</h2>
+          {s.body.map((p) => <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{p}</p>)}
+        </div>
+      ))}
+
+      <div id="cookie-inventory" style="display:flex;flex-direction:column;gap:var(--space-6)">
+        <h2 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">The cookies we use</h2>
+        {GROUPS.map((g) => (
+          <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+            <h3 id={g.id} style="font:700 1.0625rem/1.3 var(--font-sans);color:var(--text-heading);margin:0">{g.title}</h3>
+            <p style="font:var(--type-body-sm);color:var(--text-muted);margin:0">{g.intro}</p>
+            <div class="cookie-table-scroll">
+              <table class="cookie-table">
+                <caption class="sr-only">{`${g.title} cookies: name, provider, purpose and duration`}</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Provider</th>
+                    <th scope="col">Purpose</th>
+                    <th scope="col">Duration</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {g.cookies.map((c) => (
+                    <tr>
+                      <th scope="row"><code>{c.name}</code></th>
+                      <td>{c.provider}</td>
+                      <td>{c.purpose}</td>
+                      <td>{c.duration}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div id="manage-cookies" style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <h2 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">Changing or withdrawing your consent</h2>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          You can reopen your cookie choices at any time and change or withdraw what you agreed to. Withdrawing consent stops any further analytics collection; it does not delete what was already collected, which you can ask us to erase using the rights described in our Privacy Policy.
+        </p>
+        <p style="margin:0">
+          <CookieSettingsButton
+            label="Open cookie settings"
+            fallback="hide"
+            style="font:700 15px/1 var(--font-sans);color:var(--blue-500);text-decoration:underline"
+          />
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          You can also delete or block cookies in your browser settings — every major browser lets you do this per site — or install <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color:var(--blue-500)">Google's opt-out browser add-on</a> to switch off Google Analytics on every site you visit. Blocking strictly necessary cookies may stop the contact form from working.
+        </p>
+      </div>
+
+      <div id="do-not-sell" style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <h2 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">Do not sell or share my personal information</h2>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          We do not sell your personal information for money, and we do not share it for cross-context behavioural advertising or targeted advertising, as those terms are used in US state privacy laws such as the California Consumer Privacy Act. We run no advertising or remarketing tags on this site, so there is no advertising opt-out for us to apply.
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          We do use Google Analytics, which some US state laws treat as a "sale" or "share" even when no money changes hands. If you would rather we did not, turn off analytics in your cookie settings above — that is the opt-out, and it takes effect immediately. If you are a resident of a US state with its own privacy law, you can also email or call us using the details in our Privacy Policy to exercise your rights to know, delete, or correct your information, and we will not treat you differently for asking.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cookie-table-scroll { overflow-x: auto; }
+  .cookie-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  .cookie-table th,
+  .cookie-table td {
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-3) var(--space-4) var(--space-3) 0;
+    vertical-align: top;
+    font: var(--type-body-sm);
+    color: var(--text-heading);
+  }
+  .cookie-table thead th {
+    font: 600 13px/1 var(--font-sans);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .cookie-table tbody th {
+    font: 600 0.875rem/1.6 var(--font-sans);
+    white-space: nowrap;
+  }
+  .cookie-table code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.9em;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
