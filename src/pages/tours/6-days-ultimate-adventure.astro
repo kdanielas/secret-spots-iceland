@@ -164,7 +164,7 @@ const WHO_FOR = [
     primaryCta=""
     secondaryCta=""
   >
-    <Fragment slot="title">6 Days Ultimate Iceland Adventure</Fragment>
+    <Fragment slot="title">Ultimate Iceland Adventure</Fragment>
     <div class="tour-info-bar">
       <div class="tour-info-bar-stats">
         {STATS.map((s, i) => (
@@ -329,7 +329,7 @@ const WHO_FOR = [
       <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(251,246,240,.97) 40%, rgba(251,246,240,.15) 90%)"></div>
       <div style="position:relative;display:flex;flex-direction:column;gap:var(--space-9);align-items:flex-start;max-width:600px">
         <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your 6 Days Ultimate Iceland Adventure?</h2>
+          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your Ultimate Iceland Adventure?</h2>
           <p style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0">This is not just a tour — it's a complete private Iceland experience designed for travellers who want to see everything, experience everything, and come home with unforgettable memories and professional photographs. Tell Luke's team your preferred dates and group size and we'll customize every detail of your Icelandic journey.</p>
         </div>
         <Button variant="primary" href="/contact">Contact us</Button>
@@ -344,17 +344,17 @@ const WHO_FOR = [
 
   .tour-info-bar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: var(--space-6);
+    justify-content: space-between;
+    gap: var(--space-7);
     background: var(--cream-50);
-    border-radius: 32px;
-    padding: var(--space-7);
+    border-radius: 100px;
+    padding: var(--space-5) var(--space-7);
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: wrap;
   }
-  .tour-info-bar-stats { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-5); }
-  .tour-info-bar-dot { display: none; }
+  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
   .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
 
   .highlights-carousel {
@@ -397,6 +397,9 @@ const WHO_FOR = [
   @media (max-width: 768px) {
     .tour-row { flex-direction: column; align-items: stretch; }
     .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; }
+    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
+    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
+    .tour-info-bar-dot { display: none; }
   }
   @media (max-width: 640px) {
     .highlight-card { flex-basis: 78vw; }
