@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import contactBgImg from '../assets/images/south-coast-vestrahorn-tour.webp';
-import { TOURS } from '../data/tours';
+import { BUSINESS } from '../data/site';
 
 const COUNTRY_CODES = [
   { name: 'United States', code: '+1', flag: '🇺🇸' },
@@ -178,6 +178,11 @@ const COUNTRY_CODES = [
   { name: 'Zambia', code: '+260', flag: '🇿🇲' },
   { name: 'Zimbabwe', code: '+263', flag: '🇿🇼' },
 ];
+const DIRECT_CONTACT = [
+  { icon: 'phone', href: BUSINESS.telephoneHref, text: BUSINESS.telephone, label: 'Phone', ev: 'phone_click' },
+  { icon: 'mail', href: `mailto:${BUSINESS.email}`, text: BUSINESS.email, label: 'Email', ev: 'email_click' },
+];
+
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
 
 const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itinerary'];
@@ -329,25 +334,19 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
-              {/* One choice out of five, so it is a radio group: the browser gives
-                  arrow-key navigation and announces "2 of 5" for free. The pills are
-                  labels styled off :checked, not buttons. */}
-              <fieldset class="find-us-fieldset">
-                <legend class="find-us-legend">
-                  <span class="find-us-legend-row">
-                    <span class="find-us-legend-title">How did you find us? <span class="req-mark">*</span></span>
-                    <span class="find-us-legend-hint">Choose one</span>
-                  </span>
-                </legend>
-                <div class="find-us-options">
-                  {FIND_US_OPTIONS.map((opt, i) => (
-                    <div class="find-us-option">
-                      <input type="radio" class="find-us-radio" name="foundUs" id={`found-us-${i}`} value={opt} checked={i === 0} />
-                      <label class="find-us-pill" for={`found-us-${i}`}>{opt}</label>
-                    </div>
-                  ))}
-                </div>
-              </fieldset>
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
+                <h2 class="card-title" style="color:var(--text-heading);margin:0">How did you find us?</h2>
+                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Choose one <span class="req-mark">*</span></span>
+              </div>
+
+              <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-7)">
+                {FIND_US_OPTIONS.map((opt, i) => (
+                  <button type="button" class="find-us-pill" data-value={opt} aria-pressed={i === 0 ? 'true' : 'false'}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+              <input type="hidden" name="foundUs" id="found-us-input" value={FIND_US_OPTIONS[0]} />
 
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
@@ -379,6 +378,16 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
           <span style="font:700 13px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--amber-400)">Get in touch</span>
           <h1 style="font:400 2.5rem/1.2 var(--font-display);color:#E9E6DD;margin:0">Let's start planning your Secret Spots of Iceland adventure</h1>
           <p style="font:var(--type-body);color:#E9E6DD;margin:0;max-width:460px">Tell us your travel dates and what you'd love to discover — a private photography tour, a custom itinerary, or one tailored to your mobility needs.</p>
+
+          {/* Prefer not to use the form? Call or write to Luke directly (#8). */}
+          <div class="contact-direct">
+            {DIRECT_CONTACT.map((c) => (
+              <a href={c.href} class="contact-direct-link" data-ev={c.ev} data-ev-text={c.label} aria-label={`${c.label}: ${c.text}`}>
+                <Icon name={c.icon} size={18} color="#E9E6DD" />
+                <span>{c.text}</span>
+              </a>
+            ))}
+          </div>
 
           {/* Two-up at every width: the text column is 378px on desktop and the
               viewport is 360px at the low end, so four across left ~76px per
@@ -428,6 +437,30 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     .contact-text { order: 0; flex: 0 1 auto; align-items: center; text-align: center; padding-top: 0; }
     .contact-bullets { margin-inline: auto; }
     .contact-bullet { align-items: center; }
+  }
+
+  /* Direct contact links: stacked and centered on mobile, matching the column. */
+  .contact-direct {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+    width: 100%;
+    max-width: 460px;
+  }
+  .contact-direct-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font: 600 15px/1.3 var(--font-sans);
+    color: #E9E6DD;
+    text-decoration: none;
+    word-break: break-word;
+  }
+  .contact-direct-link:hover,
+  .contact-direct-link:focus-visible { text-decoration: underline; }
+  @media (min-width: 769px) {
+    .contact-direct { align-items: flex-start; }
   }
 
   .req-mark { color: #b3261e; }
