@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -113,11 +114,11 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Traveller in a wheelchair by a glacier lagoon in Iceland"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Planning an Accessible Trip to Iceland: 10 Questions You Should Ask Any Operator</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -128,6 +129,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">We have organized trips through some of the most remote parts of Iceland, including a 12-day tour with a guest in a wheelchair, and many others with older travelers and guests with limited mobility. Before any trip, the planning starts the same way: a conversation about what actually matters to you. <a href="/contact" style="color:var(--blue-500);text-decoration:underline">See how we approach accessible tours</a>.</p>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">So before you book an accessible trip to Iceland, here are some of the questions we think you should ask any operator.</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       {QUESTIONS.slice(0, 5).map((item) => (
         <section style="margin-top:var(--space-9)">

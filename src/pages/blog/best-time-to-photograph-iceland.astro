@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import FaqItem from '../../components/FaqItem.astro';
@@ -48,12 +49,12 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Northern lights over an Icelandic landscape"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
     compact
   >
     <Fragment slot="title">Best Time to Photograph Iceland: A Month-by-Month Guide</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -63,6 +64,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">After nearly 20 years photographing Iceland, the question I hear most often is simple: when should I come? The honest answer is that there is no bad time to photograph Iceland, but there absolutely is a best time for the photographs you want to take. Northern lights and ice caves belong to one half of the year; the midnight sun and the highlands belong to the other. This guide breaks it down so you can plan your trip around the light, not around luck.</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       <section style="margin-top:var(--space-9);background:#F8F7F3;border-radius:24px;padding:var(--space-8)">
         <h2 style="font:400 1.375rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">The short answer</h2>

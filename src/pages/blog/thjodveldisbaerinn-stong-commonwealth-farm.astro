@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -24,11 +25,11 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Couple by a waterfall in the Icelandic Highlands near Þjóðveldisbærinn Stöng"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Þjóðveldisbærinn Stöng - The Commonwealth Farm</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -38,6 +39,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Are you fascinated by Vikings? Know very little about them and want to learn more? Or maybe you're already well-versed in Viking history, but have never had a chance to experience the physical remnants of their everyday life? In either case, a trip to Þjóðveldisbærinn Stöng (The Commonwealth Farm) is the perfect solution. This reconstructed Viking farm lets you walk in the footsteps of Norsemen who once talked, ate, and prepared for battle here nearly a thousand years ago!</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       <section style="margin-top:var(--space-9)">
         <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Is Þjóðveldisbærinn Stöng (The Commonwealth Farm)?</h2>
