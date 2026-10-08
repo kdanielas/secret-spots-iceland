@@ -391,32 +391,31 @@ const TOUR_OPTIONS = [
 </Layout>
 
 <style>
-  /* mobile: form first and centered, text below — the form is the primary action here */
+  /* desktop: side by side, text on the left, form on the right (the form is
+     first in the DOM, so the columns are re-ordered rather than reflowed) */
   .contact-grid {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-10);
-    max-width: 720px;
-    margin: 0 auto;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-12);
   }
-  .contact-text { align-items: center; text-align: center; }
-  .contact-bullets { margin-inline: auto; }
-  .contact-bullet { align-items: center; }
+  .contact-form-card { order: 2; flex: 1.2; }
+  .contact-text { order: 1; flex: 0.8; align-items: flex-start; text-align: left; padding-top: var(--space-9); }
 
-  @media (min-width: 769px) {
-    /* desktop: side by side, text on the left, form on the right */
+  @media (max-width: 768px) {
+    /* mobile: form first and centered, text below — the form is the primary
+       action here, and DOM order already puts it first */
     .contact-grid {
-      flex-direction: row;
-      align-items: flex-start;
-      max-width: none;
-      margin: 0;
-      gap: var(--space-12);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-10);
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .contact-form-card { order: 2; flex: 1.2; }
-    .contact-text { order: 1; flex: 0.8; align-items: flex-start; text-align: left; padding-top: var(--space-9); }
-    .contact-bullets { margin-inline: 0; }
-    .contact-bullet { align-items: flex-start; }
+    .contact-form-card { order: 0; flex: 0 1 auto; }
+    .contact-text { order: 0; flex: 0 1 auto; align-items: center; text-align: center; padding-top: 0; }
+    .contact-bullets { margin-inline: auto; }
+    .contact-bullet { align-items: center; }
   }
 
   .req-mark { color: #b3261e; }
@@ -489,7 +488,7 @@ const TOUR_OPTIONS = [
     border-color: var(--ink-900);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .contact-field-row { grid-template-columns: 1fr !important; }
   }
 </style>
