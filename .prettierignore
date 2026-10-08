@@ -1,0 +1,14 @@
+# Build output and caches
+dist/
+.astro/
+node_modules/
+.vercel/
+
+# Vendored design-system handoff bundle — not ours to reformat.
+design-system/
+
+# Generated
+package-lock.json
+
+# Icon sources are copied verbatim from lucide/simple-icons.
+src/icons/

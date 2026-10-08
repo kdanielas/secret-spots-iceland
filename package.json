@@ -6,11 +6,19 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "lint": "oxlint src api",
+    "format": "prettier --write \"{src,api}/**/*.{astro,ts,js,css}\"",
+    "format:check": "prettier --check \"{src,api}/**/*.{astro,ts,js,css}\""
   },
   "dependencies": {
     "astro": "^4.16.0",
     "lucide-static": "^0.544.0",
     "simple-icons": "^16.29.0"
+  },
+  "devDependencies": {
+    "oxlint": "^1.87.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0"
   }
 }

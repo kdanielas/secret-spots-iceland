@@ -1,0 +1,29 @@
+# Keeps the two checks from #7 honest on every change:
+#   - oxlint, so unused variables, forgotten console.log and duplicate object
+#     keys are caught before the branch is merged;
+#   - prettier --check, so a real change never arrives mixed with whitespace.
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Current LTS. Neither check depends on the Node version, so this only
+      # needs to stay recent enough for the toolchain.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run format:check

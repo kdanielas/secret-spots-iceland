@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "no-console": "error",
+    "no-debugger": "error",
+
+    // Third-party globals we have to name as they are (`_iub` from Iubenda).
+    "no-underscore-dangle": "off",
+    // Stylistic; moving helpers out of their `if` block would scatter the
+    // consent code away from the elements it guards.
+    "unicorn/consistent-function-scoping": "off"
+  },
+  "ignorePatterns": ["dist", ".astro", ".vercel", "design-system", "node_modules"],
+  "overrides": [
+    {
+      // Astro generates this line; the triple-slash reference is the contract.
+      "files": ["src/env.d.ts"],
+      "rules": { "typescript/triple-slash-reference": "off" }
+    },
+    {
+      // Vercel Functions, not browser code: these logs land in the function
+      // log and are the only trace of a rejected submission (see #21).
+      "files": ["api/**"],
+      "rules": { "no-console": "off" }
+    }
+  ]
+}
