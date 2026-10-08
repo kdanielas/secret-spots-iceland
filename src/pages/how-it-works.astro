@@ -96,14 +96,6 @@ const SERVICES = [
     </div>
     <p style="font:400 28px/1.4 var(--font-sans);color:var(--text-heading);margin:0;max-width:900px">&ldquo;I started Secret Spots because I genuinely believe Iceland is best experienced privately, slowly, and with someone who knows where to look. I look forward to welcoming you and sharing the hidden places that have inspired me for nearly two decades.&rdquo;</p>
     <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Luke, Founder of Secret Spots of Iceland</span>
-    <div style="display:flex;gap:var(--space-4)">
-      <button type="button" class="how-testimonial-arrow" aria-label="Previous">
-        <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-      </button>
-      <button type="button" class="how-testimonial-arrow" aria-label="Next">
-        <Icon name="arrow-right" size={16} />
-      </button>
-    </div>
   </section>
 </Layout>
 
@@ -111,22 +103,6 @@ const SERVICES = [
   .how-pad-x { padding-left: var(--space-9); padding-right: var(--space-9); }
   .how-row { padding: var(--space-11) var(--space-9); display: flex; align-items: center; justify-content: center; }
   .how-row-inner { display: flex; align-items: center; gap: var(--space-11); max-width: 1200px; width: 100%; }
-
-  .how-testimonial-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-    border: 1px solid #e8e1d8;
-    background: #fff;
-    color: var(--ink-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-control);
-  }
-  .how-testimonial-arrow:hover { background: var(--cream-100); }
-  .how-testimonial-arrow:active { transform: var(--press-scale); }
 
   @media (max-width: 1024px) {
     .how-row-inner { gap: var(--space-8); }

@@ -82,14 +82,6 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Britta Hormann</span>
         <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">United States · Tripadvisor Review</span>
       </div>
-      <div style="display:flex;gap:var(--space-4)">
-        <button type="button" class="testimonial-arrow" aria-label="Previous review">
-          <Icon name="chevron-right" size={18} style="transform:rotate(180deg)" />
-        </button>
-        <button type="button" class="testimonial-arrow" aria-label="Next review">
-          <Icon name="chevron-right" size={18} />
-        </button>
-      </div>
     </div>
   </section>
 </Layout>
@@ -100,22 +92,6 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   .cta-pill:hover { background: var(--action-dark-bg-hover); }
   .info-pill:hover { color: var(--blue-500); }
   .card-clickable:active { transform: var(--press-scale); }
-
-  .testimonial-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-    border: none;
-    background: var(--cream-50);
-    color: var(--ink-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-control);
-  }
-  .testimonial-arrow:hover { background: var(--cream-100); }
-  .testimonial-arrow:active { transform: var(--press-scale); }
 
   @media (max-width: 768px) {
     .tours-hero-title { font-size: 2rem !important; }
