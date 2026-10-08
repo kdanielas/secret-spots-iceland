@@ -24,23 +24,33 @@ npm run build      # genera dist/
 npm run preview    # sirve dist/ como lo hará producción
 ```
 
+`npm run dev` y `npm run preview` sirven el sitio, pero no `/api/contact`: esa ruta es
+una función de Vercel, fuera del build de Astro. Para probarla en local hace falta
+`vercel dev`; en los deploys de preview de Vercel funciona como en producción.
+
 No hay tests ni linter configurados: `npm run build` es la comprobación de que nada
 se ha roto.
 
 ## Variables de entorno
 
-Copia `.env.example` como `.env` (no se sube a git) y rellena lo que necesites. Hoy
-solo hay una variable:
+Copia `.env.example` como `.env` (no se sube a git) y rellena lo que necesites:
 
 | Variable | Para qué |
 | --- | --- |
 | `PUBLIC_GTM_ID` | Contenedor de Google Tag Manager. Vacío = no se carga GTM. |
+| `RECAPTCHA_SECRET_KEY` | Clave secreta de reCAPTCHA v2, para verificar el token en el servidor. |
+| `RESEND_API_KEY` | API key de [Resend](https://resend.com), que envía el correo de la consulta. |
+| `CONTACT_FROM_EMAIL` | Remitente verificado en Resend. No es el correo del visitante. |
+| `CONTACT_TO_EMAIL` | Bandeja de Luke. Vacía = `BUSINESS.email` de `src/data/site.ts`. |
 
 En Vercel se configuran en *Settings > Environment Variables*, en Production y Preview.
+Sin las del formulario, `/api/contact` responde 503 y la página muestra un error con el
+teléfono y el correo de Luke en lugar de perder la consulta en silencio.
 
 ## Estructura
 
 ```
+api              funciones de Vercel, fuera de Astro: contact.ts envía la consulta
 src/pages        una página por ruta (incluye tours/ y blog/)
 src/components   componentes reutilizables
 src/layouts      Layout.astro: head, cabecera, pie, GTM y consentimiento
@@ -74,5 +84,10 @@ deploy de preview propio.
 - [ ] Añadir el sitemap: `site` ya está configurado en `astro.config.mjs`, pero falta
       instalar `@astrojs/sitemap` y enlazarlo desde `robots.txt`
 - [ ] Contenedor de Tag Manager (`PUBLIC_GTM_ID`) y eventos de GA4
-- [ ] Formulario de contacto enviando de verdad — hoy `src/components/InquiryForm.astro`
-      es una maqueta que no envía nada a ningún sitio
+- [ ] Clave real de reCAPTCHA: `contact.astro` lleva todavía la clave de prueba
+      pública de Google, que aprueba a cualquiera. Cambiar la pública del HTML y la
+      `RECAPTCHA_SECRET_KEY` de Vercel por las del sitio
+- [ ] Dominio verificado en Resend y `CONTACT_FROM_EMAIL` con ese dominio, o el correo
+      de la consulta se rechaza
+- [ ] `src/components/InquiryForm.astro` sigue siendo una maqueta que no envía nada;
+      el formulario que funciona es el de `/contact`
