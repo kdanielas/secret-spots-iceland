@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
+import { contactHref } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -20,6 +21,10 @@ import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 import highlight1 from '../../assets/images/haifoss-highlands-iceland.jpg';
 import highlight2 from '../../assets/images/highlands-canyon-blue-water.jpg';
 import highlight3 from '../../assets/images/landmannalaugar-iceland-highlands.jpeg';
+
+// Issue #9: el slug de este tour en src/data/tours.ts, para que los CTA lleven
+// al formulario con el tour ya elegido.
+const TOUR_SLUG = 'highlands-adventure';
 
 const STATS = [
   { icon: 'clock', label: '10-12 hours', sub: 'Private tour' },
@@ -112,7 +117,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
           </>
         ))}
       </div>
-      <Button variant="dark" href="/contact" iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
     </div>
   </Hero>
 
@@ -193,6 +198,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   </section>
 
   <TourCtaPanel
+    href={contactHref(TOUR_SLUG)}
     title="Ready to book your Highlands Adventure?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who want to venture into the heart of Iceland's wilderness. The Highlands are only accessible in summer and only with the right vehicle and guide. Tell Luke's team your preferred dates and group size and we'll check conditions and take care of everything else."
     cta="Contact us"

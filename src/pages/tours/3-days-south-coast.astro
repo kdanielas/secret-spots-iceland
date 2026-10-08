@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
-import { priceLabel } from '../../data/tours';
+import { contactHref, priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -23,10 +23,14 @@ import highlight3 from '../../assets/images/Web images/3-days-south-coast/haifos
 import highlight4 from '../../assets/images/Web images/3-days-south-coast/black-sand-beach-iceland-girl-ocean.jpg';
 import highlight5 from '../../assets/images/Web images/3-days-south-coast/south-coast-glacier-lagoon.jpg';
 
+// Issue #9: el slug de este tour en src/data/tours.ts. De ahi salen el precio
+// del info bar y los CTA, que llevan al formulario con el tour ya elegido.
+const TOUR_SLUG = 'three-days-south-coast';
+
 const STATS = [
   { icon: 'clock', label: '3 Days / 2 Nights', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavík', sub: 'Departure' },
-  { icon: 'briefcase', label: priceLabel('three-days-south-coast'), sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel(TOUR_SLUG), sub: 'Year-round' },
 ];
 
 const EXPECT = [
@@ -105,7 +109,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
           </>
         ))}
       </div>
-      <Button variant="dark" href="/contact" iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
     </div>
   </Hero>
 
@@ -195,6 +199,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   </section>
 
   <TourCtaPanel
+    href={contactHref(TOUR_SLUG)}
     title="Ready to book your 3 Days Ultimate South Coast Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who crave real connection with nature, culture, and photography. Tell Luke's team your preferred dates and group size and we'll take care of everything else."
     cta="Book this Tour"

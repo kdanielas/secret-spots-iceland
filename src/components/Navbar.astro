@@ -24,8 +24,11 @@ interface Props {
   showContact?: boolean;
   /* float the header over the hero behind it instead of letting it push the page down */
   overlay?: boolean;
+  /* Issue #9: en una página de tour llega con ?tour=<slug>, para que el
+     formulario abra con ese tour seleccionado. */
+  contactHref?: string;
 }
-const { active, transparent = false, showContact = false, overlay = false } = Astro.props;
+const { active, transparent = false, showContact = false, overlay = false, contactHref = '/contact' } = Astro.props;
 
 const NAV: NavItem[] = [
   {
@@ -159,7 +162,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       )
     ))}
     {showContact ? (
-      <a href="/contact" class="nav-contact-link" style="background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 14px/1 var(--font-sans);padding:10px 20px;border-radius:var(--radius-pill);white-space:nowrap">
+      <a href={contactHref} class="nav-contact-link" style="background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 14px/1 var(--font-sans);padding:10px 20px;border-radius:var(--radius-pill);white-space:nowrap">
         Contact us
       </a>
     ) : null}

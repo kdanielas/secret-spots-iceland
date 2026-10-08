@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
-import { priceLabel } from '../../data/tours';
+import { contactHref, priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -25,10 +25,14 @@ import highlight5 from '../../assets/images/reykjanes-peninsula-drone.jpg';
 import highlight6 from '../../assets/images/reykjanes-gunnuhver-steam.jpg';
 import highlight7 from '../../assets/images/reykjanes-lava-field-iceland.jpg';
 
+// Issue #9: el slug de este tour en src/data/tours.ts. De ahi salen el precio
+// del info bar y los CTA, que llevan al formulario con el tour ya elegido.
+const TOUR_SLUG = 'secret-reykjanes';
+
 const STATS = [
   { icon: 'clock', label: '7 hours', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavik', sub: 'Keflavík pickup' },
-  { icon: 'briefcase', label: priceLabel('secret-reykjanes'), sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel(TOUR_SLUG), sub: 'Year-round' },
 ];
 
 const EXPECT = [
@@ -105,7 +109,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
           </>
         ))}
       </div>
-      <Button variant="dark" href="/contact" iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
     </div>
   </Hero>
 
@@ -189,12 +193,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photographing the Reykjanes Peninsula</h2>
         <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Reykjanes Peninsula is one of Iceland's finest photography destinations — dramatic contrasts of black lava, turquoise geothermal pools, ocean spray and volcanic steam create extraordinary images at every stop.</p>
         <p style="font:var(--type-lead);color:var(--text-body);margin:0">Whether you're joining an Iceland photography tour with a professional camera or capturing memories on your phone, every location on this route is chosen with the best light and composition in mind. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story.</p>
-        <Button variant="outline" href="/photography-guide" iconAfter="arrow-right">See our photography tips</Button>
+        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See our photography tips</Button>
       </div>
     </div>
   </section>
 
   <TourCtaPanel
+    href={contactHref(TOUR_SLUG)}
     title="Ready to book your Secret Reykjanes Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who crave real connection with nature, culture, and photography. Tell Luke's team your dates and group size and we'll take care of everything else."
     cta="Contact us"

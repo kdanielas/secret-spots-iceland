@@ -112,3 +112,26 @@ export function getTour(slug: string): Tour {
 export function priceLabel(slug: string): string {
   return `From ${formatPrice(getTour(slug).priceUsd)} / group`;
 }
+
+/**
+ * "/contact?tour=secret-reykjanes" — the booking link for one tour. The contact
+ * form reads the `tour` parameter to preselect its tour picker, so a traveller
+ * who clicks "Check Availability" on a tour lands on the form with that tour
+ * already chosen. Going through getTour() means a typo fails the build instead
+ * of silently shipping a link the form can't match.
+ */
+export function contactHref(slug: string): string {
+  return `/contact?tour=${getTour(slug).slug}`;
+}
+
+/**
+ * El enlace de contacto que corresponde a una página: lleva el tour cuando la
+ * página es la de un tour, y es el /contact de siempre en cualquier otra. Así
+ * el botón «Contact us» de la cabecera también llega al formulario con el tour
+ * ya elegido, igual que los CTA de la propia página.
+ */
+export function contactHrefFromPath(pathname: string): string {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  const tour = TOURS.find((t) => t.href === path);
+  return tour ? contactHref(tour.slug) : '/contact';
+}

@@ -186,7 +186,13 @@ const DIRECT_CONTACT = [
 
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
 
-const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itinerary'];
+// The picker shows tour titles but each option also carries its slug, which is
+// what a /contact?tour=<slug> link from a tour page matches on (issue #9). The
+// submitted value stays the title, so what reaches the inbox is unchanged.
+const TOUR_OPTIONS = [
+  ...TOURS.map((t) => ({ slug: t.slug, title: t.title })),
+  { slug: 'custom', title: 'Not sure yet / custom itinerary' },
+];
 
 // Floor for the date field, baked in at build time. Going stale only widens the
 // allowed range by a day or two, so it can never reject a date a traveller
@@ -298,7 +304,7 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Which tour are you interested in? <span class="req-mark">*</span></span>
                 <span style="position:relative;display:block">
                   <select name="tour" required class="contact-input" style="padding-right:34px">
-                    {TOUR_OPTIONS.map((t) => <option value={t}>{t}</option>)}
+                    {TOUR_OPTIONS.map((t) => <option value={t.title} data-tour={t.slug}>{t.title}</option>)}
                   </select>
                   <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="chevron-down" size={16} />
@@ -590,6 +596,16 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const step1 = form?.querySelector<HTMLElement>('[data-step="1"]');
   const step2 = form?.querySelector<HTMLElement>('[data-step="2"]');
+
+  // Issue #9: tour pages link here as /contact?tour=<slug> so the picker opens
+  // on the tour the traveller was just reading about. An unknown or missing
+  // slug leaves the dropdown on its default option.
+  const requestedTour = new URLSearchParams(window.location.search).get('tour');
+  if (requestedTour) {
+    const tourSelect = form?.querySelector<HTMLSelectElement>('select[name="tour"]');
+    const match = Array.from(tourSelect?.options ?? []).find((o) => o.dataset.tour === requestedTour);
+    if (tourSelect && match) tourSelect.value = match.value;
+  }
 
   // Guests: the number field is the source of truth, the <output> is the live
   // mirror that gets announced when the +/- buttons move it.
