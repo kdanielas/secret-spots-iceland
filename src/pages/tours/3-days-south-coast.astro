@@ -112,7 +112,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:450/800">
+      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
         <Image src={expectImg} alt="Travelers standing at the base of a powerful waterfall on Iceland's South Coast" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
@@ -137,7 +137,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:590/886">
+      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
         <Image src={whoForImg} alt="Family group hiking near a South Coast waterfall in Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
@@ -155,7 +155,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:450/800">
+      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
         <Image src={anotherPlanetImg} alt="Couple admiring a rainbow at a South Coast waterfall in Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
@@ -181,7 +181,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
     <div class="tour-row">
-      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:603/903">
+      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903">
         <Image src={photographyImg} alt="Icelandic horse standing before a frozen waterfall on Iceland's South Coast" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
@@ -205,6 +205,9 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 <style>
   .tour-block { padding: var(--space-8); }
   .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
+     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
+  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
 
   .tour-info-bar {
     display: flex;
@@ -227,7 +230,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   }
   @media (max-width: 768px) {
     .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; }
+    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
     .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
     .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
     .tour-info-bar-dot { display: none; }

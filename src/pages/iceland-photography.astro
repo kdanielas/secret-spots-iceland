@@ -230,6 +230,9 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   }
   @media (max-width: 640px) {
     .photo-hero-title { font-size: 2rem !important; }
+    /* Issue #78: a dos columnas los vídeos 9:16 se quedan en ~150px de ancho y no
+       se ven; apilados y acotados dan un ancho usable sin ocupar toda la pantalla. */
+    .video-grid { grid-template-columns: 1fr; max-width: 300px; }
   }
 </style>
 
