@@ -137,21 +137,6 @@
 .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--grid-gap); }
 .grid-4-plain { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-9); }
 .grid-tours { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-7); width: 100%; }
-
-/* Fichas de tour con la copia completa de /iceland-photography-tours (#14): a
-   tres columnas el texto y la lista de highlights quedan en una tira
-   estrechísima, así que la pagina /tours lista a dos. */
-.grid-tour-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); width: 100%; align-items: stretch; }
-
-/* Las seis razones de «What makes this one-of-a-kind...» */
-.grid-why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-9); width: 100%; }
-@media (max-width: 1024px) {
-  .grid-tour-cards { grid-template-columns: 1fr; }
-  .grid-why { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); }
-}
-@media (max-width: 640px) {
-  .grid-why { grid-template-columns: 1fr; }
-}
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .grid-4-plain { grid-template-columns: repeat(2, 1fr); gap: var(--space-7); }
