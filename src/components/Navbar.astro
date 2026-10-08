@@ -353,19 +353,39 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const nav = document.getElementById('site-nav');
+
+  function isMobileNavOpen() {
+    return nav?.dataset.open === 'true';
+  }
+
+  function openMobileNav() {
+    if (!toggle || !nav) return;
+    nav.dataset.open = 'true';
+    // both glyphs are already in the button; CSS picks one off aria-expanded
+    toggle.setAttribute('aria-expanded', 'true');
+    // the panel hangs off the header, so the page behind it must not scroll —
+    // otherwise the header (and the open panel with it) slides out of view
+    document.body.classList.add('nav-open');
+    document.querySelectorAll('.site-header').forEach((h) => h.classList.remove('nav-hidden'));
+  }
+
+  // every dismissal path (toggle, link, outside click, Escape) goes through here
+  // so the panel, the button state and the scroll lock can never drift apart
+  function closeMobileNav({ returnFocus = false } = {}) {
+    if (!toggle || !nav || !isMobileNavOpen()) return;
+    nav.dataset.open = 'false';
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+    if (returnFocus) toggle.focus();
+  }
+
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
-      const isOpen = nav.dataset.open === 'true';
-      const next = !isOpen;
-      nav.dataset.open = String(next);
-      // both glyphs are already in the button; CSS picks one off aria-expanded
-      toggle.setAttribute('aria-expanded', String(next));
+      if (isMobileNavOpen()) closeMobileNav();
+      else openMobileNav();
     });
     nav.querySelectorAll('a').forEach((a) => {
-      a.addEventListener('click', () => {
-        nav.dataset.open = 'false';
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', () => closeMobileNav());
     });
   }
 
@@ -400,10 +420,17 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     });
 
     document.addEventListener('click', (e) => {
-      if (!header.contains(e.target as Node)) closeAll();
+      if (!header.contains(e.target as Node)) {
+        closeAll();
+        closeMobileNav();
+      }
     });
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAll();
+      if (e.key !== 'Escape') return;
+      closeAll();
+      // WCAG 2.1.2: Escape has to get the user back out of the panel, with
+      // focus back on the control that opened it
+      closeMobileNav({ returnFocus: true });
     });
   });
 
@@ -414,6 +441,14 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 
     function onScroll() {
       const y = window.scrollY;
+      // the mobile panel is anchored to the header, so hiding the header would
+      // take the open menu offscreen with it
+      if (isMobileNavOpen()) {
+        header.classList.remove('nav-hidden');
+        lastY = y;
+        ticking = false;
+        return;
+      }
       if (y <= 80) {
         header.classList.remove('nav-hidden');
       } else if (y > lastY) {
