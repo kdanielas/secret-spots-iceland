@@ -6,7 +6,8 @@ import Button from './Button.astro';
 import contactImg from '../assets/images/north-iceland-hot-steam-family.jpg';
 import { BUSINESS } from '../data/site';
 
-interface Row { icon: string; label: string; value: string; }
+/** `href` turns the value into a link; `ev` names the dataLayer event it fires. */
+interface Row { icon: string; label: string; value: string; href?: string; ev?: string; }
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -20,8 +21,11 @@ const {
   style = '',
 } = Astro.props;
 
+// Phone and email are tappable (#8) — this panel sits on nearly every page, so
+// it is the main contact surface, and 88% of the traffic is on a phone.
 const ROWS: Row[] = [
-  { icon: 'phone', label: 'Call or WhatsApp', value: BUSINESS.telephone },
+  { icon: 'phone', label: 'Call or WhatsApp', value: BUSINESS.telephone, href: BUSINESS.telephoneHref, ev: 'phone_click' },
+  { icon: 'mail', label: 'Email', value: BUSINESS.email, href: `mailto:${BUSINESS.email}`, ev: 'email_click' },
   { icon: 'map-pin', label: 'Based in', value: `${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland` },
   { icon: 'clock', label: 'Response time', value: 'Usually within 24 hours, personally from Luke.' },
 ];
@@ -39,9 +43,13 @@ const ROWS: Row[] = [
         {ROWS.map((r) => (
           <div style="display:flex;gap:var(--space-5);align-items:flex-start">
             <IconChip name={r.icon} size={32} />
-            <div style="display:flex;flex-direction:column">
+            <div style="display:flex;flex-direction:column;min-width:0">
               <span style="font:var(--type-body-xs);color:var(--text-muted)">{r.label}</span>
-              <span style="font:var(--type-body-sm);color:var(--text-heading)">{r.value}</span>
+              {r.href ? (
+                <a href={r.href} class="contact-panel-link" data-ev={r.ev} data-ev-text={r.label} style="font:var(--type-body-sm);color:var(--text-heading);text-decoration:none;word-break:break-word">{r.value}</a>
+              ) : (
+                <span style="font:var(--type-body-sm);color:var(--text-heading)">{r.value}</span>
+              )}
             </div>
           </div>
         ))}
@@ -52,6 +60,9 @@ const ROWS: Row[] = [
 </section>
 
 <style>
+  .contact-panel-link:hover,
+  .contact-panel-link:focus-visible { text-decoration: underline; }
+
   @media (max-width: 768px) {
     .contact-panel { padding: var(--space-6) !important; }
     .contact-panel-card { padding: var(--space-7) !important; min-height: 0 !important; }

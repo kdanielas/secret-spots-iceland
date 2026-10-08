@@ -8,6 +8,9 @@ export const BUSINESS = {
   description:
     'Private, photography-led Iceland tours with local guide Luke — hidden landscapes, flexible itineraries, no crowds.',
   telephone: '+354 845 4057',
+  /** Same number as `telephone`, without spaces — the `tel:` href wants no separators. */
+  telephoneHref: 'tel:+3548454057',
+  email: 'hello@secretspotsiceland.com',
   priceRange: '$$$',
   address: {
     street: 'Tangabryggja 18',
