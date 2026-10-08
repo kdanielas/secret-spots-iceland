@@ -15,13 +15,7 @@ import lukePhotographerImg from '../assets/images/reykjanes-photographer-luke.jp
 import waterfallImg from '../assets/images/south-coast-vestrahorn-tour.webp';
 import lavaVideoUrl from '../assets/images/volcano-eruption-lava-flow-vertical-iceland.mp4?url';
 import heroVideoUrl from '../assets/images/hero-slowmo.mp4?url';
-import highlandsTourImg from '../assets/images/south-coast-glacier-snowmobile.webp';
-import ringRoadTourImg from '../assets/images/glacier-lagoon-south-coast-drone.webp';
-
-const FEATURED_TOURS = [
-  { image: highlandsTourImg, duration: '10-12 hours', title: 'Highlands Adventure', description: 'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — summer only.', price: 'From €1,700', href: '/tours/highlands-adventure' },
-  { image: ringRoadTourImg, duration: '6 days', title: 'Ultimate Iceland Adventure', description: 'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.', price: 'From €1,690', href: '/tours/6-days-ultimate-adventure' },
-];
+import { FEATURED_TOURS, formatPrice } from '../data/tours';
 
 const BULLETS = [
   { icon: 'heart', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
@@ -116,7 +110,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
                 <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
                 <span style="position:absolute;bottom:16px;right:16px;color:var(--cream-50);text-align:right">
                   <span style="display:block;font:400 13px/1 var(--font-sans);opacity:.9;margin-bottom:4px">From</span>
-                  <span style="display:block;font:700 22px/1 var(--font-sans)">{t.price}<span style="font:400 13px/1 var(--font-sans)"> /group</span></span>
+                  <span style="display:block;font:700 22px/1 var(--font-sans)">{formatPrice(t.priceUsd)}<span style="font:400 13px/1 var(--font-sans)"> /group</span></span>
                 </span>
               </div>
               <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:0 var(--space-6)">
