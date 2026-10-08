@@ -528,7 +528,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
   /* Focus lands on the step heading when the step changes. Programmatic focus
      after a click should not paint a ring, hence :focus-visible only. */
-  .step-heading:focus { outline: none; }
+  .step-heading:focus { outline: none; box-shadow: none; }
   .step-heading:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 6px; border-radius: 4px; }
 
   .form-progress-step { display: flex; align-items: center; gap: 8px; }
@@ -564,7 +564,6 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
     border-radius: 8px;
     padding: 0 14px;
     height: var(--control-h-md);
-    outline: none;
     transition: var(--transition-control);
     appearance: none;
   }

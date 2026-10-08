@@ -14,7 +14,7 @@ interface Props {
 const { label, type = 'text', name, placeholder, options, rows = 4, onDark = true, style = '' } = Astro.props;
 
 const labelStyle = `font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:${onDark ? 'var(--text-on-dark)' : 'var(--text-heading)'}`;
-const controlStyle = `width:100%;box-sizing:border-box;font:var(--type-body);color:${onDark ? 'var(--cream-50)' : 'var(--ink-900)'};background:${onDark ? 'transparent' : 'var(--surface-raised)'};border:1px solid ${onDark ? 'var(--border-on-dark-field)' : 'var(--border-field)'};border-radius:var(--radius-sm);padding:0 14px;height:var(--control-h-md);outline:none;transition:var(--transition-control)`;
+const controlStyle = `width:100%;box-sizing:border-box;font:var(--type-body);color:${onDark ? 'var(--cream-50)' : 'var(--ink-900)'};background:${onDark ? 'transparent' : 'var(--surface-raised)'};border:1px solid ${onDark ? 'var(--border-on-dark-field)' : 'var(--border-field)'};border-radius:var(--radius-sm);padding:0 14px;height:var(--control-h-md);transition:var(--transition-control)`;
 ---
 
 <label class="field" style={`display:flex;flex-direction:column;gap:var(--space-3);${style}`} data-ondark={onDark ? 'true' : 'false'}>

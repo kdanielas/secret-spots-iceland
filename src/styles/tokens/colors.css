@@ -53,5 +53,13 @@
 --action-outline-fg:var(--ink-900);
 --action-outline-border:var(--ink-900);
 --action-ghost-fg:var(--blue-500);
+
+/* --- semantic: focus --- */
+/* Two-tone ring: the dark band carries the indicator over the cream page and
+   card surfaces, the light band over the footer, the dark panels and the hero
+   scrims, so one focus style covers every background without each dark
+   section having to opt in. */
+--focus-outline:var(--ink-900);
+--focus-outline-contrast:var(--cream-50);
 --focus-ring:0 0 0 3px rgba(56,98,127,.35);
 }

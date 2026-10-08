@@ -7,4 +7,8 @@ a{color:var(--text-link);text-decoration:none;transition:color var(--dur-base) v
 a:hover{color:var(--text-link-hover)}
 img{display:block;max-width:100%}
 button{font-family:var(--font-sans)}
+/* WCAG 2.4.7/2.4.11: anything focusable paints a ring. :focus-visible so a
+   mouse click does not, and :where() keeps the specificity at zero so a
+   control that needs its own ring can still override this one. */
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:2px solid var(--focus-outline);outline-offset:2px;box-shadow:0 0 0 2px var(--focus-outline-contrast)}
 ::selection{background:var(--amber-300);color:var(--espresso-900)}

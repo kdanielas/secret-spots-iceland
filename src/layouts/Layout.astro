@@ -213,7 +213,7 @@ const canonical = canonicalUrl(path);
       #main { scroll-margin-top: 110px; }
       /* <main> solo recibe el foco desde el enlace de salto, nunca tabulando, y
          un recuadro alrededor de toda la página se lee como un fallo de pintado. */
-      #main:focus { outline: none; }
+      #main:focus { outline: none; box-shadow: none; }
     </style>
 
     <script>
