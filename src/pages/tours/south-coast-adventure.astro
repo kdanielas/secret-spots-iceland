@@ -15,7 +15,7 @@ import anotherPlanetImg from '../../assets/images/Web images/south-coast-adventu
 import expectImg from '../../assets/images/Web images/south-coast-adventure/south-coast-skogafoss-winter.jpg';
 import photographyImg from '../../assets/images/Web images/south-coast-adventure/south-coast-snow-iceland.jpg';
 import whoForImg from '../../assets/images/Web images/south-coast-adventure/south-coast-horse-skogafoss-tour.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/Web images/south-coast-adventure/black-sand-beach-iceland-girl-ocean.jpg';
@@ -203,7 +203,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to Experience a South Coast Photography Tour in Iceland?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who want to experience the South Coast the way it's meant to be — without the crowds, with flexible timing, and with professional photography capturing every moment. Tell Luke's team your preferred date and group size and we'll take care of everything else."

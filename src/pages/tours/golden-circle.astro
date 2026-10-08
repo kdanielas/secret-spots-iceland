@@ -13,7 +13,7 @@ import ReviewCarousel from '../../components/ReviewCarousel.astro';
 import heroImg from '../../assets/images/Web images/golden-circle/reindeer-herd-snow.jpg';
 import expectImg from '../../assets/images/Web images/golden-circle/gullfoss-golden-circle-iceland.jpg';
 import photographyImg from '../../assets/images/Web images/golden-circle/bruafoss-golden-circle-iceland-friends.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/Web images/golden-circle/thingvellir-national-park.webp';
@@ -179,7 +179,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to book your Golden Circle Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else."

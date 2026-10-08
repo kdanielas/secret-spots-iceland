@@ -15,7 +15,7 @@ import anotherPlanetImg from '../../assets/images/highlands-traveller-waterfall.
 import expectImg from '../../assets/images/highlands-couple-iceland.jpg';
 import photographyImg from '../../assets/images/haifoss-waterfall.jpg';
 import whoForImg from '../../assets/images/landmannalaugar-guide.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/haifoss-highlands-iceland.jpg';
@@ -197,7 +197,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to book your Highlands Adventure?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who want to venture into the heart of Iceland's wilderness. The Highlands are only accessible in summer and only with the right vehicle and guide. Tell Luke's team your preferred dates and group size and we'll check conditions and take care of everything else."
