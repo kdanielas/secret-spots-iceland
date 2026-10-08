@@ -61,7 +61,7 @@ const SERVICES = [
   <section id="services" style="background:var(--surface-page);padding:var(--space-11) var(--space-9);display:flex;align-items:center;justify-content:center">
     <div style="display:flex;flex-direction:column;gap:var(--space-8);width:100%;max-width:856px">
       <h2 style="font:400 2.5rem/1.1 var(--font-display);color:#312c27;margin:0;text-align:center">Our Services</h2>
-      <div style="display:flex;flex-direction:column;width:100%;border-top:1px solid #817b73">
+      <div data-faq-group style="display:flex;flex-direction:column;width:100%;border-top:1px solid #817b73">
         {SERVICES.map((s, i) => (
           <FaqItem question={s.question} answer={s.answer} defaultOpen={i === 0} style="border-bottom-color:#817b73" />
         ))}
