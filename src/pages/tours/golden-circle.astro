@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
-import { priceLabel } from '../../data/tours';
+import { contactHref, priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -23,10 +23,14 @@ import highlight4 from '../../assets/images/Web images/golden-circle/fridheimar-
 import highlight5 from '../../assets/images/Web images/golden-circle/gullfoss-waterfall-backlit.webp';
 import highlight6 from '../../assets/images/Web images/golden-circle/kerid-crater-golden-circle.webp';
 
+// Issue #9: el slug de este tour en src/data/tours.ts. De ahi salen el precio
+// del info bar y los CTA, que llevan al formulario con el tour ya elegido.
+const TOUR_SLUG = 'golden-circle-secrets';
+
 const STATS = [
   { icon: 'clock', label: '8 hours', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavík', sub: 'Departure' },
-  { icon: 'briefcase', label: priceLabel('golden-circle-secrets'), sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel(TOUR_SLUG), sub: 'Year-round' },
 ];
 
 const EXPECT = [
@@ -115,7 +119,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
           </>
         ))}
       </div>
-      <Button variant="dark" href="/contact" iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
     </div>
   </Hero>
 
@@ -176,6 +180,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   </section>
 
   <TourCtaPanel
+    href={contactHref(TOUR_SLUG)}
     title="Ready to book your Golden Circle Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else."
     cta="Book your Tour"

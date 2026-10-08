@@ -112,3 +112,14 @@ export function getTour(slug: string): Tour {
 export function priceLabel(slug: string): string {
   return `From ${formatPrice(getTour(slug).priceUsd)} / group`;
 }
+
+/**
+ * "/contact?tour=secret-reykjanes" — the booking link for one tour. The contact
+ * form reads the `tour` parameter to preselect its tour picker, so a traveller
+ * who clicks "Check Availability" on a tour lands on the form with that tour
+ * already chosen. Going through getTour() means a typo fails the build instead
+ * of silently shipping a link the form can't match.
+ */
+export function contactHref(slug: string): string {
+  return `/contact?tour=${getTour(slug).slug}`;
+}
