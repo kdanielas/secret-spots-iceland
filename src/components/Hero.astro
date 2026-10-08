@@ -33,6 +33,10 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
 
 <div class="home-hero-wrap container-pad" style="padding-bottom:var(--space-8)">
   <section class:list={['hero-frame', { 'hero-frame-compact': compact }]} style="position:relative;min-height:85vh;border-radius:32px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+    {/* the hero fills the top of the viewport, so this still is the LCP on
+       every page that passes one (all of them but the home page) and browsers
+       give plain <img> a low fetch priority by default. The video branch
+       can't carry the same hint — poster= takes no priority attribute. */}
     {framedVideo ? (
       <video autoplay muted loop playsinline preload="auto" poster={posterSrc} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
         {/* desktop/tablet only — on mobile no <source> matches, so the browser
@@ -40,7 +44,7 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
         <source src={framedVideo} media="(min-width: 641px)" />
       </video>
     ) : (
-      <img src={posterSrc} alt={framedImageAlt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+      <img src={posterSrc} alt={framedImageAlt} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
     )}
     <div class="hero-fade" style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(230,227,218,0) 50%, #E6E3DA 92%)"></div>
     <div class="hero-content" style="position:relative;width:100%;display:flex;flex-direction:column;gap:var(--space-6);align-items:center;text-align:center;padding:0 var(--space-9) var(--space-11)">
