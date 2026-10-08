@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+
+// Página 404 (#43). Astro compila esta ruta a dist/404.html y Vercel la sirve en
+// cualquier URL que no exista, sin configuración extra. Sin ella, un enlace roto
+// de un artículo antiguo acaba en la pantalla de error de Vercel: sin cabecera,
+// sin menú y sin un solo enlace de vuelta a la web.
+
+// Las cuatro salidas que pide el issue, por orden de utilidad para quien llegó
+// aquí buscando un tour.
+const LINKS = [
+  {
+    href: '/tours',
+    title: 'All tours',
+    description: 'One-day and multi-day private tours, from Reykjanes to the highlands.',
+  },
+  {
+    href: '/blog',
+    title: 'Travel blog',
+    description: 'Local tips, hidden spots and photography guides written by Luke.',
+  },
+  {
+    href: '/contact',
+    title: 'Get in touch',
+    description: 'Tell us what you were looking for and we will point you to it.',
+  },
+  {
+    href: '/',
+    title: 'Home',
+    description: 'Start over from the beginning and see what Secret Spots is about.',
+  },
+];
+---
+
+<Layout
+  title="Page not found | Secret Spots Iceland"
+  description="That page has moved or no longer exists. Browse our private Iceland tours, read the travel blog or get in touch and we will help you find it."
+>
+  <Section>
+    <div class="nf-wrap">
+      <p class="nf-code">Error 404</p>
+      <h1 class="sh-xl" style="color:var(--text-heading);margin:0">This page has gone exploring</h1>
+      <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:580px">
+        The page you were after has moved or no longer exists — an old link, a mistyped address, or something we have since renamed. Everything else is right where you left it.
+      </p>
+
+      <div class="nf-actions">
+        <Button href="/tours" variant="primary" size="lg" iconAfter="arrow-right" evDest="listado_tours">See all tours</Button>
+        <Button href="/contact" variant="outline" size="lg" evDest="contacto">Contact us</Button>
+      </div>
+
+      <ul class="nf-links">
+        {LINKS.map((l) => (
+          <li>
+            <a href={l.href} class="nf-link" data-ev="click_link" data-ev-text={l.title}>
+              <span class="nf-link-head">
+                <span class="nf-link-title">{l.title}</span>
+                <Icon name="arrow-right" size={16} />
+              </span>
+              <span class="nf-link-desc">{l.description}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+  .nf-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* El número es decoración: el encabezado de verdad es el <h1> de debajo, para
+     que un lector de pantalla no anuncie "404" como título de la página. */
+  .nf-code {
+    font: 400 0.875rem/1 var(--font-sans);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  /* Las salidas, en tarjetas: en móvil el enlace entero es el área pulsable, no
+     una palabra subrayada de 15 px. */
+  .nf-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    width: 100%;
+    margin: var(--space-7) 0 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+
+  .nf-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    height: 100%;
+    padding: var(--space-5);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-raised);
+    text-decoration: none;
+    transition: var(--transition-control);
+  }
+  .nf-link:hover { border-color: var(--ink-900); }
+
+  .nf-link-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    color: var(--text-heading);
+  }
+  .nf-link-title { font: 700 1.0625rem/1.3 var(--font-sans); }
+  .nf-link-desc { font: var(--type-body-sm); color: var(--text-muted); }
+
+  @media (max-width: 768px) {
+    .nf-links { grid-template-columns: minmax(0, 1fr); }
+    .nf-actions { width: 100%; flex-direction: column; align-items: stretch; }
+  }
+</style>
