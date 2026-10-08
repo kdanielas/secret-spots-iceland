@@ -91,7 +91,13 @@ const ogImageHeight = cardImage
 const ogImageAlt = (cardImage && imageAlt) || DEFAULT_OG_ALT;
 // Los artículos del blog son 'article'; el resto de la web, 'website'.
 const ogType = pageType === 'blog_articulo' ? 'article' : 'website';
-const ogUrl = canonicalUrl(path);
+
+// ─── Canonical (#31) ───────────────────────────────────────────────────────
+// La URL sin barra final es la única que queremos indexada: Vercel sirve /tours
+// y /tours/ con el mismo contenido, y en la migración de 17 URLs el canonical es
+// lo que pasa la autoridad de la antigua a la nueva. Es la misma URL que usan
+// og:url y los @id del JSON-LD, así que las tres señales apuntan al mismo sitio.
+const canonical = canonicalUrl(path);
 
 ---
 
@@ -129,7 +135,7 @@ const ogUrl = canonicalUrl(path);
          Twitter Card para X. Las dos leen el mismo título, texto e imagen. -->
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={BUSINESS.name} />
-    <meta property="og:url" content={ogUrl} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
@@ -144,6 +150,7 @@ const ogUrl = canonicalUrl(path);
     <meta name="twitter:image:alt" content={ogImageAlt} />
     <!-- Not launched yet: keep the preview domain out of search results. Remove at launch. -->
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>{title}</title>
