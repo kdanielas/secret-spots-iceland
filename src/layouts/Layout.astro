@@ -49,7 +49,7 @@ const pageType =
   path === '/'                                        ? 'home'
   : path.startsWith('/tours/')                        ? 'tour'
   : path === '/tours' || path === '/accessible-tours' ? 'listado_tours'
-  : path === '/blog' || /^\/blog\/\d+$/.test(path)    ? 'blog_listado'   // /blog/2 es listado
+  : path === '/blog'                                  ? 'blog_listado'   // #56: el listado vive en una sola URL
   : path.startsWith('/blog/')                         ? 'blog_articulo'
   : path === '/contact'                               ? 'contacto'
   : path === '/faq'                                   ? 'faq'
