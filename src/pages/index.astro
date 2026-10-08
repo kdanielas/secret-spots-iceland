@@ -16,6 +16,7 @@ import waterfallImg from '../assets/images/south-coast-vestrahorn-tour.webp';
 import lavaVideoUrl from '../assets/images/volcano-eruption-lava-flow-vertical-iceland.mp4?url';
 import heroVideoUrl from '../assets/images/hero-slowmo.mp4?url';
 import { FEATURED_TOURS, formatPrice } from '../data/tours';
+import { REVIEW_PROFILES } from '../data/site';
 
 const BULLETS = [
   { icon: 'heart', title: 'Hidden locations, not tour-bus stops', description: 'Nearly 20 years of local exploration means routes away from the crowds.' },
@@ -24,11 +25,15 @@ const BULLETS = [
   { icon: 'truck', title: 'Comfortable, capable vehicles', description: "Built for Iceland's terrain, so weather and road conditions don't cancel the day." },
 ];
 
+// Each chip opens the listing the score comes from (#11) — before this they
+// all pointed at `#`, so a visitor checking whether a 5.0 was real got nothing.
+// 'ALL' is the aggregate across the three and has nowhere to go, so it renders
+// as a plain chip rather than a dead link.
 const REVIEW_PLATFORMS = [
   { label: 'ALL', rating: '5.0', dark: true },
-  { label: 'Trustpilot', rating: '5.0', icon: 'trustpilot' },
-  { label: 'Google Reviews', rating: '5.0', icon: 'google' },
-  { label: 'Tripadvisor', rating: '5.0', icon: 'tripadvisor' },
+  { label: 'Trustpilot', rating: '5.0', icon: 'trustpilot', href: REVIEW_PROFILES.trustpilot },
+  { label: 'Google Reviews', rating: '5.0', icon: 'google', href: REVIEW_PROFILES.google },
+  { label: 'Tripadvisor', rating: '5.0', icon: 'tripadvisor', href: REVIEW_PROFILES.tripadvisor },
 ];
 
 const REVIEWS = [
@@ -132,23 +137,36 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   <Section tone="page" id="reviews" style="border-top:1px solid var(--border-subtle)">
     <h2 class="sh-lg" data-reveal style="text-align:center;color:var(--text-heading);margin:0 0 var(--space-7)">What our customers say</h2>
     <div data-reveal style="display:flex;gap:var(--space-3);flex-wrap:wrap;justify-content:center;margin-bottom:var(--space-9)">
-      {REVIEW_PLATFORMS.map((p) => (
-        <a
-          href="#"
-          target="_blank"
-          style={`display:inline-flex;align-items:center;gap:var(--space-2);height:38px;padding:${p.icon ? '3px 16px 3px 3px' : '3px 16px'};border-radius:var(--radius-pill);background:${p.dark ? 'var(--ink-900)' : 'var(--surface-chip)'};text-decoration:none`}
-        >
-          {p.icon ? (
-            <span style="width:32px;height:32px;border-radius:var(--radius-pill);background:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;overflow:hidden">
-              <img src={`/icons/${p.icon}-color.svg`} alt="" width="18" height="18" style="width:18px;height:18px;object-fit:contain" />
+      {REVIEW_PLATFORMS.map((p) => {
+        const Tag = p.href ? 'a' : 'span';
+        const linkAttrs = p.href
+          ? {
+              href: p.href,
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              'aria-label': `${p.label}: rated ${p.rating} out of 5 — read the reviews (opens in a new tab)`,
+              'data-ev': 'click_link',
+              'data-ev-text': `rating_${p.label.split(' ')[0].toLowerCase()}`,
+            }
+          : {};
+        return (
+          <Tag
+            {...linkAttrs}
+            class={p.href ? 'rating-chip' : undefined}
+            style={`display:inline-flex;align-items:center;gap:var(--space-2);height:38px;padding:${p.icon ? '3px 16px 3px 3px' : '3px 16px'};border-radius:var(--radius-pill);background:${p.dark ? 'var(--ink-900)' : 'var(--surface-chip)'};text-decoration:none`}
+          >
+            {p.icon ? (
+              <span style="width:32px;height:32px;border-radius:var(--radius-pill);background:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;overflow:hidden">
+                <img src={`/icons/${p.icon}-color.svg`} alt="" width="18" height="18" style="width:18px;height:18px;object-fit:contain" />
+              </span>
+            ) : null}
+            <span style={`font:600 13px/1 var(--font-sans);color:${p.dark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>{p.label}</span>
+            <span style={`display:inline-flex;align-items:center;gap:4px;font:700 13px/1 var(--font-sans);color:${p.dark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>
+              {p.rating}<Icon name="star" size={12} color="var(--star-gold)" />
             </span>
-          ) : null}
-          <span style={`font:600 13px/1 var(--font-sans);color:${p.dark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>{p.label}</span>
-          <span style={`display:inline-flex;align-items:center;gap:4px;font:700 13px/1 var(--font-sans);color:${p.dark ? 'var(--cream-50)' : 'var(--text-heading)'}`}>
-            {p.rating}<Icon name="star" size={12} color="var(--star-gold)" />
-          </span>
-        </a>
-      ))}
+          </Tag>
+        );
+      })}
     </div>
     <div class="grid-4 customer-reviews-grid" data-reveal>
       {REVIEWS.map((r) => (
@@ -219,6 +237,10 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
   .cta-pill:hover { background: var(--action-dark-bg-hover); }
   .info-pill:hover { color: var(--blue-500); }
+  /* the rating chips are links now (#11), so they need to look clickable */
+  .rating-chip { transition: box-shadow var(--dur-fast) var(--ease-out); }
+  .rating-chip:hover { box-shadow: 0 2px 10px rgba(0,0,0,.12); }
+  .rating-chip:active { transform: var(--press-scale); }
   .card-clickable:active { transform: var(--press-scale); }
 
   @media (max-width: 768px) {
