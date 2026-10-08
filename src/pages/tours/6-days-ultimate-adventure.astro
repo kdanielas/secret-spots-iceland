@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
+import { priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -26,7 +27,7 @@ import day6Img from '../../assets/images/Web images/6-days-ultimate-adventure/hi
 const STATS = [
   { icon: 'clock', label: '6 days / 5 nights', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavík', sub: 'Keflavík Airport pickup' },
-  { icon: 'briefcase', label: 'From $8600 / group', sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel('ring-road-northern-lights'), sub: 'Year-round' },
 ];
 
 const EXPECT = [

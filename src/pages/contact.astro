@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
 import contactBgImg from '../assets/images/south-coast-vestrahorn-tour.webp';
+import { TOURS } from '../data/tours';
 
 const COUNTRY_CODES = [
   { name: 'United States', code: '+1', flag: '🇺🇸' },
@@ -179,15 +180,7 @@ const COUNTRY_CODES = [
 ];
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
 
-const TOUR_OPTIONS = [
-  'Secret Reykjanes',
-  'South Coast & Waterfalls',
-  'Golden Circle Secrets',
-  'Snæfellsnes Peninsula',
-  'Highlands Adventure',
-  'Ultimate Iceland Adventure',
-  "Not sure yet / custom itinerary",
-];
+const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itinerary'];
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
