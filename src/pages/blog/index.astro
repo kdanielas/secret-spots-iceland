@@ -3,19 +3,10 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Section from '../../components/Section.astro';
 import Icon from '../../components/Icon.astro';
-import type { GetStaticPaths } from 'astro';
 import { POSTS, formatPostDate } from '../../data/blog-posts';
-
-export const getStaticPaths = (async ({ paginate }) => {
-  return paginate(POSTS, { pageSize: 9 });
-}) satisfies GetStaticPaths;
-
-const { page } = Astro.props;
-const pageNumbers = Array.from({ length: page.lastPage }, (_, i) => i + 1);
-const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
 ---
 
-<Layout title={`Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots${page.currentPage > 1 ? ` | Page ${page.currentPage}` : ''}`} description="Discover Iceland through Luke's eyes — travel guides, hidden locations, photography spots and local tips to help you plan the perfect Iceland trip." active="Blog">
+<Layout title="Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots" description="Discover Iceland through Luke's eyes — travel guides, hidden locations, photography spots and local tips to help you plan the perfect Iceland trip." active="Blog">
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
@@ -34,7 +25,7 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
   <Section id="posts" tight style="padding-top:var(--space-7)">
     <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
       <div class="grid-tours">
-        {page.data.map((p) => (
+        {POSTS.map((p) => (
           <a href={p.href} class="card-clickable" aria-label={`Read the article: ${p.title}`} data-ev="click_link" data-ev-text={p.title} style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);text-decoration:none;color:inherit">
             <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
               <Image src={p.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
@@ -51,38 +42,6 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
           </a>
         ))}
       </div>
-
-      {page.lastPage > 1 && (
-        <nav aria-label="Blog pagination" style="display:flex;align-items:center;gap:var(--space-3)">
-          {page.url.prev ? (
-            <a href={page.url.prev} class="pagination-arrow" aria-label="Previous page">
-              <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-            </a>
-          ) : (
-            <span class="pagination-arrow is-disabled" aria-hidden="true">
-              <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-            </span>
-          )}
-          {pageNumbers.map((n) => (
-            <a
-              href={pageHref(n)}
-              class="pagination-number"
-              aria-current={n === page.currentPage ? 'page' : undefined}
-            >
-              {n}
-            </a>
-          ))}
-          {page.url.next ? (
-            <a href={page.url.next} class="pagination-arrow" aria-label="Next page">
-              <Icon name="arrow-right" size={16} />
-            </a>
-          ) : (
-            <span class="pagination-arrow is-disabled" aria-hidden="true">
-              <Icon name="arrow-right" size={16} />
-            </span>
-          )}
-        </nav>
-      )}
     </div>
   </Section>
 </Layout>
@@ -96,30 +55,4 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
   .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
   .card-clickable:active { transform: var(--press-scale); }
 
-  .pagination-arrow, .pagination-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-pill);
-    text-decoration: none;
-    transition: var(--transition-control);
-  }
-  .pagination-arrow {
-    border: 1px solid var(--border-field);
-    background: var(--cream-50);
-    color: var(--ink-900);
-  }
-  .pagination-arrow:not(.is-disabled):hover { background: var(--cream-100); }
-  .pagination-arrow:not(.is-disabled):active { transform: var(--press-scale); }
-  .pagination-arrow.is-disabled { opacity: 0.35; }
-
-  .pagination-number {
-    font: 700 14px/1 var(--font-sans);
-    color: var(--text-heading);
-    background: transparent;
-  }
-  .pagination-number:hover { background: var(--cream-50); }
-  .pagination-number[aria-current="page"] { background: var(--ink-900); color: var(--cream-50); }
 </style>
