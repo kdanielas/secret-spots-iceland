@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BUSINESS } from '../data/site';
+
+// Terms & Conditions (#12). The footer links these from every page and the
+// inquiry form will ask guests to accept them, so the page has to exist before
+// launch. Structure follows privacy-policy.astro so the two legal pages read
+// the same. The booking, payment and cancellation figures in sections 3-6 are
+// the ones to confirm with Luke and have reviewed before launch — everything
+// else describes how the tours already work (private, flexible routes,
+// photography-friendly, weather-driven changes).
+const address = `${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland`;
+
+const SECTIONS = [
+  {
+    title: '1. Who we are',
+    body: [
+      `Secretspotsiceland EHF (Kennitala ${BUSINESS.taxID}, VAT Number ${BUSINESS.vatID}), ${address}, trades as Secret Spots of Iceland and operates the private tours described on this website. We are an authorized day tour provider registered with the Icelandic Tourist Board under License No. 2024-086.`,
+      'These terms apply to your use of this website and to every tour we agree to provide. By booking a tour with us you accept them.',
+    ],
+  },
+  {
+    title: '2. What we provide',
+    body: [
+      'Every tour is private: your group travels with your guide and nobody else. The route is planned around your interests and pace rather than a fixed itinerary, and it is adjusted on the day around the weather, the road conditions and the light.',
+      'Our tours are photography-friendly, not formal photography workshops. Your guide is happy to help with viewpoints, timing and framing, but structured lessons or continuous hands-on coaching are only included if agreed in writing before booking.',
+      'Transport is in a vehicle matched to your group size, driven by your guide. Meals, accommodation, personal equipment and entrance fees to third-party attractions are not included unless your booking confirmation says otherwise.',
+    ],
+  },
+  {
+    title: '3. Inquiries and bookings',
+    body: [
+      'Submitting the inquiry form on this website is a request, not a booking. Nothing is reserved until we reply with a written confirmation setting out your date, itinerary, group size, vehicle and total price.',
+      'Please check that confirmation carefully. It is the agreed description of your tour, and together with these terms it forms our contract. Tell us straight away if anything in it is wrong.',
+      'You must be at least 18 years old to make a booking. If you book for other people, you confirm that you have their authority to do so and that you have passed these terms on to them.',
+    ],
+  },
+  {
+    title: '4. Prices and payment',
+    body: [
+      'Prices shown on this website are per group, in US dollars, and are a starting point: the final price depends on your dates, group size, vehicle and itinerary, and is the figure in your written confirmation.',
+      'No payment is taken through this website. We invoice you separately and your confirmation sets out when payment is due and how to pay it.',
+      'Prices include Icelandic VAT where it applies. Bank charges, card fees and currency conversion costs are yours.',
+    ],
+  },
+  {
+    title: '5. Changes and cancellation by you',
+    body: [
+      'If you need to change or cancel a confirmed tour, contact us as early as you can by email or phone. The cancellation terms that apply to your booking are the ones stated in your written confirmation.',
+      'We will always try to move a booking to another date rather than cancel it, subject to availability.',
+    ],
+  },
+  {
+    title: '6. Changes and cancellation by us',
+    body: [
+      'Iceland’s weather, road closures and volcanic activity can make a planned route unsafe or impossible at short notice. Where that happens we will adjust the route, swap in alternative locations, or move the tour to another day. A changed route is a normal part of how these tours work and is not a cancellation.',
+      'If we have to cancel a tour outright and cannot agree an alternative date with you, we refund what you have paid us for that tour. We are not responsible for the cost of flights, accommodation or other arrangements you booked separately.',
+      'Your guide may end or shorten a tour where continuing would be unsafe, or where a guest’s behaviour puts the group, the guide or the vehicle at risk. No refund is due in that case.',
+    ],
+  },
+  {
+    title: '7. Your responsibilities on tour',
+    body: [
+      'Please be ready at the agreed pickup point at the agreed time, and tell us in advance about anything that affects how your tour should be planned: mobility needs, medical conditions, allergies, or travelling with young children.',
+      'Iceland’s terrain and weather are demanding. You are responsible for bringing suitable clothing and footwear — we send a packing list before your tour — and for following your guide’s safety instructions, including where it is and is not safe to walk, stand or photograph.',
+      'We strongly recommend comprehensive travel insurance covering cancellation, medical costs and your equipment. We do not provide insurance.',
+    ],
+  },
+  {
+    title: '8. Liability',
+    body: [
+      'We provide our tours with reasonable skill and care. We are liable for loss or damage we cause by failing to do so, up to the price you paid for the tour, and we do not exclude liability for death or personal injury caused by our negligence, for fraud, or for anything else that cannot be excluded under Icelandic law.',
+      'We are not liable for loss or damage caused by events outside our reasonable control, including weather, volcanic or seismic activity, road closures, strikes, or the acts of third-party suppliers you asked us to coordinate with.',
+      'Your personal belongings and camera equipment remain your responsibility throughout the tour.',
+    ],
+  },
+  {
+    title: '9. Photography and this website',
+    body: [
+      'The text, photographs and other material on this website belong to us or to our licensors and may not be copied or republished without our permission.',
+      'Your guide may take photographs during your tour. We will ask you before using any image that identifies you in our marketing, and you can say no, or withdraw your agreement later, by contacting us.',
+    ],
+  },
+  {
+    title: '10. Privacy',
+    body: [
+      'How we handle the information you send us is set out in our Privacy Policy, and the cookies this website uses are listed in our Cookie Policy. Both are linked in the footer of every page.',
+    ],
+  },
+  {
+    title: '11. Complaints and governing law',
+    body: [
+      'If something goes wrong, please tell your guide at the time so we have the chance to put it right, and follow up with us in writing afterwards if it is still unresolved.',
+      'These terms are governed by Icelandic law, and the courts of Iceland have jurisdiction over any dispute arising from them.',
+    ],
+  },
+  {
+    title: '12. Contact us',
+    body: [
+      `Questions about these terms? Reach us at ${BUSINESS.telephone}, by email at ${BUSINESS.email}, or by post at ${address}.`,
+    ],
+  },
+];
+---
+
+<Layout
+  title="Terms & Conditions | Secret Spots"
+  description="Terms and conditions for Secret Spots Iceland private tours: how bookings are confirmed, what is included, and how changes and cancellations work."
+  active="Contact us"
+>
+  <section class="section-py container-pad">
+    <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
+      <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <h1 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Terms &amp; Conditions</h1>
+        <p style="font:var(--type-body-sm);color:var(--text-muted);margin:0">Last updated: October 2026</p>
+      </div>
+      {SECTIONS.map((s) => (
+        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+          <h2 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">{s.title}</h2>
+          {s.body.map((p) => <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{p}</p>)}
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
