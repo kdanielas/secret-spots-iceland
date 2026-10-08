@@ -1,6 +1,6 @@
 ---
 interface Props {
-  tone?: 'page' | 'alt' | 'dark' | 'raised';
+  tone?: 'page' | 'dark' | 'raised';
   tight?: boolean;
   id?: string;
   style?: string;
@@ -8,7 +8,6 @@ interface Props {
 const { tone = 'page', tight = false, id, style = '' } = Astro.props;
 const bg: Record<string, string> = {
   page: 'var(--surface-page)',
-  alt: 'var(--surface-page)',
   dark: 'var(--surface-dark)',
   raised: 'var(--surface-raised)',
 };
