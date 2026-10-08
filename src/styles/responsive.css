@@ -210,12 +210,6 @@
   .featured-bar { flex-direction: column; align-items: flex-start; gap: var(--space-4); padding-left: var(--space-6) !important; padding-right: var(--space-6) !important; }
 }
 
-/* --- inquiry form --- */
-.inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-@media (max-width: 768px) {
-  .inquiry-grid { grid-template-columns: 1fr; }
-}
-
 /* --- site nav --- */
 .nav-toggle { display: none; }
 @media (max-width: 1024px) {

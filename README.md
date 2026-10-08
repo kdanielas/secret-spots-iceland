@@ -89,5 +89,3 @@ deploy de preview propio.
       `RECAPTCHA_SECRET_KEY` de Vercel por las del sitio
 - [ ] Dominio verificado en Resend y `CONTACT_FROM_EMAIL` con ese dominio, o el correo
       de la consulta se rechaza
-- [ ] `src/components/InquiryForm.astro` sigue siendo una maqueta que no envía nada;
-      el formulario que funciona es el de `/contact`
