@@ -211,7 +211,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-11);max-width:700px;margin:0 auto">
       <SectionHeading align="center" eyebrow="Questions" maxWidth="700px" data-reveal>
         <Fragment slot="title">Frequently Asked Questions</Fragment>
-        <Fragment slot="lead">Starter answers below — flag any that need a fact-check against your real policies before this goes live.</Fragment>
+        <Fragment slot="lead">The things travellers ask us most before booking a private tour. If yours isn&rsquo;t here, the full FAQ covers more — or just send us a message.</Fragment>
       </SectionHeading>
       <div data-reveal style="display:flex;flex-direction:column;width:100%">
         {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
