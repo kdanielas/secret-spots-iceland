@@ -29,7 +29,7 @@ const SERVICES = [
 ---
 
 <Layout title="Custom Iceland Private Tours & Trip Planning | Secret Spots" description="From custom itineraries to accommodation recommendations and packing guides — Luke handles every detail of your Iceland trip. Private tours, fully tailored to you." active="How it works">
-  <div class="how-hero-pad" style="padding-bottom:var(--space-8)">
+  <div class="how-pad-x" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:329px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
@@ -90,7 +90,7 @@ const SERVICES = [
     </div>
   </section>
 
-  <section class="panel-py" style="background:var(--surface-page);padding-left:var(--space-9);padding-right:var(--space-9);display:flex;flex-direction:column;gap:var(--space-9);align-items:center;text-align:center">
+  <section class="panel-py how-pad-x" style="background:var(--surface-page);display:flex;flex-direction:column;gap:var(--space-9);align-items:center;text-align:center">
     <div style="display:flex;gap:4px">
       {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
     </div>
@@ -108,7 +108,7 @@ const SERVICES = [
 </Layout>
 
 <style>
-  .how-hero-pad { padding-left: var(--space-9); padding-right: var(--space-9); }
+  .how-pad-x { padding-left: var(--space-9); padding-right: var(--space-9); }
   .how-row { padding: var(--space-11) var(--space-9); display: flex; align-items: center; justify-content: center; }
   .how-row-inner { display: flex; align-items: center; gap: var(--space-11); max-width: 1200px; width: 100%; }
 
@@ -137,7 +137,7 @@ const SERVICES = [
   }
   @media (max-width: 640px) {
     .how-row { padding: var(--space-9) var(--space-6); }
-    .how-hero-pad { padding-left: var(--space-6); padding-right: var(--space-6); }
+    .how-pad-x { padding-left: var(--space-6); padding-right: var(--space-6); }
     .how-it-works-hero-title { font-size: 2rem !important; }
   }
 </style>
