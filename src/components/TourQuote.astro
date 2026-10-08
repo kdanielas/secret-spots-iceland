@@ -1,0 +1,23 @@
+---
+import Icon from './Icon.astro';
+import type { TourReview } from '../data/tours';
+
+interface Props {
+  review: TourReview;
+}
+
+const { review } = Astro.props;
+---
+
+<section class="tour-block">
+  <div class="quote-panel">
+    <div style="display:flex;gap:4px">
+      {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
+    </div>
+    <p style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"{review.quote}"</p>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+      <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">{review.name}</span>
+      <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">{review.type}</span>
+    </div>
+  </div>
+</section>

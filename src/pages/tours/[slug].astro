@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
+import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import TourChecklist from '../../components/TourChecklist.astro';
+import TourInfoBar from '../../components/TourInfoBar.astro';
+import TourItinerary from '../../components/TourItinerary.astro';
+import TourQuote from '../../components/TourQuote.astro';
+import TourReviewCarousel from '../../components/TourReviewCarousel.astro';
+import TourRow from '../../components/TourRow.astro';
+import { tourPageSchema } from '../../lib/tour';
+import { TOURS, type Tour } from '../../data/tours';
+import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
+
+export function getStaticPaths() {
+  return TOURS.map((tour) => ({ params: { slug: tour.slug }, props: { tour } }));
+}
+
+interface Props {
+  tour: Tour;
+}
+
+const { tour } = Astro.props;
+const { whoFor } = tour;
+
+const schema = await tourPageSchema(Astro.url.pathname, {
+  name: tour.name,
+  description: tour.intro,
+  heroImage: tour.hero.image,
+  duration: tour.stats[0].label,
+  highlights: tour.highlights.map((h) => h.title),
+});
+
+const headingStyle = 'font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0';
+const leadStyle = 'font:var(--type-lead);color:var(--text-body);margin:0';
+---
+
+<Layout
+  title={tour.metaTitle}
+  description={tour.metaDescription}
+  active="Tours"
+  image={tour.hero.image}
+  imageAlt={tour.hero.alt}
+  schema={schema}
+  hideContactPanel
+  footerStyle="margin:0;border:none;border-radius:0"
+>
+  <Hero
+    framedImage={tour.hero.image}
+    framedImageAlt={tour.hero.alt}
+    subtitle="Private Tour & Photography Experience with a Local Guide"
+    primaryCta=""
+    secondaryCta=""
+  >
+    <Fragment slot="title">{tour.name}</Fragment>
+    <TourInfoBar stats={tour.stats} availabilityHref={tour.availabilityHref} />
+  </Hero>
+
+  <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: tour.name }]} />
+
+  {tour.expect.image ? (
+    <TourRow image={tour.expect.image}>
+      <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">{tour.expect.heading}</h2>
+        <p style="font:var(--type-lead);color:#081824;margin:0">{tour.intro}</p>
+      </div>
+      <TourChecklist items={tour.expect.items} />
+      <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">How It Works</Button>
+    </TourRow>
+  ) : (
+    <section class="tour-block tour-block-pb-lg">
+      <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-7);align-items:center">
+        <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center">
+          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">{tour.expect.heading}</h2>
+          <p style="font:var(--type-lead);color:#081824;margin:0">{tour.intro}</p>
+        </div>
+        <TourChecklist items={tour.expect.items} />
+        <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">How It Works</Button>
+      </div>
+    </section>
+  )}
+
+  <HighlightsCarousel title={tour.highlightsHeading} highlights={tour.highlights} />
+
+  {tour.itinerary ? <TourItinerary heading={tour.itinerary.heading} days={tour.itinerary.days} /> : null}
+
+  {'iconItems' in whoFor ? (
+    <section class="tour-block who-for-section">
+      <div style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">{whoFor.heading}</h2>
+        <div class="who-for-grid">
+          {whoFor.iconItems.map((item) => (
+            <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:center;text-align:center">
+              <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+                <Icon name={item.icon} size={24} color="var(--blue-500)" />
+              </span>
+              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : (
+    <TourRow image={whoFor.image}>
+      <h2 style={headingStyle}>{whoFor.heading}</h2>
+      <div style="display:flex;flex-direction:column;width:100%">
+        {whoFor.items.map((item) => (
+          <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
+            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+          </div>
+        ))}
+      </div>
+    </TourRow>
+  )}
+
+  {tour.narrative ? (
+    <TourRow image={tour.narrative.image} align={null}>
+      <h2 style={headingStyle}>{tour.narrative.heading}</h2>
+      {tour.narrative.paragraphs.map((p) => <p style={leadStyle}>{p}</p>)}
+    </TourRow>
+  ) : null}
+
+  {tour.reviews.length > 1
+    ? <TourReviewCarousel reviews={tour.reviews} />
+    : <TourQuote review={tour.reviews[0]} />}
+
+  <TourRow image={tour.photography.image} width={900} style="margin-bottom:var(--space-8)">
+    <h2 style={headingStyle}>{tour.photography.heading}</h2>
+    {tour.photography.paragraphs.map((p) => <p style={leadStyle}>{p}</p>)}
+    {tour.photography.cta ? (
+      <Button variant="outline" href={tour.photography.cta.href} iconAfter="arrow-right">{tour.photography.cta.label}</Button>
+    ) : null}
+  </TourRow>
+
+  <TourCtaPanel
+    title={tour.cta.title}
+    lead={tour.cta.lead}
+    cta={tour.cta.label}
+    image={ctaImg}
+    imageAlt={tour.cta.imageAlt}
+  />
+</Layout>
+
+<style>
+  /* Golden Circle only: it stacks a centred checklist and an icon grid instead of
+     the image rows, so both need their own block padding. Scoped here on purpose —
+     these have to outrank the global .tour-block padding shorthand. */
+  .tour-block-pb-lg { padding-bottom: var(--panel-py); }
+  .who-for-section { padding-top: var(--section-py); padding-bottom: var(--section-py); }
+  .who-for-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-9); }
+  @media (max-width: 1024px) {
+    .tour-block-pb-lg { padding-bottom: var(--space-11); }
+    .who-for-section { padding-top: var(--space-12); padding-bottom: var(--space-12); }
+    .who-for-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .tour-block-pb-lg { padding-bottom: var(--space-9); }
+    .who-for-section { padding-top: var(--space-10); padding-bottom: var(--space-10); }
+    .who-for-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+import Icon from './Icon.astro';
+import type { TourReview } from '../data/tours';
+
+interface Props {
+  reviews: TourReview[];
+}
+
+const { reviews } = Astro.props;
+---
+
+<section class="tour-block">
+  <div class="review-carousel quote-panel">
+    <div style="display:flex;gap:4px">
+      {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
+    </div>
+    <p class="review-quote" style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"{reviews[0].quote}"</p>
+    <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
+      <span class="review-name" style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">{reviews[0].name}</span>
+      <span class="review-type" style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">{reviews[0].type}</span>
+    </div>
+    <div style="display:flex;gap:var(--space-4)">
+      <button type="button" class="testimonial-arrow" data-dir="prev" aria-label="Previous review">
+        <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
+      </button>
+      <button type="button" class="testimonial-arrow" data-dir="next" aria-label="Next review">
+        <Icon name="arrow-right" size={18} />
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: var(--cream-50);
+    color: var(--ink-900);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-control);
+  }
+  .testimonial-arrow:hover { background: var(--cream-100); }
+  .testimonial-arrow:active { transform: var(--press-scale); }
+</style>
+
+<script define:vars={{ REVIEWS: reviews }}>
+  const carousel = document.querySelector('.review-carousel');
+  if (carousel) {
+    const quoteEl = carousel.querySelector('.review-quote');
+    const nameEl = carousel.querySelector('.review-name');
+    const typeEl = carousel.querySelector('.review-type');
+    const arrows = carousel.querySelectorAll('.testimonial-arrow');
+    let index = 0;
+    let autoTimer;
+
+    // lock the quote's height to the tallest review so switching never
+    // resizes the card (re-measured on resize since wrapping changes with width)
+    function lockQuoteHeight() {
+      const original = quoteEl.textContent;
+      quoteEl.style.minHeight = '';
+      let max = 0;
+      REVIEWS.forEach((r) => {
+        quoteEl.textContent = `"${r.quote}"`;
+        max = Math.max(max, quoteEl.getBoundingClientRect().height);
+      });
+      quoteEl.textContent = original;
+      quoteEl.style.minHeight = `${max}px`;
+    }
+
+    function render() {
+      quoteEl.textContent = `"${REVIEWS[index].quote}"`;
+      nameEl.textContent = REVIEWS[index].name;
+      typeEl.textContent = REVIEWS[index].type;
+    }
+
+    function next() {
+      index = (index + 1) % REVIEWS.length;
+      render();
+    }
+
+    function startAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(next, 7000);
+    }
+
+    arrows.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.dir === 'prev') {
+          index = (index - 1 + REVIEWS.length) % REVIEWS.length;
+        } else {
+          index = (index + 1) % REVIEWS.length;
+        }
+        render();
+        startAuto();
+      });
+    });
+
+    // The script used to sit at the end of the page, so the first measurement
+    // happened with the whole document laid out. It now renders next to the
+    // carousel, so wait for the parse to finish before measuring.
+    function start() {
+      lockQuoteHeight();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(lockQuoteHeight);
+      }
+      startAuto();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', start);
+    } else {
+      start();
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(lockQuoteHeight, 150);
+    });
+  }
+</script>

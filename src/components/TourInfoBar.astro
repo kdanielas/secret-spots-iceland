@@ -1,0 +1,55 @@
+---
+import Button from './Button.astro';
+import Icon from './Icon.astro';
+import type { TourStat } from '../data/tours';
+
+interface Props {
+  stats: TourStat[];
+  availabilityHref: string;
+}
+
+const { stats, availabilityHref } = Astro.props;
+---
+
+<div class="tour-info-bar">
+  <div class="tour-info-bar-stats">
+    {stats.map((s, i) => (
+      <>
+        {i > 0 ? <span aria-hidden="true" class="tour-info-bar-dot"></span> : null}
+        <div style="display:flex;align-items:center;gap:var(--space-4)">
+          <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <Icon name={s.icon} size={20} color="var(--text-heading)" />
+          </span>
+          <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
+            <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
+            <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+          </div>
+        </div>
+      </>
+    ))}
+  </div>
+  <Button variant="dark" href={availabilityHref} iconAfter="arrow-right">Check Availability</Button>
+</div>
+
+<style>
+  .tour-info-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-7);
+    background: var(--cream-50);
+    border-radius: 100px;
+    padding: var(--space-5) var(--space-7);
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
+  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
+
+  @media (max-width: 768px) {
+    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
+    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
+    .tour-info-bar-dot { display: none; }
+  }
+</style>

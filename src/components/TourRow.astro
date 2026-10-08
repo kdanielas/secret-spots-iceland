@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { TourImage } from '../data/tours';
+
+interface Props {
+  image: TourImage;
+  /** Rendered width handed to <Image>; the photography row ships a larger one. */
+  width?: number;
+  /** align-items for the text column. The narrative row leaves it unset (stretch). */
+  align?: string | null;
+  class?: string;
+  style?: string;
+}
+
+const { image, width = 700, align = 'flex-start', class: className, style } = Astro.props;
+const textColStyle = [
+  'flex:1',
+  'display:flex',
+  'flex-direction:column',
+  'gap:var(--space-7)',
+  'max-width:600px',
+  ...(align ? [`align-items:${align}`] : []),
+].join(';');
+---
+
+<section class:list={['tour-block', 'tour-block-row', className]} style={style}>
+  <div class="tour-row">
+    <div
+      class="tour-row-media media-frame"
+      style={`flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:${image.ratio}`}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={width}
+        quality={80}
+        loading="lazy"
+        style="width:100%;height:100%;object-fit:cover"
+      />
+    </div>
+    <div style={textColStyle}>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
+     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
+  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
+
+  @media (max-width: 1024px) {
+    .tour-row { gap: var(--space-8); }
+    .tour-row-media { flex-basis: 320px !important; }
+  }
+  @media (max-width: 768px) {
+    .tour-row { flex-direction: column; align-items: stretch; }
+    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
+  }
+</style>

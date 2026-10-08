@@ -98,6 +98,16 @@
   .quote-panel { padding: var(--space-9) var(--space-7); }
 }
 
+/* Tour page section shell. Issue #42: the six tour pages were one template typed
+   out six times, and this padding travelled with every copy. Now that the pages
+   share a single route, the class is global so the sections living in the route
+   and the ones living in TourRow/TourItinerary/TourQuote get the same padding
+   without each Astro scope redeclaring it. */
+.tour-block { padding: var(--space-8); }
+@media (max-width: 768px) {
+  .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
+}
+
 /* Blog article shell. Was duplicated unchanged in ten blog pages, none of them
    with a media query, so the 64/96 block padding never shrank either. */
 .blog-article { padding-top: var(--space-11); padding-bottom: var(--panel-py); }
