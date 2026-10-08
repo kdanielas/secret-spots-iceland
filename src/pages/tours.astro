@@ -2,14 +2,59 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 import Button from '../components/Button.astro';
 import Icon from '../components/Icon.astro';
+import IconChip from '../components/IconChip.astro';
+import TourListingCard from '../components/TourListingCard.astro';
 
 import guideVideoUrl from '../assets/images/hidden-waterfall-canyon-hiker-iceland.mp4?url';
-import { TOURS, contactHref, formatPrice } from '../data/tours';
+import jeepImg from '../assets/images/jeep.webp';
+import { DAY_TOURS, MULTI_DAY_TOURS } from '../data/tours';
 
-// Medición (#86): slug del tour al que lleva una tarjeta, para tour_name.
-const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')[2] : undefined);
+/**
+ * Lo que hace distinto al tour, tal cual lo decía /iceland-photography-tours
+ * (#14): /tours sustituye a esa URL, así que el texto tiene que venirse con
+ * ella. El diseño cambia; la copia, no.
+ */
+const WHY = [
+  {
+    icon: 'clock',
+    title: 'No Fixed Itineraries',
+    description:
+      'Every tour is built around your group, your pace, and what the weather and light make possible that day. Want to stay longer at a location? We stay. Want to add a stop? We adapt.',
+  },
+  {
+    icon: 'map-pin',
+    title: 'Local Knowledge',
+    description:
+      'Nearly two decades exploring Iceland means knowing where to go, when to go, and how to avoid the crowds. Secret waterfalls, hidden canyons, alternative viewpoints, perfect light timing — this is the kind of knowledge that only comes from years of living here.',
+  },
+  {
+    icon: 'user',
+    title: 'Private & Customizable',
+    description:
+      "Just your group — no strangers, no crowded buses, no compromises. Whether you're a couple, family, or group of friends, the experience is designed exclusively for you.",
+  },
+  {
+    icon: 'shield-check',
+    title: 'Flexibility & Safety',
+    description:
+      "Weather changes? The itinerary changes. Roads are closed? There's a plan B. Luke's expertise navigating Iceland's roads and conditions — including remote F-roads in a heavy-duty 4x4 — means your adventure is always safe and optimized for the best possible experience.",
+  },
+  {
+    icon: 'camera',
+    title: 'Professional Photography Included',
+    description:
+      "Luke is a professional photographer with nearly 20 years shooting Iceland's landscapes. He doesn't just guide you to incredible locations — he helps you capture them. Go home with stunning shots, not just memories.",
+  },
+  {
+    icon: 'heart',
+    title: 'Restaurant & Accommodation Recommendations',
+    description:
+      'From cosy local spots to hidden gems only locals know about — Luke shares recommendations based on years of living in Iceland. No tourist traps, just honest advice about where to eat, where to stay, and what to experience beyond the standard route.',
+  },
+];
 ---
 
 <Layout title="Iceland Photography Tours — Shoot Hidden Iceland with a Pro" description="Private photography tours with Luke, a pro photographer with 20 years in Iceland. Golden-hour timing, secret locations, all skill levels welcome. Small groups only." active="Tours">
@@ -29,32 +74,13 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   </div>
 
   <Section id="tours" tight style="padding-top:var(--space-7);scroll-margin-top:110px">
-    <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
-      <h2 class="sh-lg" style="color:var(--text-heading);margin:0;text-align:center">All Our Private Iceland Tours</h2>
-      <div class="grid-tours">
-        {TOURS.map((t) => (
-          <div id={t.slug} class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);scroll-margin-top:110px">
-            <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
-              <div data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="position:relative;aspect-ratio:2/1;overflow:hidden">
-                <Image src={t.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-                <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)"></div>
-                <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
-                <span style="position:absolute;bottom:16px;right:16px;color:var(--cream-50);text-align:right">
-                  <span style="display:block;font:400 13px/1 var(--font-sans);opacity:.9;margin-bottom:4px">From</span>
-                  <span style="display:block;font:700 22px/1 var(--font-sans)">{formatPrice(t.priceUsd)}<span style="font:400 13px/1 var(--font-sans)"> /group</span></span>
-                </span>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:0 var(--space-6)">
-                <h3 style="font:700 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">{t.title}</h3>
-                <p style="font:400 16px/1.5 var(--font-sans);color:var(--text-heading);margin:0">{t.description}</p>
-              </div>
-            </a>
-            <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding-top:var(--space-3);margin-top:auto;padding-left:var(--space-6);padding-right:var(--space-6)">
-              <a href={contactHref(t.slug)} class="cta-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
-              <a href={t.href} class="info-pill" aria-label={`More info about the ${t.title} tour`} data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Tour details<Icon name="chevron-right" size={16} /></a>
-            </div>
-          </div>
-        ))}
+    <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+      <SectionHeading align="center" size="lg" maxWidth="760px">
+        <Fragment slot="title">Private Iceland Day Tours</Fragment>
+        <Fragment slot="lead">Four private day tours out of Reykjavík, each one just your group — volcanic coastlines, waterfalls, geothermal fields and the Highlands, with professional photography guidance throughout.</Fragment>
+      </SectionHeading>
+      <div class="grid-tour-cards">
+        {DAY_TOURS.map((t) => <TourListingCard tour={t} />)}
       </div>
     </div>
   </Section>
@@ -66,8 +92,55 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:center;text-align:center">
         <h2 class="sh-lg" style="color:var(--text-heading);margin:0">Our photography guide &amp; tips</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</p>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">Every private Iceland tour can become a photography-focused experience. Luke helps guests capture the best moments — the itinerary is shaped around the weather, the light, and what you actually want to see, with a local guide who knows where the crowds aren't.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="chevron-right">See Our Photography Guide</Button>
+      </div>
+    </div>
+  </Section>
+
+  <Section>
+    <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+      <SectionHeading align="center" size="lg" maxWidth="760px">
+        <Fragment slot="title">Multi-Day Private Tours of Iceland</Fragment>
+        <Fragment slot="lead">Three or six days with the same guide, the same vehicle and no fixed schedule — the South Coast at a relaxed pace, or a full loop of the island with the Highlands included.</Fragment>
+      </SectionHeading>
+      <div class="grid-tour-cards">
+        {MULTI_DAY_TOURS.map((t) => <TourListingCard tour={t} />)}
+      </div>
+    </div>
+  </Section>
+
+  <Section tone="alt">
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+      <SectionHeading align="center" eyebrow="Why travel with Luke" size="lg" maxWidth="820px">
+        <Fragment slot="title">What makes this one-of-a-kind Iceland photo tour so special?</Fragment>
+      </SectionHeading>
+      <div class="grid-why">
+        {WHY.map((w) => (
+          <div style="display:flex;gap:var(--space-5);align-items:flex-start">
+            <IconChip name={w.icon} size={44} />
+            <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <h3 style="font:700 17px/1.3 var(--font-sans);color:var(--text-heading);margin:0">{w.title}</h3>
+              <p style="font:400 15px/1.6 var(--font-sans);color:var(--text-body);margin:0">{w.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+
+  <Section>
+    <div data-reveal class="grid-1-1-gap5 text-first-mobile">
+      <div class="media-frame" style="border-radius:32px;overflow:hidden;aspect-ratio:4/3">
+        <Image src={jeepImg} alt="Luke's heavy-duty 4x4 fording a glacial river in the Icelandic highlands" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
+        <SectionHeading eyebrow="The vehicles" size="lg">
+          <Fragment slot="title">Experience Iceland like never before – Join the ultimate Iceland private tour!</Fragment>
+        </SectionHeading>
+        <p style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:0">During our unforgettable Iceland photography tour, I focus on your comfort and adventure by using powerful 4x4 trucks. These vehicles are built to handle Iceland's wild terrain, allowing us to reach the most spectacular Iceland photography locations that are often out of reach for regular tourists.</p>
+        <p style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:0">These aren't just any vehicles — they're a gateway to remote nature, volcanic landscapes, and hidden waterfalls that you'll discover on this one-of-a-kind photo tour Iceland. If you're traveling in a group larger than six people, I also offer a customized van that ensures everyone enjoys the journey in comfort during our photography tours Iceland.</p>
+        <Button variant="outline" href="/our-vehicles" iconAfter="chevron-right">Our Vehicles</Button>
       </div>
     </div>
   </Section>
@@ -84,15 +157,18 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
       </div>
     </div>
   </section>
+
+  <Section tight>
+    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7);align-items:center;text-align:center;max-width:760px;margin:0 auto">
+      <h2 class="sh-lg" style="color:var(--text-heading);margin:0">Ready to Plan Your Private Iceland Tour?</h2>
+      <p style="font:var(--type-lead);color:var(--text-body);margin:0">Whether you have 7 hours or 6 days, whether you want to see iconic landmarks or hidden gems, or a combination of both — we'll create the perfect private Iceland experience for you.</p>
+      <p style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:0">Tell Luke's team your travel dates, group size, and what you're dreaming of. We'll get back to you within 24 hours with ideas tailored to your trip.</p>
+      <Button variant="dark" href="/contact" iconAfter="arrow-right">Contact Luke &amp; Start Planning</Button>
+    </div>
+  </Section>
 </Layout>
 
 <style>
-  .card-clickable { transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
-  .cta-pill:hover { background: var(--action-dark-bg-hover); }
-  .info-pill:hover { color: var(--blue-500); }
-  .card-clickable:active { transform: var(--press-scale); }
-
   @media (max-width: 768px) {
     .tours-hero-title { font-size: 2rem !important; }
   }
