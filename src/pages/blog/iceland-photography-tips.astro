@@ -33,8 +33,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 ---
 
 <Layout
-  title="Iceland Photography Tips | Secret Spots Iceland"
-  description="When to visit for the photography you're after, what to pack, and the mistakes most visitors make with their cameras in Iceland's unpredictable conditions."
+  title="Iceland Photography Tips"
+  description="A local photographer's guide to Iceland's seasons, light and gear — plus the mistakes most visitors make with their cameras."
   active="Blog"
   image={heroImg}
   imageAlt="Luke, local guide and photographer, exploring Iceland's highlands"
@@ -137,8 +137,3 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
     </div>
   </article>
 </Layout>
-
-<style>
-  .blog-article { padding-top: var(--space-11); padding-bottom: var(--space-13); }
-  .blog-article-col { max-width: 720px; margin: 0 auto; }
-</style>

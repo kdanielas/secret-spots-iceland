@@ -11,6 +11,7 @@ import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
 import heroImg from '../../assets/images/Web images/golden-circle/reindeer-herd-snow.jpg';
 import expectImg from '../../assets/images/Web images/golden-circle/gullfoss-golden-circle-iceland.jpg';
 import photographyImg from '../../assets/images/Web images/golden-circle/bruafoss-golden-circle-iceland-friends.jpg';
+import TourCtaPanel from '../../components/TourCtaPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/Web images/golden-circle/thingvellir-national-park.webp';
@@ -118,7 +119,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <Breadcrumbs trail={[{ label: 'Tours', href: '/tours' }, { label: TOUR_NAME }]} />
 
-  <section class="tour-block" style="padding-bottom:var(--space-13)">
+  <section class="tour-block tour-block-pb-lg">
     <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-7);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center">
         <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Golden Circle Tour</h2>
@@ -155,7 +156,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   </section>
 
   <section class="tour-block">
-    <div class="review-carousel" style="background:#dbd6c5;border-radius:32px;padding:var(--space-13) var(--space-8);width:100%;display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+    <div class="review-carousel quote-panel">
       <div style="display:flex;gap:4px">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
@@ -177,7 +178,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
     <div class="tour-row">
-      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;aspect-ratio:590/886">
+      <div class="tour-row-media" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
         <Image src={photographyImg} alt="Two women posing by the Brúarfoss waterfall on the Golden Circle route" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
@@ -189,34 +190,37 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <section style="background:#081824;border-radius:32px 32px 0 0;padding:var(--space-8)">
-    <div style="position:relative;border-radius:24px;overflow:hidden;background:var(--cream-50);min-height:520px;display:flex;align-items:center;padding:var(--space-13)">
-      <Image src={ctaImg} alt="Family enjoying a geothermal steam vent in North Iceland" width={1600} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%" />
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(251,246,240,.97) 40%, rgba(251,246,240,.15) 90%)"></div>
-      <div style="position:relative;display:flex;flex-direction:column;gap:var(--space-9);align-items:flex-start;max-width:600px">
-        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your Golden Circle Tour?</h2>
-          <p style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0">This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else.</p>
-        </div>
-        <Button variant="primary" href="/contact">Book your Tour</Button>
-      </div>
-    </div>
-  </section>
+  <TourCtaPanel
+    title="Ready to book your Golden Circle Tour?"
+    lead="This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else."
+    cta="Book your Tour"
+    image={ctaImg}
+    imageAlt="Family enjoying a geothermal steam vent in North Iceland"
+  />
 </Layout>
 
 <style>
   .tour-block { padding: var(--space-8); }
   .who-for-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-9); }
+  /* Overrides of .tour-block's padding shorthand have to be scoped like it is —
+     a global utility loses to Astro's [data-astro-cid] specificity. Values come
+     from the shared tokens so only the breakpoints repeat. */
+  .tour-block-pb-lg { padding-bottom: var(--panel-py); }
   .who-for-section { padding-top: var(--section-py); padding-bottom: var(--section-py); }
   @media (max-width: 1024px) {
     .who-for-grid { grid-template-columns: repeat(2, 1fr); }
+    .tour-block-pb-lg { padding-bottom: var(--space-11); }
     .who-for-section { padding-top: var(--space-12); padding-bottom: var(--space-12); }
   }
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .who-for-grid { grid-template-columns: 1fr; }
+    .tour-block-pb-lg { padding-bottom: var(--space-9); }
     .who-for-section { padding-top: var(--space-10); padding-bottom: var(--space-10); }
   }
   .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
+     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
+  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
 
   .tour-info-bar {
     display: flex;
@@ -239,12 +243,10 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   }
   @media (max-width: 768px) {
     .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; }
+    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
     .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
     .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
     .tour-info-bar-dot { display: none; }
-  }
-  @media (max-width: 640px) {
     .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
   }
 

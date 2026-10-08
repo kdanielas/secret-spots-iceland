@@ -36,8 +36,11 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
     {framedVideo ? (
       <video autoplay muted loop playsinline preload="auto" poster={posterSrc} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
         {/* desktop/tablet only — on mobile no <source> matches, so the browser
-           never requests the video and just shows the poster as a still image */}
-        <source src={framedVideo} media="(min-width: 641px)" />
+           never requests the video and just shows the poster as a still image.
+           A `media` attribute can't be written mobile-first, so this is the
+           768px breakpoint read from the other side (inclusive at exactly
+           768px, where loading the video is harmless). */}
+        <source src={framedVideo} media="(min-width: 768px)" />
       </video>
     ) : (
       <img src={posterSrc} alt={framedImageAlt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
@@ -78,7 +81,7 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
   @media (prefers-reduced-motion: reduce) {
     .hero-anim { opacity: 1; transform: none; animation: none; }
   }
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .home-hero-wrap { padding-bottom: var(--space-6) !important; }
     /* a fixed 85vh floor leaves a lot of empty image above short content
        (no video, no buttons, a one-line title) on pages like FAQ — but

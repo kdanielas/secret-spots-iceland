@@ -31,22 +31,37 @@ const SECTIONS = [
     title: '5. Sharing your information',
     body: [
       "We don't share your information with third parties, except where necessary to deliver your tour (for example, a partner vehicle or accommodation provider you've asked us to coordinate with) or where required by law.",
+      'We also use service providers that process data on our behalf under contract. The relevant ones for this website are Google (website measurement and spam protection, described in sections 7 and 8) and Vercel, which hosts the site and processes server logs. We do not sell or share your personal information for cross-context behavioural advertising.',
     ],
   },
   {
     title: '6. Your rights',
     body: [
       'You can ask us at any time what information we hold about you, ask us to correct it, or ask us to delete it. To do so, contact us using the details below.',
+      'You also have the right to object to or ask us to restrict processing, to receive a copy of your data in a portable format, and to withdraw consent at any time where we rely on it (see section 7 for cookies). Withdrawing consent does not affect processing that already took place.',
+      'If you are in Iceland or the EEA and believe we have handled your information improperly, you can lodge a complaint with the Icelandic Data Protection Authority (Persónuvernd, personuvernd.is).',
     ],
   },
   {
-    title: '7. Cookies',
+    title: '7. Cookies, analytics and measurement',
     body: [
-      'This website may use basic cookies required for it to function correctly. It does not currently use third-party tracking or advertising cookies.',
+      'This website uses cookies and similar technologies. Strictly necessary cookies are the ones the site needs to work and to stay secure; these are set without asking, because the site cannot function without them. Everything else — the measurement and analytics described below — is only loaded once you have given your consent.',
+      'For measurement we use two Google services. Google Tag Manager loads and manages our measurement tags. Google Analytics 4 tells us how visitors find and use the site: pages viewed, approximate location derived from your IP address, device and browser type, and interactions such as which tour pages you open, how far you scroll, which FAQ questions you expand, and whether you submit the contact form. Google Analytics stores cookies in your browser and assigns a randomly generated identifier to your device. We use this to understand traffic in aggregate, not to identify you by name, and we do not use advertising, remarketing or cross-site tracking cookies.',
+      'Legal basis: strictly necessary cookies rely on our legitimate interest in operating a secure, working website (Article 6(1)(f) GDPR). Google Tag Manager, Google Analytics and the cookies they set rely on your consent (Article 6(1)(a) GDPR, together with the consent requirement in the Icelandic Electronic Communications Act).',
+      'Transfers outside the EEA: Google Tag Manager and Google Analytics are provided to us by Google Ireland Limited, and your data may be transferred to Google LLC in the United States and processed there. Those transfers are covered by the European Commission\u2019s Standard Contractual Clauses and by Google LLC\u2019s certification under the EU\u2013US Data Privacy Framework.',
+      'Changing or withdrawing your consent: use the \u201cCookie settings\u201d link in the footer of any page to reopen the consent choices and change or withdraw what you agreed to. You can also delete or block cookies in your browser settings, or install Google\u2019s browser add-on to opt out of Google Analytics across all sites. Withdrawing consent stops any further analytics collection; it does not delete data already collected, which you can ask us to erase under section 6.',
+      'A full inventory of every cookie this site uses \u2014 its name, who provides it, what it is for and how long it lasts \u2014 is on our Cookie Policy page, linked in the footer.',
     ],
   },
   {
-    title: '8. Contact us',
+    title: '8. Spam protection on our contact form',
+    body: [
+      'Our contact form is protected by Google reCAPTCHA, which checks whether a submission comes from a person rather than an automated script. To make that check, reCAPTCHA collects your IP address, information about your browser and device, and your interaction with the page, and sends it to Google. The form cannot be submitted without it.',
+      'We rely on our legitimate interest in keeping the form usable and free of spam and abuse (Article 6(1)(f) GDPR). As with the services in section 7, data may be transferred to Google LLC in the United States under the safeguards described there. Google\u2019s handling of this data is governed by the Google Privacy Policy and the reCAPTCHA Terms of Service.',
+    ],
+  },
+  {
+    title: '9. Contact us',
     body: [
       'Questions about this policy or your information? Reach us at +354 845 4057 or by post at Tangabryggja 18, 110 Reykjavík, Iceland.',
     ],
@@ -54,12 +69,12 @@ const SECTIONS = [
 ];
 ---
 
-<Layout title="Privacy Policy | Secret Spots Iceland" description="Privacy policy for Secret Spots Iceland: how we collect, use and protect your personal information when you book a tour or get in touch with us." active="Contact us">
+<Layout title="Privacy Policy | Secret Spots" description="Privacy policy for Secret Spots Iceland: how we collect, use and protect your personal information when you book a tour or get in touch with us." active="Contact us">
   <section class="section-py container-pad">
     <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-4)">
         <h1 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Privacy Policy</h1>
-        <p style="font:var(--type-body-sm);color:var(--text-muted);margin:0">Last updated: September 2026</p>
+        <p style="font:var(--type-body-sm);color:var(--text-muted);margin:0">Last updated: October 2026</p>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">This is a starter privacy policy covering the contact form on this website. Have it reviewed by a qualified professional for your specific legal obligations before publishing the site.</p>
       </div>
       {SECTIONS.map((s) => (

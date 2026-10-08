@@ -191,7 +191,6 @@ const TOUR_OPTIONS = [
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
-  <script src="https://www.google.com/recaptcha/api.js" async defer is:inline></script>
   <section class="contact-hero" style="position:relative;overflow:hidden;background:#081824;padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
     <Image src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
     <div class="contact-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,24,36,.78) 0%, rgba(8,24,36,.82) 100%)"></div>
@@ -344,7 +343,7 @@ const TOUR_OPTIONS = [
 
               <div style="margin-bottom:var(--space-7)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading);display:block;margin-bottom:8px">Verify you're not a robot <span class="req-mark">*</span></span>
-                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" id="recaptcha-widget"></div>
+                <div id="recaptcha-widget" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="min-height:78px"></div>
                 <span id="captcha-error" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
                 <p style="font:400 11px/1.4 var(--font-sans);color:var(--text-muted);margin:8px 0 0;max-width:380px">This is Google's public test key, which always passes — swap in your own reCAPTCHA site key and add server-side verification before this goes live.</p>
               </div>
@@ -369,20 +368,20 @@ const TOUR_OPTIONS = [
           <h1 style="font:400 2.5rem/1.2 var(--font-display);color:#E9E6DD;margin:0">Let's start planning your Secret Spots of Iceland adventure</h1>
           <p style="font:var(--type-body);color:#E9E6DD;margin:0;max-width:460px">Tell us your travel dates and what you'd love to discover — a private photography tour, a custom itinerary, or one tailored to your mobility needs.</p>
 
-          <div class="contact-bullets" style="display:flex;flex-wrap:nowrap;gap:var(--space-4);padding-top:var(--space-2);width:100%">
+          {/* Two-up at every width: the text column is 378px on desktop and the
+              viewport is 360px at the low end, so four across left ~76px per
+              label and wrapped the longest one over four or five lines. */}
+          <div class="contact-bullets" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6) var(--space-4);padding-top:var(--space-2);width:100%;max-width:460px">
             {[
               { icon: 'camera', label: 'Private photography tours' },
               { icon: 'mountain', label: 'Custom itineraries' },
               { icon: 'wheelchair', label: 'Accessible travel & limited mobility' },
               { icon: 'shield-check', label: 'Trusted by 300+ travelers' },
-            ].map((item, i, arr) => (
-              <>
-                <div class="contact-bullet" style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:0">
-                  <Icon name={item.icon} size={22} color="#E9E6DD" />
-                  <span style="font:400 12px/1.35 var(--font-sans);color:#E9E6DD">{item.label}</span>
-                </div>
-                {i < arr.length - 1 ? <span style="width:1px;align-self:stretch;flex:0 0 auto;background:rgba(233,230,221,.25)" /> : null}
-              </>
+            ].map((item) => (
+              <div class="contact-bullet" style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                <Icon name={item.icon} size={22} color="#E9E6DD" />
+                <span style="font:400 12px/1.35 var(--font-sans);color:#E9E6DD">{item.label}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -392,32 +391,31 @@ const TOUR_OPTIONS = [
 </Layout>
 
 <style>
-  /* mobile: form first and centered, text below — the form is the primary action here */
+  /* desktop: side by side, text on the left, form on the right (the form is
+     first in the DOM, so the columns are re-ordered rather than reflowed) */
   .contact-grid {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-10);
-    max-width: 720px;
-    margin: 0 auto;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-12);
   }
-  .contact-text { align-items: center; text-align: center; }
-  .contact-bullets { justify-content: center; }
-  .contact-bullet { align-items: center; }
+  .contact-form-card { order: 2; flex: 1.2; }
+  .contact-text { order: 1; flex: 0.8; align-items: flex-start; text-align: left; padding-top: var(--space-9); }
 
-  @media (min-width: 769px) {
-    /* desktop: side by side, text on the left, form on the right */
+  @media (max-width: 768px) {
+    /* mobile: form first and centered, text below — the form is the primary
+       action here, and DOM order already puts it first */
     .contact-grid {
-      flex-direction: row;
-      align-items: flex-start;
-      max-width: none;
-      margin: 0;
-      gap: var(--space-12);
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-10);
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .contact-form-card { order: 2; flex: 1.2; }
-    .contact-text { order: 1; flex: 0.8; align-items: flex-start; text-align: left; padding-top: var(--space-9); }
-    .contact-bullets { justify-content: flex-start; }
-    .contact-bullet { align-items: flex-start; }
+    .contact-form-card { order: 0; flex: 0 1 auto; }
+    .contact-text { order: 0; flex: 0 1 auto; align-items: center; text-align: center; padding-top: 0; }
+    .contact-bullets { margin-inline: auto; }
+    .contact-bullet { align-items: center; }
   }
 
   .req-mark { color: #b3261e; }
@@ -490,7 +488,7 @@ const TOUR_OPTIONS = [
     border-color: var(--ink-900);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .contact-field-row { grid-template-columns: 1fr !important; }
   }
 </style>
@@ -559,9 +557,34 @@ const TOUR_OPTIONS = [
   // google.com/recaptcha, and verify the token server-side, before this goes live.
   const captchaError = document.getElementById('captcha-error') as HTMLElement;
 
+  // The reCAPTCHA bundle is ~184 KB, so it stays off the critical path: the script
+  // is fetched the first time someone touches the form, then rendered explicitly.
+  const captchaHost = document.getElementById('recaptcha-widget');
+  let captchaRequested = false;
+
+  function loadRecaptcha() {
+    if (captchaRequested || !captchaHost) return;
+    captchaRequested = true;
+    (window as any).ssiRenderRecaptcha = () => {
+      (window as any).grecaptcha?.render(captchaHost, {
+        sitekey: captchaHost.dataset.sitekey,
+      });
+    };
+    const tag = document.createElement('script');
+    tag.src = 'https://www.google.com/recaptcha/api.js?render=explicit&onload=ssiRenderRecaptcha';
+    tag.async = true;
+    tag.defer = true;
+    document.head.appendChild(tag);
+  }
+
+  ['focusin', 'pointerdown'].forEach((evt) => {
+    form?.addEventListener(evt, loadRecaptcha, { once: true, passive: true });
+  });
+
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validateStep(step2)) return;
+    loadRecaptcha();
     const recaptchaResponse = (window as any).grecaptcha?.getResponse?.();
     if (!recaptchaResponse) {
       if (captchaError) captchaError.style.display = 'block';
