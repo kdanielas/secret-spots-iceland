@@ -12,6 +12,9 @@ dist/
 
 # editor/OS
 .DS_Store
+.claude/
+.vscode/
+.idea/
 
 # large source bundle (already extracted into design-system/)
 Secret Spots Iceland Design System.zip
