@@ -207,7 +207,13 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     <div class="container-1200" style="position:relative">
       <div class="contact-grid">
         <div data-reveal class="contact-form-card" style="width:100%;background:#F8F7F3;border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box">
-          <form id="contact-form" novalidate>
+          <form id="contact-form" action="/api/contact" method="post" novalidate>
+            {/* Honeypot (#21): no human sees or tabs into this, so anything in it
+                means a bot and the submission is dropped server-side. */}
+            <div class="contact-honeypot" aria-hidden="true">
+              <label for="contact-company">Company</label>
+              <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off" />
+            </div>
             <div class="form-progress" style="display:flex;align-items:center;gap:10px;margin-bottom:var(--space-8)">
               <div class="form-progress-step is-active" data-progress-dot="1" aria-current="step">
                 <span class="form-progress-dot">1</span>
@@ -373,10 +379,23 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
               <div style="display:flex;justify-content:flex-end">
                 <button type="submit" id="contact-submit" style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap;flex:0 0 auto">
-                  Send inquiry
+                  <span id="contact-submit-label">Send inquiry</span>
                   <Icon name="arrow-right" size={16} />
                 </button>
               </div>
+            </div>
+
+            {/* Outcome of the send (#21). Outside the two steps, because a sent
+                form hides step 2 and the message has to stay on screen. It is
+                announced when it changes, and takes focus so the fallback phone
+                and email are the next thing read out. */}
+            <div id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1" hidden>
+              <p id="form-status-message" style="margin:0"></p>
+              <p id="form-status-fallback" style="margin:8px 0 0" hidden>
+                You can also reach Luke directly at
+                <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a> or
+                <a href={BUSINESS.telephoneHref}>{BUSINESS.telephone}</a>.
+              </p>
             </div>
           </form>
         </div>
@@ -588,6 +607,36 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
   @media (max-width: 768px) {
     .contact-field-row { grid-template-columns: 1fr !important; }
   }
+
+  /* Honeypot: off-screen rather than display:none, since some bots skip hidden
+     fields. Never focusable, never announced (aria-hidden on the wrapper). */
+  .contact-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* Send outcome (#21). */
+  .form-status {
+    font: 400 14px/1.5 var(--font-sans);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: var(--space-6);
+  }
+  .form-status[data-state='ok'] {
+    background: #e7f4ec;
+    border: 1px solid #1e7c45;
+    color: #10492a;
+  }
+  .form-status[data-state='error'] {
+    background: #fdecea;
+    border: 1px solid #b3261e;
+    color: #8c1d18;
+  }
+  .form-status a { color: inherit; font-weight: 700; }
+  #contact-submit[disabled] { opacity: .65; cursor: progress; }
 </style>
 
 <script>
@@ -739,9 +788,39 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     form?.addEventListener(evt, loadRecaptcha, { once: true, passive: true });
   });
 
-  form?.addEventListener('submit', (e) => {
+  // Sending the inquiry (#21): POST to /api/contact, which verifies the reCAPTCHA
+  // token, re-validates every field and emails Luke. Nothing is claimed to the
+  // traveller until the endpoint confirms the email went out.
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const submitLabel = document.getElementById('contact-submit-label');
+  const status = document.getElementById('form-status');
+  const statusMessage = document.getElementById('form-status-message');
+  const statusFallback = document.getElementById('form-status-fallback');
+
+  const GENERIC_ERROR = 'We could not send your inquiry. Please try again in a moment.';
+
+  function showStatus(state: 'ok' | 'error', message: string) {
+    if (!status || !statusMessage) return;
+    status.dataset.state = state;
+    statusMessage.textContent = message;
+    // The phone and email are only worth offering when the form did not work.
+    if (statusFallback) statusFallback.hidden = state === 'ok';
+    status.hidden = false;
+    // Focus moves to the message either way: it is the outcome of what the
+    // traveller just did, and on an error the fallback phone and email are
+    // the next thing read out.
+    status.focus({ preventScroll: true });
+    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function setSending(sending: boolean) {
+    if (submitBtn) submitBtn.disabled = sending;
+    if (submitLabel) submitLabel.textContent = sending ? 'Sending…' : 'Send inquiry';
+  }
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!validateStep(step2)) return;
+    if (!form || !validateStep(step2)) return;
     loadRecaptcha();
     const recaptchaResponse = (window as any).grecaptcha?.getResponse?.();
     if (!recaptchaResponse) {
@@ -750,7 +829,33 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
       return;
     }
     if (captchaError) captchaError.style.display = 'none';
-    const btn = document.getElementById('contact-submit');
-    if (btn) btn.textContent = 'Thanks — Luke will reply within 24 hours';
+    if (status) status.hidden = true;
+    setSending(true);
+
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+      const data = await res.json().catch(() => ({}) as { error?: string });
+
+      if (!res.ok) {
+        // The token is single-use, so a retry needs a fresh tick of the box.
+        (window as any).grecaptcha?.reset?.();
+        setSending(false);
+        showStatus('error', (data as { error?: string }).error || GENERIC_ERROR);
+        return;
+      }
+
+      // Sent: the form goes away so nobody submits the same inquiry twice.
+      const tour = form.querySelector<HTMLSelectElement>('select[name="tour"]')?.value;
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: 'generate_lead', page_type: 'contacto', tour_name: tour });
+
+      if (step2) step2.style.display = 'none';
+      document.querySelector<HTMLElement>('.form-progress')?.remove();
+      showStatus('ok', 'Thanks — your inquiry is on its way. Luke will reply within 24 hours.');
+    } catch {
+      (window as any).grecaptcha?.reset?.();
+      setSending(false);
+      showStatus('error', GENERIC_ERROR);
+    }
   });
 </script>
