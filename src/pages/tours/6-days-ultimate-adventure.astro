@@ -14,7 +14,7 @@ import expectImg from '../../assets/images/Web images/6-days-ultimate-adventure/
 import whoForImg from '../../assets/images/Web images/6-days-ultimate-adventure/reykjanes-girl-photo.jpg';
 import completeExperienceImg from '../../assets/images/Web images/6-days-ultimate-adventure/helicopter-glacier-tour-iceland.jpg';
 import photographyImg from '../../assets/images/Web images/6-days-ultimate-adventure/landmannalaugar-guide.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import day1Img from '../../assets/images/Web images/6-days-ultimate-adventure/brimketill-reykjanes-natural-pool.jpg';
@@ -322,7 +322,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to book your Ultimate Iceland Adventure?"
     lead="This is not just a tour — it's a complete private Iceland experience designed for travellers who want to see everything, experience everything, and come home with unforgettable memories and professional photographs. Tell Luke's team your preferred dates and group size and we'll customize every detail of your Icelandic journey."

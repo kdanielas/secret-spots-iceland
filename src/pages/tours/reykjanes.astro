@@ -14,7 +14,7 @@ import anotherPlanetImg from '../../assets/images/reykjanes-piano-volcano-perfor
 import expectImg from '../../assets/images/reykjanes-volcano-girl-walking.jpg';
 import photographyImg from '../../assets/images/reykjanes-coastline-couple-shoot.jpg';
 import whoForImg from '../../assets/images/DSCF0305.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/reykjanes-coastline.jpg';
@@ -198,7 +198,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to book your Secret Reykjanes Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who crave real connection with nature, culture, and photography. Tell Luke's team your dates and group size and we'll take care of everything else."

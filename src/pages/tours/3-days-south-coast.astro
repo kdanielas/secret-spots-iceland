@@ -14,7 +14,7 @@ import anotherPlanetImg from '../../assets/images/Web images/3-days-south-coast/
 import expectImg from '../../assets/images/Web images/3-days-south-coast/south-coast-skogafoss-tour.jpg';
 import photographyImg from '../../assets/images/Web images/3-days-south-coast/south-coast-horse-skogafoss-tour.jpg';
 import whoForImg from '../../assets/images/Web images/3-days-south-coast/south-coast-family-tour.jpg';
-import TourCtaPanel from '../../components/TourCtaPanel.astro';
+import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/Web images/3-days-south-coast/south-coast-svartifoss-couple.jpg';
@@ -198,7 +198,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <TourCtaPanel
+  <ContactPanel
     href={contactHref(TOUR_SLUG)}
     title="Ready to book your 3 Days Ultimate South Coast Tour?"
     lead="This is not just a tour — it's a private Iceland experience designed for travellers who crave real connection with nature, culture, and photography. Tell Luke's team your preferred dates and group size and we'll take care of everything else."
