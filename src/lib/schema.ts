@@ -32,6 +32,7 @@ export function organizationNode(logoUrl: string): Node {
     logo: { '@type': 'ImageObject', url: logoUrl },
     image: logoUrl,
     telephone: BUSINESS.telephone,
+    email: BUSINESS.email,
     priceRange: BUSINESS.priceRange,
     taxID: BUSINESS.taxID,
     vatID: BUSINESS.vatID,

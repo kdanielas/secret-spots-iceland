@@ -20,7 +20,13 @@ const legal = [
   `Address: ${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland`,
   `Kennitala: ${BUSINESS.taxID}`,
   `VAT Number: ${BUSINESS.vatID}`,
-  BUSINESS.telephone,
+];
+// Phone and email as real links (#8). 88% of the traffic is mobile, and on the
+// old site these were the two most used contact routes — as plain text there is
+// nothing to tap. `data-ev` feeds the phone_click / email_click conversions.
+const contact = [
+  { label: 'Phone', href: BUSINESS.telephoneHref, text: BUSINESS.telephone, ev: 'phone_click' },
+  { label: 'Email', href: `mailto:${BUSINESS.email}`, text: BUSINESS.email, ev: 'email_click' },
 ];
 // Legal links (#27). GDPR wants the privacy and cookie information reachable
 // from every page. The cookie settings control is a component because it has
@@ -52,6 +58,21 @@ const legalLinks = [
         <span style="font:700 15px/1.2 var(--font-sans);color:var(--text-on-dark)">Secretspotsiceland EHF</span>
         {legal.map((l) => (
           <span style="font:var(--type-body-xs);color:var(--text-on-dark);opacity:.85">{l}</span>
+        ))}
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-7)">
+      <span style="font:600 13px/1 var(--font-sans);letter-spacing:.04em;text-transform:uppercase;color:var(--text-on-dark);opacity:.5">Contact</span>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:var(--space-3)">
+        {contact.map((c) => (
+          <a
+            href={c.href}
+            class="footer-nav-link"
+            data-ev={c.ev}
+            data-ev-text={c.label}
+            style="font:600 14px/1.2 var(--font-sans);color:var(--text-on-dark);text-decoration:none;opacity:.85;word-break:break-word"
+          >{c.text}</a>
         ))}
       </div>
     </div>
