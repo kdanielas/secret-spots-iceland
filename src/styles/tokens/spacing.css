@@ -8,6 +8,9 @@
 --container-gutter:24px;
 --section-py:120px;
 --section-py-tight:80px;
+/* one step below --section-py, for the panels and cards that carry their own
+   block padding instead of sitting inside <Section> (see .panel-py). */
+--panel-py:96px;
 --grid-gap:24px;
 --stack-gap:16px;
 

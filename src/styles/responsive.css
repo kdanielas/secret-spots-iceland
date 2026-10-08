@@ -1,6 +1,20 @@
-/* Breakpoints: 1024px (tablet) and 640px (mobile). No mobile/tablet comps were
-   supplied in the design system — these rules extrapolate from the token scale
-   (see HANDOFF.md) rather than introducing new visual language. */
+/* Breakpoints — three, and only three, across the whole site:
+     1024px  tablet landscape / small laptop
+      768px  tablet portrait and phones
+      480px  small phone
+   Every `@media` rule in src/ uses one of those widths. Don't add a fourth:
+   a layout that needs an in-between width is a layout to rethink, not a new
+   breakpoint (we had six, and between 561 and 640px the same page changed
+   density three times — see issue #76).
+
+   Rules are written desktop-first with `max-width`, so a `min-width` query is
+   almost always a sign something should be inverted instead. The exception is
+   a `media` attribute on <source>, which can't be written that way: there the
+   boundary reads `min-width: 768px`.
+
+   No mobile/tablet comps were supplied in the design system — these rules
+   extrapolate from the token scale (see HANDOFF.md) rather than introducing
+   new visual language. */
 
 /* --- layout primitives --- */
 .container-pad { padding-left: clamp(1rem, 4vw, 3rem); padding-right: clamp(1rem, 4vw, 3rem); }
@@ -10,17 +24,14 @@
 .grid-1-1-gap5 { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 @media (max-width: 768px) {
   .grid-1-1-gap5 { grid-template-columns: 1fr; gap: var(--space-9); }
-}
-/* text-first-on-mobile modifier: use when the image is the first DOM child
-   but mobile should read text-then-image (Tours, Luke sections) */
-.grid-1-1-gap5.text-first-mobile > :first-child { order: 2; }
-.grid-1-1-gap5.text-first-mobile > :last-child { order: 1; }
-@media (min-width: 769px) {
-  .grid-1-1-gap5.text-first-mobile > * { order: initial; }
+  /* text-first-on-mobile modifier: use when the image is the first DOM child
+     but mobile should read text-then-image (Tours, Luke sections) */
+  .grid-1-1-gap5.text-first-mobile > :first-child { order: 2; }
+  .grid-1-1-gap5.text-first-mobile > :last-child { order: 1; }
 }
 
 .icons-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-9); width: 100%; }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .icons-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 480px) {
@@ -38,7 +49,7 @@
   .section-py { padding-top: var(--space-12); padding-bottom: var(--space-12); }
   .section-py-tight { padding-top: var(--space-11); padding-bottom: var(--space-11); }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .section-py { padding-top: var(--space-10); padding-bottom: var(--space-10); }
   .section-py-tight { padding-top: var(--space-9); padding-bottom: var(--space-9); }
 }
@@ -52,6 +63,51 @@
    black edge; box-shadow rather than border so it costs no layout space and
    follows whatever border-radius the frame sets. */
 .media-frame { box-shadow: 0 0 0 1px var(--border-subtle); }
+/* Issue #75: the same scale one step down, for the sections and cards that carry
+   their own 96px block padding instead of sitting inside <Section>. Those values
+   were hardcoded with no media query, so at 360px two stacked panels still spent
+   192px on padding alone while their .section-py neighbours had already dropped
+   to 96px. Steps at the same 1024/640 breakpoints keep one vertical rhythm on
+   pages that mix both. */
+.panel-py { padding-top: var(--panel-py); padding-bottom: var(--panel-py); }
+@media (max-width: 1024px) {
+  .panel-py { padding-top: var(--space-11); padding-bottom: var(--space-11); }
+}
+@media (max-width: 640px) {
+  .panel-py { padding-top: var(--space-9); padding-bottom: var(--space-9); }
+}
+
+/* The Tripadvisor quote card, repeated with byte-identical inline styles on nine
+   pages. It lives here once so its block padding can follow the .panel-py scale
+   — inline, it stayed at 96px top and bottom on a phone. The side padding drops
+   a step at 640px too: 32px each side is a tenth of a 360px screen. */
+.quote-panel {
+  background: #dbd6c5;
+  border-radius: 32px;
+  padding: var(--panel-py) var(--space-8);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  .quote-panel { padding: var(--space-11) var(--space-8); }
+}
+@media (max-width: 640px) {
+  .quote-panel { padding: var(--space-9) var(--space-7); }
+}
+
+/* Blog article shell. Was duplicated unchanged in ten blog pages, none of them
+   with a media query, so the 64/96 block padding never shrank either. */
+.blog-article { padding-top: var(--space-11); padding-bottom: var(--panel-py); }
+.blog-article-col { max-width: 720px; margin: 0 auto; }
+@media (max-width: 1024px) {
+  .blog-article { padding-top: var(--space-9); padding-bottom: var(--space-11); }
+}
+@media (max-width: 640px) {
+  .blog-article { padding-top: var(--space-8); padding-bottom: var(--space-9); }
+}
 
 /* --- hero: full-bleed background photo, left-aligned text column --- */
 .hero-text-col { display: flex; flex-direction: column; gap: var(--space-7); align-items: flex-start; max-width: 560px; min-width: 0; padding: var(--space-13) 0; }
@@ -60,7 +116,7 @@
    own — without this a single long word (e.g. "Photographer") is wider than
    a phone viewport and forces horizontal scroll. */
 .hero-title { overflow-wrap: anywhere; }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-title { font-size: 2.25rem; line-height: 1.2; }
   .hero-text-col { padding: var(--space-11) 0; }
 }
@@ -86,7 +142,7 @@
   .grid-4-plain { grid-template-columns: repeat(2, 1fr); gap: var(--space-7); }
   .grid-tours { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .grid-4 { grid-template-columns: 1fr; }
   .grid-4-plain { grid-template-columns: 1fr; }
   .grid-tours { grid-template-columns: 1fr; }
@@ -96,12 +152,12 @@
 @media (max-width: 1024px) {
   .image-strip { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 560px) {
+@media (max-width: 768px) {
   .image-strip { grid-template-columns: 1fr; }
 }
 
 .stat-bar { display: grid; grid-template-columns: repeat(var(--stat-cols, 4), 1fr); }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .stat-bar { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-6); }
 }
 
@@ -110,7 +166,7 @@
 @media (max-width: 1024px) {
   .hero-section { min-height: calc(var(--hero-h) * 0.82); }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-section { min-height: auto; }
 }
 /* full-height hero: fills the viewport at every breakpoint instead of scaling down */
@@ -118,15 +174,15 @@
 @media (max-width: 1024px) {
   .hero-section-full { min-height: 100dvh; }
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-section-full { min-height: 100dvh; }
 }
 .hero-inner { padding: var(--space-13) var(--space-9) var(--space-9); }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-inner { padding: var(--space-10) var(--space-6) var(--space-8); }
 }
 .hero-ctas { display: flex; gap: var(--space-4); flex-wrap: wrap; }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .hero-ctas { flex-direction: column; align-items: center; }
 }
 
@@ -134,7 +190,7 @@
 .sh-xl { font: var(--type-display-lg); }
 .sh-lg { font: var(--type-display-md); }
 .sh-md { font: var(--type-display-sm); }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .sh-xl { font-size: 2rem; line-height: 1.18; }
   .sh-lg { font-size: 1.65rem; line-height: 1.22; }
   .sh-md { font-size: 1.4rem; line-height: 1.24; }
@@ -143,13 +199,13 @@
 /* --- featured-on bar --- */
 .featured-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-8); flex-wrap: wrap; }
 .featured-bar-platforms { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .featured-bar { flex-direction: column; align-items: flex-start; gap: var(--space-4); padding-left: var(--space-6) !important; padding-right: var(--space-6) !important; }
 }
 
 /* --- inquiry form --- */
 .inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .inquiry-grid { grid-template-columns: 1fr; }
 }
 
@@ -177,9 +233,13 @@
     height: calc(100vh - 100%);
     overflow-y: auto;
     opacity: 0; transform: translateY(-6px);
+    /* pointer-events only stops the mouse — visibility is what keeps the closed
+       panel's links out of the tab order and the a11y tree. Transitioning it
+       holds the panel visible for the whole fade-out, then flips it at the end. */
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility var(--dur-base);
   }
-  .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
   .site-nav > a.nav-contact-link { margin-top: auto; text-align: center; display: flex; justify-content: center; }
 }

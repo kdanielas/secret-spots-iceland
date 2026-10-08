@@ -168,7 +168,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   <section style="position:relative;overflow:hidden;min-height:600px;display:flex;align-items:center">
     <Image src={lukePhotographerImg} alt="Luke, local guide and photographer, in the Reykjanes peninsula" width={1600} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%" />
     <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(19,37,51,.95) 5%, rgba(19,37,51,.55) 55%, rgba(19,37,51,.15) 100%)"></div>
-    <div class="container-1200" style="position:relative;width:100%;padding-top:var(--space-13);padding-bottom:var(--space-13)">
+    <div class="container-1200 panel-py" style="position:relative;width:100%">
       <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start;max-width:640px">
         <SectionHeading size="xl" eyebrow="Meet your guide" onDark>
           <Fragment slot="title">Luke — Local Guide &amp; Photographer</Fragment>
@@ -180,7 +180,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   </section>
 
   <div class="container-pad" id="how-it-works">
-    <section style="padding:var(--space-13) 0">
+    <section class="panel-py">
       <div data-reveal class="grid-1-1-gap5" style="max-width:1200px;margin:0 auto">
         <div class="how-it-works-video-frame" style="overflow:hidden;border-radius:32px;aspect-ratio:437/776">
           <video class="lazy-video" data-src={lavaVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
@@ -231,9 +231,6 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     /* the lava video is portrait on desktop (next to the text column), but
        full-width on mobile — keep it landscape there, wider than tall */
     .how-it-works-video-frame { aspect-ratio: 4 / 3 !important; }
-  }
-
-  @media (max-width: 560px) {
     /* carousel instead of a long vertical stack of review cards */
     .customer-reviews-grid {
       display: flex !important;
