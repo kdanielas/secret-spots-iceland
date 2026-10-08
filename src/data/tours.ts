@@ -123,3 +123,15 @@ export function priceLabel(slug: string): string {
 export function contactHref(slug: string): string {
   return `/contact?tour=${getTour(slug).slug}`;
 }
+
+/**
+ * El enlace de contacto que corresponde a una página: lleva el tour cuando la
+ * página es la de un tour, y es el /contact de siempre en cualquier otra. Así
+ * el botón «Contact us» de la cabecera también llega al formulario con el tour
+ * ya elegido, igual que los CTA de la propia página.
+ */
+export function contactHrefFromPath(pathname: string): string {
+  const path = pathname.replace(/\/+$/, '') || '/';
+  const tour = TOURS.find((t) => t.href === path);
+  return tour ? contactHref(tour.slug) : '/contact';
+}

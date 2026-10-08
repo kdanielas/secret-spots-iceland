@@ -10,6 +10,7 @@ import CookieConsent from '../components/CookieConsent.astro';
 import logoImg from '../assets/images/secret-spots-iceland-logo.webp';
 import { absoluteUrl, canonicalUrl, siteNodes } from '../lib/schema';
 import { BUSINESS, TWITTER_HANDLE } from '../data/site';
+import { contactHrefFromPath } from '../data/tours';
 
 interface Props {
   title: string;
@@ -55,6 +56,10 @@ const pageType =
   : 'informativa';
 // En las páginas de tour, el slug: no cambia aunque cambie el nombre del tour.
 const tourName = path.startsWith('/tours/') ? path.split('/')[2] : undefined;
+
+// Issue #9: desde una página de tour, el botón «Contact us» de la cabecera
+// lleva ese tour, igual que los CTA de la página.
+const navContactHref = contactHrefFromPath(path);
 
 // Contenedor de Tag Manager (#88). Si la variable no está definida, no se carga.
 const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
@@ -172,7 +177,7 @@ const canonical = canonicalUrl(path);
          el CSS lo coloca abajo visualmente. -->
     <CookieConsent />
     <div style={transparentNav ? 'position:relative' : undefined}>
-      {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} />}
+      {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} contactHref={navContactHref} />}
       <!-- Accesibilidad (#70): el contenido de cada página vive dentro de un
            <main>, la región que los lectores de pantalla ofrecen para ir directo
            al contenido, y el destino del enlace de salto. tabindex="-1" es lo que
