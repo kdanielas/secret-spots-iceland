@@ -231,9 +231,6 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     /* the lava video is portrait on desktop (next to the text column), but
        full-width on mobile — keep it landscape there, wider than tall */
     .how-it-works-video-frame { aspect-ratio: 4 / 3 !important; }
-  }
-
-  @media (max-width: 560px) {
     /* carousel instead of a long vertical stack of review cards */
     .customer-reviews-grid {
       display: flex !important;
