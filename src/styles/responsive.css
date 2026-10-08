@@ -242,4 +242,8 @@
   }
   .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
   .site-nav > a.nav-contact-link { margin-top: auto; text-align: center; display: flex; justify-content: center; }
+  /* the panel scrolls on its own; freezing the page behind it keeps the header
+     (and the menu hanging off it) in place while it's open. Scoped to this
+     breakpoint so a resize to desktop can't leave the page stuck. */
+  body.nav-open { overflow: hidden; }
 }
