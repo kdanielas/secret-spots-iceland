@@ -270,12 +270,17 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     text-align: left;
     opacity: 0;
     transform: translateY(-8px);
+    /* pointer-events only stops the mouse — visibility is what keeps the closed
+       panel's links out of the tab order and the a11y tree. Transitioning it
+       holds the panel visible for the whole fade-out, then flips it at the end. */
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 180ms ease, transform 180ms ease;
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
   }
   .nav-megamenu[data-open="true"] {
     opacity: 1;
     transform: translateY(0);
+    visibility: visible;
     pointer-events: auto;
   }
 
@@ -374,7 +379,26 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     const items = header.querySelectorAll<HTMLElement>('.nav-dropdown-item');
     const panels = header.querySelectorAll<HTMLElement>('.nav-megamenu');
 
+    // Closing hides the panel outright, so focus sitting inside it would fall
+    // back to the body and restart the tab order. Hand it to the trigger first.
+    function restoreFocus() {
+      const active = document.activeElement;
+      if (!(active instanceof Node)) return;
+      const openItem = Array.from(items).find((el) => el.dataset.open === 'true' && el.contains(active));
+      if (openItem) {
+        openItem.querySelector<HTMLButtonElement>('.nav-dropdown-trigger')?.focus();
+        return;
+      }
+      const openPanel = Array.from(panels).find((el) => el.dataset.open === 'true' && el.contains(active));
+      if (openPanel) {
+        header
+          .querySelector<HTMLButtonElement>(`.nav-dropdown-trigger[data-menu="${openPanel.dataset.menuPanel}"]`)
+          ?.focus();
+      }
+    }
+
     function closeAll() {
+      restoreFocus();
       items.forEach((el) => (el.dataset.open = 'false'));
       panels.forEach((el) => (el.dataset.open = 'false'));
       triggers.forEach((el) => el.setAttribute('aria-expanded', 'false'));

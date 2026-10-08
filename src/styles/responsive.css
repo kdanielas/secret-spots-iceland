@@ -167,9 +167,13 @@
     height: calc(100vh - 100%);
     overflow-y: auto;
     opacity: 0; transform: translateY(-6px);
+    /* pointer-events only stops the mouse — visibility is what keeps the closed
+       panel's links out of the tab order and the a11y tree. Transitioning it
+       holds the panel visible for the whole fade-out, then flips it at the end. */
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), visibility var(--dur-base);
   }
-  .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .site-nav[data-open="true"] { opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto; }
   .site-nav > a.nav-contact-link { margin-top: auto; text-align: center; display: flex; justify-content: center; }
 }
