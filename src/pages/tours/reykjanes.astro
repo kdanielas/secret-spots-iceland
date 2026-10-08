@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
+import { priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -27,7 +28,7 @@ import highlight7 from '../../assets/images/reykjanes-lava-field-iceland.jpg';
 const STATS = [
   { icon: 'clock', label: '7 hours', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavik', sub: 'Keflavík pickup' },
-  { icon: 'briefcase', label: 'From €1,300 / group', sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel('secret-reykjanes'), sub: 'Year-round' },
 ];
 
 const EXPECT = [

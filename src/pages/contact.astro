@@ -185,15 +185,7 @@ const DIRECT_CONTACT = [
 
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
 
-const TOUR_OPTIONS = [
-  'Secret Reykjanes',
-  'South Coast & Waterfalls',
-  'Golden Circle Secrets',
-  'Snæfellsnes Peninsula',
-  'Highlands Adventure',
-  'Ultimate Iceland Adventure',
-  "Not sure yet / custom itinerary",
-];
+const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itinerary'];
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
@@ -332,7 +324,7 @@ const TOUR_OPTIONS = [
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 style="font:700 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">How did you find us?</h2>
+                <h2 class="card-title" style="color:var(--text-heading);margin:0">How did you find us?</h2>
                 <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Choose one <span class="req-mark">*</span></span>
               </div>
 

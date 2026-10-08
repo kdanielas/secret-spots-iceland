@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { tourPageSchema } from '../../lib/tour';
+import { priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
@@ -25,7 +26,7 @@ import highlight5 from '../../assets/images/Web images/3-days-south-coast/south-
 const STATS = [
   { icon: 'clock', label: '3 Days / 2 Nights', sub: 'Private tour' },
   { icon: 'map-pin', label: 'Reykjavík', sub: 'Departure' },
-  { icon: 'briefcase', label: 'From $4500 / tour', sub: 'Year-round' },
+  { icon: 'briefcase', label: priceLabel('three-days-south-coast'), sub: 'Year-round' },
 ];
 
 const EXPECT = [
