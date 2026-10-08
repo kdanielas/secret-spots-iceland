@@ -54,6 +54,52 @@
   .section-py-tight { padding-top: var(--space-9); padding-bottom: var(--space-9); }
 }
 
+/* Issue #75: the same scale one step down, for the sections and cards that carry
+   their own 96px block padding instead of sitting inside <Section>. Those values
+   were hardcoded with no media query, so at 360px two stacked panels still spent
+   192px on padding alone while their .section-py neighbours had already dropped
+   to 96px. Steps at the same 1024/640 breakpoints keep one vertical rhythm on
+   pages that mix both. */
+.panel-py { padding-top: var(--panel-py); padding-bottom: var(--panel-py); }
+@media (max-width: 1024px) {
+  .panel-py { padding-top: var(--space-11); padding-bottom: var(--space-11); }
+}
+@media (max-width: 640px) {
+  .panel-py { padding-top: var(--space-9); padding-bottom: var(--space-9); }
+}
+
+/* The Tripadvisor quote card, repeated with byte-identical inline styles on nine
+   pages. It lives here once so its block padding can follow the .panel-py scale
+   — inline, it stayed at 96px top and bottom on a phone. The side padding drops
+   a step at 640px too: 32px each side is a tenth of a 360px screen. */
+.quote-panel {
+  background: #dbd6c5;
+  border-radius: 32px;
+  padding: var(--panel-py) var(--space-8);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  .quote-panel { padding: var(--space-11) var(--space-8); }
+}
+@media (max-width: 640px) {
+  .quote-panel { padding: var(--space-9) var(--space-7); }
+}
+
+/* Blog article shell. Was duplicated unchanged in ten blog pages, none of them
+   with a media query, so the 64/96 block padding never shrank either. */
+.blog-article { padding-top: var(--space-11); padding-bottom: var(--panel-py); }
+.blog-article-col { max-width: 720px; margin: 0 auto; }
+@media (max-width: 1024px) {
+  .blog-article { padding-top: var(--space-9); padding-bottom: var(--space-11); }
+}
+@media (max-width: 640px) {
+  .blog-article { padding-top: var(--space-8); padding-bottom: var(--space-9); }
+}
+
 /* --- hero: full-bleed background photo, left-aligned text column --- */
 .hero-text-col { display: flex; flex-direction: column; gap: var(--space-7); align-items: flex-start; max-width: 560px; min-width: 0; padding: var(--space-13) 0; }
 .hero-rating { margin-top: var(--space-2); }
