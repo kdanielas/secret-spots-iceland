@@ -213,7 +213,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         <Fragment slot="title">Frequently Asked Questions</Fragment>
         <Fragment slot="lead">Starter answers below — flag any that need a fact-check against your real policies before this goes live.</Fragment>
       </SectionHeading>
-      <div data-reveal style="display:flex;flex-direction:column;width:100%">
+      <div data-reveal data-faq-group style="display:flex;flex-direction:column;width:100%">
         {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
       </div>
     </div>
