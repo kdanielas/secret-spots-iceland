@@ -38,6 +38,7 @@ Copia `.env.example` como `.env` (no se sube a git) y rellena lo que necesites:
 | Variable | Para qué |
 | --- | --- |
 | `PUBLIC_GTM_ID` | Contenedor de Google Tag Manager. Vacío = no se carga GTM. |
+| `PUBLIC_RECAPTCHA_SITE_KEY` | Clave pública de reCAPTCHA v2, la que pinta la casilla en `/contact`. |
 | `RECAPTCHA_SECRET_KEY` | Clave secreta de reCAPTCHA v2, para verificar el token en el servidor. |
 | `RESEND_API_KEY` | API key de [Resend](https://resend.com), que envía el correo de la consulta. |
 | `CONTACT_FROM_EMAIL` | Remitente verificado en Resend. No es el correo del visitante. |
@@ -84,9 +85,9 @@ deploy de preview propio.
 - [ ] Añadir el sitemap: `site` ya está configurado en `astro.config.mjs`, pero falta
       instalar `@astrojs/sitemap` y enlazarlo desde `robots.txt`
 - [ ] Contenedor de Tag Manager (`PUBLIC_GTM_ID`) y eventos de GA4
-- [ ] Clave real de reCAPTCHA: `contact.astro` lleva todavía la clave de prueba
-      pública de Google, que aprueba a cualquiera. Cambiar la pública del HTML y la
-      `RECAPTCHA_SECRET_KEY` de Vercel por las del sitio
+- [ ] Par de claves de reCAPTCHA del sitio en Vercel: `PUBLIC_RECAPTCHA_SITE_KEY` y
+      `RECAPTCHA_SECRET_KEY`, registradas en google.com/recaptcha/admin para
+      `secretspotsoficeland.com` y para el dominio de preview
 - [ ] Dominio verificado en Resend y `CONTACT_FROM_EMAIL` con ese dominio, o el correo
       de la consulta se rechaza
 - [ ] `src/components/InquiryForm.astro` sigue siendo una maqueta que no envía nada;

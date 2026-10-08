@@ -198,6 +198,13 @@ const TOUR_OPTIONS = [
 // allowed range by a day or two, so it can never reject a date a traveller
 // could legitimately pick.
 const TODAY_ISO = new Date().toISOString().slice(0, 10);
+
+// reCAPTCHA v2 public site key (#22). It comes from the environment and never
+// from the source, so the site cannot ship with Google's test key, which waves
+// every bot through. Without it there is no challenge to ask for and the
+// endpoint would refuse the inquiry anyway, so the form says so up front rather
+// than leaving the traveller staring at a checkbox that never appears.
+const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
@@ -365,8 +372,18 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
               <div style="margin-bottom:var(--space-7)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading);display:block;margin-bottom:8px">Verify you're not a robot <span class="req-mark">*</span></span>
-                <div id="recaptcha-widget" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="min-height:78px"></div>
-                <span id="captcha-error" role="alert" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
+                {RECAPTCHA_SITE_KEY ? (
+                  <>
+                    <div id="recaptcha-widget" data-sitekey={RECAPTCHA_SITE_KEY} style="min-height:78px"></div>
+                    <span id="captcha-error" role="alert" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
+                  </>
+                ) : (
+                  <p style="margin:0;font:400 13px/1.5 var(--font-sans);color:var(--text-muted)">
+                    The robot check is unavailable right now, so this form cannot be sent.
+                    Please reach Luke at <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a> or
+                    <a href={BUSINESS.telephoneHref}>{BUSINESS.telephone}</a>.
+                  </p>
+                )}
               </div>
 
               <div style="margin-bottom:var(--space-7)">
@@ -759,9 +776,9 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
   document.getElementById('back-to-step-1')?.addEventListener('click', () => goToStep(1));
 
-  // Google reCAPTCHA v2 checkbox — using Google's PUBLIC TEST site key, which always
-  // passes and never blocks a real bot. Swap in your own site key from
-  // google.com/recaptcha, and verify the token server-side, before this goes live.
+  // Google reCAPTCHA v2 checkbox (#22). The site key comes from
+  // PUBLIC_RECAPTCHA_SITE_KEY, and /api/contact verifies the token with the
+  // matching secret before any mail goes out.
   const captchaError = document.getElementById('captcha-error') as HTMLElement;
 
   // The reCAPTCHA bundle is ~184 KB, so it stays off the critical path: the script
@@ -822,6 +839,12 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     e.preventDefault();
     if (!form || !validateStep(step2)) return;
     loadRecaptcha();
+    // No widget means no site key was configured (#22): the server would reject
+    // the inquiry, so say so once and point at the phone and the email instead.
+    if (!captchaHost) {
+      showStatus('error', GENERIC_ERROR);
+      return;
+    }
     const recaptchaResponse = (window as any).grecaptcha?.getResponse?.();
     if (!recaptchaResponse) {
       if (captchaError) captchaError.style.display = 'block';
