@@ -149,16 +149,55 @@ const ogUrl = canonicalUrl(path);
     {GTM_ID && (
       <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     )}
+    <!-- Accesibilidad (#70). El primer tabulador de cualquier página, por delante
+         incluso del aviso de cookies: la cabecera pegajosa y los enlaces del menú
+         suman 31 elementos, y sin esto hay que pasar por todos ellos en cada
+         página antes de llegar al contenido (WCAG 2.4.1). Es un solo salto, así
+         que el aviso de cookies sigue siendo lo primero que se lee. -->
+    <a href="#main" class="skip-link">Skip to content</a>
     <!-- Consentimiento (#26). Va al principio del body para que con teclado o
          lector de pantalla se llegue al aviso antes que al resto de la página;
          el CSS lo coloca abajo visualmente. -->
     <CookieConsent />
     <div style={transparentNav ? 'position:relative' : undefined}>
       {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} />}
-      <slot />
+      <!-- Accesibilidad (#70): el contenido de cada página vive dentro de un
+           <main>, la región que los lectores de pantalla ofrecen para ir directo
+           al contenido, y el destino del enlace de salto. tabindex="-1" es lo que
+           permite que el foco aterrice aquí al activarlo; sin él, algunos
+           navegadores solo hacen scroll y el siguiente tabulador vuelve al menú. -->
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
     </div>
     {hideContactPanel ? null : <ContactPanel style={contactPanelStyle} />}
     <Footer style={footerStyle} />
+
+    <style>
+      /* Accesibilidad (#70). Fuera de la pantalla hasta que recibe el foco; no se
+         esconde con display:none ni visibility:hidden porque entonces el teclado
+         tampoco podría llegar a él. position:fixed, no absolute, para que aparezca
+         a la vista aunque la página esté desplazada. */
+      .skip-link {
+        position: fixed;
+        top: -100px;
+        left: var(--space-5);
+        z-index: var(--z-modal);
+        padding: var(--space-3) var(--space-5);
+        border-radius: var(--radius-sm);
+        background: var(--surface-raised);
+        color: var(--text-link);
+        box-shadow: var(--shadow-float);
+      }
+      .skip-link:focus { top: var(--space-5); }
+
+      /* Al activar el enlace, la cabecera pegajosa taparía el principio del
+         contenido: el mismo desplazamiento que ya usan los anclajes de /tours. */
+      #main { scroll-margin-top: 110px; }
+      /* <main> solo recibe el foco desde el enlace de salto, nunca tabulando, y
+         un recuadro alrededor de toda la página se lee como un fallo de pintado. */
+      #main:focus { outline: none; }
+    </style>
 
     <script>
       const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
