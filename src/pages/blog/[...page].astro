@@ -54,15 +54,15 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
 
       {page.lastPage > 1 && (
         <nav aria-label="Blog pagination" style="display:flex;align-items:center;gap:var(--space-3)">
-          <a
-            href={page.url.prev ?? '#'}
-            aria-disabled={page.url.prev ? undefined : 'true'}
-            class="pagination-arrow"
-            style={`opacity:${page.url.prev ? 1 : 0.35};pointer-events:${page.url.prev ? 'auto' : 'none'}`}
-            aria-label="Previous page"
-          >
-            <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
-          </a>
+          {page.url.prev ? (
+            <a href={page.url.prev} class="pagination-arrow" aria-label="Previous page">
+              <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
+            </a>
+          ) : (
+            <span class="pagination-arrow is-disabled" aria-hidden="true">
+              <Icon name="arrow-right" size={16} style="transform:rotate(180deg)" />
+            </span>
+          )}
           {pageNumbers.map((n) => (
             <a
               href={pageHref(n)}
@@ -72,15 +72,15 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
               {n}
             </a>
           ))}
-          <a
-            href={page.url.next ?? '#'}
-            aria-disabled={page.url.next ? undefined : 'true'}
-            class="pagination-arrow"
-            style={`opacity:${page.url.next ? 1 : 0.35};pointer-events:${page.url.next ? 'auto' : 'none'}`}
-            aria-label="Next page"
-          >
-            <Icon name="arrow-right" size={16} />
-          </a>
+          {page.url.next ? (
+            <a href={page.url.next} class="pagination-arrow" aria-label="Next page">
+              <Icon name="arrow-right" size={16} />
+            </a>
+          ) : (
+            <span class="pagination-arrow is-disabled" aria-hidden="true">
+              <Icon name="arrow-right" size={16} />
+            </span>
+          )}
         </nav>
       )}
     </div>
@@ -111,8 +111,9 @@ const pageHref = (n: number) => (n === 1 ? '/blog' : `/blog/${n}`);
     background: var(--cream-50);
     color: var(--ink-900);
   }
-  .pagination-arrow:hover { background: var(--cream-100); }
-  .pagination-arrow:active { transform: var(--press-scale); }
+  .pagination-arrow:not(.is-disabled):hover { background: var(--cream-100); }
+  .pagination-arrow:not(.is-disabled):active { transform: var(--press-scale); }
+  .pagination-arrow.is-disabled { opacity: 0.35; }
 
   .pagination-number {
     font: 700 14px/1 var(--font-sans);
