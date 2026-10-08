@@ -6,13 +6,14 @@ import FaqItem from '../components/FaqItem.astro';
 import heroImg from '../assets/images/highlands-couple-overlook-wide.webp';
 import { canonicalUrl, faqPageNode } from '../lib/schema';
 
-const NEEDS_REAL_ANSWER = 'Starter answer — this needs your real policy or details before the page goes live.';
-
 const FAQ_CATEGORIES = [
   {
     category: 'About the Experience',
     items: [
-      { question: 'What makes your tours different from standard Iceland tours?', answer: NEEDS_REAL_ANSWER },
+      {
+        question: 'What makes your tours different from standard Iceland tours?',
+        answer: "Three things. Every tour is 100% private — just you, your group and your guide, with no strangers and no fixed bus schedule. The route is built around your pace and interests and gets rebuilt around the weather and the light, instead of following a set itinerary. And you travel with a working photographer: Luke has been exploring and photographing Iceland since 2006, so you get both the lesser-known stops most standard tours drive past and help framing and timing the shots when you get there.",
+      },
       {
         question: 'What Secret Spots Iceland stands for?',
         answer: "Iceland is a very popular destination, with millions of visitors each year, and most natural sights are public and accessible to everyone. When we talk about Secret Spots, we don't mean places no one has ever visited. Instead, we focus on local knowledge, smart timing, alternative viewpoints, and lesser-known stops that most travelers simply pass by. The experience is about avoiding crowds where possible, visiting places at the right moment, and seeing Iceland in a more thoughtful, authentic way — not rushing from one busy attraction to another.",
@@ -39,7 +40,10 @@ const FAQ_CATEGORIES = [
   {
     category: 'Logistics',
     items: [
-      { question: 'What kind of vehicle do we travel in?', answer: NEEDS_REAL_ANSWER },
+      {
+        question: 'What kind of vehicle do we travel in?',
+        answer: 'We match the vehicle to your group: a Mercedes V-Class for up to 6 passengers, a luxury Mercedes Sprinter for up to 8 with room to spare for luggage and camera gear, and an 18-seat Sprinter minibus for larger groups. All of them are chosen for comfort on long scenic drives through changing terrain and weather. You can see the full fleet on the Our Vehicles page.',
+      },
       {
         question: 'How long are the tours?',
         answer: 'Tour lengths vary depending on the itinerary. We offer day trips, multi-day adventures, and customizable expeditions to suit your schedule.',
@@ -69,9 +73,7 @@ const FAQ_CATEGORIES = [
   },
 ];
 
-// Questions still carrying the placeholder answer stay out of the structured data —
-// publishing "this needs your real policy" as an answer is worse than publishing nothing.
-const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items).filter((item) => item.answer !== NEEDS_REAL_ANSWER);
+const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items);
 ---
 
 <Layout
