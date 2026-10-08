@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -25,11 +26,11 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Guide assisting a traveller in a wheelchair at Goðafoss waterfall"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">How We Made Iceland Accessible: A 12-Day Wheelchair Tour</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -40,6 +41,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Iceland has a reputation for being hard to explore if you have limited mobility. Rough terrain, gravel roads, unpaved paths to waterfalls — a lot of the country's most iconic sights weren't built with accessibility in mind.</p>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">But "hard to explore" and "impossible to explore" are two very different things. This is the story of a 12-day private tour with a guest who uses a wheelchair — and how we ended up in a helicopter to make sure nothing was off-limits.</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       <section style="margin-top:var(--space-9)">
         <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">The Trip</h2>

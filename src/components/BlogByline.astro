@@ -1,0 +1,19 @@
+---
+import { BLOG_AUTHOR } from '../lib/blog';
+
+interface Props {
+  /** ISO 8601 date — the machine-readable half of the dateline. */
+  datePublished: string;
+  /** Display form of the same date. */
+  dateline: string;
+  style?: string;
+}
+const { datePublished, dateline, style } = Astro.props;
+---
+
+{/* Deliberately below the opening paragraph rather than in the hero: the first
+    text after a post's <h1> should answer it, so a search engine excerpting a
+    snippet gets the answer instead of the author's name and the date. */}
+<p style={`font:var(--type-body-sm);color:var(--text-muted);margin:0;${style ?? ''}`}>
+  By {BLOG_AUTHOR} · <time datetime={datePublished}>{dateline}</time>
+</p>

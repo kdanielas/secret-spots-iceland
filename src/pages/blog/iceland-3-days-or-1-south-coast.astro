@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -24,11 +25,11 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Horseback riding near Skógafoss waterfall on Iceland's South Coast"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">Iceland in 3 Days or Just 1? The South Coast of Iceland</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -39,6 +40,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Your journey through Iceland can last six days, three days — or even just one. Regardless of how much time you have or the style of travel you choose, every well-organized tour lets you experience the most important, beautiful, and unique highlights of Iceland.</p>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Today, I want to convince you that Iceland is worth visiting even if you only have one day. In under 24 hours, you can feel the magic of this land — and perhaps live one of the most unforgettable adventures of your life! Interested?</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       <section style="margin-top:var(--space-9)">
         <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Exploring Iceland in 1 Day</h2>
