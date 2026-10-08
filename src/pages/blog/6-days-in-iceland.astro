@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { BLOG_AUTHOR, blogPageMeta } from '../../lib/blog';
+import BlogByline from '../../components/BlogByline.astro';
+import { blogPageMeta } from '../../lib/blog';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 
@@ -33,11 +34,11 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
   <Hero
     framedImage={heroImg}
     framedImageAlt="Aerial view of a glacier lagoon on Iceland's South Coast"
+    subtitle={post.answer}
     primaryCta=""
     secondaryCta=""
   >
     <Fragment slot="title">6 Days in Iceland – What to See and Experience?</Fragment>
-    <Fragment slot="subtitle">By {BLOG_AUTHOR} · <time datetime={post.datePublished}>{dateline}</time></Fragment>
   </Hero>
 
   <article class="blog-article container-pad">
@@ -47,6 +48,8 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Time is not elastic. Although travel lovers would like to be on the road endlessly, in reality, we eventually need to return to daily life — work, family, household duties, and everything else. But that doesn't mean you can't see and experience a lot in a short time! "Iceland in a week" was the motto I followed when organizing a six-day tour through this stunning land. Discover why it's the best option if you want to explore Iceland in a short period!</p>
       </div>
+
+      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
 
       <section style="margin-top:var(--space-9)">
         <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Iceland in a Week – Travel Itinerary</h2>

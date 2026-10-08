@@ -90,7 +90,7 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
        cut off at the top). min-height is a true floor: it still shrinks
        short-content pages close to square, but never clips longer content. */
     .hero-frame { min-height: 420px !important; }
-    /* opt-in for short-content heroes (e.g. a blog post byline) where even
+    /* opt-in for short-content heroes (e.g. a blog post, which has no CTAs) where even
        420px is taller than needed. A fixed aspect-ratio looked more like a
        true 4:3 photo, but it clips longer titles the same way the old
        85vh+overflow:hidden combo did — min-height never clips, it's just a
