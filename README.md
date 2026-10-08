@@ -28,8 +28,31 @@ npm run preview    # sirve dist/ como lo hará producción
 una función de Vercel, fuera del build de Astro. Para probarla en local hace falta
 `vercel dev`; en los deploys de preview de Vercel funciona como en producción.
 
-No hay tests ni linter configurados: `npm run build` es la comprobación de que nada
-se ha roto.
+## Linter y formato
+
+```bash
+npm run lint           # oxlint sobre src/ y api/
+npm run format         # prettier --write
+npm run format:check   # lo que comprueba el CI
+```
+
+[oxlint](https://oxc.rs) avisa de variables sin usar, `console.log` olvidados, claves
+repetidas en un objeto y errores de corrección. Las reglas desactivadas y su motivo
+están en `.oxlintrc.json`. En `api/` se permite `console`: son funciones de Vercel y
+esos logs van al log de la función.
+
+De un `.astro` mira el frontmatter y los `<script>`, pero **no la plantilla HTML**: un
+atributo repetido en una etiqueta o un problema de accesibilidad del marcado no los ve
+nadie todavía.
+
+Prettier formatea `.astro`, `.ts`, `.js` y `.css` de `src/` y `api/`. Queda fuera el
+bundle de `design-system/`, que es material de referencia, y `src/icons/`, que son SVG
+copiados tal cual. Si un cambio tuyo sale con ruido de espacios, pasa `npm run format`
+antes de hacer commit.
+
+El workflow `.github/workflows/lint.yml` corre `lint` y `format:check` en cada pull
+request y en cada push a `main`. No hay tests: junto con `npm run build`, son la
+comprobación de que nada se ha roto.
 
 ## Variables de entorno
 
