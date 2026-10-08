@@ -186,6 +186,11 @@ const DIRECT_CONTACT = [
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
 
 const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itinerary'];
+
+// Floor for the date field, baked in at build time. Going stale only widens the
+// allowed range by a day or two, so it can never reject a date a traveller
+// could legitimately pick.
+const TODAY_ISO = new Date().toISOString().slice(0, 10);
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
@@ -197,7 +202,7 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
         <div data-reveal class="contact-form-card" style="width:100%;background:#F8F7F3;border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box">
           <form id="contact-form" novalidate>
             <div class="form-progress" style="display:flex;align-items:center;gap:10px;margin-bottom:var(--space-8)">
-              <div class="form-progress-step is-active" data-progress-dot="1">
+              <div class="form-progress-step is-active" data-progress-dot="1" aria-current="step">
                 <span class="form-progress-dot">1</span>
                 <span class="form-progress-label">Personal data</span>
               </div>
@@ -210,7 +215,7 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
 
             <div data-step="1">
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Personal data</h2>
+                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Personal data <span class="sr-only">&#8201;— step 1 of 2</span></h2>
                 <span style="font:600 14px/1 var(--font-sans);color:var(--text-muted)"><span class="req-mark">*</span> Required fields</span>
               </div>
 
@@ -218,10 +223,12 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">First Name <span class="req-mark">*</span></span>
                   <input type="text" name="firstName" required class="contact-input" />
+                  <span class="field-error" id="err-firstName" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Last Name <span class="req-mark">*</span></span>
                   <input type="text" name="lastName" required class="contact-input" />
+                  <span class="field-error" id="err-lastName" role="alert" hidden></span>
                 </label>
               </div>
 
@@ -233,11 +240,13 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                   </span>
                   <input type="email" name="email" required class="contact-input" placeholder="you@domain.com" style="padding-left:40px" />
                 </span>
+                <span class="field-error" id="err-email" role="alert" hidden></span>
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Tell us about your ideal Iceland experience <span class="req-mark">*</span></span>
                 <textarea name="experience" required rows={4} class="contact-input" style="resize:vertical;font-family:var(--font-sans)"></textarea>
+                <span class="field-error" id="err-experience" role="alert" hidden></span>
               </label>
 
               <div class="contact-field-row" style="display:grid;grid-template-columns:220px 1fr;gap:var(--space-5);margin-bottom:var(--space-7)">
@@ -251,6 +260,7 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                       <Icon name="chevron-down" size={16} />
                     </span>
                   </span>
+                  <span class="field-error" id="err-countryCode" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Phone <span class="req-mark">*</span></span>
@@ -260,6 +270,7 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                     </span>
                     <input type="tel" name="phone" required class="contact-input" placeholder="Your phone number" style="padding-left:40px" />
                   </span>
+                  <span class="field-error" id="err-phone" role="alert" hidden></span>
                 </label>
               </div>
 
@@ -278,7 +289,7 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
               </button>
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel data</h2>
+                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel data <span class="sr-only">&#8201;— step 2 of 2</span></h2>
                 <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Your plans can be flexible</span>
               </div>
 
@@ -292,16 +303,13 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                     <Icon name="chevron-down" size={16} />
                   </span>
                 </span>
+                <span class="field-error" id="err-tour" role="alert" hidden></span>
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Preferred tour date <span class="req-mark">*</span></span>
-                <span style="position:relative;display:block">
-                  <input type="text" name="tourDate" placeholder="dd/mm/yyyy" required class="contact-input" style="padding-right:40px" />
-                  <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
-                    <Icon name="chevron-down" size={16} />
-                  </span>
-                </span>
+                <input type="date" name="tourDate" required class="contact-input contact-input-date" min={TODAY_ISO} />
+                <span class="field-error" id="err-tourDate" role="alert" hidden></span>
               </label>
 
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-7)">
@@ -313,13 +321,16 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
                   <button type="button" class="guest-stepper-btn" data-action="decrement" aria-label="Decrease guests">
                     <Icon name="minus" size={14} />
                   </button>
-                  <span id="guest-count" style="font:700 16px/1 var(--font-sans);color:var(--text-heading);min-width:12px;text-align:center">1</span>
+                  <output id="guest-count" for="guests-input" aria-live="polite" style="font:700 16px/1 var(--font-sans);color:var(--text-heading);min-width:12px;text-align:center">1</output>
                   <button type="button" class="guest-stepper-btn guest-stepper-btn-amber" data-action="increment" aria-label="Increase guests">
                     <Icon name="plus" size={14} />
                   </button>
                 </div>
               </div>
-              <input type="hidden" name="guests" id="guests-input" value="1" />
+              {/* The +/- buttons are the visible control; this field is what carries
+                  the value into the submission and gives screen-reader and keyboard
+                  users a real number to read and type into. */}
+              <input type="number" name="guests" id="guests-input" value="1" min="1" step="1" aria-label="Number of guests" class="sr-only" />
 
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
@@ -342,13 +353,16 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
               <div style="margin-bottom:var(--space-7)">
                 <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading);display:block;margin-bottom:8px">Verify you're not a robot <span class="req-mark">*</span></span>
                 <div id="recaptcha-widget" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="min-height:78px"></div>
-                <span id="captcha-error" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
+                <span id="captcha-error" role="alert" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
               </div>
 
-              <label style="display:flex;align-items:flex-start;gap:10px;margin-bottom:var(--space-7)">
-                <input type="checkbox" name="privacyConsent" id="privacy-consent" required style="margin-top:3px;width:16px;height:16px;flex:0 0 auto" />
-                <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a href="/privacy-policy" target="_blank" style="color:var(--blue-500);text-decoration:underline">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
-              </label>
+              <div style="margin-bottom:var(--space-7)">
+                <label style="display:flex;align-items:flex-start;gap:10px">
+                  <input type="checkbox" name="privacyConsent" id="privacy-consent" required style="margin-top:3px;width:16px;height:16px;flex:0 0 auto" />
+                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a href="/privacy-policy" target="_blank" style="color:var(--blue-500);text-decoration:underline">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
+                </label>
+                <span class="field-error" id="err-privacyConsent" role="alert" hidden></span>
+              </div>
 
               <div style="display:flex;justify-content:flex-end">
                 <button type="submit" id="contact-submit" style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap;flex:0 0 auto">
@@ -451,6 +465,29 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
 
   .req-mark { color: #b3261e; }
 
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Errors live in the page, not in the browser's native bubble, so they survive
+     a scroll or a tap and can be re-read. #b3261e is 6.1:1 on the #F8F7F3 card. */
+  .field-error { display: block; font: 400 12px/1.4 var(--font-sans); color: #b3261e; }
+  .field-error[hidden] { display: none; }
+  .contact-input[aria-invalid='true'],
+  .contact-input[aria-invalid='true']:focus { border-color: #b3261e; }
+  input[type='checkbox'][aria-invalid='true'] { outline: 2px solid #b3261e; outline-offset: 2px; }
+
+  /* Focus lands on the step heading when the step changes. Programmatic focus
+     after a click should not paint a ring, hence :focus-visible only. */
+  .step-heading:focus { outline: none; }
+  .step-heading:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 6px; border-radius: 4px; }
+
   .form-progress-step { display: flex; align-items: center; gap: 8px; }
   .form-progress-dot {
     width: 26px; height: 26px; border-radius: 50%; flex: 0 0 auto;
@@ -468,7 +505,10 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
   .form-progress-line::after { content: ''; position: absolute; inset: 0; width: 0%; background: var(--action-primary-bg); transition: width 320ms ease; }
   .form-progress-line.is-filled::after { width: 100%; }
   @media (max-width: 480px) {
-    .form-progress-label { display: none; }
+    /* The labels are the only thing that says what each step is, so they shrink
+       instead of disappearing — bare "1" and "2" carry no context. */
+    .form-progress { gap: 8px !important; }
+    .form-progress-label { font-size: 11px; white-space: normal; }
   }
 
   .contact-input {
@@ -486,6 +526,11 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
     appearance: none;
   }
   textarea.contact-input { height: auto; padding: 12px 14px; }
+  /* A native date control brings its own picker affordance, so the field keeps
+     room for it on the right instead of a decorative chevron. */
+  .contact-input-date { padding-right: 10px; }
+  .contact-input-date::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .65; }
+  .contact-input-date::-webkit-calendar-picker-indicator:hover { opacity: 1; }
   .contact-input:focus { border-color: var(--blue-500); }
 
   @media (max-width: 768px) {
@@ -503,7 +548,20 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
   .guest-stepper-btn:hover { opacity: .85; }
   .guest-stepper-btn:active { transform: var(--press-scale); }
 
+  .find-us-fieldset { border: 0; margin: 0 0 var(--space-7); padding: 0; min-width: 0; }
+  .find-us-legend { width: 100%; padding: 0; margin: 0 0 var(--space-6); }
+  .find-us-legend-row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
+  .find-us-legend-title { font: 700 20px/1.2 var(--font-sans); color: var(--text-heading); }
+  .find-us-legend-hint { font: 400 12px/1 var(--font-sans); color: var(--text-muted); white-space: nowrap; }
+  .find-us-options { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .find-us-option { position: relative; display: flex; }
+  /* The radio stays in the accessibility tree and the tab/arrow order; the pill
+     label is what you see, and the focus ring is forwarded onto it. */
+  .find-us-radio { position: absolute; top: 0; left: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+
   .find-us-pill {
+    display: inline-flex;
+    align-items: center;
     font: 600 14px/1 var(--font-sans);
     color: var(--text-heading);
     background: var(--surface-raised);
@@ -513,11 +571,12 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
     cursor: pointer;
     transition: var(--transition-control);
   }
-  .find-us-pill[aria-pressed="true"] {
+  .find-us-radio:checked + .find-us-pill {
     background: var(--ink-900);
     color: var(--cream-50);
     border-color: var(--ink-900);
   }
+  .find-us-radio:focus-visible + .find-us-pill { outline: 2px solid var(--blue-500); outline-offset: 2px; }
 
   @media (max-width: 768px) {
     .contact-field-row { grid-template-columns: 1fr !important; }
@@ -525,63 +584,114 @@ const TOUR_OPTIONS = [...TOURS.map((t) => t.title), 'Not sure yet / custom itine
 </style>
 
 <script>
-  const guestCount = document.getElementById('guest-count');
-  const guestsInput = document.getElementById('guests-input') as HTMLInputElement;
-  let guests = 1;
-  document.querySelectorAll<HTMLButtonElement>('.guest-stepper-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      if (btn.dataset.action === 'increment') guests += 1;
-      else guests = Math.max(1, guests - 1);
-      if (guestCount) guestCount.textContent = String(guests);
-      if (guestsInput) guestsInput.value = String(guests);
-    });
-  });
+  type FormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
-  const foundUsInput = document.getElementById('found-us-input') as HTMLInputElement;
-  document.querySelectorAll<HTMLButtonElement>('.find-us-pill').forEach((pill) => {
-    pill.addEventListener('click', () => {
-      document.querySelectorAll<HTMLButtonElement>('.find-us-pill').forEach((p) => p.setAttribute('aria-pressed', 'false'));
-      pill.setAttribute('aria-pressed', 'true');
-      if (foundUsInput) foundUsInput.value = pill.dataset.value ?? '';
-    });
-  });
-
-  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const step1 = form?.querySelector<HTMLElement>('[data-step="1"]');
   const step2 = form?.querySelector<HTMLElement>('[data-step="2"]');
 
-  function validateStep(container: HTMLElement | null | undefined) {
-    if (!container) return true;
-    const fields = container.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input[required], select[required], textarea[required]');
-    for (const field of fields) {
-      if (!field.checkValidity()) {
-        field.reportValidity();
-        return false;
-      }
-    }
-    return true;
+  // Guests: the number field is the source of truth, the <output> is the live
+  // mirror that gets announced when the +/- buttons move it.
+  const guestCount = document.getElementById('guest-count');
+  const guestsInput = document.getElementById('guests-input') as HTMLInputElement | null;
+
+  function setGuests(next: number) {
+    const value = Math.max(1, Math.round(next) || 1);
+    if (guestsInput) guestsInput.value = String(value);
+    if (guestCount) guestCount.textContent = String(value);
   }
 
-  const progressDot1 = document.querySelector<HTMLElement>('[data-progress-dot="1"]');
-  const progressDot2 = document.querySelector<HTMLElement>('[data-progress-dot="2"]');
+  document.querySelectorAll<HTMLButtonElement>('.guest-stepper-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const current = Number(guestsInput?.value ?? 1);
+      setGuests(btn.dataset.action === 'increment' ? current + 1 : current - 1);
+    });
+  });
+  guestsInput?.addEventListener('change', () => setGuests(Number(guestsInput.value)));
+
+  function errorFor(field: FormField) {
+    return field.name ? document.getElementById('err-' + field.name) : null;
+  }
+
+  function showError(field: FormField) {
+    field.setAttribute('aria-invalid', 'true');
+    const err = errorFor(field);
+    if (!err) return;
+    field.setAttribute('aria-describedby', err.id);
+    err.textContent = field.validationMessage;
+    err.hidden = false;
+  }
+
+  function clearError(field: FormField) {
+    field.removeAttribute('aria-invalid');
+    field.removeAttribute('aria-describedby');
+    const err = errorFor(field);
+    if (!err) return;
+    err.textContent = '';
+    err.hidden = true;
+  }
+
+  function validateStep(container: HTMLElement | null | undefined) {
+    if (!container) return true;
+    const fields = container.querySelectorAll<FormField>('input[required], select[required], textarea[required]');
+    let firstInvalid: FormField | null = null;
+    for (const field of fields) {
+      if (field.checkValidity()) {
+        clearError(field);
+      } else {
+        showError(field);
+        if (!firstInvalid) firstInvalid = field;
+      }
+    }
+    if (!firstInvalid) return true;
+    firstInvalid.focus({ preventScroll: true });
+    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  }
+
+  // Drop a field's error as soon as it is valid again, so the message never
+  // contradicts what is on screen.
+  ['input', 'change'].forEach((evt) => {
+    form?.addEventListener(evt, (e) => {
+      const field = e.target as FormField | null;
+      if (!field || !field.hasAttribute('aria-invalid')) return;
+      if (field.checkValidity()) clearError(field);
+    });
+  });
+
+  const progressStep1 = document.querySelector<HTMLElement>('[data-progress-dot="1"]');
+  const progressStep2 = document.querySelector<HTMLElement>('[data-progress-dot="2"]');
   const progressLine = document.querySelector<HTMLElement>('[data-progress-line]');
+
+  function markCurrent(el: HTMLElement | null, isCurrent: boolean) {
+    if (!el) return;
+    if (isCurrent) el.setAttribute('aria-current', 'step');
+    else el.removeAttribute('aria-current');
+  }
+
+  function goToStep(step: 1 | 2) {
+    const leaving = step === 2 ? step1 : step2;
+    const entering = step === 2 ? step2 : step1;
+    if (leaving) leaving.style.display = 'none';
+    if (entering) entering.style.display = 'block';
+
+    progressStep2?.classList.toggle('is-active', step === 2);
+    progressLine?.classList.toggle('is-filled', step === 2);
+    markCurrent(progressStep1, step === 1);
+    markCurrent(progressStep2, step === 2);
+
+    form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Moving focus to the new heading is what tells a screen reader that
+    // something happened; the heading carries "step N of 2".
+    entering?.querySelector<HTMLElement>('.step-heading')?.focus({ preventScroll: true });
+  }
 
   document.getElementById('to-step-2')?.addEventListener('click', () => {
     if (!validateStep(step1)) return;
-    if (step1) step1.style.display = 'none';
-    if (step2) step2.style.display = 'block';
-    progressDot2?.classList.add('is-active');
-    progressLine?.classList.add('is-filled');
-    form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    goToStep(2);
   });
 
-  document.getElementById('back-to-step-1')?.addEventListener('click', () => {
-    if (step2) step2.style.display = 'none';
-    if (step1) step1.style.display = 'block';
-    progressDot2?.classList.remove('is-active');
-    progressLine?.classList.remove('is-filled');
-    form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  document.getElementById('back-to-step-1')?.addEventListener('click', () => goToStep(1));
 
   // Google reCAPTCHA v2 checkbox — using Google's PUBLIC TEST site key, which always
   // passes and never blocks a real bot. Swap in your own site key from
