@@ -54,6 +54,15 @@
   .section-py-tight { padding-top: var(--space-9); padding-bottom: var(--space-9); }
 }
 
+/* --- media frames --- */
+/* One treatment for every rounded photo/video frame sitting on the page
+   background. These used to be a mix of a 1px --ink-900 border (About,
+   Accessible Tours, Photography, Reviews) and nothing at all (tour pages,
+   How It Works), so the same component read as two different ones. A hairline
+   ring in --border-subtle separates the media from the sand without the hard
+   black edge; box-shadow rather than border so it costs no layout space and
+   follows whatever border-radius the frame sets. */
+.media-frame { box-shadow: 0 0 0 1px var(--border-subtle); }
 /* Issue #75: the same scale one step down, for the sections and cards that carry
    their own 96px block padding instead of sitting inside <Section>. Those values
    were hardcoded with no media query, so at 360px two stacked panels still spent
