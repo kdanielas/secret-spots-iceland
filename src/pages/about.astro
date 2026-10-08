@@ -94,14 +94,6 @@ import toursImg from '../assets/images/Web images/about-luke/northern-lights-ice
       <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
         <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Luke, Founder of Secret Spots of Iceland</span>
       </div>
-      <div style="display:flex;gap:var(--space-4)">
-        <button type="button" class="testimonial-arrow" aria-label="Previous">
-          <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
-        </button>
-        <button type="button" class="testimonial-arrow" aria-label="Next">
-          <Icon name="arrow-right" size={18} />
-        </button>
-      </div>
     </div>
   </section>
 </Layout>
@@ -114,22 +106,6 @@ import toursImg from '../assets/images/Web images/about-luke/northern-lights-ice
     border-radius: 32px;
     padding: var(--space-8);
   }
-
-  .testimonial-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-    border: 1px solid #e8e1d8;
-    background: #fff;
-    color: var(--ink-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-control);
-  }
-  .testimonial-arrow:hover { background: var(--cream-100); }
-  .testimonial-arrow:active { transform: var(--press-scale); }
 
   @media (max-width: 1024px) {
     .about-row { gap: var(--space-8); }

@@ -8,6 +8,7 @@ import { priceLabel } from '../../data/tours';
 import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
+import ReviewCarousel from '../../components/ReviewCarousel.astro';
 
 import heroImg from '../../assets/images/Web images/golden-circle/reindeer-herd-snow.jpg';
 import expectImg from '../../assets/images/Web images/golden-circle/gullfoss-golden-circle-iceland.jpg';
@@ -157,24 +158,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   </section>
 
   <section class="tour-block">
-    <div class="review-carousel quote-panel">
-      <div style="display:flex;gap:4px">
-        {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
-      </div>
-      <p class="review-quote" style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"{REVIEWS[0].quote}"</p>
-      <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-        <span class="review-name" style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">{REVIEWS[0].name}</span>
-        <span class="review-type" style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">{REVIEWS[0].type}</span>
-      </div>
-      <div style="display:flex;gap:var(--space-4)">
-        <button type="button" class="testimonial-arrow" data-dir="prev" aria-label="Previous review">
-          <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
-        </button>
-        <button type="button" class="testimonial-arrow" data-dir="next" aria-label="Next review">
-          <Icon name="arrow-right" size={18} />
-        </button>
-      </div>
-    </div>
+    <ReviewCarousel reviews={REVIEWS} label="Golden Circle guest reviews" />
   </section>
 
   <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
@@ -250,84 +234,4 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     .tour-info-bar-dot { display: none; }
     .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
   }
-
-  .testimonial-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-    border: none;
-    background: var(--cream-50);
-    color: var(--ink-900);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: var(--transition-control);
-  }
-  .testimonial-arrow:hover { background: var(--cream-100); }
-  .testimonial-arrow:active { transform: var(--press-scale); }
 </style>
-
-<script define:vars={{ REVIEWS }}>
-  const carousel = document.querySelector('.review-carousel');
-  if (carousel) {
-    const quoteEl = carousel.querySelector('.review-quote');
-    const nameEl = carousel.querySelector('.review-name');
-    const typeEl = carousel.querySelector('.review-type');
-    const arrows = carousel.querySelectorAll('.testimonial-arrow');
-    let index = 0;
-    let autoTimer;
-
-    function lockQuoteHeight() {
-      const original = quoteEl.textContent;
-      quoteEl.style.minHeight = '';
-      let max = 0;
-      REVIEWS.forEach((r) => {
-        quoteEl.textContent = `"${r.quote}"`;
-        max = Math.max(max, quoteEl.getBoundingClientRect().height);
-      });
-      quoteEl.textContent = original;
-      quoteEl.style.minHeight = `${max}px`;
-    }
-
-    function render() {
-      quoteEl.textContent = `"${REVIEWS[index].quote}"`;
-      nameEl.textContent = REVIEWS[index].name;
-      typeEl.textContent = REVIEWS[index].type;
-    }
-
-    function next() {
-      index = (index + 1) % REVIEWS.length;
-      render();
-    }
-
-    function startAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(next, 7000);
-    }
-
-    arrows.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        if (btn.dataset.dir === 'prev') {
-          index = (index - 1 + REVIEWS.length) % REVIEWS.length;
-        } else {
-          index = (index + 1) % REVIEWS.length;
-        }
-        render();
-        startAuto();
-      });
-    });
-
-    lockQuoteHeight();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(lockQuoteHeight);
-    }
-    startAuto();
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(lockQuoteHeight, 150);
-    });
-  }
-</script>
