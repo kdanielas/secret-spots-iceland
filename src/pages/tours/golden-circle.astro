@@ -11,6 +11,7 @@ import HighlightsCarousel from '../../components/HighlightsCarousel.astro';
 import heroImg from '../../assets/images/Web images/golden-circle/reindeer-herd-snow.jpg';
 import expectImg from '../../assets/images/Web images/golden-circle/gullfoss-golden-circle-iceland.jpg';
 import photographyImg from '../../assets/images/Web images/golden-circle/bruafoss-golden-circle-iceland-friends.jpg';
+import TourCtaPanel from '../../components/TourCtaPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.jpg';
 
 import highlight1 from '../../assets/images/Web images/golden-circle/thingvellir-national-park.webp';
@@ -189,19 +190,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     </div>
   </section>
 
-  <section style="background:#081824;border-radius:32px 32px 0 0;padding:var(--space-8)">
-    <div style="position:relative;border-radius:24px;overflow:hidden;background:var(--cream-50);min-height:520px;display:flex;align-items:center;padding:var(--space-13)">
-      <Image src={ctaImg} alt="Family enjoying a geothermal steam vent in North Iceland" width={1600} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%" />
-      <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(251,246,240,.97) 40%, rgba(251,246,240,.15) 90%)"></div>
-      <div style="position:relative;display:flex;flex-direction:column;gap:var(--space-9);align-items:flex-start;max-width:600px">
-        <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-          <h2 style="font:400 3rem/1.1 var(--font-display);color:var(--text-heading);margin:0">Ready to book your Golden Circle Tour?</h2>
-          <p style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0">This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else.</p>
-        </div>
-        <Button variant="primary" href="/contact">Book your Tour</Button>
-      </div>
-    </div>
-  </section>
+  <TourCtaPanel
+    title="Ready to book your Golden Circle Tour?"
+    lead="This is not just a tour — it's a private Iceland experience designed for travellers who want the famous Golden Circle without the famous crowds. Tell Luke's team your preferred date and group size and we'll take care of everything else."
+    cta="Book your Tour"
+    image={ctaImg}
+    imageAlt="Family enjoying a geothermal steam vent in North Iceland"
+  />
 </Layout>
 
 <style>
