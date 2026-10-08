@@ -11,32 +11,50 @@ import vehiclesImg from '../assets/images/south-coast-vestrahorn-tour.webp';
 const SERVICES = [
   {
     question: 'Private tours — just your group, nobody else',
-    answer: 'Every tour is 100% private. No strangers, no fixed bus schedule — just you, your group, and Luke, with the itinerary built entirely around you.',
+    answer:
+      'Every tour is 100% private. No strangers, no fixed bus schedule — just you, your group, and Luke, with the itinerary built entirely around you.',
   },
   {
     question: 'Professional photography guidance',
-    answer: "As a working photographer, Luke doesn't just guide you to the location — he helps you frame and time the shot, so you go home with photos you actually want.",
+    answer:
+      "As a working photographer, Luke doesn't just guide you to the location — he helps you frame and time the shot, so you go home with photos you actually want.",
   },
   {
     question: 'Flexible itinerary — no fixed routes',
-    answer: 'The route adapts to the weather, the light and your pace, not the other way around. Fewer stops if you want more time somewhere, a different route if the conditions call for it.',
+    answer:
+      'The route adapts to the weather, the light and your pace, not the other way around. Fewer stops if you want more time somewhere, a different route if the conditions call for it.',
   },
   {
     question: 'Restaurant and local food recommendations',
-    answer: "From the classic Icelandic hot dog to small farmhouse spots along the way, Luke shares the food finds that don't show up in guidebooks.",
+    answer:
+      "From the classic Icelandic hot dog to small farmhouse spots along the way, Luke shares the food finds that don't show up in guidebooks.",
   },
 ];
 ---
 
-<Layout title="Custom Iceland Private Tours & Trip Planning | Secret Spots" description="From custom itineraries to accommodation recommendations and packing guides — Luke handles every detail of your Iceland trip. Private tours, fully tailored to you." active="How it works">
+<Layout
+  title="Custom Iceland Private Tours & Trip Planning | Secret Spots"
+  description="From custom itineraries to accommodation recommendations and packing guides — Luke handles every detail of your Iceland trip. Private tours, fully tailored to you."
+  active="How it works"
+>
   <div class="how-pad-x" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:329px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
-          <h1 class="how-it-works-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">How It Works</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">No fixed schedules, no strangers, no compromises</p>
+          <h1
+            class="how-it-works-hero-title"
+            style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere"
+          >
+            How It Works
+          </h1>
+          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">
+            No fixed schedules, no strangers, no compromises
+          </p>
         </div>
-        <a href="#services" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none">
+        <a
+          href="#services"
+          style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none"
+        >
           <span style="font:700 15px/1 var(--font-sans)">See how it works</span>
           <Icon name="chevron-down" size={20} color="var(--amber-400)" />
         </a>
@@ -48,22 +66,52 @@ const SERVICES = [
 
   <section class="how-row" style="background:var(--surface-page)">
     <div class="how-row-inner">
-      <div class="how-row-media media-frame" style="flex:0 0 413px;border-radius:32px;overflow:hidden;aspect-ratio:413/620">
-        <Image src={stepsImg} alt="Steam rising over a hot spring in the Icelandic winter" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="how-row-media media-frame"
+        style="flex:0 0 413px;border-radius:32px;overflow:hidden;aspect-ratio:413/620"
+      >
+        <Image
+          src={stepsImg}
+          alt="Steam rising over a hot spring in the Icelandic winter"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:565px">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Every tour is just you and your group — designed around what you want to see, how you want to move, and what the weather and light make possible that day.</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">That's how Luke approaches every private Iceland tour. Since 2006 he has been exploring and photographing Iceland's most remote and breathtaking landscapes — building a deep knowledge of hidden locations, secret viewpoints, and the kind of places that never appear in guidebooks. The private tours grew naturally from that — a way to share what he's discovered with travellers who wanted something more personal and authentic than a standard tour bus experience.</p>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Every tour is just you and your group — designed around what you want to see, how you want
+          to move, and what the weather and light make possible that day.
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          That's how Luke approaches every private Iceland tour. Since 2006 he has been exploring
+          and photographing Iceland's most remote and breathtaking landscapes — building a deep
+          knowledge of hidden locations, secret viewpoints, and the kind of places that never appear
+          in guidebooks. The private tours grew naturally from that — a way to share what he's
+          discovered with travellers who wanted something more personal and authentic than a
+          standard tour bus experience.
+        </p>
       </div>
     </div>
   </section>
 
   <section id="services" class="how-row" style="background:var(--surface-page)">
     <div style="display:flex;flex-direction:column;gap:var(--space-8);width:100%;max-width:856px">
-      <h2 style="font:400 2.5rem/1.1 var(--font-display);color:#312c27;margin:0;text-align:center">Our Services</h2>
-      <div data-faq-group style="display:flex;flex-direction:column;width:100%;border-top:1px solid #817b73">
+      <h2 style="font:400 2.5rem/1.1 var(--font-display);color:#312c27;margin:0;text-align:center">
+        Our Services
+      </h2>
+      <div
+        data-faq-group
+        style="display:flex;flex-direction:column;width:100%;border-top:1px solid #817b73"
+      >
         {SERVICES.map((s, i) => (
-          <FaqItem question={s.question} answer={s.answer} defaultOpen={i === 0} style="border-bottom-color:#817b73" />
+          <FaqItem
+            question={s.question}
+            answer={s.answer}
+            defaultOpen={i === 0}
+            style="border-bottom-color:#817b73"
+          />
         ))}
       </div>
     </div>
@@ -71,18 +119,41 @@ const SERVICES = [
 
   <section class="how-row" style="background:var(--surface-page)">
     <div class="how-row-inner">
-      <div class="how-row-media media-frame" style="flex:0 0 686px;border-radius:32px;overflow:hidden;aspect-ratio:686/458">
-        <Image src={vehiclesImg} alt="4x4 vehicle on the road along Iceland's South Coast" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="how-row-media media-frame"
+        style="flex:0 0 686px;border-radius:32px;overflow:hidden;aspect-ratio:686/458"
+      >
+        <Image
+          src={vehiclesImg}
+          alt="4x4 vehicle on the road along Iceland's South Coast"
+          width={900}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-9);max-width:600px">
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel in comfort — vehicles chosen for your group</h2>
+          <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+            Travel in comfort — vehicles chosen for your group
+          </h2>
           <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Getting to Iceland's most remote and breathtaking locations should be as enjoyable as arriving there. That's why every tour uses a carefully selected luxury vehicle matched to your group size, comfort expectations, and the terrain you'll be exploring.</p>
-            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Luke works with trusted local partners to ensure you always travel in the right vehicle for your journey — whether that's a smooth ride along the South Coast or a rugged adventure into the Highlands.</p>
+            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+              Getting to Iceland's most remote and breathtaking locations should be as enjoyable as
+              arriving there. That's why every tour uses a carefully selected luxury vehicle matched
+              to your group size, comfort expectations, and the terrain you'll be exploring.
+            </p>
+            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+              Luke works with trusted local partners to ensure you always travel in the right
+              vehicle for your journey — whether that's a smooth ride along the South Coast or a
+              rugged adventure into the Highlands.
+            </p>
           </div>
         </div>
-        <a href="/our-vehicles" style="display:inline-flex;align-items:center;justify-content:center;gap:var(--space-3);border:1.5px solid var(--ink-900);color:var(--ink-900);text-decoration:none;padding:14px 32px;border-radius:31px;font:600 16px/1 var(--font-sans);align-self:flex-start">
+        <a
+          href="/our-vehicles"
+          style="display:inline-flex;align-items:center;justify-content:center;gap:var(--space-3);border:1.5px solid var(--ink-900);color:var(--ink-900);text-decoration:none;padding:14px 32px;border-radius:31px;font:600 16px/1 var(--font-sans);align-self:flex-start"
+        >
           Our Vehicles
           <Icon name="arrow-right" size={20} />
         </a>
@@ -90,28 +161,68 @@ const SERVICES = [
     </div>
   </section>
 
-  <section class="panel-py how-pad-x" style="background:var(--surface-page);display:flex;flex-direction:column;gap:var(--space-9);align-items:center;text-align:center">
+  <section
+    class="panel-py how-pad-x"
+    style="background:var(--surface-page);display:flex;flex-direction:column;gap:var(--space-9);align-items:center;text-align:center"
+  >
     <div style="display:flex;gap:4px">
-      {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
+      {Array.from({ length: 5 }).map(() => (
+        <Icon name="star" size={20} color="var(--star-gold)" />
+      ))}
     </div>
-    <p style="font:400 28px/1.4 var(--font-sans);color:var(--text-heading);margin:0;max-width:900px">&ldquo;I started Secret Spots because I genuinely believe Iceland is best experienced privately, slowly, and with someone who knows where to look. I look forward to welcoming you and sharing the hidden places that have inspired me for nearly two decades.&rdquo;</p>
-    <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Luke, Founder of Secret Spots of Iceland</span>
+    <p style="font:400 28px/1.4 var(--font-sans);color:var(--text-heading);margin:0;max-width:900px">
+      &ldquo;I started Secret Spots because I genuinely believe Iceland is best experienced
+      privately, slowly, and with someone who knows where to look. I look forward to welcoming you
+      and sharing the hidden places that have inspired me for nearly two decades.&rdquo;
+    </p>
+    <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">
+      Luke, Founder of Secret Spots of Iceland
+    </span>
   </section>
 </Layout>
 
 <style>
-  .how-pad-x { padding-left: var(--space-9); padding-right: var(--space-9); }
-  .how-row { padding: var(--space-11) var(--space-9); display: flex; align-items: center; justify-content: center; }
-  .how-row-inner { display: flex; align-items: center; gap: var(--space-11); max-width: 1200px; width: 100%; }
+  .how-pad-x {
+    padding-left: var(--space-9);
+    padding-right: var(--space-9);
+  }
+  .how-row {
+    padding: var(--space-11) var(--space-9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .how-row-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-11);
+    max-width: 1200px;
+    width: 100%;
+  }
 
   @media (max-width: 1024px) {
-    .how-row-inner { gap: var(--space-8); }
+    .how-row-inner {
+      gap: var(--space-8);
+    }
   }
   @media (max-width: 768px) {
-    .how-row-inner { flex-direction: column; align-items: stretch; }
-    .how-row-media { flex-basis: auto !important; width: 100%; }
-    .how-row { padding: var(--space-9) var(--space-6); }
-    .how-pad-x { padding-left: var(--space-6); padding-right: var(--space-6); }
-    .how-it-works-hero-title { font-size: 2rem !important; }
+    .how-row-inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .how-row-media {
+      flex-basis: auto !important;
+      width: 100%;
+    }
+    .how-row {
+      padding: var(--space-9) var(--space-6);
+    }
+    .how-pad-x {
+      padding-left: var(--space-6);
+      padding-right: var(--space-6);
+    }
+    .how-it-works-hero-title {
+      font-size: 2rem !important;
+    }
   }
 </style>

@@ -32,9 +32,20 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
 ---
 
 <div class="home-hero-wrap container-pad" style="padding-bottom:var(--space-8)">
-  <section class:list={['hero-frame', { 'hero-frame-compact': compact }]} style="position:relative;min-height:85vh;border-radius:32px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+  <section
+    class:list={['hero-frame', { 'hero-frame-compact': compact }]}
+    style="position:relative;min-height:85vh;border-radius:32px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center"
+  >
     {framedVideo ? (
-      <video autoplay muted loop playsinline preload="auto" poster={posterSrc} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster={posterSrc}
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+      >
         {/* desktop/tablet only — on mobile no <source> matches, so the browser
            never requests the video and just shows the poster as a still image.
            A `media` attribute can't be written mobile-first, so this is the
@@ -43,24 +54,48 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
         <source src={framedVideo} media="(min-width: 768px)" />
       </video>
     ) : (
-      <img src={posterSrc} alt={framedImageAlt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+      <img
+        src={posterSrc}
+        alt={framedImageAlt}
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+      />
     )}
-    <div class="hero-fade" style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(230,227,218,0) 50%, #E6E3DA 92%)"></div>
-    <div class="hero-content" style="position:relative;width:100%;display:flex;flex-direction:column;gap:var(--space-6);align-items:center;text-align:center;padding:0 var(--space-9) var(--space-11)">
+    <div
+      class="hero-fade"
+      style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(230,227,218,0) 50%, #E6E3DA 92%)"
+    ></div>
+    <div
+      class="hero-content"
+      style="position:relative;width:100%;display:flex;flex-direction:column;gap:var(--space-6);align-items:center;text-align:center;padding:0 var(--space-9) var(--space-11)"
+    >
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center">
-        <h1 class="hero-title hero-anim" style="font:400 36px/1.25 var(--font-display);color:var(--text-heading);margin:0;max-width:60%;animation-delay:200ms">
+        <h1
+          class="hero-title hero-anim"
+          style="font:400 36px/1.25 var(--font-display);color:var(--text-heading);margin:0;max-width:60%;animation-delay:200ms"
+        >
           <slot name="title" />
         </h1>
         {subtitle || Astro.slots.has('subtitle') ? (
-          <p class="hero-anim" style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:600px;animation-delay:900ms">
+          <p
+            class="hero-anim"
+            style="font:400 18px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:600px;animation-delay:900ms"
+          >
             {subtitle}
             <slot name="subtitle" />
           </p>
         ) : null}
       </div>
       <div class="hero-ctas hero-anim" style="justify-content:center;animation-delay:1600ms">
-        {primaryCta ? <Button variant={primaryVariant} href={primaryHref}>{primaryCta}</Button> : null}
-        {secondaryCta ? <Button variant="outline" href={secondaryHref} iconAfter="arrow-right">{secondaryCta}</Button> : null}
+        {primaryCta ? (
+          <Button variant={primaryVariant} href={primaryHref}>
+            {primaryCta}
+          </Button>
+        ) : null}
+        {secondaryCta ? (
+          <Button variant="outline" href={secondaryHref} iconAfter="arrow-right">
+            {secondaryCta}
+          </Button>
+        ) : null}
       </div>
       <slot />
     </div>
@@ -76,38 +111,65 @@ const posterSrc = (await getImage({ src: framedImage, width: 1600, quality: 80 }
     animation: hero-fade-up 1400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
   @keyframes hero-fade-up {
-    to { opacity: 1; transform: none; }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-anim { opacity: 1; transform: none; animation: none; }
+    .hero-anim {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
   @media (max-width: 768px) {
-    .home-hero-wrap { padding-bottom: var(--space-6) !important; }
+    .home-hero-wrap {
+      padding-bottom: var(--space-6) !important;
+    }
     /* a fixed 85vh floor leaves a lot of empty image above short content
        (no video, no buttons, a one-line title) on pages like FAQ — but
        aspect-ratio clipped taller content instead of growing for it (the
        section has overflow:hidden, so the home page's wrapped title got
        cut off at the top). min-height is a true floor: it still shrinks
        short-content pages close to square, but never clips longer content. */
-    .hero-frame { min-height: 420px !important; }
+    .hero-frame {
+      min-height: 420px !important;
+    }
     /* opt-in for short-content heroes (e.g. a blog post, which has no CTAs) where even
        420px is taller than needed. A fixed aspect-ratio looked more like a
        true 4:3 photo, but it clips longer titles the same way the old
        85vh+overflow:hidden combo did — min-height never clips, it's just a
        lower floor, so long titles still get all the room they need. */
-    .hero-frame-compact { min-height: 300px !important; }
-    .hero-content { padding-top: var(--space-9) !important; }
-    .hero-title { font-size: 1.75rem !important; max-width: 100% !important; }
+    .hero-frame-compact {
+      min-height: 300px !important;
+    }
+    .hero-content {
+      padding-top: var(--space-9) !important;
+    }
+    .hero-title {
+      font-size: 1.75rem !important;
+      max-width: 100% !important;
+    }
     /* the wrapped title takes up much more vertical space on narrow
        screens and sits right at the top of the video with no protection,
        so the fade needs to cover the whole hero (not just the lower half)
        and be strong enough to stay legible over bright video frames */
-    .hero-fade { background: linear-gradient(to bottom, rgba(230,227,218,.6) 0%, rgba(230,227,218,.8) 35%, #E6E3DA 75%) !important; }
+    .hero-fade {
+      background: linear-gradient(
+        to bottom,
+        rgba(230, 227, 218, 0.6) 0%,
+        rgba(230, 227, 218, 0.8) 35%,
+        #e6e3da 75%
+      ) !important;
+    }
   }
 </style>
 
 <style is:global>
   /* keeps the page background flush with the hero's own fade color, so the
      rounded card doesn't show a seam against a differently-toned page bg */
-  body:has(.home-hero-wrap) { background: #E6E3DA !important; }
+  body:has(.home-hero-wrap) {
+    background: #e6e3da !important;
+  }
 </style>

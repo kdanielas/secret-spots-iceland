@@ -21,7 +21,12 @@ const MONTHS = [
   { month: 'May', hours: '16–20 h', best: '—', note: 'Puffins arrive, green returns' },
   { month: 'June', hours: '20–21 h', best: '—', note: 'Midnight sun, lupines, highlands open' },
   { month: 'July', hours: '18–21 h', best: '—', note: 'Highlands at their best' },
-  { month: 'August', hours: '15–18 h', best: '★ (late)', note: 'Warm light, auroras return late month' },
+  {
+    month: 'August',
+    hours: '15–18 h',
+    best: '★ (late)',
+    note: 'Warm light, auroras return late month',
+  },
   { month: 'September', hours: '11–14 h', best: '★★★', note: 'Autumn colour + dark skies' },
   { month: 'October', hours: '8–11 h', best: '★★★', note: 'First snow, full aurora season' },
   { month: 'November', hours: '5–8 h', best: '★★★', note: 'Ice caves open, deep winter light' },
@@ -29,10 +34,26 @@ const MONTHS = [
 ];
 
 const FAQS = [
-  { question: 'What is the single best month to photograph Iceland?', answer: 'For a first trip: late September, for the combination of auroras, autumn colour and manageable weather. For a second trip: February–March for ice caves, or June for the highlands.' },
-  { question: 'Is summer worth it if there are no northern lights?', answer: "Absolutely — the midnight sun gives you more shootable golden light in one night than most places offer in a week, and it's the only window for the highland interior." },
-  { question: 'When is Iceland least crowded?', answer: 'November and early December, and again in April–May. Both offer excellent photography with the locations largely to yourself.' },
-  { question: 'Do I need a guide to photograph Iceland?', answer: 'You can self-drive much of the ring road. Where a local guide changes everything is timing and weather: knowing which side of a mountain has clear sky tonight, when the light will hit a canyon wall, and which "famous" spot to skip for the better one ten minutes away.' },
+  {
+    question: 'What is the single best month to photograph Iceland?',
+    answer:
+      'For a first trip: late September, for the combination of auroras, autumn colour and manageable weather. For a second trip: February–March for ice caves, or June for the highlands.',
+  },
+  {
+    question: 'Is summer worth it if there are no northern lights?',
+    answer:
+      "Absolutely — the midnight sun gives you more shootable golden light in one night than most places offer in a week, and it's the only window for the highland interior.",
+  },
+  {
+    question: 'When is Iceland least crowded?',
+    answer:
+      'November and early December, and again in April–May. Both offer excellent photography with the locations largely to yourself.',
+  },
+  {
+    question: 'Do I need a guide to photograph Iceland?',
+    answer:
+      'You can self-drive much of the ring road. Where a local guide changes everything is timing and weather: knowing which side of a mountain has clear sky tonight, when the light will hit a canyon wall, and which "famous" spot to skip for the better one ten minutes away.',
+  },
 ];
 
 const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroImg);
@@ -59,16 +80,33 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs
+        inline
+        trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]}
+        style="margin-bottom:var(--space-10)"
+      />
 
       <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">After nearly 20 years photographing Iceland, the question I hear most often is simple: when should I come? The honest answer is that there is no bad time to photograph Iceland, but there absolutely is a best time for the photographs you want to take. Northern lights and ice caves belong to one half of the year; the midnight sun and the highlands belong to the other. This guide breaks it down so you can plan your trip around the light, not around luck.</p>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          After nearly 20 years photographing Iceland, the question I hear most often is simple:
+          when should I come? The honest answer is that there is no bad time to photograph Iceland,
+          but there absolutely is a best time for the photographs you want to take. Northern lights
+          and ice caves belong to one half of the year; the midnight sun and the highlands belong to
+          the other. This guide breaks it down so you can plan your trip around the light, not
+          around luck.
+        </p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline
+        datePublished={post.datePublished}
+        dateline={dateline}
+        style="margin-top:var(--space-6)"
+      />
 
       <section style="margin-top:var(--space-9);background:#F8F7F3;border-radius:24px;padding:var(--space-8)">
-        <h2 style="font:400 1.375rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">The short answer</h2>
+        <h2 style="font:400 1.375rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          The short answer
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
           {[
             'For northern lights and ice caves: late September to March',
@@ -77,100 +115,209 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
             'For puffins: mid-May to early August',
           ].map((item) => (
             <div style="display:flex;gap:var(--space-4);align-items:flex-start">
-              <Icon name="check" size={18} color="var(--blue-500)" style="flex:0 0 auto;margin-top:3px" />
+              <Icon
+                name="check"
+                size={18}
+                color="var(--blue-500)"
+                style="flex:0 0 auto;margin-top:3px"
+              />
               <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
             </div>
           ))}
         </div>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-5) 0 0">If you can only come once, I usually point people to late September or early March: you get workable daylight, real darkness for auroras, and dramatic low sun angles all day long.</p>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-5) 0 0">
+          If you can only come once, I usually point people to late September or early March: you
+          get workable daylight, real darkness for auroras, and dramatic low sun angles all day
+          long.
+        </p>
       </section>
 
       <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Autumn (September – October): auroras meet autumn colour</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          Autumn (September – October): auroras meet autumn colour
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">By early September the nights are properly dark again and the aurora season reopens, while daytime temperatures are still mild and the mountain roads mostly open. The birches and blueberry heath turn red and gold, which against black lava makes a colour combination you won't find anywhere else on earth. October adds the first snow on the peaks while the lowlands keep their colour. If I had to pick one month for a first photography trip to Iceland, late September would win more often than not.</p>
-          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">Best for: northern lights with comfortable logistics, autumn colours, dramatic skies.</p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            By early September the nights are properly dark again and the aurora season reopens,
+            while daytime temperatures are still mild and the mountain roads mostly open. The
+            birches and blueberry heath turn red and gold, which against black lava makes a colour
+            combination you won't find anywhere else on earth. October adds the first snow on the
+            peaks while the lowlands keep their colour. If I had to pick one month for a first
+            photography trip to Iceland, late September would win more often than not.
+          </p>
+          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">
+            Best for: northern lights with comfortable logistics, autumn colours, dramatic skies.
+          </p>
         </div>
       </section>
 
       <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Winter (November – February): the season of dark gold</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          Winter (November – February): the season of dark gold
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Winter days in Iceland are short, around four to five hours of light in December, but that light is extraordinary. The sun never climbs far above the horizon, which means the whole day is effectively one long golden hour. Frozen waterfalls, black beaches under snow, and the deep blue of glacier ice make this the most atmospheric season of all.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">This is also ice cave season: the natural caves under Vatnajökull are only safe and accessible roughly from November to March, and no photograph really prepares you for the blue inside them. The trade-offs are real: weather changes violently and fast, some roads close without warning, and you'll want a local who knows which plans to abandon and when. Shooting days need flexibility built in.</p>
-          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">Best for: northern lights, ice caves, frozen waterfalls, moody seascapes.</p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            Winter days in Iceland are short, around four to five hours of light in December, but
+            that light is extraordinary. The sun never climbs far above the horizon, which means the
+            whole day is effectively one long golden hour. Frozen waterfalls, black beaches under
+            snow, and the deep blue of glacier ice make this the most atmospheric season of all.
+          </p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            This is also ice cave season: the natural caves under Vatnajökull are only safe and
+            accessible roughly from November to March, and no photograph really prepares you for the
+            blue inside them. The trade-offs are real: weather changes violently and fast, some
+            roads close without warning, and you'll want a local who knows which plans to abandon
+            and when. Shooting days need flexibility built in.
+          </p>
+          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">
+            Best for: northern lights, ice caves, frozen waterfalls, moody seascapes.
+          </p>
         </div>
       </section>
 
       <figure style="margin:var(--space-11) 0">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={winterImg} alt="Skógafoss waterfall in the Icelandic winter" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+          <Image
+            src={winterImg}
+            alt="Skógafoss waterfall in the Icelandic winter"
+            width={900}
+            quality={80}
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover"
+          />
         </div>
       </figure>
 
       <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Spring (March – May): light returns, crowds haven't</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          Spring (March – May): light returns, crowds haven't
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Spring is Iceland's most underrated season for photography. Daylight grows fast, by late March you have twelve hours of usable light with the sun still staying low enough for long, warm evenings. Waterfalls are at their most powerful with the melt, the last auroras of the season are still possible into early April, and the puffins return to the cliffs in mid-May.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">March in particular is a personal favourite: winter landscapes with spring logistics.</p>
-          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">Best for: waterfalls at full force, puffins (from May), late-season auroras, quiet locations.</p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            Spring is Iceland's most underrated season for photography. Daylight grows fast, by late
+            March you have twelve hours of usable light with the sun still staying low enough for
+            long, warm evenings. Waterfalls are at their most powerful with the melt, the last
+            auroras of the season are still possible into early April, and the puffins return to the
+            cliffs in mid-May.
+          </p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            March in particular is a personal favourite: winter landscapes with spring logistics.
+          </p>
+          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">
+            Best for: waterfalls at full force, puffins (from May), late-season auroras, quiet
+            locations.
+          </p>
         </div>
       </section>
 
       <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Summer (June – mid-August): the midnight sun</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          Summer (June – mid-August): the midnight sun
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">From roughly the first week of June to mid-July, the sun barely sets. Golden hour stretches from about 10 pm to 1 am, and you can shoot in soft, directional light in the middle of the "night" with nobody else around. This is also the only season when the highland interior opens — Landmannalaugar's rhyolite mountains and the black deserts of the interior are summer-only territory.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">What you give up is darkness: there are no northern lights in summer, full stop. And the popular south coast locations get busy in the middle of the day, which matters less than you'd think, because the best light is at midnight anyway.</p>
-          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">Best for: the highlands, midnight-sun seascapes, lupine fields (June), 20-hour shooting days.</p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            From roughly the first week of June to mid-July, the sun barely sets. Golden hour
+            stretches from about 10 pm to 1 am, and you can shoot in soft, directional light in the
+            middle of the "night" with nobody else around. This is also the only season when the
+            highland interior opens — Landmannalaugar's rhyolite mountains and the black deserts of
+            the interior are summer-only territory.
+          </p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            What you give up is darkness: there are no northern lights in summer, full stop. And the
+            popular south coast locations get busy in the middle of the day, which matters less than
+            you'd think, because the best light is at midnight anyway.
+          </p>
+          <p style="font:700 15px/1.5 var(--font-sans);color:#38627F;margin:0">
+            Best for: the highlands, midnight-sun seascapes, lupine fields (June), 20-hour shooting
+            days.
+          </p>
         </div>
       </section>
 
       <figure style="margin:var(--space-11) 0">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={summerImg} alt="Colourful rhyolite mountains in the Icelandic Highlands" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+          <Image
+            src={summerImg}
+            alt="Colourful rhyolite mountains in the Icelandic Highlands"
+            width={900}
+            quality={80}
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover"
+          />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Month by month at a glance</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          Month by month at a glance
+        </h2>
         <div style="display:flex;flex-direction:column;width:100%">
           {MONTHS.map((m) => (
             <div style="display:flex;align-items:center;gap:var(--space-5);padding:var(--space-4) 0;border-bottom:1px solid var(--border-subtle)">
-              <span style="font:700 15px/1 var(--font-sans);color:var(--text-heading);width:90px;flex:0 0 auto">{m.month}</span>
-              <span style="font:400 13px/1 var(--font-sans);color:var(--text-muted);width:64px;flex:0 0 auto">{m.hours}</span>
-              <span style="font:400 14px/1 var(--font-sans);color:var(--star-gold);width:76px;flex:0 0 auto">{m.best}</span>
-              <span style="font:400 14px/1.4 var(--font-sans);color:var(--text-heading);flex:1">{m.note}</span>
+              <span style="font:700 15px/1 var(--font-sans);color:var(--text-heading);width:90px;flex:0 0 auto">
+                {m.month}
+              </span>
+              <span style="font:400 13px/1 var(--font-sans);color:var(--text-muted);width:64px;flex:0 0 auto">
+                {m.hours}
+              </span>
+              <span style="font:400 14px/1 var(--font-sans);color:var(--star-gold);width:76px;flex:0 0 auto">
+                {m.best}
+              </span>
+              <span style="font:400 14px/1.4 var(--font-sans);color:var(--text-heading);flex:1">
+                {m.note}
+              </span>
             </div>
           ))}
         </div>
       </section>
 
       <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What about the northern lights, exactly?</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Three things need to line up: darkness (September–March), clear skies, and solar activity. You can't control the last two — which is why aurora photography in Iceland is a game of mobility. The photographers who go home with the shot are the ones who can drive out from under the cloud, sometimes two hours in the "wrong" direction. Local knowledge of microclimates matters more than any forecast app.</p>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">
+          What about the northern lights, exactly?
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+          Three things need to line up: darkness (September–March), clear skies, and solar activity.
+          You can't control the last two — which is why aurora photography in Iceland is a game of
+          mobility. The photographers who go home with the shot are the ones who can drive out from
+          under the cloud, sometimes two hours in the "wrong" direction. Local knowledge of
+          microclimates matters more than any forecast app.
+        </p>
       </section>
 
       <section style="margin-top:var(--space-11)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-6)">Frequently asked questions</h2>
+        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-6)">
+          Frequently asked questions
+        </h2>
         <div data-faq-group style="display:flex;flex-direction:column;width:100%">
-          {FAQS.map((q, i) => <FaqItem question={q.question} answer={q.answer} defaultOpen={i === 0} />)}
+          {FAQS.map((q, i) => (
+            <FaqItem question={q.question} answer={q.answer} defaultOpen={i === 0} />
+          ))}
         </div>
       </section>
 
       <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Ready to put this into practice?</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">See our Iceland photography tours, built around the light, all skill levels welcome.</p>
+          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">
+            Ready to put this into practice?
+          </h2>
+          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">
+            See our Iceland photography tours, built around the light, all skill levels welcome.
+          </p>
         </div>
-        <Button variant="primary" href="/tours">See Our Iceland Photography Tours</Button>
+        <Button variant="primary" href="/tours">
+          See Our Iceland Photography Tours
+        </Button>
       </div>
 
       <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
+        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">
+          L
+        </span>
         <div style="display:flex;flex-direction:column">
           <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+          <span style="font:var(--type-body-xs);color:var(--text-muted)">
+            Founder &amp; guide, Secret Spots of Iceland
+          </span>
         </div>
       </div>
     </div>

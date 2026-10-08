@@ -46,14 +46,21 @@ const {
 // Se quita la barra final: Vercel sirve /tours y /tours/ igual.
 const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const pageType =
-  path === '/'                                        ? 'home'
-  : path.startsWith('/tours/')                        ? 'tour'
-  : path === '/tours' || path === '/accessible-tours' ? 'listado_tours'
-  : path === '/blog'                                  ? 'blog_listado'   // #56: el listado vive en una sola URL
-  : path.startsWith('/blog/')                         ? 'blog_articulo'
-  : path === '/contact'                               ? 'contacto'
-  : path === '/faq'                                   ? 'faq'
-  : 'informativa';
+  path === '/'
+    ? 'home'
+    : path.startsWith('/tours/')
+      ? 'tour'
+      : path === '/tours' || path === '/accessible-tours'
+        ? 'listado_tours'
+        : path === '/blog'
+          ? 'blog_listado' // #56: el listado vive en una sola URL
+          : path.startsWith('/blog/')
+            ? 'blog_articulo'
+            : path === '/contact'
+              ? 'contacto'
+              : path === '/faq'
+                ? 'faq'
+                : 'informativa';
 // En las páginas de tour, el slug: no cambia aunque cambie el nombre del tour.
 const tourName = path.startsWith('/tours/') ? path.split('/')[2] : undefined;
 
@@ -85,7 +92,8 @@ const DEFAULT_OG_ALT = 'Two travellers looking out over the Icelandic highlands 
 // casos vale más /og-default.jpg, que ya viene recortada a 1200x630.
 const cardImage =
   image && image.width >= OG_WIDTH && image.width / image.height >= 1.3 ? image : undefined;
-const ogImage = cardImage && (await getImage({ src: cardImage, width: OG_WIDTH, format: 'jpeg', quality: 80 }));
+const ogImage =
+  cardImage && (await getImage({ src: cardImage, width: OG_WIDTH, format: 'jpeg', quality: 80 }));
 
 const ogImageUrl = absoluteUrl(ogImage ? ogImage.src : '/og-default.jpg');
 // Las medidas reales: si no cuadran con la imagen, Facebook la recorta a su aire.
@@ -103,7 +111,6 @@ const ogType = pageType === 'blog_articulo' ? 'article' : 'website';
 // lo que pasa la autoridad de la antigua a la nueva. Es la misma URL que usan
 // og:url y los @id del JSON-LD, así que las tres señales apuntan al mismo sitio.
 const canonical = canonicalUrl(path);
-
 ---
 
 <!doctype html>
@@ -127,14 +134,18 @@ const canonical = canonicalUrl(path);
       window.dataLayer.push({ page_type: pageType, tour_name: tourName });
     </script>
     <!-- Tag Manager (#88). Solo se carga si PUBLIC_GTM_ID está definido. -->
-    {GTM_ID && (
-      <script is:inline define:vars={{ GTM_ID }}>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-        var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer',GTM_ID);
-      </script>
-    )}
+    {GTM_ID && <script is:inline define:vars={{ GTM_ID }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', GTM_ID);
+    </script>}
     <meta name="description" content={description} />
     <!-- Tarjeta social (#38): Open Graph para WhatsApp, Facebook y LinkedIn;
          Twitter Card para X. Las dos leen el mismo título, texto e imagen. -->
@@ -160,24 +171,43 @@ const canonical = canonicalUrl(path);
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>{title}</title>
     <JsonLd schema={jsonLd} />
-    <script is:inline>document.documentElement.classList.add('js-reveal-ready');</script>
+    <script is:inline>
+      document.documentElement.classList.add('js-reveal-ready');
+    </script>
   </head>
   <body style="background:var(--surface-page)">
     {GTM_ID && (
-      <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"
+        ></iframe>
+      </noscript>
     )}
     <!-- Accesibilidad (#70). El primer tabulador de cualquier página, por delante
          incluso del aviso de cookies: la cabecera pegajosa y los enlaces del menú
          suman 31 elementos, y sin esto hay que pasar por todos ellos en cada
          página antes de llegar al contenido (WCAG 2.4.1). Es un solo salto, así
          que el aviso de cookies sigue siendo lo primero que se lee. -->
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="#main" class="skip-link">
+      Skip to content
+    </a>
     <!-- Consentimiento (#26). Va al principio del body para que con teclado o
          lector de pantalla se llegue al aviso antes que al resto de la página;
          el CSS lo coloca abajo visualmente. -->
     <CookieConsent />
     <div style={transparentNav ? 'position:relative' : undefined}>
-      {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} contactHref={navContactHref} />}
+      {hideNav ? null : (
+        <Navbar
+          active={active}
+          transparent={transparentNav}
+          showContact
+          overlay={transparentNav}
+          contactHref={navContactHref}
+        />
+      )}
       <!-- Accesibilidad (#70): el contenido de cada página vive dentro de un
            <main>, la región que los lectores de pantalla ofrecen para ir directo
            al contenido, y el destino del enlace de salto. tabindex="-1" es lo que
@@ -206,14 +236,20 @@ const canonical = canonicalUrl(path);
         color: var(--text-link);
         box-shadow: var(--shadow-float);
       }
-      .skip-link:focus { top: var(--space-5); }
+      .skip-link:focus {
+        top: var(--space-5);
+      }
 
       /* Al activar el enlace, la cabecera pegajosa taparía el principio del
          contenido: el mismo desplazamiento que ya usan los anclajes de /tours. */
-      #main { scroll-margin-top: 110px; }
+      #main {
+        scroll-margin-top: 110px;
+      }
       /* <main> solo recibe el foco desde el enlace de salto, nunca tabulando, y
          un recuadro alrededor de toda la página se lee como un fallo de pintado. */
-      #main:focus { outline: none; }
+      #main:focus {
+        outline: none;
+      }
     </style>
 
     <script>
@@ -232,7 +268,7 @@ const canonical = canonicalUrl(path);
               }
             });
           },
-          { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+          { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
         );
         items.forEach((el) => observer.observe(el));
       }
@@ -296,24 +332,31 @@ const canonical = canonicalUrl(path);
       // Clics: click_button, click_link, click_nav, click_image, phone_click, email_click.
       // En fase de captura (true): algunos componentes cortan la propagación del clic
       // (los desplegables del menú hacen stopPropagation) y en fase normal no llegaría.
-      document.addEventListener('click', (e) => {
-        const el = (e.target as Element | null)?.closest<HTMLElement>('[data-ev]');
-        if (!el) return;
-        const evento = el.dataset.ev!;
-        const enlace = el.closest<HTMLAnchorElement>('a[href]');
-        // data-ev-text manda: en una tarjeta, el texto completo traería la descripción entera.
-        const texto = (el.dataset.evText ?? el.textContent ?? '').trim().replace(/\s+/g, ' ');
-        const campoTexto = evento === 'click_button' ? 'button_text'
-                         : evento === 'click_image'  ? 'image_alt'
-                         : 'link_text';
-        empujar(evento, {
-          page_type: varPagina('page_type'),
-          page_zone: zona(el),
-          destino: el.dataset.evDest ?? destino(enlace),
-          [campoTexto]: texto,
-          tour_name: el.dataset.evTour ?? varPagina('tour_name'),
-        });
-      }, true);
+      document.addEventListener(
+        'click',
+        (e) => {
+          const el = (e.target as Element | null)?.closest<HTMLElement>('[data-ev]');
+          if (!el) return;
+          const evento = el.dataset.ev!;
+          const enlace = el.closest<HTMLAnchorElement>('a[href]');
+          // data-ev-text manda: en una tarjeta, el texto completo traería la descripción entera.
+          const texto = (el.dataset.evText ?? el.textContent ?? '').trim().replace(/\s+/g, ' ');
+          const campoTexto =
+            evento === 'click_button'
+              ? 'button_text'
+              : evento === 'click_image'
+                ? 'image_alt'
+                : 'link_text';
+          empujar(evento, {
+            page_type: varPagina('page_type'),
+            page_zone: zona(el),
+            destino: el.dataset.evDest ?? destino(enlace),
+            [campoTexto]: texto,
+            tour_name: el.dataset.evTour ?? varPagina('tour_name'),
+          });
+        },
+        true,
+      );
 
       // toggle_faq. Atributo propio (data-ev-faq), nunca data-ev en el mismo elemento.
       // Este listener está en document, así que corre después del de FaqItem:
@@ -343,15 +386,24 @@ const canonical = canonicalUrl(path);
           for (const u of umbrales) {
             if (pct >= u && !vistos.has(u)) {
               vistos.add(u);
-              empujar('scroll_depth', { page_type: varPagina('page_type'), percent_scrolled: u, tour_name: varPagina('tour_name') });
+              empujar('scroll_depth', {
+                page_type: varPagina('page_type'),
+                percent_scrolled: u,
+                tour_name: varPagina('tour_name'),
+              });
             }
           }
           if (vistos.size === umbrales.length) window.removeEventListener('scroll', alHacerScroll);
           pendiente = false;
         };
-        const alHacerScroll = () => { if (!pendiente) { pendiente = true; requestAnimationFrame(medir); } };
+        const alHacerScroll = () => {
+          if (!pendiente) {
+            pendiente = true;
+            requestAnimationFrame(medir);
+          }
+        };
         window.addEventListener('scroll', alHacerScroll, { passive: true });
-        medir();   // en páginas cortas, el 90 % ya se ve al cargar
+        medir(); // en páginas cortas, el 90 % ya se ve al cargar
       })();
     </script>
   </body>

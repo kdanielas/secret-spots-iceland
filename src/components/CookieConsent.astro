@@ -20,40 +20,73 @@ import { CATEGORIES } from '../lib/consent';
     <div class="cc-banner-copy">
       <p class="cc-banner-title">Cookies on this site</p>
       <p class="cc-banner-text">
-        Some cookies are needed for the site to work and to keep the contact form free of spam.
-        With your consent we also use Google Analytics to see how the site is used — never for
-        advertising. You can change your mind at any time. See our <a href="/cookie-policy">Cookie Policy</a>.
+        Some cookies are needed for the site to work and to keep the contact form free of spam. With
+        your consent we also use Google Analytics to see how the site is used — never for
+        advertising. You can change your mind at any time. See our{' '}
+        <a href="/cookie-policy">Cookie Policy</a>.
       </p>
     </div>
     <div class="cc-banner-actions">
-      <button type="button" class="cc-btn cc-btn-outline" data-cc="open" data-ev="click_button" data-ev-text="Cookie settings">Cookie settings</button>
-      <button type="button" class="cc-btn cc-btn-dark" data-cc="reject" data-ev="click_button" data-ev-text="Reject all cookies">Reject all</button>
-      <button type="button" class="cc-btn cc-btn-dark" data-cc="accept" data-ev="click_button" data-ev-text="Accept all cookies">Accept all</button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-outline"
+        data-cc="open"
+        data-ev="click_button"
+        data-ev-text="Cookie settings"
+      >
+        Cookie settings
+      </button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-dark"
+        data-cc="reject"
+        data-ev="click_button"
+        data-ev-text="Reject all cookies"
+      >
+        Reject all
+      </button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-dark"
+        data-cc="accept"
+        data-ev="click_button"
+        data-ev-text="Accept all cookies"
+      >
+        Accept all
+      </button>
     </div>
   </div>
 </aside>
 
 <div id="cookie-prefs" class="cc-modal" hidden>
   <div class="cc-scrim" data-cc="close"></div>
-  <div class="cc-card" role="dialog" aria-modal="true" aria-labelledby="cc-title" aria-describedby="cc-intro">
+  <div
+    class="cc-card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cc-title"
+    aria-describedby="cc-intro"
+  >
     <button type="button" class="cc-close" data-cc="close" aria-label="Close cookie settings">
       <Icon name="x" size={18} />
     </button>
 
-    <p id="cc-title" class="cc-card-title">Cookie settings</p>
+    <p id="cc-title" class="cc-card-title">
+      Cookie settings
+    </p>
     <p id="cc-intro" class="cc-card-intro">
-      Choose which cookies this site may use. Your choice is stored for 12 months and you can
-      change it whenever you like from the link in the footer.
+      Choose which cookies this site may use. Your choice is stored for 12 months and you can change
+      it whenever you like from the link in the footer.
     </p>
 
     <ul class="cc-cats">
       {CATEGORIES.map((cat) => (
         <li class="cc-cat">
           <div class="cc-cat-head">
-            <label class="cc-switch-label" for={`cc-toggle-${cat.id}`}>{cat.title}</label>
-            {cat.required ? (
-              <span class="cc-always">Always on</span>
-            ) : null}
+            <label class="cc-switch-label" for={`cc-toggle-${cat.id}`}>
+              {cat.title}
+            </label>
+            {cat.required ? <span class="cc-always">Always on</span> : null}
             <input
               type="checkbox"
               class="cc-switch"
@@ -64,15 +97,41 @@ import { CATEGORIES } from '../lib/consent';
               aria-describedby={`cc-desc-${cat.id}`}
             />
           </div>
-          <p class="cc-cat-desc" id={`cc-desc-${cat.id}`}>{cat.description}</p>
+          <p class="cc-cat-desc" id={`cc-desc-${cat.id}`}>
+            {cat.description}
+          </p>
         </li>
       ))}
     </ul>
 
     <div class="cc-card-actions">
-      <button type="button" class="cc-btn cc-btn-dark" data-cc="reject" data-ev="click_button" data-ev-text="Reject all cookies">Reject all</button>
-      <button type="button" class="cc-btn cc-btn-dark" data-cc="accept" data-ev="click_button" data-ev-text="Accept all cookies">Accept all</button>
-      <button type="button" class="cc-btn cc-btn-primary" data-cc="save" data-ev="click_button" data-ev-text="Save cookie choices">Save choices</button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-dark"
+        data-cc="reject"
+        data-ev="click_button"
+        data-ev-text="Reject all cookies"
+      >
+        Reject all
+      </button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-dark"
+        data-cc="accept"
+        data-ev="click_button"
+        data-ev-text="Accept all cookies"
+      >
+        Accept all
+      </button>
+      <button
+        type="button"
+        class="cc-btn cc-btn-primary"
+        data-cc="save"
+        data-ev="click_button"
+        data-ev-text="Save cookie choices"
+      >
+        Save choices
+      </button>
     </div>
 
     <p class="cc-card-foot">
@@ -87,8 +146,12 @@ import { CATEGORIES } from '../lib/consent';
      in <head>, so a returning visitor never sees the banner flash; data-cc-ready
      comes from the module below, so the banner never appears before the buttons
      it offers can do anything. */
-  .cc-banner { display: none; }
-  :global(html[data-consent='ask'][data-cc-ready]) .cc-banner { display: block; }
+  .cc-banner {
+    display: none;
+  }
+  :global(html[data-consent='ask'][data-cc-ready]) .cc-banner {
+    display: block;
+  }
 
   .cc-banner {
     position: fixed;
@@ -98,8 +161,14 @@ import { CATEGORIES } from '../lib/consent';
     animation: cc-rise var(--dur-slow) var(--ease-out) both;
   }
   @keyframes cc-rise {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 
   .cc-banner-inner {
@@ -115,7 +184,11 @@ import { CATEGORIES } from '../lib/consent';
     box-shadow: var(--shadow-bar);
     padding: var(--space-6) var(--space-7);
   }
-  .cc-banner-copy { display: flex; flex-direction: column; gap: var(--space-2); }
+  .cc-banner-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
   .cc-banner-title {
     font: 700 1rem/1.3 var(--font-sans);
     color: var(--text-heading);
@@ -127,7 +200,10 @@ import { CATEGORIES } from '../lib/consent';
     margin: 0;
     max-width: 68ch;
   }
-  .cc-banner-text a { color: var(--blue-500); text-decoration: underline; }
+  .cc-banner-text a {
+    color: var(--blue-500);
+    text-decoration: underline;
+  }
   .cc-banner-actions {
     display: flex;
     align-items: center;
@@ -153,13 +229,31 @@ import { CATEGORIES } from '../lib/consent';
     cursor: pointer;
     transition: var(--transition-control);
   }
-  .cc-btn:active { transform: var(--press-scale); }
-  .cc-btn-dark { background: var(--action-dark-bg); color: var(--action-dark-fg); }
-  .cc-btn-dark:hover { background: var(--action-dark-bg-hover); }
-  .cc-btn-primary { background: var(--action-primary-bg); color: var(--action-primary-fg); }
-  .cc-btn-primary:hover { background: var(--action-primary-bg-hover); }
-  .cc-btn-outline { background: transparent; color: var(--action-outline-fg); border-color: var(--action-outline-border); }
-  .cc-btn-outline:hover { background: rgba(29, 45, 68, 0.05); }
+  .cc-btn:active {
+    transform: var(--press-scale);
+  }
+  .cc-btn-dark {
+    background: var(--action-dark-bg);
+    color: var(--action-dark-fg);
+  }
+  .cc-btn-dark:hover {
+    background: var(--action-dark-bg-hover);
+  }
+  .cc-btn-primary {
+    background: var(--action-primary-bg);
+    color: var(--action-primary-fg);
+  }
+  .cc-btn-primary:hover {
+    background: var(--action-primary-bg-hover);
+  }
+  .cc-btn-outline {
+    background: transparent;
+    color: var(--action-outline-fg);
+    border-color: var(--action-outline-border);
+  }
+  .cc-btn-outline:hover {
+    background: rgba(29, 45, 68, 0.05);
+  }
 
   /* --- preferences dialog --- */
   .cc-modal {
@@ -171,8 +265,14 @@ import { CATEGORIES } from '../lib/consent';
     justify-content: center;
     padding: var(--space-5);
   }
-  .cc-modal[hidden] { display: none; }
-  .cc-scrim { position: absolute; inset: 0; background: rgba(23, 32, 40, 0.55); }
+  .cc-modal[hidden] {
+    display: none;
+  }
+  .cc-scrim {
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 32, 40, 0.55);
+  }
 
   .cc-card {
     position: relative;
@@ -202,7 +302,10 @@ import { CATEGORIES } from '../lib/consent';
     color: var(--text-muted);
     cursor: pointer;
   }
-  .cc-close:hover { background: var(--surface-chip); color: var(--text-heading); }
+  .cc-close:hover {
+    background: var(--surface-chip);
+    color: var(--text-heading);
+  }
 
   .cc-card-title {
     font: 400 1.5rem/1.3 var(--font-display);
@@ -210,12 +313,31 @@ import { CATEGORIES } from '../lib/consent';
     margin: 0;
     padding-right: var(--space-8);
   }
-  .cc-card-intro { font: var(--type-body-sm); color: var(--text-body); margin: 0; }
+  .cc-card-intro {
+    font: var(--type-body-sm);
+    color: var(--text-body);
+    margin: 0;
+  }
 
-  .cc-cats { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .cc-cat { border-top: 1px solid var(--border-subtle); padding: var(--space-5) 0; }
-  .cc-cat:last-child { border-bottom: 1px solid var(--border-subtle); }
-  .cc-cat-head { display: flex; align-items: center; gap: var(--space-3); }
+  .cc-cats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .cc-cat {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-5) 0;
+  }
+  .cc-cat:last-child {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .cc-cat-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
   .cc-switch-label {
     font: 700 0.9375rem/1.3 var(--font-sans);
     color: var(--text-heading);
@@ -230,7 +352,11 @@ import { CATEGORIES } from '../lib/consent';
     border-radius: var(--radius-pill);
     padding: 5px 10px;
   }
-  .cc-cat-desc { font: var(--type-body-sm); color: var(--text-muted); margin: var(--space-2) 0 0; }
+  .cc-cat-desc {
+    font: var(--type-body-sm);
+    color: var(--text-muted);
+    margin: var(--space-2) 0 0;
+  }
 
   /* A real checkbox, restyled as a switch: it keeps the native keyboard
      behaviour and the checked state screen readers announce. */
@@ -259,39 +385,91 @@ import { CATEGORIES } from '../lib/consent';
     background: var(--white);
     transition: transform var(--dur-base) var(--ease-out);
   }
-  .cc-switch:checked { background: var(--blue-500); }
-  .cc-switch:checked::after { transform: translateX(20px); }
-  .cc-switch:disabled { cursor: default; opacity: 0.55; }
-  .cc-switch:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .cc-switch:checked {
+    background: var(--blue-500);
+  }
+  .cc-switch:checked::after {
+    transform: translateX(20px);
+  }
+  .cc-switch:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+  .cc-switch:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
 
-  .cc-card-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-  .cc-card-actions .cc-btn { flex: 1 1 auto; }
-  .cc-card-foot { font: var(--type-body-xs); color: var(--text-muted); margin: 0; }
-  .cc-card-foot a { color: var(--blue-500); text-decoration: underline; }
+  .cc-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .cc-card-actions .cc-btn {
+    flex: 1 1 auto;
+  }
+  .cc-card-foot {
+    font: var(--type-body-xs);
+    color: var(--text-muted);
+    margin: 0;
+  }
+  .cc-card-foot a {
+    color: var(--blue-500);
+    text-decoration: underline;
+  }
 
   .cc-btn:focus-visible,
-  .cc-close:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+  .cc-close:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
 
   @media (max-width: 768px) {
-    .cc-banner-inner { flex-direction: column; align-items: stretch; gap: var(--space-5); }
-    .cc-banner-actions { flex-wrap: wrap; }
-    .cc-banner-actions .cc-btn { flex: 1 1 140px; }
+    .cc-banner-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-5);
+    }
+    .cc-banner-actions {
+      flex-wrap: wrap;
+    }
+    .cc-banner-actions .cc-btn {
+      flex: 1 1 140px;
+    }
   }
   @media (max-width: 480px) {
-    .cc-banner { padding: var(--space-3); }
-    .cc-banner-inner { padding: var(--space-5); }
-    .cc-card { padding: var(--space-6); }
+    .cc-banner {
+      padding: var(--space-3);
+    }
+    .cc-banner-inner {
+      padding: var(--space-5);
+    }
+    .cc-card {
+      padding: var(--space-6);
+    }
     /* Two rows rather than three stacked buttons: on a phone the banner was
        eating close to half the screen. "Accept all" and "Reject all" share the
        second row, so neither is the easier one to reach. */
-    .cc-banner-actions [data-cc='open'] { flex: 1 1 100%; }
+    .cc-banner-actions [data-cc='open'] {
+      flex: 1 1 100%;
+    }
     .cc-banner-actions [data-cc='reject'],
-    .cc-banner-actions [data-cc='accept'] { flex: 1 1 calc(50% - var(--space-3)); }
+    .cc-banner-actions [data-cc='accept'] {
+      flex: 1 1 calc(50% - var(--space-3));
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .cc-banner { animation: none; }
-    .cc-switch, .cc-switch::after, .cc-btn { transition: none; }
-    .cc-btn:active { transform: none; }
+    .cc-banner {
+      animation: none;
+    }
+    .cc-switch,
+    .cc-switch::after,
+    .cc-btn {
+      transition: none;
+    }
+    .cc-btn:active {
+      transform: none;
+    }
   }
 </style>
 
@@ -317,13 +495,13 @@ import { CATEGORIES } from '../lib/consent';
     const dataLayer = (): unknown[] =>
       ((window as any).dataLayer = (window as any).dataLayer || []);
     // Consent Mode wants the arguments object, not an object literal.
-    function gtag() { dataLayer().push(arguments); }
+    function gtag() {
+      dataLayer().push(arguments);
+    }
 
     const readDecision = (): Decision | null => {
       try {
-        const match = document.cookie.match(
-          new RegExp('(?:^|; )' + CONSENT_COOKIE + '=([^;]*)')
-        );
+        const match = document.cookie.match(new RegExp('(?:^|; )' + CONSENT_COOKIE + '=([^;]*)'));
         const parsed = match ? JSON.parse(decodeURIComponent(match[1])) : null;
         if (parsed && parsed.v === CONSENT_VERSION && parsed.c && typeof parsed.c === 'object') {
           return parsed.c as Decision;
@@ -336,11 +514,10 @@ import { CATEGORIES } from '../lib/consent';
 
     const writeDecision = (decision: Decision) => {
       const value = encodeURIComponent(
-        JSON.stringify({ v: CONSENT_VERSION, c: decision, t: Date.now() })
+        JSON.stringify({ v: CONSENT_VERSION, c: decision, t: Date.now() }),
       );
       const secure = location.protocol === 'https:' ? ';Secure' : '';
-      document.cookie =
-        `${CONSENT_COOKIE}=${value};path=/;max-age=${CONSENT_MAX_AGE};SameSite=Lax${secure}`;
+      document.cookie = `${CONSENT_COOKIE}=${value};path=/;max-age=${CONSENT_MAX_AGE};SameSite=Lax${secure}`;
     };
 
     const signalsFor = (decision: Decision) => {
@@ -455,7 +632,7 @@ import { CATEGORIES } from '../lib/consent';
       }
       if (event.key !== 'Tab') return;
       const items = Array.from(card.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (el) => el.offsetParent !== null
+        (el) => el.offsetParent !== null,
       );
       if (!items.length) return;
       const first = items[0];

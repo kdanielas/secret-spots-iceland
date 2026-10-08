@@ -12,27 +12,61 @@ const { question, answer, defaultOpen = false, style = '' } = Astro.props;
 // aria-controls needs a real id. Questions are unique within a page, so
 // slugging the question keeps the id stable across builds — a random one would
 // churn the HTML of five pages on every rebuild.
-const answerId = `faq-${question.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48)}`;
+const answerId = `faq-${question
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '')
+  .slice(0, 48)}`;
 ---
 
-<div class="faq-item" data-open={defaultOpen ? 'true' : 'false'} style={`border-bottom:1px solid rgba(35,51,62,.33);padding:var(--space-5) 0;${style}`}>
-  <button class="faq-toggle" type="button" aria-expanded={defaultOpen ? 'true' : 'false'} aria-controls={answerId} data-ev-faq={question} style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);width:100%;background:none;border:none;padding:0;cursor:pointer;text-align:left">
+<div
+  class="faq-item"
+  data-open={defaultOpen ? 'true' : 'false'}
+  style={`border-bottom:1px solid rgba(35,51,62,.33);padding:var(--space-5) 0;${style}`}
+>
+  <button
+    class="faq-toggle"
+    type="button"
+    aria-expanded={defaultOpen ? 'true' : 'false'}
+    aria-controls={answerId}
+    data-ev-faq={question}
+    style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-5);width:100%;background:none;border:none;padding:0;cursor:pointer;text-align:left"
+  >
     <span style="font:600 16px/1.3 var(--font-sans);color:var(--text-heading)">{question}</span>
     <span class="faq-icon" style="width:24px;height:24px;flex:0 0 auto;color:var(--ink-900)">
-      <span class="faq-icon-closed"><Icon name="plus" size={24} /></span>
-      <span class="faq-icon-open"><Icon name="minus" size={24} /></span>
+      <span class="faq-icon-closed">
+        <Icon name="plus" size={24} />
+      </span>
+      <span class="faq-icon-open">
+        <Icon name="minus" size={24} />
+      </span>
     </span>
   </button>
-  <p id={answerId} class="faq-answer" hidden={!defaultOpen} style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:var(--space-4) 0 0;padding-right:40px">{answer}</p>
+  <p
+    id={answerId}
+    class="faq-answer"
+    hidden={!defaultOpen}
+    style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:var(--space-4) 0 0;padding-right:40px"
+  >
+    {answer}
+  </p>
 </div>
 
 <style>
   /* Both glyphs are inlined in the markup; data-open decides which one shows,
      so opening an item costs no extra request. */
-  .faq-icon-closed { display: inline-flex; }
-  .faq-icon-open { display: none; }
-  .faq-item[data-open="true"] .faq-icon-closed { display: none; }
-  .faq-item[data-open="true"] .faq-icon-open { display: inline-flex; }
+  .faq-icon-closed {
+    display: inline-flex;
+  }
+  .faq-icon-open {
+    display: none;
+  }
+  .faq-item[data-open='true'] .faq-icon-closed {
+    display: none;
+  }
+  .faq-item[data-open='true'] .faq-icon-open {
+    display: inline-flex;
+  }
 </style>
 
 <script>

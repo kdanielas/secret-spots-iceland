@@ -42,14 +42,27 @@ const LINKS = [
   <Section>
     <div class="nf-wrap">
       <p class="nf-code">Error 404</p>
-      <h1 class="sh-xl" style="color:var(--text-heading);margin:0">This page has gone exploring</h1>
+      <h1 class="sh-xl" style="color:var(--text-heading);margin:0">
+        This page has gone exploring
+      </h1>
       <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:580px">
-        The page you were after has moved or no longer exists — an old link, a mistyped address, or something we have since renamed. Everything else is right where you left it.
+        The page you were after has moved or no longer exists — an old link, a mistyped address, or
+        something we have since renamed. Everything else is right where you left it.
       </p>
 
       <div class="nf-actions">
-        <Button href="/tours" variant="primary" size="lg" iconAfter="arrow-right" evDest="listado_tours">See all tours</Button>
-        <Button href="/contact" variant="outline" size="lg" evDest="contacto">Contact us</Button>
+        <Button
+          href="/tours"
+          variant="primary"
+          size="lg"
+          iconAfter="arrow-right"
+          evDest="listado_tours"
+        >
+          See all tours
+        </Button>
+        <Button href="/contact" variant="outline" size="lg" evDest="contacto">
+          Contact us
+        </Button>
       </div>
 
       <ul class="nf-links">
@@ -123,7 +136,9 @@ const LINKS = [
     text-decoration: none;
     transition: var(--transition-control);
   }
-  .nf-link:hover { border-color: var(--ink-900); }
+  .nf-link:hover {
+    border-color: var(--ink-900);
+  }
 
   .nf-link-head {
     display: flex;
@@ -132,11 +147,22 @@ const LINKS = [
     gap: var(--space-3);
     color: var(--text-heading);
   }
-  .nf-link-title { font: 700 1.0625rem/1.3 var(--font-sans); }
-  .nf-link-desc { font: var(--type-body-sm); color: var(--text-muted); }
+  .nf-link-title {
+    font: 700 1.0625rem/1.3 var(--font-sans);
+  }
+  .nf-link-desc {
+    font: var(--type-body-sm);
+    color: var(--text-muted);
+  }
 
   @media (max-width: 768px) {
-    .nf-links { grid-template-columns: minmax(0, 1fr); }
-    .nf-actions { width: 100%; flex-direction: column; align-items: stretch; }
+    .nf-links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .nf-actions {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>

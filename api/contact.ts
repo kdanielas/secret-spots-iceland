@@ -122,7 +122,7 @@ function emailBody(rows: [string, string][], heading: string) {
     .map(
       ([label, value]) =>
         `<tr><td style="padding:4px 12px 4px 0;vertical-align:top"><strong>${escapeHtml(label)}</strong></td>` +
-        `<td style="padding:4px 0">${escapeHtml(value).replace(/\n/g, '<br>')}</td></tr>`
+        `<td style="padding:4px 0">${escapeHtml(value).replace(/\n/g, '<br>')}</td></tr>`,
     )
     .join('');
   return { text, html: `<h2>${escapeHtml(heading)}</h2><table>${cells}</table>` };
@@ -171,7 +171,10 @@ async function handlePost(request: Request): Promise<Response> {
   try {
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null;
     if (!(await recaptchaPasses(token, ip))) {
-      return json(400, { ok: false, error: 'The robot check did not pass. Please tick the box again.' });
+      return json(400, {
+        ok: false,
+        error: 'The robot check did not pass. Please tick the box again.',
+      });
     }
   } catch (err) {
     return fail(502, 'reCAPTCHA verification failed: ' + err);
@@ -189,7 +192,7 @@ async function handlePost(request: Request): Promise<Response> {
       ['Found us via', f.foundUs],
       ['Message', f.experience],
     ],
-    `New inquiry from ${name}`
+    `New inquiry from ${name}`,
   );
 
   try {

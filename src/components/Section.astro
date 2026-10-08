@@ -14,7 +14,11 @@ const bg: Record<string, string> = {
 };
 ---
 
-<section id={id} class:list={['container-pad', tight ? 'section-py-tight' : 'section-py']} style={`background:${bg[tone]};${style}`}>
+<section
+  id={id}
+  class:list={['container-pad', tight ? 'section-py-tight' : 'section-py']}
+  style={`background:${bg[tone]};${style}`}
+>
   <div style="max-width:var(--container-max);margin:0 auto">
     <slot />
   </div>

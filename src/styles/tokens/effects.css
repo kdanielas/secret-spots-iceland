@@ -1,32 +1,43 @@
-:root{
---radius-xs:4px;--radius-sm:6px;--radius-md:10px;--radius-lg:12px;--radius-xl:16px;--radius-2xl:20px;--radius-pill:999px;
---radius-card:24px;--radius-image:4px;--radius-panel:16px;--radius-field:8px;
+:root {
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-pill: 999px;
+  --radius-card: 24px;
+  --radius-image: 4px;
+  --radius-panel: 16px;
+  --radius-field: 8px;
 
---shadow-none:none;
---shadow-card:0 1px 2px rgba(39,51,60,.04),0 8px 24px rgba(39,51,60,.06);
---shadow-review-card:0 12px 16px rgba(0,0,0,.04);
---shadow-float:0 12px 40px rgba(39,51,60,.10);
---shadow-bar:0 2px 4px rgba(39,51,60,.04),0 18px 44px rgba(39,51,60,.10);
---shadow-inset-field:inset 0 1px 0 rgba(39,51,60,.04);
+  --shadow-none: none;
+  --shadow-card: 0 1px 2px rgba(39, 51, 60, 0.04), 0 8px 24px rgba(39, 51, 60, 0.06);
+  --shadow-review-card: 0 12px 16px rgba(0, 0, 0, 0.04);
+  --shadow-float: 0 12px 40px rgba(39, 51, 60, 0.1);
+  --shadow-bar: 0 2px 4px rgba(39, 51, 60, 0.04), 0 18px 44px rgba(39, 51, 60, 0.1);
+  --shadow-inset-field: inset 0 1px 0 rgba(39, 51, 60, 0.04);
 
---ease-out:cubic-bezier(.22,.61,.36,1); /* @kind other */
---ease-in-out:cubic-bezier(.4,0,.2,1); /* @kind other */
---dur-fast:140ms; /* @kind other */
---dur-base:220ms; /* @kind other */
---dur-slow:420ms; /* @kind other */
---image-zoom-hover:scale(1.035); /* @kind other */
---press-scale:scale(.985); /* @kind other */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --dur-fast: 140ms; /* @kind other */
+  --dur-base: 220ms; /* @kind other */
+  --dur-slow: 420ms; /* @kind other */
+  --image-zoom-hover: scale(1.035); /* @kind other */
+  --press-scale: scale(0.985); /* @kind other */
 
---blur-chip:blur(8px); /* @kind other */
+  --blur-chip: blur(8px); /* @kind other */
 
-/* stacking order — every z-index in the app comes from this scale so that
+  /* stacking order — every z-index in the app comes from this scale so that
    layers stay comparable instead of being guessed per component */
---z-base:0; /* @kind other */
---z-sticky:100; /* @kind other */
---z-dropdown:200; /* @kind other */
---z-overlay:300; /* @kind other */
---z-modal:400; /* @kind other */
+  --z-base: 0; /* @kind other */
+  --z-sticky: 100; /* @kind other */
+  --z-dropdown: 200; /* @kind other */
+  --z-overlay: 300; /* @kind other */
+  --z-modal: 400; /* @kind other */
 
---transition-control:background-color var(--dur-base) var(--ease-out),color var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),transform var(--dur-fast) var(--ease-out);
---transition-image:transform var(--dur-slow) var(--ease-out);
+  --transition-control:
+    background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+  --transition-image: transform var(--dur-slow) var(--ease-out);
 }

@@ -12,14 +12,25 @@ interface Props {
 const { trail, inline = false, style = '' } = Astro.props;
 
 const crumbs: Crumb[] = [{ label: 'Home', href: '/' }, ...trail];
-const schema = { '@context': 'https://schema.org', ...breadcrumbNode(canonicalUrl(Astro.url.pathname), crumbs) };
+const schema = {
+  '@context': 'https://schema.org',
+  ...breadcrumbNode(canonicalUrl(Astro.url.pathname), crumbs),
+};
 ---
 
-<nav class:list={['breadcrumbs', !inline && 'container-pad breadcrumbs-page']} aria-label="Breadcrumb" style={style}>
+<nav
+  class:list={['breadcrumbs', !inline && 'container-pad breadcrumbs-page']}
+  aria-label="Breadcrumb"
+  style={style}
+>
   <ol>
     {crumbs.map((crumb, i) => (
       <li>
-        {i > 0 ? <span class="breadcrumbs-sep" aria-hidden="true">/</span> : null}
+        {i > 0 ? (
+          <span class="breadcrumbs-sep" aria-hidden="true">
+            /
+          </span>
+        ) : null}
         {crumb.href && i < crumbs.length - 1 ? (
           <a href={crumb.href}>{crumb.label}</a>
         ) : (

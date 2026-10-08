@@ -31,7 +31,9 @@ const {
   hidden={fallback === 'hide'}
   class="cookie-settings-btn"
   style={style}
->{label}</button>
+>
+  {label}
+</button>
 
 <style>
   .cookie-settings-btn {
@@ -43,8 +45,13 @@ const {
     text-decoration: none;
     font-family: inherit;
   }
-  .cookie-settings-btn:hover { opacity: 1; text-decoration: underline; }
-  .cookie-settings-btn[hidden] { display: none; }
+  .cookie-settings-btn:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .cookie-settings-btn[hidden] {
+    display: none;
+  }
 </style>
 
 <script>
@@ -68,7 +75,7 @@ const {
   // Buttons marked fallback="hide" stay hidden until a CMP actually turns up.
   // CMPs load asynchronously, so poll briefly rather than checking once.
   const hidden = document.querySelectorAll<HTMLElement>(
-    '[data-cookie-settings][data-cookie-fallback="hide"]'
+    '[data-cookie-settings][data-cookie-fallback="hide"]',
   );
   if (hidden.length) {
     let tries = 0;

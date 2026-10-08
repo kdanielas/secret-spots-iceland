@@ -2,7 +2,10 @@
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
 
-interface ListLink { label: string; href: string; }
+interface ListLink {
+  label: string;
+  href: string;
+}
 interface IntroColumn {
   type: 'intro';
   title: string;
@@ -16,8 +19,15 @@ interface ListColumn {
   items: ListLink[];
 }
 type MenuColumn = IntroColumn | ListColumn;
-interface MegaMenu { dividers: boolean; columns: MenuColumn[]; }
-interface NavItem { label: string; href?: string; megaMenu?: MegaMenu; }
+interface MegaMenu {
+  dividers: boolean;
+  columns: MenuColumn[];
+}
+interface NavItem {
+  label: string;
+  href?: string;
+  megaMenu?: MegaMenu;
+}
 interface Props {
   active?: string;
   transparent?: boolean;
@@ -28,7 +38,13 @@ interface Props {
      formulario abra con ese tour seleccionado. */
   contactHref?: string;
 }
-const { active, transparent = false, showContact = false, overlay = false, contactHref = '/contact' } = Astro.props;
+const {
+  active,
+  transparent = false,
+  showContact = false,
+  overlay = false,
+  contactHref = '/contact',
+} = Astro.props;
 
 const NAV: NavItem[] = [
   {
@@ -40,7 +56,8 @@ const NAV: NavItem[] = [
         {
           type: 'intro',
           title: 'Iceland Photography Tours',
-          description: 'Private, photography-led tours designed around your pace, interests and the best light.',
+          description:
+            'Private, photography-led tours designed around your pace, interests and the best light.',
           href: '/tours',
           secondary: { label: 'See all tours', href: '/tours' },
         },
@@ -75,20 +92,23 @@ const NAV: NavItem[] = [
         {
           type: 'intro',
           title: 'How it works',
-          description: 'From your first message to the photos in your hands — see how a Secret Spots tour comes together.',
+          description:
+            'From your first message to the photos in your hands — see how a Secret Spots tour comes together.',
           href: '/how-it-works',
           secondary: { label: 'Our Vehicles', href: '/our-vehicles' },
         },
         {
           type: 'intro',
           title: 'Photography Guide',
-          description: 'Tips and locations to help you get the most out of your Iceland photography.',
+          description:
+            'Tips and locations to help you get the most out of your Iceland photography.',
           href: '/iceland-photography',
         },
         {
           type: 'intro',
           title: 'Accessible Tours in Iceland',
-          description: 'Flexible itineraries designed to work for travellers of all mobility levels.',
+          description:
+            'Flexible itineraries designed to work for travellers of all mobility levels.',
           href: '/accessible-tours',
         },
       ],
@@ -123,12 +143,25 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   <a href="/">
     <Logo height={54} onDark={transparent} />
   </a>
-  <button class="nav-toggle" type="button" data-ev="click_nav" data-ev-text="Menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav" style={`color:${textColor}`}>
-    <span class="nav-toggle-icon-closed"><Icon name="menu" size={20} /></span>
-    <span class="nav-toggle-icon-open"><Icon name="x" size={20} /></span>
+  <button
+    class="nav-toggle"
+    type="button"
+    data-ev="click_nav"
+    data-ev-text="Menu"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="site-nav"
+    style={`color:${textColor}`}
+  >
+    <span class="nav-toggle-icon-closed">
+      <Icon name="menu" size={20} />
+    </span>
+    <span class="nav-toggle-icon-open">
+      <Icon name="x" size={20} />
+    </span>
   </button>
   <nav id="site-nav" class="site-nav" data-open="false" style="display:flex;gap:var(--space-7)">
-    {NAV.map((it) => (
+    {NAV.map((it) =>
       it.megaMenu ? (
         <div class="nav-dropdown-item">
           <button
@@ -146,7 +179,9 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           </button>
           <div class="nav-mobile-submenu">
             {flattenMegaMenu(it.megaMenu).map((link) => (
-              <a href={link.href} class="nav-mobile-submenu-link">{link.label}</a>
+              <a href={link.href} class="nav-mobile-submenu-link">
+                {link.label}
+              </a>
             ))}
           </div>
         </div>
@@ -159,10 +194,14 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
         >
           {it.label}
         </a>
-      )
-    ))}
+      ),
+    )}
     {showContact ? (
-      <a href={contactHref} class="nav-contact-link" style="background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 14px/1 var(--font-sans);padding:10px 20px;border-radius:var(--radius-pill);white-space:nowrap">
+      <a
+        href={contactHref}
+        class="nav-contact-link"
+        style="background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 14px/1 var(--font-sans);padding:10px 20px;border-radius:var(--radius-pill);white-space:nowrap"
+      >
         Contact us
       </a>
     ) : null}
@@ -171,11 +210,16 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   {NAV.filter((it) => it.megaMenu).map((it) => (
     <div class="nav-megamenu" data-menu-panel={it.label} data-open="false">
       <div class:list={['nav-megamenu-inner', { 'nav-megamenu-dividers': it.megaMenu!.dividers }]}>
-        {it.megaMenu!.columns.map((col) => (
+        {it.megaMenu!.columns.map((col) =>
           col.type === 'intro' ? (
             <div class="nav-megamenu-col">
               {col.secondary && col.secondary.href === col.href ? (
-                <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
+                <a
+                  href={col.href}
+                  class="nav-megamenu-intro"
+                  data-ev="click_nav"
+                  data-ev-text={col.title}
+                >
                   <div>
                     <span class="nav-megamenu-title">{col.title}</span>
                     <p class="nav-megamenu-desc">{col.description}</p>
@@ -187,7 +231,12 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                 </a>
               ) : (
                 <>
-                  <a href={col.href} class="nav-megamenu-intro" data-ev="click_nav" data-ev-text={col.title}>
+                  <a
+                    href={col.href}
+                    class="nav-megamenu-intro"
+                    data-ev="click_nav"
+                    data-ev-text={col.title}
+                  >
                     <div>
                       <span class="nav-megamenu-title-row">
                         <span class="nav-megamenu-title">{col.title}</span>
@@ -197,7 +246,12 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
                     </div>
                   </a>
                   {col.secondary ? (
-                    <a href={col.secondary.href} class="nav-megamenu-secondary" data-ev="click_nav" data-ev-text={col.secondary.label}>
+                    <a
+                      href={col.secondary.href}
+                      class="nav-megamenu-secondary"
+                      data-ev="click_nav"
+                      data-ev-text={col.secondary.label}
+                    >
                       <span>{col.secondary.label}</span>
                       <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                     </a>
@@ -209,21 +263,28 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
             <div class="nav-megamenu-col">
               <span class="nav-megamenu-eyebrow">{col.eyebrow}</span>
               {col.items.map((link) => (
-                <a href={link.href} class="nav-megamenu-link" data-ev="click_nav" data-ev-text={link.label}>
+                <a
+                  href={link.href}
+                  class="nav-megamenu-link"
+                  data-ev="click_nav"
+                  data-ev-text={link.label}
+                >
                   <span>{link.label}</span>
                   <Icon name="arrow-right" size={14} class="nav-megamenu-link-arrow" />
                 </a>
               ))}
             </div>
-          )
-        ))}
+          ),
+        )}
       </div>
     </div>
   ))}
 </header>
 
 <style>
-  .site-nav { align-items: center; }
+  .site-nav {
+    align-items: center;
+  }
 
   /* z-index comes from the shared scale in tokens/effects.css: the header sits on
      the sticky layer, the mega-menu and the mobile panel on the dropdown layer */
@@ -240,26 +301,53 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     gap: var(--space-8);
     transition: transform 320ms ease;
   }
-  :global(.site-header[data-transparent="true"]) { background: transparent; }
+  :global(.site-header[data-transparent='true']) {
+    background: transparent;
+  }
   /* overlay headers lift out of the flow so the hero shows through behind them */
-  :global(.site-header.site-header-overlay) { position: absolute; top: 0; left: 0; right: 0; }
-  :global(.site-header.nav-hidden) { transform: translateY(-100%); }
-  :global(.site-header:has(.nav-dropdown-item[data-open="true"])) { background: #F8F7F3 !important; }
+  :global(.site-header.site-header-overlay) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  :global(.site-header.nav-hidden) {
+    transform: translateY(-100%);
+  }
+  :global(.site-header:has(.nav-dropdown-item[data-open='true'])) {
+    background: #f8f7f3 !important;
+  }
   /* mobile: the whole menu panel shares one background, so the header row
      above it should switch to that same color while it's open instead of
      staying transparent over the hero image behind it */
-  :global(.site-header:has(.site-nav[data-open="true"])) { background: var(--surface-raised) !important; }
+  :global(.site-header:has(.site-nav[data-open='true'])) {
+    background: var(--surface-raised) !important;
+  }
 
   /* The menu and close glyphs are both inlined in the button, so swapping them
      is a CSS toggle rather than a fetch for a second icon file. */
-  .nav-toggle-icon-closed { display: inline-flex; }
-  .nav-toggle-icon-open { display: none; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-closed { display: none; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-icon-open { display: inline-flex; }
+  .nav-toggle-icon-closed {
+    display: inline-flex;
+  }
+  .nav-toggle-icon-open {
+    display: none;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle-icon-closed {
+    display: none;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle-icon-open {
+    display: inline-flex;
+  }
 
-  :global(.nav-dropdown-chevron) { transition: transform var(--dur-base, 180ms) ease; }
-  :global(.nav-dropdown-item[data-open="true"] .nav-dropdown-chevron) { transform: rotate(180deg); }
-  .nav-dropdown-item[data-open="true"] .nav-dropdown-trigger { color: #38627F !important; }
+  :global(.nav-dropdown-chevron) {
+    transition: transform var(--dur-base, 180ms) ease;
+  }
+  :global(.nav-dropdown-item[data-open='true'] .nav-dropdown-chevron) {
+    transform: rotate(180deg);
+  }
+  .nav-dropdown-item[data-open='true'] .nav-dropdown-trigger {
+    color: #38627f !important;
+  }
 
   .nav-megamenu {
     position: absolute;
@@ -267,7 +355,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     left: 0;
     right: 0;
     z-index: var(--z-dropdown);
-    background: #F8F7F3;
+    background: #f8f7f3;
     border-radius: 0 0 24px 24px;
     padding: var(--space-9);
     text-align: left;
@@ -278,58 +366,113 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
        holds the panel visible for the whole fade-out, then flips it at the end. */
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease,
+      visibility 180ms;
   }
-  .nav-megamenu[data-open="true"] {
+  .nav-megamenu[data-open='true'] {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
     pointer-events: auto;
   }
 
-  .nav-megamenu-inner { display: flex; gap: var(--space-11); }
-  .nav-megamenu-col { flex: 1; display: flex; flex-direction: column; gap: var(--space-5); min-width: 0; }
+  .nav-megamenu-inner {
+    display: flex;
+    gap: var(--space-11);
+  }
+  .nav-megamenu-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    min-width: 0;
+  }
   .nav-megamenu-dividers .nav-megamenu-col:not(:last-child) {
     padding-right: var(--space-11);
     border-right: 1px solid var(--border-subtle);
   }
 
-  .nav-megamenu-intro { display: flex; align-items: flex-start; text-decoration: none; }
-  .nav-megamenu-title-row { display: inline-flex; align-items: center; gap: 6px; }
-  .nav-megamenu-title { display: block; font: 600 20px/1.3 var(--font-sans); color: var(--text-heading); }
-  .nav-megamenu-desc { margin: 4px 0 0; font: 400 14px/1.5 var(--font-sans); color: var(--text-body); max-width: 320px; }
+  .nav-megamenu-intro {
+    display: flex;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .nav-megamenu-title-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-megamenu-title {
+    display: block;
+    font: 600 20px/1.3 var(--font-sans);
+    color: var(--text-heading);
+  }
+  .nav-megamenu-desc {
+    margin: 4px 0 0;
+    font: 400 14px/1.5 var(--font-sans);
+    color: var(--text-body);
+    max-width: 320px;
+  }
 
   .nav-megamenu-secondary {
-    display: flex; align-items: center; gap: 6px;
-    text-decoration: none; font: 600 16px/1.3 var(--font-sans); color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font: 600 16px/1.3 var(--font-sans);
+    color: var(--text-heading);
     padding-top: var(--space-3);
   }
   .nav-megamenu-secondary-inline {
-    display: inline-flex; align-items: center; gap: 6px;
-    font: 600 16px/1.3 var(--font-sans); color: var(--text-heading);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: 600 16px/1.3 var(--font-sans);
+    color: var(--text-heading);
     margin-top: var(--space-3);
   }
 
-  .nav-megamenu-eyebrow { font: 600 12px/1 var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-megamenu-eyebrow {
+    font: 600 12px/1 var(--font-sans);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
   .nav-megamenu-link {
-    display: flex; align-items: center; gap: 6px;
-    text-decoration: none; font: 400 16px/1.3 var(--font-sans); color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font: 400 16px/1.3 var(--font-sans);
+    color: var(--text-heading);
     padding: var(--space-2) 0;
   }
-  .nav-megamenu-link:hover, .nav-megamenu-secondary:hover,
+  .nav-megamenu-link:hover,
+  .nav-megamenu-secondary:hover,
   .nav-megamenu-intro:hover .nav-megamenu-title,
-  .nav-megamenu-intro:hover .nav-megamenu-secondary-inline { color: var(--blue-500); }
+  .nav-megamenu-intro:hover .nav-megamenu-secondary-inline {
+    color: var(--blue-500);
+  }
   :global(.nav-megamenu-link-arrow) {
     flex: 0 0 auto;
     opacity: 0;
     transform: translateX(-4px);
-    transition: opacity var(--dur-base, 180ms) ease, transform var(--dur-base, 180ms) ease;
+    transition:
+      opacity var(--dur-base, 180ms) ease,
+      transform var(--dur-base, 180ms) ease;
   }
   .nav-megamenu-link:hover :global(.nav-megamenu-link-arrow),
   .nav-megamenu-intro:hover :global(.nav-megamenu-link-arrow),
-  .nav-megamenu-secondary:hover :global(.nav-megamenu-link-arrow) { opacity: 1; transform: translateX(0); }
+  .nav-megamenu-secondary:hover :global(.nav-megamenu-link-arrow) {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
-  .nav-mobile-submenu { display: none; }
+  .nav-mobile-submenu {
+    display: none;
+  }
   .nav-mobile-submenu-link {
     display: block;
     width: 100%;
@@ -341,13 +484,19 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   }
 
   @media (max-width: 1024px) {
-    .nav-megamenu { display: none; }
+    .nav-megamenu {
+      display: none;
+    }
 
     /* collapsed = pointing right, expanded = pointing down */
-    :global(.nav-dropdown-chevron) { transform: rotate(-90deg); }
-    :global(.nav-dropdown-item[data-open="true"] .nav-dropdown-chevron) { transform: rotate(0deg); }
+    :global(.nav-dropdown-chevron) {
+      transform: rotate(-90deg);
+    }
+    :global(.nav-dropdown-item[data-open='true'] .nav-dropdown-chevron) {
+      transform: rotate(0deg);
+    }
 
-    .nav-dropdown-item[data-open="true"] .nav-mobile-submenu {
+    .nav-dropdown-item[data-open='true'] .nav-mobile-submenu {
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -407,15 +556,21 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     function restoreFocus() {
       const active = document.activeElement;
       if (!(active instanceof Node)) return;
-      const openItem = Array.from(items).find((el) => el.dataset.open === 'true' && el.contains(active));
+      const openItem = Array.from(items).find(
+        (el) => el.dataset.open === 'true' && el.contains(active),
+      );
       if (openItem) {
         openItem.querySelector<HTMLButtonElement>('.nav-dropdown-trigger')?.focus();
         return;
       }
-      const openPanel = Array.from(panels).find((el) => el.dataset.open === 'true' && el.contains(active));
+      const openPanel = Array.from(panels).find(
+        (el) => el.dataset.open === 'true' && el.contains(active),
+      );
       if (openPanel) {
         header
-          .querySelector<HTMLButtonElement>(`.nav-dropdown-trigger[data-menu="${openPanel.dataset.menuPanel}"]`)
+          .querySelector<HTMLButtonElement>(
+            `.nav-dropdown-trigger[data-menu="${openPanel.dataset.menuPanel}"]`,
+          )
           ?.focus();
       }
     }
@@ -435,7 +590,9 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
         // data-open attribute on .nav-dropdown-item
         const menuName = trigger.dataset.menu;
         const item = trigger.closest<HTMLElement>('.nav-dropdown-item');
-        const panel = header.querySelector<HTMLElement>(`.nav-megamenu[data-menu-panel="${menuName}"]`);
+        const panel = header.querySelector<HTMLElement>(
+          `.nav-megamenu[data-menu-panel="${menuName}"]`,
+        );
         const isOpen = item?.dataset.open === 'true';
         closeAll();
         if (item && !isOpen) {
@@ -462,36 +619,42 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   });
 
   // hide the sticky header on scroll down, reveal it on scroll up
-  document.querySelectorAll<HTMLElement>('.site-header:not([data-transparent="true"])').forEach((header) => {
-    let lastY = window.scrollY;
-    let ticking = false;
+  document
+    .querySelectorAll<HTMLElement>('.site-header:not([data-transparent="true"])')
+    .forEach((header) => {
+      let lastY = window.scrollY;
+      let ticking = false;
 
-    function onScroll() {
-      const y = window.scrollY;
-      // the mobile panel is anchored to the header, so hiding the header would
-      // take the open menu offscreen with it
-      if (isMobileNavOpen()) {
-        header.classList.remove('nav-hidden');
+      function onScroll() {
+        const y = window.scrollY;
+        // the mobile panel is anchored to the header, so hiding the header would
+        // take the open menu offscreen with it
+        if (isMobileNavOpen()) {
+          header.classList.remove('nav-hidden');
+          lastY = y;
+          ticking = false;
+          return;
+        }
+        if (y <= 80) {
+          header.classList.remove('nav-hidden');
+        } else if (y > lastY) {
+          header.classList.add('nav-hidden');
+        } else if (y < lastY) {
+          header.classList.remove('nav-hidden');
+        }
         lastY = y;
         ticking = false;
-        return;
       }
-      if (y <= 80) {
-        header.classList.remove('nav-hidden');
-      } else if (y > lastY) {
-        header.classList.add('nav-hidden');
-      } else if (y < lastY) {
-        header.classList.remove('nav-hidden');
-      }
-      lastY = y;
-      ticking = false;
-    }
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(onScroll);
-        ticking = true;
-      }
-    }, { passive: true });
-  });
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!ticking) {
+            requestAnimationFrame(onScroll);
+            ticking = true;
+          }
+        },
+        { passive: true },
+      );
+    });
 </script>

@@ -64,26 +64,77 @@ const base = `display:${fullWidth ? 'flex' : 'inline-flex'};align-items:center;j
 </Tag>
 
 <style>
-  .btn-sm { height: var(--control-h-sm); padding: 0 var(--control-px-sm); }
-  .btn-md { height: var(--control-h-md); padding: 0 var(--control-px-md); }
-  .btn-lg { height: var(--control-h-lg); padding: 0 var(--control-px-lg); }
+  .btn-sm {
+    height: var(--control-h-sm);
+    padding: 0 var(--control-px-sm);
+  }
+  .btn-md {
+    height: var(--control-h-md);
+    padding: 0 var(--control-px-md);
+  }
+  .btn-lg {
+    height: var(--control-h-lg);
+    padding: 0 var(--control-px-lg);
+  }
 
-  .btn-primary { background: var(--action-primary-bg); color: var(--action-primary-fg); border: 1px solid transparent; }
-  .btn-primary:hover:not(:disabled) { background: var(--action-primary-bg-hover); }
-  .btn-primary:active:not(:disabled) { transform: var(--press-scale); }
+  .btn-primary {
+    background: var(--action-primary-bg);
+    color: var(--action-primary-fg);
+    border: 1px solid transparent;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: var(--action-primary-bg-hover);
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: var(--press-scale);
+  }
 
-  .btn-dark { background: var(--action-dark-bg); color: var(--action-dark-fg); border: 1px solid transparent; }
-  .btn-dark:hover:not(:disabled) { background: var(--action-dark-bg-hover); }
-  .btn-dark:active:not(:disabled) { transform: var(--press-scale); }
+  .btn-dark {
+    background: var(--action-dark-bg);
+    color: var(--action-dark-fg);
+    border: 1px solid transparent;
+  }
+  .btn-dark:hover:not(:disabled) {
+    background: var(--action-dark-bg-hover);
+  }
+  .btn-dark:active:not(:disabled) {
+    transform: var(--press-scale);
+  }
 
-  .btn-outline { background: transparent; color: var(--action-outline-fg); border: 1px solid var(--action-outline-border); }
-  .btn-outline:hover:not(:disabled) { background: rgba(29,45,68,.05); border-color: var(--ink-900); }
-  .btn-outline:active:not(:disabled) { transform: var(--press-scale); }
+  .btn-outline {
+    background: transparent;
+    color: var(--action-outline-fg);
+    border: 1px solid var(--action-outline-border);
+  }
+  .btn-outline:hover:not(:disabled) {
+    background: rgba(29, 45, 68, 0.05);
+    border-color: var(--ink-900);
+  }
+  .btn-outline:active:not(:disabled) {
+    transform: var(--press-scale);
+  }
 
-  .btn-outlineLight { background: rgba(23,32,40,.18); color: var(--cream-50); border: 1px solid var(--border-on-dark); }
-  .btn-outlineLight:hover:not(:disabled) { background: rgba(251,246,240,.16); border-color: var(--cream-50); }
-  .btn-outlineLight:active:not(:disabled) { transform: var(--press-scale); }
+  .btn-outlineLight {
+    background: rgba(23, 32, 40, 0.18);
+    color: var(--cream-50);
+    border: 1px solid var(--border-on-dark);
+  }
+  .btn-outlineLight:hover:not(:disabled) {
+    background: rgba(251, 246, 240, 0.16);
+    border-color: var(--cream-50);
+  }
+  .btn-outlineLight:active:not(:disabled) {
+    transform: var(--press-scale);
+  }
 
-  .btn-link { background: transparent; color: var(--ink-900); border: 1px solid transparent; padding: 0; height: auto; }
-  .btn-link:hover:not(:disabled) { color: var(--blue-500); }
+  .btn-link {
+    background: transparent;
+    color: var(--ink-900);
+    border: 1px solid transparent;
+    padding: 0;
+    height: auto;
+  }
+  .btn-link:hover:not(:disabled) {
+    color: var(--blue-500);
+  }
 </style>

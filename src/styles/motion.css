@@ -1,6 +1,10 @@
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Scroll-triggered entrance animation. Gated behind .js-reveal-ready (set by
@@ -8,7 +12,9 @@ html { scroll-behavior: smooth; }
 .js-reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 420ms var(--ease-out), transform 420ms var(--ease-out);
+  transition:
+    opacity 420ms var(--ease-out),
+    transform 420ms var(--ease-out);
 }
 .js-reveal-ready [data-reveal].revealed {
   opacity: 1;

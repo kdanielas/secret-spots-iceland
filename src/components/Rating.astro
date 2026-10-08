@@ -21,5 +21,7 @@ const ariaLabel = `${Number(value.toFixed(1))} out of ${max} ${max === 1 ? 'star
       <Icon name="star" size={size} style={`opacity:${i < Math.round(value) ? 1 : 0.3}`} />
     ))}
   </span>
-  {label ? <span style="font:var(--type-body-sm);color:var(--text-muted);margin-left:6px">{label}</span> : null}
+  {label ? (
+    <span style="font:var(--type-body-sm);color:var(--text-muted);margin-left:6px">{label}</span>
+  ) : null}
 </div>

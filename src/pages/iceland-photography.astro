@@ -34,26 +34,72 @@ import video1 from '../assets/images/hidden-waterfall-canyon-hiker-iceland.mp4?u
 import video2 from '../assets/images/volcano-eruption-lava-flow-vertical-iceland.mp4?url';
 
 const LOCATIONS = [
-  { image: northernLightsImg, title: 'Northern Lights Photography in Iceland', description: 'Capturing the Northern Lights requires the right conditions, location, and timing. Luke helps travelers find the best viewpoints away from crowds, combining local experience with photography knowledge to create unforgettable aurora images.', tours: ['6 Days Ultimate Adventure'] },
-  { image: blackSandImg, title: 'Black Sand Beach Photography', description: 'The volcanic coastline of Iceland creates some of the most recognizable landscapes in the world. Capture dramatic black sand beaches, basalt columns, sea stacks, and Atlantic waves along the South Coast.', tours: ['South Coast Adventure', '3 Days South Coast'] },
-  { image: waterfallImg, title: 'Waterfall Photography in Iceland', description: "Iceland's waterfalls are among its most iconic photography locations. From powerful cascades like Skógafoss and Seljalandsfoss to hidden waterfalls in remote valleys, each location offers unique compositions and dramatic landscapes.", tours: ['South Coast Adventure', '3 Days South Coast', 'Highlands Adventure'] },
-  { image: highlandsImg, title: 'Highlands Photography Locations in Iceland', description: 'The Icelandic Highlands offer some of the most remote and untouched photography locations in the country. Colorful mountains, lava fields, canyons, and hidden waterfalls create landscapes that feel like another planet.', tours: ['Highlands Adventure', '6 Days Ultimate Adventure'] },
-  { image: glacierImg, title: 'Glacier & Ice Cave Photography', description: 'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.', tours: ['3 Days South Coast', '6 Days Ultimate Adventure'] },
+  {
+    image: northernLightsImg,
+    title: 'Northern Lights Photography in Iceland',
+    description:
+      'Capturing the Northern Lights requires the right conditions, location, and timing. Luke helps travelers find the best viewpoints away from crowds, combining local experience with photography knowledge to create unforgettable aurora images.',
+    tours: ['6 Days Ultimate Adventure'],
+  },
+  {
+    image: blackSandImg,
+    title: 'Black Sand Beach Photography',
+    description:
+      'The volcanic coastline of Iceland creates some of the most recognizable landscapes in the world. Capture dramatic black sand beaches, basalt columns, sea stacks, and Atlantic waves along the South Coast.',
+    tours: ['South Coast Adventure', '3 Days South Coast'],
+  },
+  {
+    image: waterfallImg,
+    title: 'Waterfall Photography in Iceland',
+    description:
+      "Iceland's waterfalls are among its most iconic photography locations. From powerful cascades like Skógafoss and Seljalandsfoss to hidden waterfalls in remote valleys, each location offers unique compositions and dramatic landscapes.",
+    tours: ['South Coast Adventure', '3 Days South Coast', 'Highlands Adventure'],
+  },
+  {
+    image: highlandsImg,
+    title: 'Highlands Photography Locations in Iceland',
+    description:
+      'The Icelandic Highlands offer some of the most remote and untouched photography locations in the country. Colorful mountains, lava fields, canyons, and hidden waterfalls create landscapes that feel like another planet.',
+    tours: ['Highlands Adventure', '6 Days Ultimate Adventure'],
+  },
+  {
+    image: glacierImg,
+    title: 'Glacier & Ice Cave Photography',
+    description:
+      'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.',
+    tours: ['3 Days South Coast', '6 Days Ultimate Adventure'],
+  },
 ];
 
 const MOMENTS = [moment1, moment2, moment3, moment4, moment5, moment6];
 const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
 ---
 
-<Layout title="How to Photograph Iceland: Seasons, Light, Gear & Timing" description="A photographer's guide to Iceland's best locations — Northern Lights, glaciers, black sand beaches and hidden waterfalls, from local guide Luke." active="Photography Guide">
+<Layout
+  title="How to Photograph Iceland: Seasons, Light, Gear & Timing"
+  description="A photographer's guide to Iceland's best locations — Northern Lights, glaciers, black sand beaches and hidden waterfalls, from local guide Luke."
+  active="Photography Guide"
+>
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
-          <h1 class="photo-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Iceland Photography Guide — Best Locations &amp; Photo Spots</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">Iceland is one of the world's most rewarding places to shoot — if you know where to go and when. This guide walks through the locations, light, and moments Luke looks for after nearly 20 years photographing the island, from the Northern Lights and glacier lagoons to black sand beaches and hidden waterfalls few visitors ever find.</p>
+          <h1
+            class="photo-hero-title"
+            style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere"
+          >
+            Iceland Photography Guide — Best Locations &amp; Photo Spots
+          </h1>
+          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">
+            Iceland is one of the world's most rewarding places to shoot — if you know where to go
+            and when. This guide walks through the locations, light, and moments Luke looks for
+            after nearly 20 years photographing the island, from the Northern Lights and glacier
+            lagoons to black sand beaches and hidden waterfalls few visitors ever find.
+          </p>
         </div>
-        <Button variant="primary" href="/tours">See All Our Iceland Photography Tours</Button>
+        <Button variant="primary" href="/tours">
+          See All Our Iceland Photography Tours
+        </Button>
       </div>
     </section>
   </div>
@@ -62,15 +108,40 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
 
   <Section tight style="padding-top:var(--space-7)">
     <div class="photo-row">
-      <div class="photo-row-media media-frame" style="flex:0 0 460px;border-radius:32px;overflow:hidden;aspect-ratio:460/560">
-        <Image src={introImg} alt="Luke photographing the South Coast of Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="photo-row-media media-frame"
+        style="flex:0 0 460px;border-radius:32px;overflow:hidden;aspect-ratio:460/560"
+      >
+        <Image
+          src={introImg}
+          alt="Luke photographing the South Coast of Iceland"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">What Makes Photography in Iceland Different</h2>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          What Makes Photography in Iceland Different
+        </h2>
         <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Unlike a regular private sightseeing tour, an Iceland photography tour is designed around capturing the best images. Luke guides photographers and photography enthusiasts to Iceland's most spectacular locations, helping with compositions, camera settings, lighting conditions, and planning the perfect shot.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">From dramatic waterfalls and black sand beaches to volcanic landscapes, glaciers, and the Northern Lights, every photography tour in Iceland is adapted to weather, seasons, and the best available light.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Whether you are an experienced photographer looking to improve your skills or simply want to capture incredible memories from Iceland, Luke creates a personalized experience based on your goals.</p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            Unlike a regular private sightseeing tour, an Iceland photography tour is designed
+            around capturing the best images. Luke guides photographers and photography enthusiasts
+            to Iceland's most spectacular locations, helping with compositions, camera settings,
+            lighting conditions, and planning the perfect shot.
+          </p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            From dramatic waterfalls and black sand beaches to volcanic landscapes, glaciers, and
+            the Northern Lights, every photography tour in Iceland is adapted to weather, seasons,
+            and the best available light.
+          </p>
+          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">
+            Whether you are an experienced photographer looking to improve your skills or simply
+            want to capture incredible memories from Iceland, Luke creates a personalized experience
+            based on your goals.
+          </p>
         </div>
       </div>
     </div>
@@ -79,11 +150,24 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   <Section tone="alt">
     <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center;max-width:720px">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Best Photography Locations in Iceland</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">From volcanic landscapes and black sand beaches to glaciers, waterfalls, and the Northern Lights, every region offers unique opportunities to capture unforgettable images. During Luke's private Iceland tours, you'll visit some of the country's most photogenic locations while benefiting from local knowledge, flexible timing, and professional photography guidance.</p>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Best Photography Locations in Iceland
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          From volcanic landscapes and black sand beaches to glaciers, waterfalls, and the Northern
+          Lights, every region offers unique opportunities to capture unforgettable images. During
+          Luke's private Iceland tours, you'll visit some of the country's most photogenic locations
+          while benefiting from local knowledge, flexible timing, and professional photography
+          guidance.
+        </p>
       </div>
       <div style="display:flex;justify-content:flex-end;gap:var(--space-4);width:100%">
-        <button type="button" class="locations-arrow" data-dir="prev" aria-label="Previous location">
+        <button
+          type="button"
+          class="locations-arrow"
+          data-dir="prev"
+          aria-label="Previous location"
+        >
           <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
         </button>
         <button type="button" class="locations-arrow" data-dir="next" aria-label="Next location">
@@ -92,20 +176,42 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       </div>
       <div class="locations-carousel">
         {LOCATIONS.map((l) => (
-          <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
-            <div data-ev="click_image" data-ev-text={l.title} style="position:relative;aspect-ratio:2/1;overflow:hidden">
-              <Image src={l.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+          <article
+            class="location-card"
+            style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)"
+          >
+            <div
+              data-ev="click_image"
+              data-ev-text={l.title}
+              style="position:relative;aspect-ratio:2/1;overflow:hidden"
+            >
+              <Image
+                src={l.image}
+                alt=""
+                width={500}
+                quality={80}
+                loading="lazy"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+              />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">
               <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-                <h3 style="font:700 18px/1.3 var(--font-sans);color:var(--text-heading);margin:0">{l.title}</h3>
-                <p style="font:400 14px/1.6 var(--font-sans);color:var(--text-body);margin:0">{l.description}</p>
+                <h3 style="font:700 18px/1.3 var(--font-sans);color:var(--text-heading);margin:0">
+                  {l.title}
+                </h3>
+                <p style="font:400 14px/1.6 var(--font-sans);color:var(--text-body);margin:0">
+                  {l.description}
+                </p>
               </div>
               <div style="display:flex;flex-direction:column;gap:var(--space-3);padding-top:var(--space-3);border-top:1px solid var(--border-subtle)">
-                <span style="font:700 12px/1 var(--font-sans);letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)">Available on</span>
+                <span style="font:700 12px/1 var(--font-sans);letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)">
+                  Available on
+                </span>
                 <div style="display:flex;flex-wrap:wrap;gap:8px">
                   {l.tours.map((t) => (
-                    <span style="display:inline-flex;background:var(--surface-chip);color:var(--text-heading);font:600 12px/1 var(--font-sans);padding:7px 12px;border-radius:20px">{t}</span>
+                    <span style="display:inline-flex;background:var(--surface-chip);color:var(--text-heading);font:600 12px/1 var(--font-sans);padding:7px 12px;border-radius:20px">
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -119,13 +225,26 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   <Section tone="page">
     <div style="display:flex;flex-direction:column;gap:var(--space-8)" data-reveal>
       <div style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center;max-width:720px;margin:0 auto">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Moments from Our Private Iceland Tours</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Every tour is about more than the destination. From sharing unforgettable views to discovering hidden places together, these moments capture the joy, adventure, and memories created during our private tours across Iceland.</p>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Moments from Our Private Iceland Tours
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          Every tour is about more than the destination. From sharing unforgettable views to
+          discovering hidden places together, these moments capture the joy, adventure, and memories
+          created during our private tours across Iceland.
+        </p>
       </div>
       <div class="photo-carousel">
         {MOMENTS.map((m) => (
           <div class="photo-carousel-card">
-            <Image src={m} alt="" width={500} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+            <Image
+              src={m}
+              alt=""
+              width={500}
+              quality={80}
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover"
+            />
           </div>
         ))}
       </div>
@@ -135,13 +254,26 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   <Section tone="alt">
     <div style="display:flex;flex-direction:column;gap:var(--space-8)" data-reveal>
       <div style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center;max-width:760px;margin:0 auto">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Hidden Gems of Iceland</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">From glacier lagoons and volcanic landscapes to secluded waterfalls and black sand beaches — many of these hidden viewpoints and remote landscapes are only accessible through local knowledge and years of exploration.</p>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Hidden Gems of Iceland
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          From glacier lagoons and volcanic landscapes to secluded waterfalls and black sand beaches
+          — many of these hidden viewpoints and remote landscapes are only accessible through local
+          knowledge and years of exploration.
+        </p>
       </div>
       <div class="photo-carousel">
         {GEMS.map((g) => (
           <div class="photo-carousel-card">
-            <Image src={g} alt="" width={500} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+            <Image
+              src={g}
+              alt=""
+              width={500}
+              quality={80}
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover"
+            />
           </div>
         ))}
       </div>
@@ -151,15 +283,35 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   <Section tone="page">
     <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center;max-width:640px">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Iceland in Motion</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Discover the authentic beauty that makes every tour unforgettable.</p>
+        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Iceland in Motion
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          Discover the authentic beauty that makes every tour unforgettable.
+        </p>
       </div>
       <div class="video-grid">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:9/16">
-          <video class="lazy-video" data-src={video1} muted loop playsinline autoplay style="width:100%;height:100%;object-fit:cover"></video>
+          <video
+            class="lazy-video"
+            data-src={video1}
+            muted
+            loop
+            playsinline
+            autoplay
+            style="width:100%;height:100%;object-fit:cover"
+          ></video>
         </div>
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:9/16">
-          <video class="lazy-video" data-src={video2} muted loop playsinline autoplay style="width:100%;height:100%;object-fit:cover"></video>
+          <video
+            class="lazy-video"
+            data-src={video2}
+            muted
+            loop
+            playsinline
+            autoplay
+            style="width:100%;height:100%;object-fit:cover"
+          ></video>
         </div>
       </div>
     </div>
@@ -167,7 +319,11 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
 </Layout>
 
 <style>
-  .photo-row { display: flex; align-items: center; gap: var(--space-11); }
+  .photo-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-11);
+  }
 
   .photo-carousel {
     display: flex;
@@ -176,7 +332,9 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
   }
-  .photo-carousel::-webkit-scrollbar { display: none; }
+  .photo-carousel::-webkit-scrollbar {
+    display: none;
+  }
   .photo-carousel-card {
     flex: 0 0 clamp(220px, 26vw, 340px);
     aspect-ratio: 3/4;
@@ -185,7 +343,13 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     scroll-snap-align: start;
   }
 
-  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-7); max-width: 600px; width: 100%; }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7);
+    max-width: 600px;
+    width: 100%;
+  }
 
   .locations-carousel {
     display: flex;
@@ -195,7 +359,9 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     scrollbar-width: none;
     width: 100%;
   }
-  .locations-carousel::-webkit-scrollbar { display: none; }
+  .locations-carousel::-webkit-scrollbar {
+    display: none;
+  }
   .location-card {
     flex: 0 0 clamp(260px, 30vw, 340px);
     scroll-snap-align: start;
@@ -213,24 +379,45 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     cursor: pointer;
     transition: var(--transition-control);
   }
-  .locations-arrow:hover { background: var(--cream-100); }
-  .locations-arrow:active { transform: var(--press-scale); }
+  .locations-arrow:hover {
+    background: var(--cream-100);
+  }
+  .locations-arrow:active {
+    transform: var(--press-scale);
+  }
 
   @media (max-width: 768px) {
-    .location-card { flex-basis: 78vw; }
+    .location-card {
+      flex-basis: 78vw;
+    }
   }
 
   @media (max-width: 1024px) {
-    .photo-row { gap: var(--space-8); }
-    .photo-row-media { flex-basis: 320px !important; }
+    .photo-row {
+      gap: var(--space-8);
+    }
+    .photo-row-media {
+      flex-basis: 320px !important;
+    }
   }
   @media (max-width: 768px) {
-    .photo-row { flex-direction: column; align-items: stretch; }
-    .photo-row-media { flex-basis: auto !important; width: 100%; }
-    .photo-hero-title { font-size: 2rem !important; }
+    .photo-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .photo-row-media {
+      flex-basis: auto !important;
+      width: 100%;
+    }
+    .photo-hero-title {
+      font-size: 2rem !important;
+    }
     /* Issue #78: a dos columnas los vídeos 9:16 se quedan en ~150px de ancho y no
        se ven; apilados y acotados dan un ancho usable sin ocupar toda la pantalla. */
-    .video-grid { grid-template-columns: 1fr; max-width: 300px; }
+    .video-grid {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+    }
   }
 </style>
 
@@ -253,11 +440,16 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     locationsArrows.forEach((btn) => {
       btn.addEventListener('click', () => {
         const card = locationsTrack.querySelector<HTMLElement>('.location-card');
-        const step = card ? card.getBoundingClientRect().width + 28 : locationsTrack.clientWidth * 0.8;
+        const step = card
+          ? card.getBoundingClientRect().width + 28
+          : locationsTrack.clientWidth * 0.8;
         if (btn.dataset.dir === 'prev' && locationsTrack.scrollLeft - step < 0) {
           locationsTrack.scrollLeft += setWidth();
         }
-        locationsTrack.scrollBy({ left: btn.dataset.dir === 'prev' ? -step : step, behavior: 'smooth' });
+        locationsTrack.scrollBy({
+          left: btn.dataset.dir === 'prev' ? -step : step,
+          behavior: 'smooth',
+        });
       });
     });
 
@@ -284,7 +476,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
         }
       });
     },
-    { rootMargin: '200px' }
+    { rootMargin: '200px' },
   );
   lazyVideos.forEach((video) => io.observe(video));
 </script>

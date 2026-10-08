@@ -6,15 +6,30 @@ import Icon from '../../components/Icon.astro';
 import { POSTS, formatPostDate } from '../../data/blog-posts';
 ---
 
-<Layout title="Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots" description="Discover Iceland through Luke's eyes — travel guides, hidden locations, photography spots and local tips to help you plan the perfect Iceland trip." active="Blog">
+<Layout
+  title="Iceland Travel Blog — Local Tips & Hidden Gems | Secret Spots"
+  description="Discover Iceland through Luke's eyes — travel guides, hidden locations, photography spots and local tips to help you plan the perfect Iceland trip."
+  active="Blog"
+>
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
-          <h1 class="blog-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Iceland Travel Blog</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">Local tips, hidden gems and stories from the road — written by Luke and the Secret Spots team.</p>
+          <h1
+            class="blog-hero-title"
+            style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere"
+          >
+            Iceland Travel Blog
+          </h1>
+          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">
+            Local tips, hidden gems and stories from the road — written by Luke and the Secret Spots
+            team.
+          </p>
         </div>
-        <a href="#posts" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none">
+        <a
+          href="#posts"
+          style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none"
+        >
           <span style="font:700 15px/1 var(--font-sans)">Read the latest</span>
           <Icon name="chevron-down" size={20} color="var(--amber-400)" />
         </a>
@@ -26,14 +41,37 @@ import { POSTS, formatPostDate } from '../../data/blog-posts';
     <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
       <div class="grid-tours">
         {POSTS.map((p) => (
-          <a href={p.href} class="card-clickable" aria-label={`Read the article: ${p.title}`} data-ev="click_link" data-ev-text={p.title} style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);text-decoration:none;color:inherit">
+          <a
+            href={p.href}
+            class="card-clickable"
+            aria-label={`Read the article: ${p.title}`}
+            data-ev="click_link"
+            data-ev-text={p.title}
+            style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);text-decoration:none;color:inherit"
+          >
             <div style="position:relative;aspect-ratio:2/1;overflow:hidden">
-              <Image src={p.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-              <time datetime={p.datePublished} style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{formatPostDate(p.datePublished)}</time>
+              <Image
+                src={p.image}
+                alt=""
+                width={500}
+                quality={80}
+                loading="lazy"
+                style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+              />
+              <time
+                datetime={p.datePublished}
+                style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)"
+              >
+                {formatPostDate(p.datePublished)}
+              </time>
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6);flex:1">
-              <h2 class="card-title" style="color:var(--text-heading);margin:0">{p.title}</h2>
-              <p style="font:400 14px/1.6 var(--font-sans);color:var(--text-body);margin:0">{p.excerpt}</p>
+              <h2 class="card-title" style="color:var(--text-heading);margin:0">
+                {p.title}
+              </h2>
+              <p style="font:400 14px/1.6 var(--font-sans);color:var(--text-body);margin:0">
+                {p.excerpt}
+              </p>
               <span style="display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:var(--space-3);font:700 14px/1 var(--font-sans);color:var(--text-heading)">
                 Read article
                 <Icon name="chevron-right" size={14} />
@@ -48,11 +86,20 @@ import { POSTS, formatPostDate } from '../../data/blog-posts';
 
 <style>
   @media (max-width: 768px) {
-    .blog-hero-title { font-size: 2rem !important; }
+    .blog-hero-title {
+      font-size: 2rem !important;
+    }
   }
 
-  .card-clickable { transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
-  .card-clickable:active { transform: var(--press-scale); }
-
+  .card-clickable {
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .card-clickable:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  .card-clickable:active {
+    transform: var(--press-scale);
+  }
 </style>

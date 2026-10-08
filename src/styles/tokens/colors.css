@@ -1,57 +1,79 @@
-:root{
-/* --- base palette, re-sampled from the updated Secret Spots Iceland Figma --- */
---amber-300:#F8C877;--amber-400:#F4B04B;--amber-500:#E5A038;--amber-600:#C9862A;
---blue-500:#38627F;--blue-400:#4C7593;--blue-300:#69889D;--blue-200:#98AEBB;
---ink-900:#27333C;--ink-800:#293238;--ink-700:#324856;--ink-600:#465C6B;
---espresso-900:#291F1E;--espresso-800:#3A2D2B;
---gray-700:#525B66;--gray-600:#5C6570;--gray-500:#7A828C;--gray-400:#9AA1A9;
---cream-50:#FBFAF8;--cream-100:#FBF6F0;--sand-100:#F1F0EC;--sand-200:#E9E6DD;--sand-300:#DCD8CC;
---white:#FFFFFF;
---star-gold:#F4B04B;
---avatar-red:#9B2C2C;
---surface-footer:#081824;
+:root {
+  /* --- base palette, re-sampled from the updated Secret Spots Iceland Figma --- */
+  --amber-300: #f8c877;
+  --amber-400: #f4b04b;
+  --amber-500: #e5a038;
+  --amber-600: #c9862a;
+  --blue-500: #38627f;
+  --blue-400: #4c7593;
+  --blue-300: #69889d;
+  --blue-200: #98aebb;
+  --ink-900: #27333c;
+  --ink-800: #293238;
+  --ink-700: #324856;
+  --ink-600: #465c6b;
+  --espresso-900: #291f1e;
+  --espresso-800: #3a2d2b;
+  --gray-700: #525b66;
+  --gray-600: #5c6570;
+  --gray-500: #7a828c;
+  --gray-400: #9aa1a9;
+  --cream-50: #fbfaf8;
+  --cream-100: #fbf6f0;
+  --sand-100: #f1f0ec;
+  --sand-200: #e9e6dd;
+  --sand-300: #dcd8cc;
+  --white: #ffffff;
+  --star-gold: #f4b04b;
+  --avatar-red: #9b2c2c;
+  --surface-footer: #081824;
 
-/* --- semantic: text --- */
---text-heading:var(--ink-900);
---text-body:rgba(39,51,60,.82);
---text-muted:var(--gray-700);
---text-eyebrow:var(--blue-500);
---text-accent:var(--blue-500);
---text-link:var(--ink-900);
---text-link-hover:var(--blue-500);
---text-on-dark:var(--cream-100);
---text-on-dark-muted:rgba(251,246,240,.70);
---text-on-amber:var(--espresso-900);
+  /* --- semantic: text --- */
+  --text-heading: var(--ink-900);
+  --text-body: rgba(39, 51, 60, 0.82);
+  --text-muted: var(--gray-700);
+  --text-eyebrow: var(--blue-500);
+  --text-accent: var(--blue-500);
+  --text-link: var(--ink-900);
+  --text-link-hover: var(--blue-500);
+  --text-on-dark: var(--cream-100);
+  --text-on-dark-muted: rgba(251, 246, 240, 0.7);
+  --text-on-amber: var(--espresso-900);
 
-/* --- semantic: surfaces --- */
---surface-page:#E6E3DA;
---surface-page-alt:var(--sand-200);
---surface-raised:var(--cream-50);
---surface-card:var(--sand-200);
---surface-card-light:var(--cream-50);
---surface-chip:var(--sand-100);
---surface-dark:#132533;
---surface-dark-panel:var(--ink-700);
---surface-dark-field:rgba(251,246,240,.06);
---scrim-image:linear-gradient(180deg,rgba(23,32,40,.68) 0%,rgba(23,32,40,.48) 45%,rgba(23,32,40,.74) 100%); /* @kind other */
---scrim-chip:rgba(39,51,60,.55);
+  /* --- semantic: surfaces --- */
+  --surface-page: #e6e3da;
+  --surface-page-alt: var(--sand-200);
+  --surface-raised: var(--cream-50);
+  --surface-card: var(--sand-200);
+  --surface-card-light: var(--cream-50);
+  --surface-chip: var(--sand-100);
+  --surface-dark: #132533;
+  --surface-dark-panel: var(--ink-700);
+  --surface-dark-field: rgba(251, 246, 240, 0.06);
+  --scrim-image: linear-gradient(
+    180deg,
+    rgba(23, 32, 40, 0.68) 0%,
+    rgba(23, 32, 40, 0.48) 45%,
+    rgba(23, 32, 40, 0.74) 100%
+  ); /* @kind other */
+  --scrim-chip: rgba(39, 51, 60, 0.55);
 
-/* --- semantic: borders --- */
---border-subtle:rgba(39,51,60,.12);
---border-strong:rgba(39,51,60,.28);
---border-field:rgba(39,51,60,.55);
---border-on-dark:rgba(251,246,240,.28);
---border-on-dark-field:rgba(251,246,240,.45);
+  /* --- semantic: borders --- */
+  --border-subtle: rgba(39, 51, 60, 0.12);
+  --border-strong: rgba(39, 51, 60, 0.28);
+  --border-field: rgba(39, 51, 60, 0.55);
+  --border-on-dark: rgba(251, 246, 240, 0.28);
+  --border-on-dark-field: rgba(251, 246, 240, 0.45);
 
-/* --- semantic: actions --- */
---action-primary-bg:var(--amber-400);
---action-primary-bg-hover:var(--amber-500);
---action-primary-fg:var(--espresso-900);
---action-dark-bg:#081824;
---action-dark-bg-hover:#0f2636;
---action-dark-fg:var(--cream-50);
---action-outline-fg:var(--ink-900);
---action-outline-border:var(--ink-900);
---action-ghost-fg:var(--blue-500);
---focus-ring:0 0 0 3px rgba(56,98,127,.35);
+  /* --- semantic: actions --- */
+  --action-primary-bg: var(--amber-400);
+  --action-primary-bg-hover: var(--amber-500);
+  --action-primary-fg: var(--espresso-900);
+  --action-dark-bg: #081824;
+  --action-dark-bg-hover: #0f2636;
+  --action-dark-fg: var(--cream-50);
+  --action-outline-fg: var(--ink-900);
+  --action-outline-border: var(--ink-900);
+  --action-ghost-fg: var(--blue-500);
+  --focus-ring: 0 0 0 3px rgba(56, 98, 127, 0.35);
 }

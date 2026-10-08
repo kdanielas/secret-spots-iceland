@@ -18,7 +18,9 @@ const GRANTABLE = CATEGORIES.map((c) => ({
   window.dataLayer = window.dataLayer || [];
   // Consent Mode needs the arguments object itself in the dataLayer, not an
   // object literal — that is how Tag Manager recognises a consent command.
-  function gtag() { window.dataLayer.push(arguments); }
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
   window.gtag = window.gtag || gtag;
 
   // The decision the visitor made on an earlier visit. Anything malformed or
@@ -41,7 +43,9 @@ const GRANTABLE = CATEGORIES.map((c) => ({
   var gpc = !stored && navigator.globalPrivacyControl === true;
 
   var defaults = {};
-  DENIED_SIGNALS.forEach(function (signal) { defaults[signal] = 'denied'; });
+  DENIED_SIGNALS.forEach(function (signal) {
+    defaults[signal] = 'denied';
+  });
   GRANTABLE.forEach(function (category) {
     var granted = category.required || (stored ? stored[category.id] === true : false);
     category.signals.forEach(function (signal) {
@@ -59,8 +63,5 @@ const GRANTABLE = CATEGORIES.map((c) => ({
   // Drives the banner's visibility from CSS. Doing it here, before the body is
   // parsed, is what stops returning visitors seeing the banner flash before a
   // script could hide it.
-  document.documentElement.setAttribute(
-    'data-consent',
-    stored ? 'set' : gpc ? 'gpc' : 'ask'
-  );
+  document.documentElement.setAttribute('data-consent', stored ? 'set' : gpc ? 'gpc' : 'ask');
 </script>

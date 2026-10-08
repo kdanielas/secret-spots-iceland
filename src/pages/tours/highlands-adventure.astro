@@ -47,9 +47,24 @@ const EXPECT = [
 ];
 
 const HIGHLIGHTS = [
-  { image: highlight1, title: 'Háifoss Waterfall', description: "Iceland's second-tallest waterfall at 122 meters, plunging dramatically into a deep gorge carved by glacial rivers. The sheer scale is overwhelming — and most visitors never see it because it requires a private guide with 4x4 access and local knowledge of where to safely view this raw natural power." },
-  { image: highlight2, title: 'Sigöldugljúfur Canyon', description: "A magical canyon lined with dozens of cascading waterfalls — each one a masterpiece of erosion and water power. The canyon is a photographer's dream and a hiker's paradise, accessible only to those willing to venture into Iceland's true wilderness." },
-  { image: highlight3, title: 'Landmannalaugar (Optional)', description: 'Colorful rhyolite mountains — reds, yellows, and greens — and natural hot springs in the heart of the Highlands. Only accessible in summer and only in good weather. When conditions allow, this is Iceland\'s most surreal and photogenic destination. Optional hiking and geothermal bathing available.' },
+  {
+    image: highlight1,
+    title: 'Háifoss Waterfall',
+    description:
+      "Iceland's second-tallest waterfall at 122 meters, plunging dramatically into a deep gorge carved by glacial rivers. The sheer scale is overwhelming — and most visitors never see it because it requires a private guide with 4x4 access and local knowledge of where to safely view this raw natural power.",
+  },
+  {
+    image: highlight2,
+    title: 'Sigöldugljúfur Canyon',
+    description:
+      "A magical canyon lined with dozens of cascading waterfalls — each one a masterpiece of erosion and water power. The canyon is a photographer's dream and a hiker's paradise, accessible only to those willing to venture into Iceland's true wilderness.",
+  },
+  {
+    image: highlight3,
+    title: 'Landmannalaugar (Optional)',
+    description:
+      "Colorful rhyolite mountains — reds, yellows, and greens — and natural hot springs in the heart of the Highlands. Only accessible in summer and only in good weather. When conditions allow, this is Iceland's most surreal and photogenic destination. Optional hiking and geothermal bathing available.",
+  },
 ];
 
 const WHO_FOR = [
@@ -63,11 +78,36 @@ const WHO_FOR = [
 ];
 
 const REVIEWS = [
-  { quote: 'He took us to several locations — climbing over boulders to reach incredible views. Luke made sure I could navigate safely. He was engaging, warm, fun, and knowledgeable and helped to make this one of our favorite days.', name: 'S K', type: 'Friends' },
-  { quote: 'He took us to many beautiful places out of the crowds and took AMAZING photos that captured our memories forever. He is very patient, accommodating and knowledgeable of the area.', name: 'Gabriela B', type: 'Couples' },
-  { quote: 'Luke planned visits to Sigöldugljúfur, Sigöldufoss, Háifoss — magical places with very little traffic. The Highlands were mystical and the trip was fulfilling. Luke was personable, knowledgeable and more than eager to help make the trip memorable.', name: 'Mark W', type: 'Solo' },
-  { quote: 'He took us to spectacular places we would have never found on our own. We got some amazing photos and got to see such varied areas. He helped us avoid the crowds as much as possible. I would not hesitate to use him for a much longer tour.', name: 'Jennifer D', type: 'Family' },
-  { quote: 'While we booked a certain route, as we discussed what really interested us, we changed course and did not see a large tour bus the entire journey. The tour exceeded expectations, was personal, and we learned and saw a lot of what makes Iceland so interesting.', name: 'Mark Andrews', type: 'Family' },
+  {
+    quote:
+      'He took us to several locations — climbing over boulders to reach incredible views. Luke made sure I could navigate safely. He was engaging, warm, fun, and knowledgeable and helped to make this one of our favorite days.',
+    name: 'S K',
+    type: 'Friends',
+  },
+  {
+    quote:
+      'He took us to many beautiful places out of the crowds and took AMAZING photos that captured our memories forever. He is very patient, accommodating and knowledgeable of the area.',
+    name: 'Gabriela B',
+    type: 'Couples',
+  },
+  {
+    quote:
+      'Luke planned visits to Sigöldugljúfur, Sigöldufoss, Háifoss — magical places with very little traffic. The Highlands were mystical and the trip was fulfilling. Luke was personable, knowledgeable and more than eager to help make the trip memorable.',
+    name: 'Mark W',
+    type: 'Solo',
+  },
+  {
+    quote:
+      'He took us to spectacular places we would have never found on our own. We got some amazing photos and got to see such varied areas. He helped us avoid the crowds as much as possible. I would not hesitate to use him for a much longer tour.',
+    name: 'Jennifer D',
+    type: 'Family',
+  },
+  {
+    quote:
+      'While we booked a certain route, as we discussed what really interested us, we changed course and did not see a large tour bus the entire journey. The tour exceeded expectations, was personal, and we learned and saw a lot of what makes Iceland so interesting.',
+    name: 'Mark Andrews',
+    type: 'Family',
+  },
 ];
 
 const TOUR_NAME = 'Highlands Adventure';
@@ -110,14 +150,20 @@ const schema = await tourPageSchema(Astro.url.pathname, {
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
               <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">
+                  {s.label}
+                </span>
+                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">
+                  {s.sub}
+                </span>
               </div>
             </div>
           </>
         ))}
       </div>
-      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">
+        Check Availability
+      </Button>
     </div>
   </Hero>
 
@@ -125,12 +171,24 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={expectImg} alt="Couple standing above the deep gorge of Háifoss waterfall in the Icelandic Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800"
+      >
+        <Image
+          src={expectImg}
+          alt="Couple standing above the deep gorge of Háifoss waterfall in the Icelandic Highlands"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
-          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Highlands Tour</h2>
+          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">
+            What to Expect on the Highlands Tour
+          </h2>
           <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
@@ -141,7 +199,9 @@ const schema = await tourPageSchema(Astro.url.pathname, {
             </div>
           ))}
         </div>
-        <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">How It Works</Button>
+        <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">
+          How It Works
+        </Button>
       </div>
     </div>
   </section>
@@ -150,11 +210,23 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
-        <Image src={whoForImg} alt="Guide standing at the rim of a colorful geothermal valley in the Icelandic Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886"
+      >
+        <Image
+          src={whoForImg}
+          alt="Guide standing at the rim of a colorful geothermal valley in the Icelandic Highlands"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Who This Highlands Tour Is For</h2>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Who This Highlands Tour Is For
+        </h2>
         <div style="display:flex;flex-direction:column;width:100%">
           {WHO_FOR.map((item) => (
             <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
@@ -168,13 +240,35 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={anotherPlanetImg} alt="Travelers lying at the edge of the cliff overlooking Háifoss waterfall in the Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800"
+      >
+        <Image
+          src={anotherPlanetImg}
+          alt="Travelers lying at the edge of the cliff overlooking Háifoss waterfall in the Highlands"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Iceland's most remote and mystical landscapes.</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Icelandic Highlands are where nature reveals its rawest power — dramatic waterfalls plunging 122 meters into canyons, colorful rhyolite mountains, Viking ruins buried in time, and lava formations that look like another planet. But the Highlands are only accessible in summer, and only to those with the right vehicle and local knowledge.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">This private Iceland tour takes you deep into Iceland's heart — far from tour buses and crowds — to places most visitors never reach. With Luke's expertise navigating F-roads in a rugged 4x4 vehicle, you'll discover the geological drama, ancient history, and surreal beauty that makes the Highlands the ultimate Icelandic adventure.</p>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Iceland's most remote and mystical landscapes.
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          The Icelandic Highlands are where nature reveals its rawest power — dramatic waterfalls
+          plunging 122 meters into canyons, colorful rhyolite mountains, Viking ruins buried in
+          time, and lava formations that look like another planet. But the Highlands are only
+          accessible in summer, and only to those with the right vehicle and local knowledge.
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          This private Iceland tour takes you deep into Iceland's heart — far from tour buses and
+          crowds — to places most visitors never reach. With Luke's expertise navigating F-roads in
+          a rugged 4x4 vehicle, you'll discover the geological drama, ancient history, and surreal
+          beauty that makes the Highlands the ultimate Icelandic adventure.
+        </p>
       </div>
     </div>
   </section>
@@ -185,14 +279,39 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903">
-        <Image src={photographyImg} alt="Couple sitting above Háifoss waterfall with a rainbow rising from the mist" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903"
+      >
+        <Image
+          src={photographyImg}
+          alt="Couple sitting above Háifoss waterfall with a rainbow rising from the mist"
+          width={900}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photographing the Highlands</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Highlands are where Iceland's most dramatic and cinematic landscapes exist — but only for those who can reach them and know where to look. Waterfalls backlit by rare Highlands sunlight, colorful mountains in impossible hues, lava formations framing sky and water, moody Highlands weather creating theatrical lighting.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Whether you're a professional photographer or capturing memories on your phone, every location on this tour is chosen for its visual drama and photographic potential. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story of Iceland's wildest side.</p>
-        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Photographing the Highlands
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          The Highlands are where Iceland's most dramatic and cinematic landscapes exist — but only
+          for those who can reach them and know where to look. Waterfalls backlit by rare Highlands
+          sunlight, colorful mountains in impossible hues, lava formations framing sky and water,
+          moody Highlands weather creating theatrical lighting.
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          Whether you're a professional photographer or capturing memories on your phone, every
+          location on this tour is chosen for its visual drama and photographic potential.
+          Professional photography guidance is included throughout — this is not just a tour, it's
+          an experience designed for travellers who want to come home with images that tell a real
+          story of Iceland's wildest side.
+        </p>
+        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">
+          See Our Photography Guide
+        </Button>
       </div>
     </div>
   </section>
@@ -208,11 +327,21 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 </Layout>
 
 <style>
-  .tour-block { padding: var(--space-8); }
-  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+  .tour-block {
+    padding: var(--space-8);
+  }
+  .tour-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-11);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
   /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
      breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
-  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
+  .tour-row-media {
+    aspect-ratio: var(--media-ratio, 450/800);
+  }
 
   .tour-info-bar {
     display: flex;
@@ -226,19 +355,55 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     margin: 0 auto;
     flex-wrap: wrap;
   }
-  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
+  .tour-info-bar-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .tour-info-bar-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--ink-900);
+    flex: 0 0 auto;
+  }
 
   @media (max-width: 1024px) {
-    .tour-row { gap: var(--space-8); }
-    .tour-row-media { flex-basis: 320px !important; }
+    .tour-row {
+      gap: var(--space-8);
+    }
+    .tour-row-media {
+      flex-basis: 320px !important;
+    }
   }
   @media (max-width: 768px) {
-    .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
-    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
-    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
-    .tour-info-bar-dot { display: none; }
-    .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
+    .tour-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .tour-row-media {
+      flex-basis: auto !important;
+      width: 100%;
+      order: -1;
+      aspect-ratio: 1/1;
+    }
+    .tour-info-bar {
+      flex-direction: column;
+      border-radius: 32px;
+      justify-content: center;
+    }
+    .tour-info-bar-stats {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .tour-info-bar-dot {
+      display: none;
+    }
+    .tour-block {
+      padding-left: var(--space-6);
+      padding-right: var(--space-6);
+    }
   }
 </style>

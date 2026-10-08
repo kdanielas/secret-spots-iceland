@@ -23,7 +23,11 @@ const {
 const uid = `xfade-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<div class:list={['image-crossfade', className]} data-interval={interval} style={`position:relative;overflow:hidden;border-radius:${radius};aspect-ratio:${ratio};${style}`}>
+<div
+  class:list={['image-crossfade', className]}
+  data-interval={interval}
+  style={`position:relative;overflow:hidden;border-radius:${radius};aspect-ratio:${ratio};${style}`}
+>
   {images.map((img, i) => (
     <Image
       src={img}

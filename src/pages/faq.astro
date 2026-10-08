@@ -12,15 +12,18 @@ const FAQ_CATEGORIES = [
     items: [
       {
         question: 'What makes your tours different from standard Iceland tours?',
-        answer: "Three things. Every tour is 100% private — just you, your group and your guide, with no strangers and no fixed bus schedule. The route is built around your pace and interests and gets rebuilt around the weather and the light, instead of following a set itinerary. And you travel with a working photographer: Luke has been exploring and photographing Iceland since 2006, so you get both the lesser-known stops most standard tours drive past and help framing and timing the shots when you get there.",
+        answer:
+          'Three things. Every tour is 100% private — just you, your group and your guide, with no strangers and no fixed bus schedule. The route is built around your pace and interests and gets rebuilt around the weather and the light, instead of following a set itinerary. And you travel with a working photographer: Luke has been exploring and photographing Iceland since 2006, so you get both the lesser-known stops most standard tours drive past and help framing and timing the shots when you get there.',
       },
       {
         question: 'What Secret Spots Iceland stands for?',
-        answer: "Iceland is a very popular destination, with millions of visitors each year, and most natural sights are public and accessible to everyone. When we talk about Secret Spots, we don't mean places no one has ever visited. Instead, we focus on local knowledge, smart timing, alternative viewpoints, and lesser-known stops that most travelers simply pass by. The experience is about avoiding crowds where possible, visiting places at the right moment, and seeing Iceland in a more thoughtful, authentic way — not rushing from one busy attraction to another.",
+        answer:
+          "Iceland is a very popular destination, with millions of visitors each year, and most natural sights are public and accessible to everyone. When we talk about Secret Spots, we don't mean places no one has ever visited. Instead, we focus on local knowledge, smart timing, alternative viewpoints, and lesser-known stops that most travelers simply pass by. The experience is about avoiding crowds where possible, visiting places at the right moment, and seeing Iceland in a more thoughtful, authentic way — not rushing from one busy attraction to another.",
       },
       {
         question: "Can I join if I've already booked some activities?",
-        answer: 'Absolutely! We offer flexible planning and can integrate our expert guidance with your existing itinerary to make the most of your time in Iceland.',
+        answer:
+          'Absolutely! We offer flexible planning and can integrate our expert guidance with your existing itinerary to make the most of your time in Iceland.',
       },
     ],
   },
@@ -29,11 +32,13 @@ const FAQ_CATEGORIES = [
     items: [
       {
         question: 'Do I need to be a photographer to join?',
-        answer: "Not at all! Our Iceland photography tour is designed not just for professional photographers, but for anyone who loves adventure, nature, and capturing amazing memories — whether with a DSLR, smartphone, or just your eyes! While professional photography is part of the experience, the real focus is on enjoying Iceland's breathtaking landscapes and making the most of every moment.",
+        answer:
+          "Not at all! Our Iceland photography tour is designed not just for professional photographers, but for anyone who loves adventure, nature, and capturing amazing memories — whether with a DSLR, smartphone, or just your eyes! While professional photography is part of the experience, the real focus is on enjoying Iceland's breathtaking landscapes and making the most of every moment.",
       },
       {
         question: 'Is this a photography tour with hands-on coaching?',
-        answer: "Our tours are photography-friendly, not formal photography workshops. We're always happy to help with framing ideas, great viewpoints, timing, and capturing beautiful memories — whether on a phone or camera. However, we don't provide structured photography lessons, technical coaching, or continuous hands-on direction unless this is specifically discussed and arranged in advance. If photography guidance is a priority for you, we're happy to tailor the experience — just let us know before booking so expectations are fully aligned.",
+        answer:
+          "Our tours are photography-friendly, not formal photography workshops. We're always happy to help with framing ideas, great viewpoints, timing, and capturing beautiful memories — whether on a phone or camera. However, we don't provide structured photography lessons, technical coaching, or continuous hands-on direction unless this is specifically discussed and arranged in advance. If photography guidance is a priority for you, we're happy to tailor the experience — just let us know before booking so expectations are fully aligned.",
       },
     ],
   },
@@ -42,19 +47,23 @@ const FAQ_CATEGORIES = [
     items: [
       {
         question: 'What kind of vehicle do we travel in?',
-        answer: 'We match the vehicle to your group: a Mercedes V-Class for up to 6 passengers, a luxury Mercedes Sprinter for up to 8 with room to spare for luggage and camera gear, and an 18-seat Sprinter minibus for larger groups. All of them are chosen for comfort on long scenic drives through changing terrain and weather. You can see the full fleet on the Our Vehicles page.',
+        answer:
+          'We match the vehicle to your group: a Mercedes V-Class for up to 6 passengers, a luxury Mercedes Sprinter for up to 8 with room to spare for luggage and camera gear, and an 18-seat Sprinter minibus for larger groups. All of them are chosen for comfort on long scenic drives through changing terrain and weather. You can see the full fleet on the Our Vehicles page.',
       },
       {
         question: 'How long are the tours?',
-        answer: 'Tour lengths vary depending on the itinerary. We offer day trips, multi-day adventures, and customizable expeditions to suit your schedule.',
+        answer:
+          'Tour lengths vary depending on the itinerary. We offer day trips, multi-day adventures, and customizable expeditions to suit your schedule.',
       },
       {
         question: 'Where do the tours start?',
-        answer: "We can pick you up from Reykjavik or Keflavik Airport — just let us know your arrival details, and we'll take care of the rest!",
+        answer:
+          "We can pick you up from Reykjavik or Keflavik Airport — just let us know your arrival details, and we'll take care of the rest!",
       },
       {
         question: 'What should I pack?',
-        answer: "Iceland's weather can be unpredictable, so we provide a detailed packing list to ensure you're prepared. Essentials include warm layers, waterproof gear, and sturdy hiking boots.",
+        answer:
+          "Iceland's weather can be unpredictable, so we provide a detailed packing list to ensure you're prepared. Essentials include warm layers, waterproof gear, and sturdy hiking boots.",
       },
     ],
   },
@@ -63,11 +72,13 @@ const FAQ_CATEGORIES = [
     items: [
       {
         question: 'Can I book a private tour?',
-        answer: 'Yes! We offer Iceland private tours tailored to your preferences, whether you want a solo adventure, a couple\'s getaway, or a special group trip.',
+        answer:
+          "Yes! We offer Iceland private tours tailored to your preferences, whether you want a solo adventure, a couple's getaway, or a special group trip.",
       },
       {
         question: 'How do I book a tour?',
-        answer: "Simply contact us with your preferred dates and interests, and we'll handle the rest — creating a unique itinerary tailored just for you!",
+        answer:
+          "Simply contact us with your preferred dates and interests, and we'll handle the rest — creating a unique itinerary tailored just for you!",
       },
     ],
   },
@@ -83,18 +94,33 @@ const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items);
   footerStyle="border:none"
   schema={[faqPageNode(canonicalUrl(Astro.url.pathname), faqEntries)]}
 >
-  <Hero framedImage={heroImg} framedImageAlt="Couple overlooking the Icelandic highlands" subtitle="Frequently Asked Questions" primaryCta="" secondaryCta="">
+  <Hero
+    framedImage={heroImg}
+    framedImageAlt="Couple overlooking the Icelandic highlands"
+    subtitle="Frequently Asked Questions"
+    primaryCta=""
+    secondaryCta=""
+  >
     <Fragment slot="title">FAQs</Fragment>
   </Hero>
 
   <section class="section-py" style="background:var(--surface-page)">
-    <div data-faq-group style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-13);padding:0 var(--space-8)">
+    <div
+      data-faq-group
+      style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-13);padding:0 var(--space-8)"
+    >
       {FAQ_CATEGORIES.map((cat, c) => (
         <div style="display:flex;flex-direction:column;gap:var(--space-8)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">{cat.category}</h2>
+          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">
+            {cat.category}
+          </h2>
           <div style="display:flex;flex-direction:column;width:100%">
             {cat.items.map((item, i) => (
-              <FaqItem question={item.question} answer={item.answer} defaultOpen={c === 0 && i === 0} />
+              <FaqItem
+                question={item.question}
+                answer={item.answer}
+                defaultOpen={c === 0 && i === 0}
+              />
             ))}
           </div>
         </div>

@@ -12,15 +12,32 @@ import { TOURS, contactHref, formatPrice } from '../data/tours';
 const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')[2] : undefined);
 ---
 
-<Layout title="Iceland Photography Tours — Shoot Hidden Iceland with a Pro" description="Private photography tours with Luke, a pro photographer with 20 years in Iceland. Golden-hour timing, secret locations, all skill levels welcome. Small groups only." active="Tours">
+<Layout
+  title="Iceland Photography Tours — Shoot Hidden Iceland with a Pro"
+  description="Private photography tours with Luke, a pro photographer with 20 years in Iceland. Golden-hour timing, secret locations, all skill levels welcome. Small groups only."
+  active="Tours"
+>
   <div class="container-pad" style="padding-bottom:var(--space-8)">
     <section style="background:#081824;border-radius:32px;min-height:500px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
-          <h1 class="tours-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Iceland Photography Tours — Book Now</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">From day trips to multi-day adventures, every tour is fully private and built around you. Choose a classic private Iceland tour or a dedicated photography tour with Luke — a local guide and professional photographer with nearly 20 years exploring Iceland's most remote landscapes — and go home with the trip, and the photos, you actually wanted.</p>
+          <h1
+            class="tours-hero-title"
+            style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere"
+          >
+            Iceland Photography Tours — Book Now
+          </h1>
+          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">
+            From day trips to multi-day adventures, every tour is fully private and built around
+            you. Choose a classic private Iceland tour or a dedicated photography tour with Luke — a
+            local guide and professional photographer with nearly 20 years exploring Iceland's most
+            remote landscapes — and go home with the trip, and the photos, you actually wanted.
+          </p>
         </div>
-        <a href="#tours" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none">
+        <a
+          href="#tours"
+          style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none"
+        >
           <span style="font:700 15px/1 var(--font-sans)">Check our tours</span>
           <Icon name="chevron-down" size={20} color="var(--amber-400)" />
         </a>
@@ -30,28 +47,81 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
 
   <Section id="tours" tight style="padding-top:var(--space-7);scroll-margin-top:110px">
     <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
-      <h2 class="sh-lg" style="color:var(--text-heading);margin:0;text-align:center">All Our Private Iceland Tours</h2>
+      <h2 class="sh-lg" style="color:var(--text-heading);margin:0;text-align:center">
+        All Our Private Iceland Tours
+      </h2>
       <div class="grid-tours">
         {TOURS.map((t) => (
-          <div id={t.slug} class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);scroll-margin-top:110px">
-            <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
-              <div data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="position:relative;aspect-ratio:2/1;overflow:hidden">
-                <Image src={t.image} alt="" width={500} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+          <div
+            id={t.slug}
+            class="card-clickable"
+            style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);scroll-margin-top:110px"
+          >
+            <a
+              href={t.href}
+              data-ev="click_link"
+              data-ev-text={t.title}
+              data-ev-tour={tourSlug(t.href)}
+              style="display:contents;text-decoration:none;color:inherit"
+            >
+              <div
+                data-ev="click_image"
+                data-ev-text={t.title}
+                data-ev-tour={tourSlug(t.href)}
+                style="position:relative;aspect-ratio:2/1;overflow:hidden"
+              >
+                <Image
+                  src={t.image}
+                  alt=""
+                  width={500}
+                  quality={80}
+                  loading="lazy"
+                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+                />
                 <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)"></div>
-                <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
+                <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">
+                  {t.duration}
+                </span>
                 <span style="position:absolute;bottom:16px;right:16px;color:var(--cream-50);text-align:right">
-                  <span style="display:block;font:400 13px/1 var(--font-sans);opacity:.9;margin-bottom:4px">From</span>
-                  <span style="display:block;font:700 22px/1 var(--font-sans)">{formatPrice(t.priceUsd)}<span style="font:400 13px/1 var(--font-sans)"> /group</span></span>
+                  <span style="display:block;font:400 13px/1 var(--font-sans);opacity:.9;margin-bottom:4px">
+                    From
+                  </span>
+                  <span style="display:block;font:700 22px/1 var(--font-sans)">
+                    {formatPrice(t.priceUsd)}
+                    <span style="font:400 13px/1 var(--font-sans)"> /group</span>
+                  </span>
                 </span>
               </div>
               <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:0 var(--space-6)">
-                <h3 style="font:700 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">{t.title}</h3>
-                <p style="font:400 16px/1.5 var(--font-sans);color:var(--text-heading);margin:0">{t.description}</p>
+                <h3 style="font:700 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">
+                  {t.title}
+                </h3>
+                <p style="font:400 16px/1.5 var(--font-sans);color:var(--text-heading);margin:0">
+                  {t.description}
+                </p>
               </div>
             </a>
             <div style="display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding-top:var(--space-3);margin-top:auto;padding-left:var(--space-6);padding-right:var(--space-6)">
-              <a href={contactHref(t.slug)} class="cta-pill" data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Check Availability</a>
-              <a href={t.href} class="info-pill" aria-label={`More info about the ${t.title} tour`} data-ev="click_button" data-ev-tour={tourSlug(t.href)} style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none">Tour details<Icon name="chevron-right" size={16} /></a>
+              <a
+                href={contactHref(t.slug)}
+                class="cta-pill"
+                data-ev="click_button"
+                data-ev-tour={tourSlug(t.href)}
+                style="display:inline-flex;align-items:center;justify-content:center;padding:9.5px 24px;background:var(--action-dark-bg);color:var(--action-dark-fg);border-radius:var(--radius-pill);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none"
+              >
+                Check Availability
+              </a>
+              <a
+                href={t.href}
+                class="info-pill"
+                aria-label={`More info about the ${t.title} tour`}
+                data-ev="click_button"
+                data-ev-tour={tourSlug(t.href)}
+                style="display:inline-flex;align-items:center;gap:4px;padding:9px 4px;color:var(--ink-900);font:var(--type-button);font-size:.9375rem;white-space:nowrap;text-decoration:none"
+              >
+                Tour details
+                <Icon name="chevron-right" size={16} />
+              </a>
             </div>
           </div>
         ))}
@@ -60,14 +130,34 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   </Section>
 
   <Section tone="alt">
-    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
-      <div class="media-frame" style="width:100%;aspect-ratio:16/9;border-radius:32px;overflow:hidden">
-        <video class="lazy-video" data-src={guideVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
+    <div
+      data-reveal
+      style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center"
+    >
+      <div
+        class="media-frame"
+        style="width:100%;aspect-ratio:16/9;border-radius:32px;overflow:hidden"
+      >
+        <video
+          class="lazy-video"
+          data-src={guideVideoUrl}
+          muted
+          loop
+          playsinline
+          style="width:100%;height:100%;object-fit:cover"
+        ></video>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:center;text-align:center">
-        <h2 class="sh-lg" style="color:var(--text-heading);margin:0">Our photography guide &amp; tips</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">Every tour is private and shaped around the weather, the light, and what you actually want to see — with a local guide who knows where the crowds aren't.</p>
-        <Button variant="outline" href="/iceland-photography" iconAfter="chevron-right">See Our Photography Guide</Button>
+        <h2 class="sh-lg" style="color:var(--text-heading);margin:0">
+          Our photography guide &amp; tips
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:720px">
+          Every tour is private and shaped around the weather, the light, and what you actually want
+          to see — with a local guide who knows where the crowds aren't.
+        </p>
+        <Button variant="outline" href="/iceland-photography" iconAfter="chevron-right">
+          See Our Photography Guide
+        </Button>
       </div>
     </div>
   </Section>
@@ -75,26 +165,51 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   <section class="container-pad" style="padding-top:0;padding-bottom:var(--space-11)">
     <div data-reveal class="quote-panel">
       <div style="display:flex;gap:4px">
-        {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
+        {Array.from({ length: 5 }).map(() => (
+          <Icon name="star" size={20} color="var(--star-gold)" />
+        ))}
       </div>
-      <p style="font:400 22px/1.6 var(--font-sans);color:var(--text-heading);margin:0;text-align:center;max-width:900px">We recently completed a trip to Iceland from Reykjavik to the south coast with Luke as our guide throughout. We had a range of ages in our group from tween to 80+ and Luke did a fantastic job of accommodating capabilities and interests throughout. He had us well equipped with the secret spots he is known for along with the must see big destinations.</p>
+      <p style="font:400 22px/1.6 var(--font-sans);color:var(--text-heading);margin:0;text-align:center;max-width:900px">
+        We recently completed a trip to Iceland from Reykjavik to the south coast with Luke as our
+        guide throughout. We had a range of ages in our group from tween to 80+ and Luke did a
+        fantastic job of accommodating capabilities and interests throughout. He had us well
+        equipped with the secret spots he is known for along with the must see big destinations.
+      </p>
       <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-        <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Britta Hormann</span>
-        <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">United States · Tripadvisor Review</span>
+        <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">
+          Britta Hormann
+        </span>
+        <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">
+          United States · Tripadvisor Review
+        </span>
       </div>
     </div>
   </section>
 </Layout>
 
 <style>
-  .card-clickable { transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
-  .card-clickable:hover { box-shadow: 0 12px 32px rgba(0,0,0,.1); }
-  .cta-pill:hover { background: var(--action-dark-bg-hover); }
-  .info-pill:hover { color: var(--blue-500); }
-  .card-clickable:active { transform: var(--press-scale); }
+  .card-clickable {
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .card-clickable:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  .cta-pill:hover {
+    background: var(--action-dark-bg-hover);
+  }
+  .info-pill:hover {
+    color: var(--blue-500);
+  }
+  .card-clickable:active {
+    transform: var(--press-scale);
+  }
 
   @media (max-width: 768px) {
-    .tours-hero-title { font-size: 2rem !important; }
+    .tours-hero-title {
+      font-size: 2rem !important;
+    }
   }
 </style>
 
@@ -112,7 +227,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         }
       });
     },
-    { rootMargin: '200px' }
+    { rootMargin: '200px' },
   );
   lazyVideos.forEach((video) => io.observe(video));
 </script>

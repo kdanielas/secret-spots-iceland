@@ -49,18 +49,48 @@ const EXPECT = [
 ];
 
 const HIGHLIGHTS = [
-  { image: highlight1, title: 'Reynisfjara Black Sand Beach', description: "Jet-black sand, towering basalt columns, and the Reynisdrangar sea stacks rising from the ocean — one of Iceland's most iconic landscapes, timed for the best light of the day." },
-  { image: highlight2, title: 'Skógafoss Waterfall', description: 'A powerful, wide cascade into a misty canyon. Climb the stairs alongside it for panoramic views, or stand at the base and feel the spray.' },
-  { image: highlight3, title: 'Sólheimajökull Glacier (Optional)', description: 'An easily accessible glacier. Optional 1-hour hike with certified guides — walking on ancient ice and exploring crevasses.' },
-  { image: highlight4, title: 'Dyrhólaey Nature Reserve', description: 'Rich birdlife, dramatic cliffs, and a massive sea arch carved by the Atlantic — sweeping 360° views from this coastal promontory.' },
-  { image: highlight5, title: 'Vík Village', description: "Iceland's southernmost village — craft lunch or dinner overlooking dramatic coastline, and a relaxed pause in the day." },
-  { image: highlight6, title: 'Skógar Folk Museum', description: 'Turf houses, traditional boats, and heritage artifacts — a look at rural Icelandic life in past centuries.' },
+  {
+    image: highlight1,
+    title: 'Reynisfjara Black Sand Beach',
+    description:
+      "Jet-black sand, towering basalt columns, and the Reynisdrangar sea stacks rising from the ocean — one of Iceland's most iconic landscapes, timed for the best light of the day.",
+  },
+  {
+    image: highlight2,
+    title: 'Skógafoss Waterfall',
+    description:
+      'A powerful, wide cascade into a misty canyon. Climb the stairs alongside it for panoramic views, or stand at the base and feel the spray.',
+  },
+  {
+    image: highlight3,
+    title: 'Sólheimajökull Glacier (Optional)',
+    description:
+      'An easily accessible glacier. Optional 1-hour hike with certified guides — walking on ancient ice and exploring crevasses.',
+  },
+  {
+    image: highlight4,
+    title: 'Dyrhólaey Nature Reserve',
+    description:
+      'Rich birdlife, dramatic cliffs, and a massive sea arch carved by the Atlantic — sweeping 360° views from this coastal promontory.',
+  },
+  {
+    image: highlight5,
+    title: 'Vík Village',
+    description:
+      "Iceland's southernmost village — craft lunch or dinner overlooking dramatic coastline, and a relaxed pause in the day.",
+  },
+  {
+    image: highlight6,
+    title: 'Skógar Folk Museum',
+    description:
+      'Turf houses, traditional boats, and heritage artifacts — a look at rural Icelandic life in past centuries.',
+  },
 ];
 
 const WHO_FOR = [
   'Families wanting to experience the complete Iceland in one epic journey',
   'Couples seeking an unforgettable adventure combining adventure and romance',
-  "First-time visitors wanting to see everything Iceland is famous for — plus the hidden side",
+  'First-time visitors wanting to see everything Iceland is famous for — plus the hidden side',
   'Photographers pursuing the full range of Icelandic landscapes and light',
   'Groups wanting flexibility — each day can be customized based on interests and energy',
   'Multi-generational groups — from young children to grandparents, Luke adapts every day',
@@ -68,12 +98,42 @@ const WHO_FOR = [
 ];
 
 const REVIEWS = [
-  { quote: "Luke is awesome both as a person and as a tour guide. On top of that he takes amazing photos. He has great in-depth knowledge about Iceland and knows all the good places to visit. Plus he's always ready to make extra efforts to deliver what guests want. My only regret is we just had him for 1 day!", name: 'Abhishek', type: 'Couple' },
-  { quote: 'If you want a customized off-road adventure and photo session making you feel like the luckiest person in the world — go with Luke! He showed us so much, even during the short winter days.', name: 'razner', type: 'Family' },
-  { quote: "Luke was a phenomenal tour guide! If you're looking for adventure off the beaten path, he's got you covered. He went above and beyond what we were looking for and suggested amazing spots we hadn't considered.", name: 'Liz B', type: 'Friends' },
-  { quote: "We had an amazing time with Luke touring the South Coast. Two jam-packed days of breathtaking scenery, delicious food, and a local's insight. He's responsive, patient, fun, and his photography is the icing on the cake!", name: 'Jennifer Q', type: 'Family' },
-  { quote: 'Luke created a flexible, weather-adaptable adventure that combined well-known sites with hidden treasures. His expert photography let us enjoy the moment instead of fumbling with our phones. Highly recommend!', name: 'Mehul P', type: 'Family' },
-  { quote: "Luke provided a meaningful, personal, and dynamic tour! His energy was amazing and he kept us engaged during long drives. We sang, laughed, and shared incredible moments. I'm so thankful for the memories he captured!", name: 'Tanja P', type: 'Friends' },
+  {
+    quote:
+      "Luke is awesome both as a person and as a tour guide. On top of that he takes amazing photos. He has great in-depth knowledge about Iceland and knows all the good places to visit. Plus he's always ready to make extra efforts to deliver what guests want. My only regret is we just had him for 1 day!",
+    name: 'Abhishek',
+    type: 'Couple',
+  },
+  {
+    quote:
+      'If you want a customized off-road adventure and photo session making you feel like the luckiest person in the world — go with Luke! He showed us so much, even during the short winter days.',
+    name: 'razner',
+    type: 'Family',
+  },
+  {
+    quote:
+      "Luke was a phenomenal tour guide! If you're looking for adventure off the beaten path, he's got you covered. He went above and beyond what we were looking for and suggested amazing spots we hadn't considered.",
+    name: 'Liz B',
+    type: 'Friends',
+  },
+  {
+    quote:
+      "We had an amazing time with Luke touring the South Coast. Two jam-packed days of breathtaking scenery, delicious food, and a local's insight. He's responsive, patient, fun, and his photography is the icing on the cake!",
+    name: 'Jennifer Q',
+    type: 'Family',
+  },
+  {
+    quote:
+      'Luke created a flexible, weather-adaptable adventure that combined well-known sites with hidden treasures. His expert photography let us enjoy the moment instead of fumbling with our phones. Highly recommend!',
+    name: 'Mehul P',
+    type: 'Family',
+  },
+  {
+    quote:
+      "Luke provided a meaningful, personal, and dynamic tour! His energy was amazing and he kept us engaged during long drives. We sang, laughed, and shared incredible moments. I'm so thankful for the memories he captured!",
+    name: 'Tanja P',
+    type: 'Friends',
+  },
 ];
 
 const TOUR_NAME = 'South Coast Private Iceland';
@@ -116,14 +176,20 @@ const schema = await tourPageSchema(Astro.url.pathname, {
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
               <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">
+                  {s.label}
+                </span>
+                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">
+                  {s.sub}
+                </span>
               </div>
             </div>
           </>
         ))}
       </div>
-      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">Check Availability</Button>
+      <Button variant="dark" href={contactHref(TOUR_SLUG)} iconAfter="arrow-right">
+        Check Availability
+      </Button>
     </div>
   </Hero>
 
@@ -131,12 +197,24 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={expectImg} alt="Traveler in a maroon winter coat standing on ice in front of the frozen Skógafoss waterfall" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800"
+      >
+        <Image
+          src={expectImg}
+          alt="Traveler in a maroon winter coat standing on ice in front of the frozen Skógafoss waterfall"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
-          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the South Coast Tour</h2>
+          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">
+            What to Expect on the South Coast Tour
+          </h2>
           <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
@@ -147,7 +225,9 @@ const schema = await tourPageSchema(Astro.url.pathname, {
             </div>
           ))}
         </div>
-        <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">How It Works</Button>
+        <Button variant="outline" href="/how-it-works" iconAfter="arrow-right">
+          How It Works
+        </Button>
       </div>
     </div>
   </section>
@@ -156,11 +236,23 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
-        <Image src={whoForImg} alt="White Icelandic horse standing in icy water at the base of a frozen South Coast waterfall" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886"
+      >
+        <Image
+          src={whoForImg}
+          alt="White Icelandic horse standing in icy water at the base of a frozen South Coast waterfall"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">This tour is perfect for</h2>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          This tour is perfect for
+        </h2>
         <div style="display:flex;flex-direction:column;width:100%">
           {WHO_FOR.map((item) => (
             <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
@@ -174,13 +266,37 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={anotherPlanetImg} alt="Glacier outlet on Iceland's South Coast" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800"
+      >
+        <Image
+          src={anotherPlanetImg}
+          alt="Glacier outlet on Iceland's South Coast"
+          width={700}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Iceland's most iconic landscapes in one unforgettable day</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The South Coast is where Iceland reveals its raw power — dramatic waterfalls plunging from sheer cliffs, black sand beaches with towering basalt columns, glaciers calving into lagoons, and cliffs carved by centuries of Atlantic waves. It's Iceland's most famous route, which means crowds. But with Luke's local knowledge, flexible timing, and professional photography, you'll experience the South Coast the way it's meant to be experienced — without the tour bus queues.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">This full-day private Iceland tour takes you through landscapes carved by ice, fire, and ocean. From Seljalandsfoss and Skógafoss waterfalls to Reynisfjara black sand beach and optional glacier adventures, every stop is adapted to light conditions, weather, and what you want to experience most.</p>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Iceland's most iconic landscapes in one unforgettable day
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          The South Coast is where Iceland reveals its raw power — dramatic waterfalls plunging from
+          sheer cliffs, black sand beaches with towering basalt columns, glaciers calving into
+          lagoons, and cliffs carved by centuries of Atlantic waves. It's Iceland's most famous
+          route, which means crowds. But with Luke's local knowledge, flexible timing, and
+          professional photography, you'll experience the South Coast the way it's meant to be
+          experienced — without the tour bus queues.
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          This full-day private Iceland tour takes you through landscapes carved by ice, fire, and
+          ocean. From Seljalandsfoss and Skógafoss waterfalls to Reynisfjara black sand beach and
+          optional glacier adventures, every stop is adapted to light conditions, weather, and what
+          you want to experience most.
+        </p>
       </div>
     </div>
   </section>
@@ -191,14 +307,38 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903">
-        <Image src={photographyImg} alt="Woman standing in a snowy South Coast field with mountains and trees in the background" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div
+        class="tour-row-media media-frame"
+        style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903"
+      >
+        <Image
+          src={photographyImg}
+          alt="Woman standing in a snowy South Coast field with mountains and trees in the background"
+          width={900}
+          quality={80}
+          loading="lazy"
+          style="width:100%;height:100%;object-fit:cover"
+        />
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photography Experience on This South Coast Iceland Tour</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The South Coast is one of Earth's most photogenic regions — but only if you know when and where to shoot. Golden hour light hitting Seljalandsfoss, dramatic cloud formations over Reynisfjara, glacial mist at the right moment, seabirds catching light above the cliffs — every location has a perfect window.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Professional photography guidance is included throughout the full 10-hour day. Luke will help you find the best angles, time the light perfectly, suggest compositions, and capture the moments that make the South Coast unforgettable — not just the famous views, but your personal experience of this raw landscape.</p>
-        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
+        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">
+          Photography Experience on This South Coast Iceland Tour
+        </h2>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          The South Coast is one of Earth's most photogenic regions — but only if you know when and
+          where to shoot. Golden hour light hitting Seljalandsfoss, dramatic cloud formations over
+          Reynisfjara, glacial mist at the right moment, seabirds catching light above the cliffs —
+          every location has a perfect window.
+        </p>
+        <p style="font:var(--type-lead);color:var(--text-body);margin:0">
+          Professional photography guidance is included throughout the full 10-hour day. Luke will
+          help you find the best angles, time the light perfectly, suggest compositions, and capture
+          the moments that make the South Coast unforgettable — not just the famous views, but your
+          personal experience of this raw landscape.
+        </p>
+        <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">
+          See Our Photography Guide
+        </Button>
       </div>
     </div>
   </section>
@@ -214,11 +354,21 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 </Layout>
 
 <style>
-  .tour-block { padding: var(--space-8); }
-  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+  .tour-block {
+    padding: var(--space-8);
+  }
+  .tour-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-11);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
   /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
      breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
-  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
+  .tour-row-media {
+    aspect-ratio: var(--media-ratio, 450/800);
+  }
 
   .tour-info-bar {
     display: flex;
@@ -232,19 +382,55 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     margin: 0 auto;
     flex-wrap: wrap;
   }
-  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
+  .tour-info-bar-stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+  .tour-info-bar-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--ink-900);
+    flex: 0 0 auto;
+  }
 
   @media (max-width: 1024px) {
-    .tour-row { gap: var(--space-8); }
-    .tour-row-media { flex-basis: 320px !important; }
+    .tour-row {
+      gap: var(--space-8);
+    }
+    .tour-row-media {
+      flex-basis: 320px !important;
+    }
   }
   @media (max-width: 768px) {
-    .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
-    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
-    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
-    .tour-info-bar-dot { display: none; }
-    .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
+    .tour-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .tour-row-media {
+      flex-basis: auto !important;
+      width: 100%;
+      order: -1;
+      aspect-ratio: 1/1;
+    }
+    .tour-info-bar {
+      flex-direction: column;
+      border-radius: 32px;
+      justify-content: center;
+    }
+    .tour-info-bar-stats {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .tour-info-bar-dot {
+      display: none;
+    }
+    .tour-block {
+      padding-left: var(--space-6);
+      padding-right: var(--space-6);
+    }
   }
 </style>

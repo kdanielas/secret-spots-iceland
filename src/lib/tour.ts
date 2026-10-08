@@ -19,7 +19,9 @@ export async function tourPageSchema(pathname: string, input: TourPageInput) {
       pageUrl: canonicalUrl(pathname),
       name: input.name,
       description: input.description,
-      imageUrl: absoluteUrl((await getImage({ src: input.heroImage, width: 1200, quality: 80 })).src),
+      imageUrl: absoluteUrl(
+        (await getImage({ src: input.heroImage, width: 1200, quality: 80 })).src,
+      ),
       duration: input.duration,
       highlights: input.highlights,
     }),

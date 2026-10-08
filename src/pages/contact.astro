@@ -180,8 +180,20 @@ const COUNTRY_CODES = [
   { name: 'Zimbabwe', code: '+263', flag: '🇿🇼' },
 ];
 const DIRECT_CONTACT = [
-  { icon: 'phone', href: BUSINESS.telephoneHref, text: BUSINESS.telephone, label: 'Phone', ev: 'phone_click' },
-  { icon: 'mail', href: `mailto:${BUSINESS.email}`, text: BUSINESS.email, label: 'Email', ev: 'email_click' },
+  {
+    icon: 'phone',
+    href: BUSINESS.telephoneHref,
+    text: BUSINESS.telephone,
+    label: 'Phone',
+    ev: 'phone_click',
+  },
+  {
+    icon: 'mail',
+    href: `mailto:${BUSINESS.email}`,
+    text: BUSINESS.email,
+    label: 'Email',
+    ev: 'email_click',
+  },
 ];
 
 const FIND_US_OPTIONS = ['Google', 'Social Media', 'Tripadvisor/Viator', 'Referral', 'Other'];
@@ -200,21 +212,55 @@ const TOUR_OPTIONS = [
 const TODAY_ISO = new Date().toISOString().slice(0, 10);
 ---
 
-<Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
-  <section class="contact-hero" style="position:relative;overflow:hidden;background:#081824;padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
-    <Image src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-    <div class="contact-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,24,36,.78) 0%, rgba(8,24,36,.82) 100%)"></div>
+<Layout
+  title="Plan Your Iceland Adventure - Contact Us | Secret Spots"
+  description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you."
+  active="Contact us"
+  transparentNav
+  hideContactPanel
+  footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)"
+>
+  <section
+    class="contact-hero"
+    style="position:relative;overflow:hidden;background:#081824;padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)"
+  >
+    <Image
+      src={contactBgImg}
+      alt=""
+      width={1920}
+      quality={80}
+      loading="eager"
+      fetchpriority="high"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"
+    />
+    <div
+      class="contact-hero-overlay"
+      style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,24,36,.78) 0%, rgba(8,24,36,.82) 100%)"
+    ></div>
     <div class="container-1200" style="position:relative">
       <div class="contact-grid">
-        <div data-reveal class="contact-form-card" style="width:100%;background:#F8F7F3;border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box">
+        <div
+          data-reveal
+          class="contact-form-card"
+          style="width:100%;background:#F8F7F3;border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box"
+        >
           <form id="contact-form" action="/api/contact" method="post" novalidate>
             {/* Honeypot (#21): no human sees or tabs into this, so anything in it
                 means a bot and the submission is dropped server-side. */}
             <div class="contact-honeypot" aria-hidden="true">
               <label for="contact-company">Company</label>
-              <input type="text" id="contact-company" name="company" tabindex="-1" autocomplete="off" />
+              <input
+                type="text"
+                id="contact-company"
+                name="company"
+                tabindex="-1"
+                autocomplete="off"
+              />
             </div>
-            <div class="form-progress" style="display:flex;align-items:center;gap:10px;margin-bottom:var(--space-8)">
+            <div
+              class="form-progress"
+              style="display:flex;align-items:center;gap:10px;margin-bottom:var(--space-8)"
+            >
               <div class="form-progress-step is-active" data-progress-dot="1" aria-current="step">
                 <span class="form-progress-dot">1</span>
                 <span class="form-progress-label">Personal data</span>
@@ -228,46 +274,92 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
             <div data-step="1">
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Personal data <span class="sr-only">&#8201;— step 1 of 2</span></h2>
-                <span style="font:600 14px/1 var(--font-sans);color:var(--text-muted)"><span class="req-mark">*</span> Required fields</span>
+                <h2
+                  class="step-heading"
+                  tabindex="-1"
+                  style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0"
+                >
+                  Personal data <span class="sr-only">&#8201;— step 1 of 2</span>
+                </h2>
+                <span style="font:600 14px/1 var(--font-sans);color:var(--text-muted)">
+                  <span class="req-mark">*</span> Required fields
+                </span>
               </div>
 
-              <div class="contact-field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-bottom:var(--space-5)">
+              <div
+                class="contact-field-row"
+                style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-bottom:var(--space-5)"
+              >
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">First Name <span class="req-mark">*</span></span>
+                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                    First Name <span class="req-mark">*</span>
+                  </span>
                   <input type="text" name="firstName" required class="contact-input" />
                   <span class="field-error" id="err-firstName" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Last Name <span class="req-mark">*</span></span>
+                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                    Last Name <span class="req-mark">*</span>
+                  </span>
                   <input type="text" name="lastName" required class="contact-input" />
                   <span class="field-error" id="err-lastName" role="alert" hidden></span>
                 </label>
               </div>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Email <span class="req-mark">*</span></span>
+                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                  Email <span class="req-mark">*</span>
+                </span>
                 <span style="position:relative;display:block">
                   <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="mail" size={16} />
                   </span>
-                  <input type="email" name="email" required class="contact-input" placeholder="you@domain.com" style="padding-left:40px" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    class="contact-input"
+                    placeholder="you@domain.com"
+                    style="padding-left:40px"
+                  />
                 </span>
                 <span class="field-error" id="err-email" role="alert" hidden></span>
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Tell us about your ideal Iceland experience <span class="req-mark">*</span></span>
-                <textarea name="experience" required rows={4} class="contact-input" style="resize:vertical;font-family:var(--font-sans)"></textarea>
+                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                  Tell us about your ideal Iceland experience <span class="req-mark">*</span>
+                </span>
+                <textarea
+                  name="experience"
+                  required
+                  rows={4}
+                  class="contact-input"
+                  style="resize:vertical;font-family:var(--font-sans)"
+                ></textarea>
                 <span class="field-error" id="err-experience" role="alert" hidden></span>
               </label>
 
-              <div class="contact-field-row" style="display:grid;grid-template-columns:220px 1fr;gap:var(--space-5);margin-bottom:var(--space-7)">
+              <div
+                class="contact-field-row"
+                style="display:grid;grid-template-columns:220px 1fr;gap:var(--space-5);margin-bottom:var(--space-7)"
+              >
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Country code <span class="req-mark">*</span></span>
+                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                    Country code <span class="req-mark">*</span>
+                  </span>
                   <span style="position:relative;display:block">
-                    <select name="countryCode" required class="contact-input" style="padding-right:34px">
-                      {COUNTRY_CODES.map((c) => <option value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
+                    <select
+                      name="countryCode"
+                      required
+                      class="contact-input"
+                      style="padding-right:34px"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option value={c.code}>
+                          {c.flag} {c.name} ({c.code})
+                        </option>
+                      ))}
                     </select>
                     <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="chevron-down" size={16} />
@@ -276,19 +368,32 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
                   <span class="field-error" id="err-countryCode" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Phone <span class="req-mark">*</span></span>
+                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                    Phone <span class="req-mark">*</span>
+                  </span>
                   <span style="position:relative;display:block">
                     <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="phone" size={16} />
                     </span>
-                    <input type="tel" name="phone" required class="contact-input" placeholder="Your phone number" style="padding-left:40px" />
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      class="contact-input"
+                      placeholder="Your phone number"
+                      style="padding-left:40px"
+                    />
                   </span>
                   <span class="field-error" id="err-phone" role="alert" hidden></span>
                 </label>
               </div>
 
               <div style="display:flex;justify-content:flex-end">
-                <button type="button" id="to-step-2" style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap">
+                <button
+                  type="button"
+                  id="to-step-2"
+                  style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap"
+                >
                   Continue
                   <Icon name="arrow-right" size={16} />
                 </button>
@@ -296,21 +401,39 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
             </div>
 
             <div data-step="2" style="display:none">
-              <button type="button" id="back-to-step-1" style="display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font:600 13px/1 var(--font-sans);color:var(--text-muted);margin-bottom:var(--space-6)">
+              <button
+                type="button"
+                id="back-to-step-1"
+                style="display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font:600 13px/1 var(--font-sans);color:var(--text-muted);margin-bottom:var(--space-6)"
+              >
                 <Icon name="arrow-right" size={14} style="transform:rotate(180deg)" />
                 Back
               </button>
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel data <span class="sr-only">&#8201;— step 2 of 2</span></h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Your plans can be flexible</span>
+                <h2
+                  class="step-heading"
+                  tabindex="-1"
+                  style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0"
+                >
+                  Travel data <span class="sr-only">&#8201;— step 2 of 2</span>
+                </h2>
+                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">
+                  Your plans can be flexible
+                </span>
               </div>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Which tour are you interested in? <span class="req-mark">*</span></span>
+                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                  Which tour are you interested in? <span class="req-mark">*</span>
+                </span>
                 <span style="position:relative;display:block">
                   <select name="tour" required class="contact-input" style="padding-right:34px">
-                    {TOUR_OPTIONS.map((t) => <option value={t.title} data-tour={t.slug}>{t.title}</option>)}
+                    {TOUR_OPTIONS.map((t) => (
+                      <option value={t.title} data-tour={t.slug}>
+                        {t.title}
+                      </option>
+                    ))}
                   </select>
                   <span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="chevron-down" size={16} />
@@ -320,22 +443,51 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Preferred tour date <span class="req-mark">*</span></span>
-                <input type="date" name="tourDate" required class="contact-input contact-input-date" min={TODAY_ISO} />
+                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">
+                  Preferred tour date <span class="req-mark">*</span>
+                </span>
+                <input
+                  type="date"
+                  name="tourDate"
+                  required
+                  class="contact-input contact-input-date"
+                  min={TODAY_ISO}
+                />
                 <span class="field-error" id="err-tourDate" role="alert" hidden></span>
               </label>
 
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-7)">
                 <div style="display:flex;flex-direction:column;gap:2px">
-                  <span style="font:700 14px/1.2 var(--font-sans);color:var(--text-heading)">Number of Guests</span>
-                  <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">You can update this later</span>
+                  <span style="font:700 14px/1.2 var(--font-sans);color:var(--text-heading)">
+                    Number of Guests
+                  </span>
+                  <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">
+                    You can update this later
+                  </span>
                 </div>
                 <div style="display:flex;align-items:center;gap:var(--space-5)">
-                  <button type="button" class="guest-stepper-btn" data-action="decrement" aria-label="Decrease guests">
+                  <button
+                    type="button"
+                    class="guest-stepper-btn"
+                    data-action="decrement"
+                    aria-label="Decrease guests"
+                  >
                     <Icon name="minus" size={14} />
                   </button>
-                  <output id="guest-count" for="guests-input" aria-live="polite" style="font:700 16px/1 var(--font-sans);color:var(--text-heading);min-width:12px;text-align:center">1</output>
-                  <button type="button" class="guest-stepper-btn guest-stepper-btn-amber" data-action="increment" aria-label="Increase guests">
+                  <output
+                    id="guest-count"
+                    for="guests-input"
+                    aria-live="polite"
+                    style="font:700 16px/1 var(--font-sans);color:var(--text-heading);min-width:12px;text-align:center"
+                  >
+                    1
+                  </output>
+                  <button
+                    type="button"
+                    class="guest-stepper-btn guest-stepper-btn-amber"
+                    data-action="increment"
+                    aria-label="Increase guests"
+                  >
                     <Icon name="plus" size={14} />
                   </button>
                 </div>
@@ -343,18 +495,36 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
               {/* The +/- buttons are the visible control; this field is what carries
                   the value into the submission and gives screen-reader and keyboard
                   users a real number to read and type into. */}
-              <input type="number" name="guests" id="guests-input" value="1" min="1" step="1" aria-label="Number of guests" class="sr-only" />
+              <input
+                type="number"
+                name="guests"
+                id="guests-input"
+                value="1"
+                min="1"
+                step="1"
+                aria-label="Number of guests"
+                class="sr-only"
+              />
 
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="card-title" style="color:var(--text-heading);margin:0">How did you find us?</h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Choose one <span class="req-mark">*</span></span>
+                <h2 class="card-title" style="color:var(--text-heading);margin:0">
+                  How did you find us?
+                </h2>
+                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">
+                  Choose one <span class="req-mark">*</span>
+                </span>
               </div>
 
               <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-7)">
                 {FIND_US_OPTIONS.map((opt, i) => (
-                  <button type="button" class="find-us-pill" data-value={opt} aria-pressed={i === 0 ? 'true' : 'false'}>
+                  <button
+                    type="button"
+                    class="find-us-pill"
+                    data-value={opt}
+                    aria-pressed={i === 0 ? 'true' : 'false'}
+                  >
                     {opt}
                   </button>
                 ))}
@@ -364,21 +534,54 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
               <div style="margin-bottom:var(--space-7)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading);display:block;margin-bottom:8px">Verify you're not a robot <span class="req-mark">*</span></span>
-                <div id="recaptcha-widget" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" style="min-height:78px"></div>
-                <span id="captcha-error" role="alert" style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px">Please confirm you're not a robot.</span>
+                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading);display:block;margin-bottom:8px">
+                  Verify you're not a robot <span class="req-mark">*</span>
+                </span>
+                <div
+                  id="recaptcha-widget"
+                  data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                  style="min-height:78px"
+                ></div>
+                <span
+                  id="captcha-error"
+                  role="alert"
+                  style="display:none;font:400 12px/1.4 var(--font-sans);color:#b3261e;margin-top:6px"
+                >
+                  Please confirm you're not a robot.
+                </span>
               </div>
 
               <div style="margin-bottom:var(--space-7)">
                 <label style="display:flex;align-items:flex-start;gap:10px">
-                  <input type="checkbox" name="privacyConsent" id="privacy-consent" required style="margin-top:3px;width:16px;height:16px;flex:0 0 auto" />
-                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a href="/privacy-policy" target="_blank" style="color:var(--blue-500);text-decoration:underline">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
+                  <input
+                    type="checkbox"
+                    name="privacyConsent"
+                    id="privacy-consent"
+                    required
+                    style="margin-top:3px;width:16px;height:16px;flex:0 0 auto"
+                  />
+                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">
+                    I agree to the{' '}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      style="color:var(--blue-500);text-decoration:underline"
+                    >
+                      Privacy Policy
+                    </a>{' '}
+                    and consent to Secret Spots of Iceland storing my information to respond to this
+                    inquiry. <span class="req-mark">*</span>
+                  </span>
                 </label>
                 <span class="field-error" id="err-privacyConsent" role="alert" hidden></span>
               </div>
 
               <div style="display:flex;justify-content:flex-end">
-                <button type="submit" id="contact-submit" style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap;flex:0 0 auto">
+                <button
+                  type="submit"
+                  id="contact-submit"
+                  style="display:inline-flex;align-items:center;gap:10px;background:var(--action-primary-bg);color:var(--action-primary-fg);font:700 15px/1 var(--font-sans);padding:14px 24px;border-radius:var(--radius-pill);border:none;cursor:pointer;white-space:nowrap;flex:0 0 auto"
+                >
                   <span id="contact-submit-label">Send inquiry</span>
                   <Icon name="arrow-right" size={16} />
                 </button>
@@ -389,7 +592,14 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
                 form hides step 2 and the message has to stay on screen. It is
                 announced when it changes, and takes focus so the fallback phone
                 and email are the next thing read out. */}
-            <div id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1" hidden>
+            <div
+              id="form-status"
+              class="form-status"
+              role="status"
+              aria-live="polite"
+              tabindex="-1"
+              hidden
+            >
               <p id="form-status-message" style="margin:0"></p>
               <p id="form-status-fallback" style="margin:8px 0 0" hidden>
                 You can also reach Luke directly at
@@ -400,15 +610,32 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
           </form>
         </div>
 
-        <div data-reveal class="contact-text" style="display:flex;flex-direction:column;gap:var(--space-6)">
-          <span style="font:700 13px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--amber-400)">Get in touch</span>
-          <h1 style="font:400 2.5rem/1.2 var(--font-display);color:#E9E6DD;margin:0">Let's start planning your Secret Spots of Iceland adventure</h1>
-          <p style="font:var(--type-body);color:#E9E6DD;margin:0;max-width:460px">Tell us your travel dates and what you'd love to discover — a private photography tour, a custom itinerary, or one tailored to your mobility needs.</p>
+        <div
+          data-reveal
+          class="contact-text"
+          style="display:flex;flex-direction:column;gap:var(--space-6)"
+        >
+          <span style="font:700 13px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--amber-400)">
+            Get in touch
+          </span>
+          <h1 style="font:400 2.5rem/1.2 var(--font-display);color:#E9E6DD;margin:0">
+            Let's start planning your Secret Spots of Iceland adventure
+          </h1>
+          <p style="font:var(--type-body);color:#E9E6DD;margin:0;max-width:460px">
+            Tell us your travel dates and what you'd love to discover — a private photography tour,
+            a custom itinerary, or one tailored to your mobility needs.
+          </p>
 
           {/* Prefer not to use the form? Call or write to Luke directly (#8). */}
           <div class="contact-direct">
             {DIRECT_CONTACT.map((c) => (
-              <a href={c.href} class="contact-direct-link" data-ev={c.ev} data-ev-text={c.label} aria-label={`${c.label}: ${c.text}`}>
+              <a
+                href={c.href}
+                class="contact-direct-link"
+                data-ev={c.ev}
+                data-ev-text={c.label}
+                aria-label={`${c.label}: ${c.text}`}
+              >
                 <Icon name={c.icon} size={18} color="#E9E6DD" />
                 <span>{c.text}</span>
               </a>
@@ -418,14 +645,20 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
           {/* Two-up at every width: the text column is 378px on desktop and the
               viewport is 360px at the low end, so four across left ~76px per
               label and wrapped the longest one over four or five lines. */}
-          <div class="contact-bullets" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6) var(--space-4);padding-top:var(--space-2);width:100%;max-width:460px">
+          <div
+            class="contact-bullets"
+            style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6) var(--space-4);padding-top:var(--space-2);width:100%;max-width:460px"
+          >
             {[
               { icon: 'camera', label: 'Private photography tours' },
               { icon: 'mountain', label: 'Custom itineraries' },
               { icon: 'wheelchair', label: 'Accessible travel & limited mobility' },
               { icon: 'shield-check', label: 'Trusted by 300+ travelers' },
             ].map((item) => (
-              <div class="contact-bullet" style="display:flex;flex-direction:column;gap:8px;min-width:0">
+              <div
+                class="contact-bullet"
+                style="display:flex;flex-direction:column;gap:8px;min-width:0"
+              >
                 <Icon name={item.icon} size={22} color="#E9E6DD" />
                 <span style="font:400 12px/1.35 var(--font-sans);color:#E9E6DD">{item.label}</span>
               </div>
@@ -446,8 +679,17 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     align-items: flex-start;
     gap: var(--space-12);
   }
-  .contact-form-card { order: 2; flex: 1.2; }
-  .contact-text { order: 1; flex: 0.8; align-items: flex-start; text-align: left; padding-top: var(--space-9); }
+  .contact-form-card {
+    order: 2;
+    flex: 1.2;
+  }
+  .contact-text {
+    order: 1;
+    flex: 0.8;
+    align-items: flex-start;
+    text-align: left;
+    padding-top: var(--space-9);
+  }
 
   @media (max-width: 768px) {
     /* mobile: form first and centered, text below — the form is the primary
@@ -459,10 +701,23 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
       max-width: 720px;
       margin: 0 auto;
     }
-    .contact-form-card { order: 0; flex: 0 1 auto; }
-    .contact-text { order: 0; flex: 0 1 auto; align-items: center; text-align: center; padding-top: 0; }
-    .contact-bullets { margin-inline: auto; }
-    .contact-bullet { align-items: center; }
+    .contact-form-card {
+      order: 0;
+      flex: 0 1 auto;
+    }
+    .contact-text {
+      order: 0;
+      flex: 0 1 auto;
+      align-items: center;
+      text-align: center;
+      padding-top: 0;
+    }
+    .contact-bullets {
+      margin-inline: auto;
+    }
+    .contact-bullet {
+      align-items: center;
+    }
   }
 
   /* Direct contact links: stacked and centered on mobile, matching the column. */
@@ -479,22 +734,30 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     align-items: center;
     gap: 10px;
     font: 600 15px/1.3 var(--font-sans);
-    color: #E9E6DD;
+    color: #e9e6dd;
     text-decoration: none;
     word-break: break-word;
   }
   .contact-direct-link:hover,
-  .contact-direct-link:focus-visible { text-decoration: underline; }
+  .contact-direct-link:focus-visible {
+    text-decoration: underline;
+  }
   @media (min-width: 769px) {
-    .contact-direct { align-items: flex-start; }
+    .contact-direct {
+      align-items: flex-start;
+    }
   }
 
-  .req-mark { color: #b3261e; }
+  .req-mark {
+    color: #b3261e;
+  }
 
   .sr-only {
     position: absolute;
-    width: 1px; height: 1px;
-    margin: -1px; padding: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
     overflow: hidden;
     clip-path: inset(50%);
     white-space: nowrap;
@@ -503,38 +766,96 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
   /* Errors live in the page, not in the browser's native bubble, so they survive
      a scroll or a tap and can be re-read. #b3261e is 6.1:1 on the #F8F7F3 card. */
-  .field-error { display: block; font: 400 12px/1.4 var(--font-sans); color: #b3261e; }
-  .field-error[hidden] { display: none; }
+  .field-error {
+    display: block;
+    font: 400 12px/1.4 var(--font-sans);
+    color: #b3261e;
+  }
+  .field-error[hidden] {
+    display: none;
+  }
   .contact-input[aria-invalid='true'],
-  .contact-input[aria-invalid='true']:focus { border-color: #b3261e; }
-  input[type='checkbox'][aria-invalid='true'] { outline: 2px solid #b3261e; outline-offset: 2px; }
+  .contact-input[aria-invalid='true']:focus {
+    border-color: #b3261e;
+  }
+  input[type='checkbox'][aria-invalid='true'] {
+    outline: 2px solid #b3261e;
+    outline-offset: 2px;
+  }
 
   /* Focus lands on the step heading when the step changes. Programmatic focus
      after a click should not paint a ring, hence :focus-visible only. */
-  .step-heading:focus { outline: none; }
-  .step-heading:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 6px; border-radius: 4px; }
+  .step-heading:focus {
+    outline: none;
+  }
+  .step-heading:focus-visible {
+    outline: 2px solid var(--blue-500);
+    outline-offset: 6px;
+    border-radius: 4px;
+  }
 
-  .form-progress-step { display: flex; align-items: center; gap: 8px; }
+  .form-progress-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .form-progress-dot {
-    width: 26px; height: 26px; border-radius: 50%; flex: 0 0 auto;
-    display: flex; align-items: center; justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font: 700 12px/1 var(--font-sans);
     border: 2px solid var(--border-field);
     color: var(--text-muted);
     background: var(--surface-raised);
     transition: var(--transition-control);
   }
-  .form-progress-label { font: 600 13px/1 var(--font-sans); color: var(--text-muted); white-space: nowrap; transition: var(--transition-control); }
-  .form-progress-step.is-active .form-progress-dot { border-color: var(--text-heading); background: var(--text-heading); color: var(--cream-50); }
-  .form-progress-step.is-active .form-progress-label { color: var(--text-heading); }
-  .form-progress-line { flex: 1; height: 2px; border-radius: 2px; background: var(--border-field); position: relative; overflow: hidden; }
-  .form-progress-line::after { content: ''; position: absolute; inset: 0; width: 0%; background: var(--action-primary-bg); transition: width 320ms ease; }
-  .form-progress-line.is-filled::after { width: 100%; }
+  .form-progress-label {
+    font: 600 13px/1 var(--font-sans);
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: var(--transition-control);
+  }
+  .form-progress-step.is-active .form-progress-dot {
+    border-color: var(--text-heading);
+    background: var(--text-heading);
+    color: var(--cream-50);
+  }
+  .form-progress-step.is-active .form-progress-label {
+    color: var(--text-heading);
+  }
+  .form-progress-line {
+    flex: 1;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--border-field);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-progress-line::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background: var(--action-primary-bg);
+    transition: width 320ms ease;
+  }
+  .form-progress-line.is-filled::after {
+    width: 100%;
+  }
   @media (max-width: 480px) {
     /* The labels are the only thing that says what each step is, so they shrink
        instead of disappearing — bare "1" and "2" carry no context. */
-    .form-progress { gap: 8px !important; }
-    .form-progress-label { font-size: 11px; white-space: normal; }
+    .form-progress {
+      gap: 8px !important;
+    }
+    .form-progress-label {
+      font-size: 11px;
+      white-space: normal;
+    }
   }
 
   .contact-input {
@@ -551,39 +872,113 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     transition: var(--transition-control);
     appearance: none;
   }
-  textarea.contact-input { height: auto; padding: 12px 14px; }
+  textarea.contact-input {
+    height: auto;
+    padding: 12px 14px;
+  }
   /* A native date control brings its own picker affordance, so the field keeps
      room for it on the right instead of a decorative chevron. */
-  .contact-input-date { padding-right: 10px; }
-  .contact-input-date::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .65; }
-  .contact-input-date::-webkit-calendar-picker-indicator:hover { opacity: 1; }
-  .contact-input:focus { border-color: var(--blue-500); }
+  .contact-input-date {
+    padding-right: 10px;
+  }
+  .contact-input-date::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.65;
+  }
+  .contact-input-date::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  .contact-input:focus {
+    border-color: var(--blue-500);
+  }
 
   @media (max-width: 768px) {
-    .contact-hero { padding-top: calc(var(--space-9) + 56px) !important; padding-bottom: var(--space-8) !important; }
-    .contact-hero-overlay { background: linear-gradient(180deg, rgba(8,24,36,.82) 0%, rgba(8,24,36,.78) 60%, rgba(8,24,36,.7) 100%) !important; }
+    .contact-hero {
+      padding-top: calc(var(--space-9) + 56px) !important;
+      padding-bottom: var(--space-8) !important;
+    }
+    .contact-hero-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(8, 24, 36, 0.82) 0%,
+        rgba(8, 24, 36, 0.78) 60%,
+        rgba(8, 24, 36, 0.7) 100%
+      ) !important;
+    }
   }
 
   .guest-stepper-btn {
-    width: 32px; height: 32px; border-radius: var(--radius-pill);
-    border: 1px solid var(--border-field); background: var(--surface-raised);
-    color: var(--text-heading); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: var(--transition-control);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-field);
+    background: var(--surface-raised);
+    color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-control);
   }
-  .guest-stepper-btn-amber { background: var(--amber-400); border-color: var(--amber-400); color: var(--ink-900); }
-  .guest-stepper-btn:hover { opacity: .85; }
-  .guest-stepper-btn:active { transform: var(--press-scale); }
+  .guest-stepper-btn-amber {
+    background: var(--amber-400);
+    border-color: var(--amber-400);
+    color: var(--ink-900);
+  }
+  .guest-stepper-btn:hover {
+    opacity: 0.85;
+  }
+  .guest-stepper-btn:active {
+    transform: var(--press-scale);
+  }
 
-  .find-us-fieldset { border: 0; margin: 0 0 var(--space-7); padding: 0; min-width: 0; }
-  .find-us-legend { width: 100%; padding: 0; margin: 0 0 var(--space-6); }
-  .find-us-legend-row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); }
-  .find-us-legend-title { font: 700 20px/1.2 var(--font-sans); color: var(--text-heading); }
-  .find-us-legend-hint { font: 400 12px/1 var(--font-sans); color: var(--text-muted); white-space: nowrap; }
-  .find-us-options { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-  .find-us-option { position: relative; display: flex; }
+  .find-us-fieldset {
+    border: 0;
+    margin: 0 0 var(--space-7);
+    padding: 0;
+    min-width: 0;
+  }
+  .find-us-legend {
+    width: 100%;
+    padding: 0;
+    margin: 0 0 var(--space-6);
+  }
+  .find-us-legend-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .find-us-legend-title {
+    font: 700 20px/1.2 var(--font-sans);
+    color: var(--text-heading);
+  }
+  .find-us-legend-hint {
+    font: 400 12px/1 var(--font-sans);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .find-us-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .find-us-option {
+    position: relative;
+    display: flex;
+  }
   /* The radio stays in the accessibility tree and the tab/arrow order; the pill
      label is what you see, and the focus ring is forwarded onto it. */
-  .find-us-radio { position: absolute; top: 0; left: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+  .find-us-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
 
   .find-us-pill {
     display: inline-flex;
@@ -602,10 +997,15 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     color: var(--cream-50);
     border-color: var(--ink-900);
   }
-  .find-us-radio:focus-visible + .find-us-pill { outline: 2px solid var(--blue-500); outline-offset: 2px; }
+  .find-us-radio:focus-visible + .find-us-pill {
+    outline: 2px solid var(--blue-500);
+    outline-offset: 2px;
+  }
 
   @media (max-width: 768px) {
-    .contact-field-row { grid-template-columns: 1fr !important; }
+    .contact-field-row {
+      grid-template-columns: 1fr !important;
+    }
   }
 
   /* Honeypot: off-screen rather than display:none, since some bots skip hidden
@@ -635,8 +1035,14 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     border: 1px solid #b3261e;
     color: #8c1d18;
   }
-  .form-status a { color: inherit; font-weight: 700; }
-  #contact-submit[disabled] { opacity: .65; cursor: progress; }
+  .form-status a {
+    color: inherit;
+    font-weight: 700;
+  }
+  #contact-submit[disabled] {
+    opacity: 0.65;
+    cursor: progress;
+  }
 </style>
 
 <script>
@@ -652,7 +1058,9 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
   const requestedTour = new URLSearchParams(window.location.search).get('tour');
   if (requestedTour) {
     const tourSelect = form?.querySelector<HTMLSelectElement>('select[name="tour"]');
-    const match = Array.from(tourSelect?.options ?? []).find((o) => o.dataset.tour === requestedTour);
+    const match = Array.from(tourSelect?.options ?? []).find(
+      (o) => o.dataset.tour === requestedTour,
+    );
     if (tourSelect && match) tourSelect.value = match.value;
   }
 
@@ -699,7 +1107,9 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 
   function validateStep(container: HTMLElement | null | undefined) {
     if (!container) return true;
-    const fields = container.querySelectorAll<FormField>('input[required], select[required], textarea[required]');
+    const fields = container.querySelectorAll<FormField>(
+      'input[required], select[required], textarea[required]',
+    );
     let firstInvalid: FormField | null = null;
     for (const field of fields) {
       if (field.checkValidity()) {
@@ -825,7 +1235,9 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
     const recaptchaResponse = (window as any).grecaptcha?.getResponse?.();
     if (!recaptchaResponse) {
       if (captchaError) captchaError.style.display = 'block';
-      document.getElementById('recaptcha-widget')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document
+        .getElementById('recaptcha-widget')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     if (captchaError) captchaError.style.display = 'none';
@@ -847,7 +1259,11 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
       // Sent: the form goes away so nobody submits the same inquiry twice.
       const tour = form.querySelector<HTMLSelectElement>('select[name="tour"]')?.value;
       (window as any).dataLayer = (window as any).dataLayer || [];
-      (window as any).dataLayer.push({ event: 'generate_lead', page_type: 'contacto', tour_name: tour });
+      (window as any).dataLayer.push({
+        event: 'generate_lead',
+        page_type: 'contacto',
+        tour_name: tour,
+      });
 
       if (step2) step2.style.display = 'none';
       document.querySelector<HTMLElement>('.form-progress')?.remove();

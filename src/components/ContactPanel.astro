@@ -7,7 +7,13 @@ import contactImg from '../assets/images/north-iceland-hot-steam-family.jpg';
 import { BUSINESS } from '../data/site';
 
 /** `href` turns the value into a link; `ev` names the dataLayer event it fires. */
-interface Row { icon: string; label: string; value: string; href?: string; ev?: string; }
+interface Row {
+  icon: string;
+  label: string;
+  value: string;
+  href?: string;
+  ev?: string;
+}
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -37,16 +43,43 @@ const {
 // Phone and email are tappable (#8) — this panel closes every page, so it is the
 // main contact surface, and 88% of the traffic is on a phone.
 const ROWS: Row[] = [
-  { icon: 'phone', label: 'Call or WhatsApp', value: BUSINESS.telephone, href: BUSINESS.telephoneHref, ev: 'phone_click' },
-  { icon: 'mail', label: 'Email', value: BUSINESS.email, href: `mailto:${BUSINESS.email}`, ev: 'email_click' },
-  { icon: 'map-pin', label: 'Based in', value: `${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland` },
-  { icon: 'clock', label: 'Response time', value: 'Usually within 24 hours, personally from Luke.' },
+  {
+    icon: 'phone',
+    label: 'Call or WhatsApp',
+    value: BUSINESS.telephone,
+    href: BUSINESS.telephoneHref,
+    ev: 'phone_click',
+  },
+  {
+    icon: 'mail',
+    label: 'Email',
+    value: BUSINESS.email,
+    href: `mailto:${BUSINESS.email}`,
+    ev: 'email_click',
+  },
+  {
+    icon: 'map-pin',
+    label: 'Based in',
+    value: `${BUSINESS.address.street}, ${BUSINESS.address.postalCode} ${BUSINESS.address.city}, Iceland`,
+  },
+  {
+    icon: 'clock',
+    label: 'Response time',
+    value: 'Usually within 24 hours, personally from Luke.',
+  },
 ];
 ---
 
 <section class="contact-panel" style={style}>
   <div class="contact-panel-card">
-    <Image src={image} alt={imageAlt} width={1600} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%" />
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={1600}
+      quality={80}
+      loading="lazy"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%"
+    />
     <div class="contact-panel-overlay"></div>
     <div class="contact-panel-body">
       <Eyebrow tone="amber">{eyebrow}</Eyebrow>
@@ -60,7 +93,9 @@ const ROWS: Row[] = [
               <div class="contact-panel-row-text">
                 <span class="contact-panel-row-label">{r.label}</span>
                 {r.href ? (
-                  <a href={r.href} class="contact-panel-link" data-ev={r.ev} data-ev-text={r.label}>{r.value}</a>
+                  <a href={r.href} class="contact-panel-link" data-ev={r.ev} data-ev-text={r.label}>
+                    {r.value}
+                  </a>
                 ) : (
                   <span class="contact-panel-row-value">{r.value}</span>
                 )}
@@ -69,7 +104,14 @@ const ROWS: Row[] = [
           ))}
         </div>
       ) : null}
-      <Button variant="primary" iconAfter="arrow-right" href={href} style="margin-top:var(--space-4)">{cta}</Button>
+      <Button
+        variant="primary"
+        iconAfter="arrow-right"
+        href={href}
+        style="margin-top:var(--space-4)"
+      >
+        {cta}
+      </Button>
     </div>
   </div>
 </section>
@@ -95,7 +137,7 @@ const ROWS: Row[] = [
   .contact-panel-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(251,246,240,.97) 30%, rgba(251,246,240,0) 55%);
+    background: linear-gradient(90deg, rgba(251, 246, 240, 0.97) 30%, rgba(251, 246, 240, 0) 55%);
   }
   .contact-panel-body {
     position: relative;
@@ -105,8 +147,17 @@ const ROWS: Row[] = [
     align-items: flex-start;
     max-width: 560px;
   }
-  .contact-panel-title { color: var(--text-heading); margin: 0; overflow-wrap: break-word; }
-  .contact-panel-lead { font: var(--type-body); color: var(--text-body); margin: 0; max-width: 460px; }
+  .contact-panel-title {
+    color: var(--text-heading);
+    margin: 0;
+    overflow-wrap: break-word;
+  }
+  .contact-panel-lead {
+    font: var(--type-body);
+    color: var(--text-body);
+    margin: 0;
+    max-width: 460px;
+  }
 
   .contact-panel-rows {
     display: flex;
@@ -114,10 +165,24 @@ const ROWS: Row[] = [
     gap: var(--space-6);
     margin-top: var(--space-4);
   }
-  .contact-panel-row { display: flex; gap: var(--space-5); align-items: flex-start; }
-  .contact-panel-row-text { display: flex; flex-direction: column; min-width: 0; }
-  .contact-panel-row-label { font: var(--type-body-xs); color: var(--text-muted); }
-  .contact-panel-row-value { font: var(--type-body-sm); color: var(--text-heading); }
+  .contact-panel-row {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+  .contact-panel-row-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .contact-panel-row-label {
+    font: var(--type-body-xs);
+    color: var(--text-muted);
+  }
+  .contact-panel-row-value {
+    font: var(--type-body-sm);
+    color: var(--text-heading);
+  }
   .contact-panel-link {
     font: var(--type-body-sm);
     color: var(--text-heading);
@@ -125,14 +190,23 @@ const ROWS: Row[] = [
     word-break: break-word;
   }
   .contact-panel-link:hover,
-  .contact-panel-link:focus-visible { text-decoration: underline; }
+  .contact-panel-link:focus-visible {
+    text-decoration: underline;
+  }
 
   @media (max-width: 768px) {
-    .contact-panel-card { min-height: 0; }
+    .contact-panel-card {
+      min-height: 0;
+    }
     /* El degradado horizontal deja el texto sin fondo legible cuando la columna
        ocupa todo el ancho; en móvil se vuelve vertical. */
     .contact-panel-overlay {
-      background: linear-gradient(180deg, rgba(251,246,240,.93) 0%, rgba(251,246,240,.97) 60%, rgba(251,246,240,.93) 100%);
+      background: linear-gradient(
+        180deg,
+        rgba(251, 246, 240, 0.93) 0%,
+        rgba(251, 246, 240, 0.97) 60%,
+        rgba(251, 246, 240, 0.93) 100%
+      );
     }
   }
 </style>

@@ -17,9 +17,16 @@ const { title, highlights } = Astro.props;
 <section class="panel-py" style="background:var(--ink-900);overflow:hidden">
   <div style="display:flex;flex-direction:column;gap:var(--space-11);max-width:var(--container-max);margin:0 auto">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-8)">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--cream-100);margin:0">{title}</h2>
+      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--cream-100);margin:0">
+        {title}
+      </h2>
       <div style="display:flex;gap:var(--space-4)">
-        <button type="button" class="highlights-arrow" data-dir="prev" aria-label="Previous highlight">
+        <button
+          type="button"
+          class="highlights-arrow"
+          data-dir="prev"
+          aria-label="Previous highlight"
+        >
           <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
         </button>
         <button type="button" class="highlights-arrow" data-dir="next" aria-label="Next highlight">
@@ -31,11 +38,20 @@ const { title, highlights } = Astro.props;
       {highlights.map((h) => (
         <div class="highlight-card">
           <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/10">
-            <Image src={h.image} alt="" width={500} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+            <Image
+              src={h.image}
+              alt=""
+              width={500}
+              quality={80}
+              loading="lazy"
+              style="width:100%;height:100%;object-fit:cover"
+            />
           </div>
           <div style="display:flex;flex-direction:column;gap:var(--space-3)">
             <span style="font:600 24px/1.2 var(--font-sans);color:var(--cream-100)">{h.title}</span>
-            <p style="font:400 14px/1.5 var(--font-sans);color:rgba(244,237,225,.7);margin:0">{h.description}</p>
+            <p style="font:400 14px/1.5 var(--font-sans);color:rgba(244,237,225,.7);margin:0">
+              {h.description}
+            </p>
           </div>
         </div>
       ))}
@@ -53,7 +69,9 @@ const { title, highlights } = Astro.props;
     scroll-padding: 0 var(--space-8);
     scrollbar-width: none;
   }
-  .highlights-carousel::-webkit-scrollbar { display: none; }
+  .highlights-carousel::-webkit-scrollbar {
+    display: none;
+  }
   .highlight-card {
     flex: 0 0 clamp(260px, 30vw, 420px);
     scroll-snap-align: start;
@@ -65,7 +83,7 @@ const { title, highlights } = Astro.props;
     width: 44px;
     height: 44px;
     border-radius: var(--radius-pill);
-    border: 1px solid rgba(255,255,255,.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     background: transparent;
     color: var(--cream-100);
     display: flex;
@@ -74,11 +92,17 @@ const { title, highlights } = Astro.props;
     cursor: pointer;
     transition: var(--transition-control);
   }
-  .highlights-arrow:hover { background: rgba(255,255,255,.1); }
-  .highlights-arrow:active { transform: var(--press-scale); }
+  .highlights-arrow:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .highlights-arrow:active {
+    transform: var(--press-scale);
+  }
 
   @media (max-width: 768px) {
-    .highlight-card { flex-basis: 78vw; }
+    .highlight-card {
+      flex-basis: 78vw;
+    }
   }
 </style>
 
