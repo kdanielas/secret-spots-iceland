@@ -100,6 +100,11 @@ const ogUrl = canonicalUrl(path);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Fonts (#40): the three faces every page paints with, fetched alongside
+         the stylesheet instead of after the browser has parsed it. -->
+    <link rel="preload" href="/fonts/Prata-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lato-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lato-Bold.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Consentimiento (#26): los valores por defecto de Consent Mode v2, ANTES
          que el dataLayer y que Tag Manager. Si van después, GA4 escribe sus
          cookies antes de que la persona haya dicho nada. -->
