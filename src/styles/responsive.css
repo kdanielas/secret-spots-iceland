@@ -43,6 +43,16 @@
   .section-py-tight { padding-top: var(--space-9); padding-bottom: var(--space-9); }
 }
 
+/* --- media frames --- */
+/* One treatment for every rounded photo/video frame sitting on the page
+   background. These used to be a mix of a 1px --ink-900 border (About,
+   Accessible Tours, Photography, Reviews) and nothing at all (tour pages,
+   How It Works), so the same component read as two different ones. A hairline
+   ring in --border-subtle separates the media from the sand without the hard
+   black edge; box-shadow rather than border so it costs no layout space and
+   follows whatever border-radius the frame sets. */
+.media-frame { box-shadow: 0 0 0 1px var(--border-subtle); }
+
 /* --- hero: full-bleed background photo, left-aligned text column --- */
 .hero-text-col { display: flex; flex-direction: column; gap: var(--space-7); align-items: flex-start; max-width: 560px; min-width: 0; padding: var(--space-13) 0; }
 .hero-rating { margin-top: var(--space-2); }
