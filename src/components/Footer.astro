@@ -17,6 +17,9 @@ const { style = '' } = Astro.props;
 // — 88% of the traffic — this is where people look for what the header hid.
 // The tour entries come from TOURS so the footer can never drift out of sync
 // with the catalogue.
+// Same derivation index.astro and tours.astro use, so a tour keeps one name in
+// GA4 wherever it was clicked: the path segment, not the TOURS slug.
+const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')[2] : undefined);
 const tourLinks = [
   ...TOURS.map((t) => ({ label: t.title, href: t.href })),
   { label: 'Accessible Tours', href: '/accessible-tours' },
@@ -45,13 +48,26 @@ const contact = [
 // Legal links (#27, #12). GDPR wants the privacy and cookie information
 // reachable from every page, and the inquiry form asks guests to accept the
 // terms, so those have to be one click away too. The cookie settings control
-// is a component because it has to talk to the CMP. The US "do not sell or
-// share" wording stays on the Cookie Policy page rather than in this bar.
+// is a component because it has to talk to the CMP.
+//
+// The US state laws want the opt-out reachable by its own statutory name, not
+// buried behind "Cookie Policy", so the last link spells it out and lands on
+// the section that explains it. The wording is the one the laws use, which is
+// why it is this long.
 const legalLinks = [
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms & Conditions', href: '/terms' },
   { label: 'Cookie Policy', href: '/cookie-policy' },
+  { label: 'Do Not Sell or Share My Personal Information', href: '/cookie-policy#do-not-sell' },
 ];
+// Every link down here carries data-ev="click_link" (#27). The listener in
+// Layout.astro derives page_zone ("pie") from the <footer> ancestor and the
+// destination from the href, so nothing else has to be spelled out per link —
+// the data-ev-zone the issue proposed predates that listener. The exception is
+// the tour column: without an explicit data-ev-tour those clicks inherit the
+// tour_name of the page they were clicked from, so "Secret Reykjanes" in the
+// footer of the Golden Circle page would be filed under Golden Circle.
+
 // Build year, so the copyright line does not go stale on its own.
 const year = new Date().getFullYear();
 ---
@@ -80,7 +96,7 @@ const year = new Date().getFullYear();
       <span class="footer-col-title">Tours</span>
       <nav class="footer-col-links" aria-label="Tours">
         {tourLinks.map((l) => (
-          <a href={l.href} class="footer-nav-link">{l.label}</a>
+          <a href={l.href} class="footer-nav-link" data-ev="click_link" data-ev-tour={tourSlug(l.href)}>{l.label}</a>
         ))}
       </nav>
     </div>
@@ -89,7 +105,7 @@ const year = new Date().getFullYear();
       <span class="footer-col-title">Company</span>
       <nav class="footer-col-links" aria-label="Company">
         {companyLinks.map((l) => (
-          <a href={l.href} class="footer-nav-link">{l.label}</a>
+          <a href={l.href} class="footer-nav-link" data-ev="click_link">{l.label}</a>
         ))}
       </nav>
     </div>
@@ -130,7 +146,7 @@ const year = new Date().getFullYear();
       {legalLinks.map((l, i) => (
         <>
           {i > 0 ? <span class="footer-legal-sep" aria-hidden="true">·</span> : null}
-          <a href={l.href} class="footer-nav-link">{l.label}</a>
+          <a href={l.href} class="footer-nav-link" data-ev="click_link">{l.label}</a>
         </>
       ))}
       <span class="footer-legal-sep" aria-hidden="true">·</span>
