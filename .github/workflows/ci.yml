@@ -1,0 +1,34 @@
+# Red de seguridad mínima de #6: construir el sitio en cada push a main y en
+# cada pull request, para que un cambio que rompe el build se vea aquí y no en
+# el despliegue o, peor, en producción.
+#
+# El linter y el formato viven en su propio workflow (lint.yml, #7) para que un
+# fallo de estilo y un fallo de build se distingan de un vistazo en la lista de
+# checks.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # LTS actual, la misma versión que lint.yml. `cache: npm` reutiliza el
+      # caché de dependencias entre ejecuciones usando package-lock.json.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # `npm ci` instala exactamente el lock, sin actualizar nada.
+      - run: npm ci
+
+      # El sitio es estático (output: 'static'), así que el build no necesita
+      # ninguna variable de entorno: las secretas sólo las usa /api/contact en
+      # tiempo de ejecución y PUBLIC_GTM_ID vacío simplemente no carga GTM.
+      - run: npm run build
