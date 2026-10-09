@@ -35,47 +35,47 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Iceland has a reputation for being hard to explore if you have limited mobility. Rough terrain, gravel roads, unpaved paths to waterfalls — a lot of the country's most iconic sights weren't built with accessibility in mind.</p>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">But "hard to explore" and "impossible to explore" are two very different things. This is the story of a 12-day private tour with a guest who uses a wheelchair — and how we ended up in a helicopter to make sure nothing was off-limits.</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">Iceland has a reputation for being hard to explore if you have limited mobility. Rough terrain, gravel roads, unpaved paths to waterfalls — a lot of the country's most iconic sights weren't built with accessibility in mind.</p>
+        <p class="lead-heading">But "hard to explore" and "impossible to explore" are two very different things. This is the story of a 12-day private tour with a guest who uses a wheelchair — and how we ended up in a helicopter to make sure nothing was off-limits.</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">The Trip</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The plan started the way every private tour with Luke does: a conversation, not a checklist. Before we ever hit the road, we talked through what mattered most — how much walking felt comfortable, what pace worked, which sights were non-negotiable, and where we could be flexible.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Twelve days gave us room to do this properly. No rushing between stops, no forcing a full day of sightseeing into a schedule built for someone else. We adjusted as we went — some days covered more ground, some days we simply stayed longer at one spot because the light was good and there was no reason to leave.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Along the way, there was still time for the small moments that make a trip memorable — a soak in a natural hot spring, a laugh in a hot tub after a long day outdoors, an unplanned stop because something caught the eye.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">The Trip</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">The plan started the way every private tour with Luke does: a conversation, not a checklist. Before we ever hit the road, we talked through what mattered most — how much walking felt comfortable, what pace worked, which sights were non-negotiable, and where we could be flexible.</p>
+          <p class="lead-heading">Twelve days gave us room to do this properly. No rushing between stops, no forcing a full day of sightseeing into a schedule built for someone else. We adjusted as we went — some days covered more ground, some days we simply stayed longer at one spot because the light was good and there was no reason to leave.</p>
+          <p class="lead-heading">Along the way, there was still time for the small moments that make a trip memorable — a soak in a natural hot spring, a laugh in a hot tub after a long day outdoors, an unplanned stop because something caught the eye.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">When the Road Runs Out</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Some of Iceland's most striking landscapes simply aren't reachable by any vehicle — accessible or not. Certain highland routes, glacier lagoons, and remote coastal formations sit beyond where roads go at all.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Rather than skip those places, we flew to them. Two helicopter tours during the trip opened up parts of Iceland that would have stayed completely out of reach otherwise — glacier views, remote coastline, landscapes that most visitors never get close to, wheelchair or not.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">When the Road Runs Out</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Some of Iceland's most striking landscapes simply aren't reachable by any vehicle — accessible or not. Certain highland routes, glacier lagoons, and remote coastal formations sit beyond where roads go at all.</p>
+          <p class="lead-heading">Rather than skip those places, we flew to them. Two helicopter tours during the trip opened up parts of Iceland that would have stayed completely out of reach otherwise — glacier views, remote coastline, landscapes that most visitors never get close to, wheelchair or not.</p>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={helicopterImg} alt="Helicopter tour over an Icelandic glacier" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={helicopterImg} alt="Helicopter tour over an Icelandic glacier" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
-      <section style="background:var(--surface-page-soft);border-radius:24px;padding:var(--space-9)">
+      <section class="soft-panel soft-panel-lg">
         <p style="font:400 22px/1.5 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">&ldquo;I've had several older guests and guests with limited mobility over the years. One guest was in a wheelchair, and we traveled around Iceland together for 12 days. We even did two helicopter tours, which made it possible to experience places that would otherwise have been inaccessible.&rdquo;</p>
         <span style="font:700 14px/1 var(--font-sans);color:var(--text-muted)">— Luke</span>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What This Trip Taught Us</h2>
+      <section class="mt-9">
+        <h2 class="article-h2">What This Trip Taught Us</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-5)">This wasn't a one-time accommodation we figured out on the fly. It shaped how every private tour here gets planned since. A few things that made the biggest difference:</p>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {[
             'Nothing is assumed. Every guest’s needs are different, so nothing gets planned before that first conversation about what actually matters to you.',
             'Vehicles and routes are chosen around the guest, not the other way around. A fixed itinerary that assumes everyone can hike the same trail doesn’t work — so we don’t use one.',
@@ -83,39 +83,39 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
           ].map((item) => (
             <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
               <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto;margin-top:2px" />
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={glacierLagoonImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={glacierLagoonImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Iceland, Without Compromise</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Twelve days, two helicopter tours, and a guest who saw far more of this country than most travelers ever do — wheelchair included. That's the standard we try to bring to every trip, not just this one.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">If you're planning a trip to Iceland and wondering whether your mobility needs will limit what you can see, the honest answer is: probably not as much as you think.</p>
+        <h2 class="article-h2">Iceland, Without Compromise</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Twelve days, two helicopter tours, and a guest who saw far more of this country than most travelers ever do — wheelchair included. That's the standard we try to bring to every trip, not just this one.</p>
+          <p class="lead-heading">If you're planning a trip to Iceland and wondering whether your mobility needs will limit what you can see, the honest answer is: probably not as much as you think.</p>
         </div>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">See how we adapt every tour</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Tell us about your trip and we'll walk you through exactly how we'd plan it around you.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="cta-panel-title">See how we adapt every tour</h2>
+          <p class="lead-on-dark">Tell us about your trip and we'll walk you through exactly how we'd plan it around you.</p>
         </div>
         <Button variant="primary" href="/accessible-tours">See How We Adapt Every Tour</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

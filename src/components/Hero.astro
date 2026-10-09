@@ -36,10 +36,10 @@ const {
 const posterSrc = framedVideo ? (await getImage({ src: framedImage, width: 1600, quality: 80 })).src : undefined;
 ---
 
-<div class="home-hero-wrap container-pad" style="padding-bottom:var(--space-8)">
+<div class="home-hero-wrap container-pad pb-8">
   <section class:list={['hero-frame', { 'hero-frame-compact': compact }]} style="position:relative;min-height:85vh;border-radius:32px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
     {framedVideo ? (
-      <video autoplay muted loop playsinline preload="auto" poster={posterSrc} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <video class="inset-fill cover" autoplay muted loop playsinline preload="auto" poster={posterSrc}>
         {/* desktop/tablet only — on mobile no <source> matches, so the browser
            never requests the video and just shows the poster as a still image.
            A `media` attribute can't be written mobile-first, so this is the
@@ -48,7 +48,7 @@ const posterSrc = framedVideo ? (await getImage({ src: framedImage, width: 1600,
         <source src={framedVideo} media="(min-width: 768px)" />
       </video>
     ) : (
-      <Image src={framedImage} alt={framedImageAlt} width={1600} widths={[640, 1024, 1600]} sizes="100vw" quality={80} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+      <Image class="inset-fill cover" src={framedImage} alt={framedImageAlt} width={1600} widths={[640, 1024, 1600]} sizes="100vw" quality={80} loading="eager" fetchpriority="high" />
     )}
     <div class="hero-fade" style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(230,227,218,0) 50%, #E6E3DA 92%)"></div>
     <div class="hero-content" style="position:relative;width:100%;display:flex;flex-direction:column;gap:var(--space-6);align-items:center;text-align:center;padding:0 var(--space-9) var(--space-11)">
@@ -67,7 +67,7 @@ const posterSrc = framedVideo ? (await getImage({ src: framedImage, width: 1600,
         {primaryCta ? <Button variant={primaryVariant} href={primaryHref}>{primaryCta}</Button> : null}
         {secondaryCta ? <Button variant="outline" href={secondaryHref} iconAfter="arrow-right">{secondaryCta}</Button> : null}
       </div>
-      <slot />
+      <slot/>
     </div>
   </section>
 </div>

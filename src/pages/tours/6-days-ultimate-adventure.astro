@@ -194,11 +194,11 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         {STATS.map((s, i) => (
           <>
             {i > 0 ? <span aria-hidden="true" class="tour-info-bar-dot"></span> : null}
-            <div style="display:flex;align-items:center;gap:var(--space-4)">
-              <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <div class="row-center gap-4">
+              <span class="icon-disc">
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
-              <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
+              <div class="stack gap-2 text-left">
                 <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
                 <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
               </div>
@@ -214,19 +214,19 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={expectImg} alt="A volcano erupting with smoke and ash, two people sitting on rocks observing it in Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:450/800">
+        <Image class="cover" src={expectImg} alt="A volcano erupting with smoke and ash, two people sitting on rocks observing it in Iceland" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
-          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading-deep);margin:0">What to Expect on the 6-Day Adventure</h2>
-          <p style="font:var(--type-lead);color:var(--text-heading-deep);margin:0">{TOUR_INTRO}</p>
+      <div class="text-col items-start">
+        <div class="stack gap-4">
+          <h2 class="page-section-title-deep">What to Expect on the 6-Day Adventure</h2>
+          <p class="lead-deep">{TOUR_INTRO}</p>
         </div>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {EXPECT.map((item) => (
-            <div style="display:flex;gap:var(--space-4);align-items:center;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
-              <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto" />
-              <p style="font:var(--type-lead);color:var(--text-heading-deep);margin:0">{item}</p>
+            <div class="feature-row">
+              <Icon name="check" size={20} color="var(--blue-500)" />
+              <p class="lead-deep">{item}</p>
             </div>
           ))}
         </div>
@@ -239,8 +239,8 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block">
     <div style="display:flex;flex-direction:column;gap:var(--space-10);max-width:var(--container-max);margin:0 auto">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">6-Day Itinerary</h2>
-      <div style="display:flex;flex-direction:column">
+      <h2 class="page-section-title">6-Day Itinerary</h2>
+      <div class="stack">
         {DAYS.map((d) => (
           <div style="display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8) 0;border-bottom:1px solid var(--border-subtle)">
             <div style="display:flex;flex-direction:column;gap:var(--space-2)">
@@ -249,7 +249,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
               <p style="font:600 15px/1.4 var(--font-sans);color:var(--text-muted);margin:0">{d.subtitle}</p>
             </div>
             <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:800px">{d.description}</p>
-            <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <div class="stack gap-3">
               {d.stops.map((stop) => (
                 <div style="display:flex;gap:var(--space-3);align-items:flex-start">
                   <Icon name="check" size={16} color="var(--blue-500)" style="flex:0 0 auto;margin-top:4px" />
@@ -266,15 +266,15 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
-        <Image src={whoForImg} alt="A woman sitting near a geothermal area with steam rising behind her in Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:590/886">
+        <Image class="cover" src={whoForImg} alt="A woman sitting near a geothermal area with steam rising behind her in Iceland" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Who This 6-Day Adventure Is For</h2>
-        <div style="display:flex;flex-direction:column;width:100%">
+      <div class="text-col items-start">
+        <h2 class="page-section-title">Who This 6-Day Adventure Is For</h2>
+        <div class="stack w-full">
           {WHO_FOR.map((item) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid var(--border-sand)">
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+            <div class="spec-row">
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
@@ -284,39 +284,39 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={completeExperienceImg} alt="A couple standing in front of a red helicopter with snow-capped mountains and glacier in the background" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:450/800">
+        <Image class="cover" src={completeExperienceImg} alt="A couple standing in front of a red helicopter with snow-capped mountains and glacier in the background" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">The complete Iceland experience in one unforgettable journey</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">In 6 days you can experience the essence of Iceland — from volcanic landscapes and geothermal wonders to thundering waterfalls, otherworldly glaciers, and remote Highlands. But only if you have a guide who knows where to go, when to go, and how to experience it all without the crowds.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">This private Iceland tour combines everything Iceland is famous for — the Golden Circle, South Coast waterfalls, glacier lagoons, Viking history — with the hidden gems, flexible timing, and professional photography that transform a famous route into a personal adventure. You'll stay 3 nights based in Reykjavík and 2 nights on the South Coast, giving you the perfect pace to explore without rushing.</p>
+      <div class="text-col">
+        <h2 class="page-section-title">The complete Iceland experience in one unforgettable journey</h2>
+        <p class="lead-body">In 6 days you can experience the essence of Iceland — from volcanic landscapes and geothermal wonders to thundering waterfalls, otherworldly glaciers, and remote Highlands. But only if you have a guide who knows where to go, when to go, and how to experience it all without the crowds.</p>
+        <p class="lead-body">This private Iceland tour combines everything Iceland is famous for — the Golden Circle, South Coast waterfalls, glacier lagoons, Viking history — with the hidden gems, flexible timing, and professional photography that transform a famous route into a personal adventure. You'll stay 3 nights based in Reykjavík and 2 nights on the South Coast, giving you the perfect pace to explore without rushing.</p>
       </div>
     </div>
   </section>
 
   <section class="tour-block">
     <div class="quote-panel">
-      <div style="display:flex;gap:4px">
+      <div class="row gap-2">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
       <p style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"Our group had varying ages and activity levels and Luke did a great job planning our days. He was organized, responsive, and thoughtfully bought us some local treats. We made an album of our trip and loved the great photos he took!"</p>
-      <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-        <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Sahsla</span>
+      <div class="stack gap-2 items-center">
+        <span class="label-14">Sahsla</span>
         <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">Family · Secret Spots of Iceland Review</span>
       </div>
     </div>
   </section>
 
-  <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
+  <section class="tour-block tour-block-row mb-8">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903">
-        <Image src={photographyImg} alt="Colorful mountains with patches of snow and small lakes in Landmannalaugar, Iceland" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:603/903">
+        <Image class="cover" src={photographyImg} alt="Colorful mountains with patches of snow and small lakes in Landmannalaugar, Iceland" width={900} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photographing 6 Days of Iceland</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Six days exploring Iceland means six days of constantly changing light, weather, and landscapes. From golden hour at waterfalls to moody Highlands lighting, from glacier blue to geothermal colors — every moment is a potential masterpiece.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Professional photography guidance is included throughout all 6 days. Luke will help you capture the dramatic moments, find the best angles, time the light perfectly, and go home with images that tell the real story of your Iceland adventure — not just the Instagram version, but the authentic experience you lived.</p>
+      <div class="text-col items-start">
+        <h2 class="page-section-title">Photographing 6 Days of Iceland</h2>
+        <p class="lead-body">Six days exploring Iceland means six days of constantly changing light, weather, and landscapes. From golden hour at waterfalls to moody Highlands lighting, from glacier blue to geothermal colors — every moment is a potential masterpiece.</p>
+        <p class="lead-body">Professional photography guidance is included throughout all 6 days. Luke will help you capture the dramatic moments, find the best angles, time the light perfectly, and go home with images that tell the real story of your Iceland adventure — not just the Instagram version, but the authentic experience you lived.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
       </div>
     </div>
@@ -331,40 +331,3 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     imageAlt="Family enjoying a geothermal steam vent in North Iceland"
   />
 </Layout>
-
-<style>
-  .tour-block { padding: var(--space-8); }
-  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
-  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
-     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
-  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
-
-  .tour-info-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-7);
-    background: var(--cream-50);
-    border-radius: 100px;
-    padding: var(--space-5) var(--space-7);
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
-
-  @media (max-width: 1024px) {
-    .tour-row { gap: var(--space-8); }
-    .tour-row-media { flex-basis: 320px !important; }
-  }
-  @media (max-width: 768px) {
-    .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
-    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
-    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
-    .tour-info-bar-dot { display: none; }
-    .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
-  }
-</style>
-

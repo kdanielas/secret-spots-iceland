@@ -144,10 +144,10 @@ const REVIEW_SOURCES = [
 ---
 
 <Layout title="Iceland private tours reviews | Secret Spots" description="Read honest reviews from travelers who explored Iceland's hidden gems with Luke. Private tours and photography experiences — see what others discovered." active="Reviews">
-  <div class="container-pad" style="padding-bottom:var(--space-8)">
-    <section style="background:var(--surface-dark-deep);border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
-      <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
-        <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
+  <div class="container-pad pb-8">
+    <section class="page-hero-dark">
+      <div class="stack gap-8 items-center" style="max-width:857px">
+        <div class="stack gap-8 items-center text-center">
           <h1 class="reviews-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Real Experiences. Real Memories. Real Iceland.</h1>
           <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">From hidden waterfalls and volcanic landscapes to unforgettable road trips and professional photography, discover what guests have to say about exploring Iceland with Luke.</p>
         </div>
@@ -160,7 +160,7 @@ const REVIEW_SOURCES = [
   </div>
 
   <Section id="reviews-intro" tight style="padding-top:var(--space-7)">
-    <div style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+    <div class="stack gap-11 items-center">
       <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">Why Travelers Choose Secret Spots Iceland</h2>
       <div class="why-grid">
         {WHY_CHOOSE.map((w) => (
@@ -176,10 +176,10 @@ const REVIEW_SOURCES = [
   <Section tight style="padding-top:0">
     <div class="acc-row">
       <div class="acc-row-media media-frame" style="flex:0 0 460px;border-radius:32px;overflow:hidden;aspect-ratio:460/460">
-        <Image src={testimonialImg} alt="Happy guests on a private Secret Spots Iceland tour" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        <Image class="cover" src={testimonialImg} alt="Happy guests on a private Secret Spots Iceland tour" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <div style="display:flex;gap:4px">
+      <div class="text-col">
+        <div class="row gap-2">
           {Array.from({ length: 5 }).map(() => <Icon name="star" size={18} color="var(--star-gold)" />)}
         </div>
         <div style="border-left:3px solid var(--amber-400);padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-4)">
@@ -193,11 +193,11 @@ const REVIEW_SOURCES = [
 
   {THEMES.map((t) => (
     <Section tone="page">
-      <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+      <div class="stack gap-9 items-center">
         <div style="display:flex;flex-direction:column;gap:var(--space-3);align-items:center;text-align:center;max-width:720px">
           <span style="font:var(--type-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--text-eyebrow)">{t.eyebrow}</span>
-          <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">{t.title}</h2>
-          <p style="font:var(--type-lead);color:var(--text-body);margin:0">{t.lead}</p>
+          <h2 class="page-subsection-title">{t.title}</h2>
+          <p class="lead-body">{t.lead}</p>
         </div>
         <div class="quote-grid">
           {t.quotes.map((q) => (
@@ -215,8 +215,8 @@ const REVIEW_SOURCES = [
   <Section tone="page">
     <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-3);align-items:center;text-align:center;max-width:680px">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">What Guests Say Most Often</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">After reading hundreds of reviews, the same themes appear again and again:</p>
+        <h2 class="page-subsection-title">What Guests Say Most Often</h2>
+        <p class="lead-body">After reading hundreds of reviews, the same themes appear again and again:</p>
       </div>
       <div class="guest-chip-cloud">
         {WHAT_GUESTS_SAY.map((item) => (
@@ -230,7 +230,7 @@ const REVIEW_SOURCES = [
   </Section>
 
   <Section id="reviews" tone="page">
-    <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+    <div class="stack gap-9 items-center">
       <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">Reviews</h2>
       <div class="grid-4 reviews-grid">
         {REVIEWS.map((r) => (
@@ -241,7 +241,7 @@ const REVIEW_SOURCES = [
       </div>
 
       <div class="review-sources">
-        <h3 style="font:400 1.5rem/1.3 var(--font-display);color:var(--text-heading);margin:0">Read them where guests left them</h3>
+        <h3 class="article-h3">Read them where guests left them</h3>
         <p style="font:400 16px/1.6 var(--font-sans);color:var(--text-body);margin:0;max-width:620px">The reviews above are a selection. Every one of them is public on Tripadvisor and Google, unedited and in full.</p>
         <div class="review-sources-links">
           {REVIEW_SOURCES.map((s) => (

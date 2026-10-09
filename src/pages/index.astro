@@ -80,7 +80,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   </Hero>
 
   <Section>
-    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
+    <div class="stack gap-9 items-center" data-reveal>
       <SectionHeading align="center" eyebrow="What to expect" size="lg" maxWidth="784px">
         <Fragment slot="title">Private Iceland tours offer a completely different way to explore the country</Fragment>
         <Fragment slot="lead">Our private tours of Iceland are created for travelers who want flexibility, comfort, and a deeper connection with the country. Every tour is just you and your group — designed around what you want to see, how you want to move, and what the weather and light make possible that day.</Fragment>
@@ -100,17 +100,17 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
   </Section>
 
   <section class="container-1200 section-py">
-    <div data-reveal style="display:flex;flex-direction:column;gap:var(--space-11);align-items:center">
+    <div class="stack gap-11 items-center" data-reveal>
       <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:center;text-align:center">
         <h2 style="font:400 2.75rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Curated Iceland Experiences</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">From photography masterclasses to off-the-beaten-path adventures.</p>
+        <p class="lead-heading">From photography masterclasses to off-the-beaten-path adventures.</p>
       </div>
       <div class="grid-1-1-gap5" style="width:100%;gap:var(--space-5)">
         {FEATURED_TOURS.map((t) => (
           <div class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7)">
             <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
               <div data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="position:relative;aspect-ratio:2/1;overflow:hidden">
-                <Image src={t.image} alt="" width={700} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                <Image class="inset-fill cover" src={t.image} alt="" width={700} quality={80} loading="lazy" />
                 <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)"></div>
                 <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
                 <span style="position:absolute;bottom:16px;right:16px;color:var(--cream-50);text-align:right">
@@ -195,20 +195,20 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     <section class="panel-py">
       <div data-reveal class="grid-1-1-gap5" style="max-width:1200px;margin:0 auto">
         <div class="how-it-works-video-frame" style="overflow:hidden;border-radius:32px;aspect-ratio:437/776">
-          <video class="lazy-video" data-src={lavaVideoUrl} muted loop playsinline style="width:100%;height:100%;object-fit:cover"></video>
+          <video class="lazy-video cover" data-src={lavaVideoUrl} muted loop playsinline></video>
         </div>
         <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start">
-          <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+          <div class="stack gap-5">
             <Eyebrow>How it works</Eyebrow>
             <h2 class="sh-lg" style="color:var(--text-heading);margin:0">From first message to the photos in your hands</h2>
           </div>
-          <div style="display:flex;flex-direction:column;width:100%">
+          <div class="stack w-full">
             {STEPS.map((s) => (
               <div style="display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-5) 0;border-bottom:1px solid var(--blue-500)">
                 <span style="font:700 16px/1 var(--font-sans);color:var(--blue-500)">{s.number}</span>
-                <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <div class="stack gap-3">
                   <span style="font:var(--type-body-lg);color:var(--text-heading)">{s.title}</span>
-                  <p style="font:var(--type-lead);color:var(--text-body);margin:0">{s.description}</p>
+                  <p class="lead-body">{s.description}</p>
                 </div>
               </div>
             ))}
@@ -225,7 +225,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         <Fragment slot="title">Frequently Asked Questions</Fragment>
         <Fragment slot="lead">The things travellers ask us most before booking a private tour. If yours isn&rsquo;t here, the full FAQ covers more — or just send us a message.</Fragment>
       </SectionHeading>
-      <div data-reveal data-faq-group style="display:flex;flex-direction:column;width:100%">
+      <div class="stack w-full" data-reveal data-faq-group>
         {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
       </div>
     </div>

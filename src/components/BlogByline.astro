@@ -6,14 +6,15 @@ interface Props {
   datePublished: string;
   /** Display form of the same date. */
   dateline: string;
+  class?: string;
   style?: string;
 }
-const { datePublished, dateline, style } = Astro.props;
+const { datePublished, dateline, class: className, style } = Astro.props;
 ---
 
 {/* Deliberately below the opening paragraph rather than in the hero: the first
     text after a post's <h1> should answer it, so a search engine excerpting a
     snippet gets the answer instead of the author's name and the date. */}
-<p style={`font:var(--type-body-sm);color:var(--text-muted);margin:0;${style ?? ''}`}>
+<p class:list={['blog-byline', className]} style={style}>
   By {BLOG_AUTHOR} · <time datetime={datePublished}>{dateline}</time>
 </p>

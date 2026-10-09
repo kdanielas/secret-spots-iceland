@@ -15,7 +15,7 @@ const { name, date, avatar, initial, rating = 5, quote, onDark = false, style = 
 ---
 
 <article style={`display:flex;flex-direction:column;gap:var(--space-5);background:${onDark ? 'rgba(251,250,248,.04)' : 'var(--surface-card-light)'};border-radius:var(--radius-card);padding:${onDark ? '12px' : '28px'};box-shadow:var(--shadow-review-card);${style}`}>
-  <header style="display:flex;align-items:center;gap:var(--space-4)">
+  <header class="row-center gap-4">
     {avatar ? (
       <img src={avatar} alt={name} style="width:48px;height:48px;border-radius:var(--radius-pill);object-fit:cover" />
     ) : (

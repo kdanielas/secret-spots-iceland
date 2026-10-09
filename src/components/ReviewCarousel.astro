@@ -17,7 +17,7 @@ const { reviews, label = 'Guest reviews' } = Astro.props;
 ---
 
 <div class="review-carousel quote-panel" role="group" aria-roledescription="carousel" aria-label={label}>
-  <div style="display:flex;gap:4px">
+  <div class="row gap-2">
     {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
   </div>
   <!-- aria-live starts off: while the carousel rotates on its own, announcing a
@@ -26,8 +26,8 @@ const { reviews, label = 'Guest reviews' } = Astro.props;
        and the reduced-motion case are announced. -->
   <div class="review-live" aria-live="off" aria-atomic="true">
     <p class="review-quote" style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"{reviews[0].quote}"</p>
-    <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-      <span class="review-name" style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">{reviews[0].name}</span>
+    <div class="stack gap-2 items-center">
+      <span class="review-name label-14">{reviews[0].name}</span>
       <span class="review-type" style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">{reviews[0].type}</span>
     </div>
   </div>

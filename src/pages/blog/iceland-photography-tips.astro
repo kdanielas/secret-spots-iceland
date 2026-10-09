@@ -53,88 +53,88 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Iceland is one of the most photographed countries on Earth — and one of the easiest places to come home with disappointing photos. The difference between a snapshot and a portfolio-worthy image almost always comes down to the same three things: timing, light, and the right gear.</p>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">This guide breaks down when to visit for the kind of photography you're after, what to pack, and the mistakes most visitors make with their cameras in Iceland's unpredictable conditions.</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">Iceland is one of the most photographed countries on Earth — and one of the easiest places to come home with disappointing photos. The difference between a snapshot and a portfolio-worthy image almost always comes down to the same three things: timing, light, and the right gear.</p>
+        <p class="lead-heading">This guide breaks down when to visit for the kind of photography you're after, what to pack, and the mistakes most visitors make with their cameras in Iceland's unpredictable conditions.</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">When Should You Visit?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Winter (October–March) is aurora season. Long nights, genuinely dark skies away from Reykjavík, and — when the KP index cooperates — the Northern Lights. It's also when snow transforms the landscape into something closer to black-and-white photography: stark contrast, minimal color, dramatic skies. For a breakdown of specific aurora photography locations and technique, see our <a href="/iceland-photography" style="color:var(--blue-500);text-decoration:underline">Iceland Photography Guide</a>.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Summer (June–August) brings something most photographers never experience elsewhere: nearly 24 hours of daylight. The midnight sun changes how you shoot — extended golden hour, no rush to capture everything before dark, soft warm tones from the low sun angle, and access to remote highland areas that only open in summer.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Shoulder seasons (April–May, September) sit between the two: fewer visitors than peak summer, more daylight than winter, and transitional light that shifts fast — useful if you want variety without committing to either extreme.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">When Should You Visit?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Winter (October–March) is aurora season. Long nights, genuinely dark skies away from Reykjavík, and — when the KP index cooperates — the Northern Lights. It's also when snow transforms the landscape into something closer to black-and-white photography: stark contrast, minimal color, dramatic skies. For a breakdown of specific aurora photography locations and technique, see our <a href="/iceland-photography" style="color:var(--blue-500);text-decoration:underline">Iceland Photography Guide</a>.</p>
+          <p class="lead-heading">Summer (June–August) brings something most photographers never experience elsewhere: nearly 24 hours of daylight. The midnight sun changes how you shoot — extended golden hour, no rush to capture everything before dark, soft warm tones from the low sun angle, and access to remote highland areas that only open in summer.</p>
+          <p class="lead-heading">Shoulder seasons (April–May, September) sit between the two: fewer visitors than peak summer, more daylight than winter, and transitional light that shifts fast — useful if you want variety without committing to either extreme.</p>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={guideImg} alt="Photographer at Vestrahorn mountain on Iceland's South Coast" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={guideImg} alt="Photographer at Vestrahorn mountain on Iceland's South Coast" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Why Guided Light-Chasing Beats a Fixed Schedule</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Most Iceland itineraries — guided or self-driven — run on a fixed clock: arrive, stop for fifteen minutes, move on. Photography doesn't work on that schedule. The best light rarely lines up with a printed itinerary, and Iceland's weather can shift dramatically within an hour.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The difference between a working photography approach and a sightseeing one usually comes down to: arrival timing planned around light, not convenience; stops that last as long as the shot requires, not a fixed window; real-time adjustment when weather or cloud cover changes what's actually shootable; and composition and camera-settings guidance on location, not just transportation to it.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">This is the approach behind every private tour with Luke, a photographer with nearly 20 years photographing Iceland's landscapes.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">Why Guided Light-Chasing Beats a Fixed Schedule</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Most Iceland itineraries — guided or self-driven — run on a fixed clock: arrive, stop for fifteen minutes, move on. Photography doesn't work on that schedule. The best light rarely lines up with a printed itinerary, and Iceland's weather can shift dramatically within an hour.</p>
+          <p class="lead-heading">The difference between a working photography approach and a sightseeing one usually comes down to: arrival timing planned around light, not convenience; stops that last as long as the shot requires, not a fixed window; real-time adjustment when weather or cloud cover changes what's actually shootable; and composition and camera-settings guidance on location, not just transportation to it.</p>
+          <p class="lead-heading">This is the approach behind every private tour with Luke, a photographer with nearly 20 years photographing Iceland's landscapes.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Essential Camera Gear for Iceland</h2>
+      <section class="mt-9">
+        <h2 class="article-h2">Essential Camera Gear for Iceland</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-5)">You don't need professional equipment to get great results, but a few items make a significant difference:</p>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {GEAR.map((item) => (
             <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
               <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto;margin-top:2px" />
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-5) 0 0">If you're shooting primarily on a phone, that's completely fine — composition and timing matter more than equipment.</p>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={gearImg} alt="Photography tour on the Reykjanes Peninsula" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={gearImg} alt="Photography tour on the Reykjanes Peninsula" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Common Mistakes First-Time Photographers Make in Iceland</h2>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <h2 class="article-h2">Common Mistakes First-Time Photographers Make in Iceland</h2>
+        <div class="stack w-full">
           {MISTAKES.map((item) => (
             <div style="padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Planning Your Trip</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Whether you're chasing the aurora in winter or the midnight sun in summer, timing and local knowledge make the difference between seeing Iceland and actually capturing it.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">Planning Your Trip</h2>
+        <p class="lead-heading">Whether you're chasing the aurora in winter or the midnight sun in summer, timing and local knowledge make the difference between seeing Iceland and actually capturing it.</p>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Ready to shoot Iceland at its best?</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">See our Iceland photography tours, built around your pace and the light.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="cta-panel-title">Ready to shoot Iceland at its best?</h2>
+          <p class="lead-on-dark">See our Iceland photography tours, built around your pace and the light.</p>
         </div>
         <Button variant="primary" href="/tours">See Our Iceland Photography Tours</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

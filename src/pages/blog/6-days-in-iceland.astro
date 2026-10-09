@@ -43,24 +43,24 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Time is not elastic. Although travel lovers would like to be on the road endlessly, in reality, we eventually need to return to daily life — work, family, household duties, and everything else. But that doesn't mean you can't see and experience a lot in a short time! "Iceland in a week" was the motto I followed when organizing a six-day tour through this stunning land. Discover why it's the best option if you want to explore Iceland in a short period!</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">Time is not elastic. Although travel lovers would like to be on the road endlessly, in reality, we eventually need to return to daily life — work, family, household duties, and everything else. But that doesn't mean you can't see and experience a lot in a short time! "Iceland in a week" was the motto I followed when organizing a six-day tour through this stunning land. Discover why it's the best option if you want to explore Iceland in a short period!</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Iceland in a Week – Travel Itinerary</h2>
+      <section class="mt-9">
+        <h2 class="article-h2">Iceland in a Week – Travel Itinerary</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-6)">To make the "Iceland in a week" plan work, you need to craft a smart route — one that allows you to keep moving forward without backtracking or covering the same areas repeatedly. There's no time to waste, and there's so much to see in Iceland! The 6 Days Ultimate Adventure from Reykjavik tour includes:</p>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {STOPS.map((s) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid var(--border-sand)">
+            <div class="spec-row">
               <p style="font:700 17px/1.3 var(--font-sans);color:var(--text-heading);margin:0 0 6px">
                 {s.href ? <a href={s.href} style="color:inherit;text-decoration:underline">{s.name}</a> : s.name}
               </p>
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{s.description}</p>
+              <p class="lead-heading">{s.description}</p>
             </div>
           ))}
         </div>
@@ -68,40 +68,40 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-4) 0 0">If a six-day tour feels like too much, check out what you can explore and experience in just three days: <a href="/blog/3-days-in-south-iceland" style="color:var(--blue-500);text-decoration:underline">3 Days in South Iceland – What Can You See?</a></p>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={highlandsImg} alt="Landmannalaugar's colourful rhyolite mountains in the Icelandic Highlands" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={highlandsImg} alt="Landmannalaugar's colourful rhyolite mountains in the Icelandic Highlands" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Iceland in a Week – What Can You Experience?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Depending on the season, time of year, and weather, this weeklong Iceland tour offers various additional attractions. Highlights include horseback riding on a black sand beach or across lava fields, visiting an ice cave, hiking on a glacier with a certified guide, snowmobiling on Vatnajökull glacier, and even dog sledding. These are once-in-a-lifetime experiences you'll never forget.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">But that's not all — even if your memories start to fade after a few years, you'll have a full photographic record of where you went, what you saw, and what you experienced. My tour is truly unique — it's a photographic journey that combines sightseeing in Iceland's most iconic spots with a professional photo shoot.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Extra perks? Privacy (it's just you and your chosen companions on the tour) and personalized attractions — don't want to visit something from the list? Want to add a special spot? No problem!</p>
+        <h2 class="article-h2">Iceland in a Week – What Can You Experience?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Depending on the season, time of year, and weather, this weeklong Iceland tour offers various additional attractions. Highlights include horseback riding on a black sand beach or across lava fields, visiting an ice cave, hiking on a glacier with a certified guide, snowmobiling on Vatnajökull glacier, and even dog sledding. These are once-in-a-lifetime experiences you'll never forget.</p>
+          <p class="lead-heading">But that's not all — even if your memories start to fade after a few years, you'll have a full photographic record of where you went, what you saw, and what you experienced. My tour is truly unique — it's a photographic journey that combines sightseeing in Iceland's most iconic spots with a professional photo shoot.</p>
+          <p class="lead-heading">Extra perks? Privacy (it's just you and your chosen companions on the tour) and personalized attractions — don't want to visit something from the list? Want to add a special spot? No problem!</p>
         </div>
       </section>
 
       <figure style="margin:var(--space-11) 0 0">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/9">
-          <Image src={goldenCircleImg} alt="Kerið crater on the Golden Circle route" width={1200} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+          <Image class="cover" src={goldenCircleImg} alt="Kerið crater on the Golden Circle route" width={1200} quality={80} loading="lazy" />
         </div>
       </figure>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Ready for a week in Iceland?</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Get in touch with me and check available dates!</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="cta-panel-title">Ready for a week in Iceland?</h2>
+          <p class="lead-on-dark">Get in touch with me and check available dates!</p>
         </div>
         <Button variant="primary" href="/contact">Check Availability</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

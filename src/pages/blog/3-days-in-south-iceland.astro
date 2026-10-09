@@ -35,73 +35,73 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">South Iceland is full of attractions worth seeing — and worth spending more than a single day exploring. In this article, I'll walk you through what's worth seeing over three days in the area around Vík, the southernmost village on Iceland's mainland. Vík is located just under 200 km from Reykjavík, which is where we'll start our journey for convenience. If Icelandic waterfalls, canyons, and caves fascinate you, this article and trip are made for you!</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">South Iceland is full of attractions worth seeing — and worth spending more than a single day exploring. In this article, I'll walk you through what's worth seeing over three days in the area around Vík, the southernmost village on Iceland's mainland. Vík is located just under 200 km from Reykjavík, which is where we'll start our journey for convenience. If Icelandic waterfalls, canyons, and caves fascinate you, this article and trip are made for you!</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Vík – A Scenic Base in South Iceland</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Vík is a small town — or a village, as some might prefer to call it. In 2018, it had only 402 residents (the entire region had slightly more — 750 inhabitants in 2021). Despite its small size, Vík is a popular accommodation base for tourists visiting South Iceland. And it's no surprise! From Vík, you're close to some of the most stunning natural attractions in Iceland, including breathtaking waterfalls, canyons, lakes, caves, and other natural wonders.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">A trip to Vík is also a treat for wildlife enthusiasts — the area is a prime location to spot puffins, seabirds typical of the coasts of the North and Central Atlantic and the nearby Arctic Ocean. There's even something for military history fans: near Vík lies the wreckage of the Sólheimasandur plane, abandoned by the U.S. Navy.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">Vík – A Scenic Base in South Iceland</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Vík is a small town — or a village, as some might prefer to call it. In 2018, it had only 402 residents (the entire region had slightly more — 750 inhabitants in 2021). Despite its small size, Vík is a popular accommodation base for tourists visiting South Iceland. And it's no surprise! From Vík, you're close to some of the most stunning natural attractions in Iceland, including breathtaking waterfalls, canyons, lakes, caves, and other natural wonders.</p>
+          <p class="lead-heading">A trip to Vík is also a treat for wildlife enthusiasts — the area is a prime location to spot puffins, seabirds typical of the coasts of the North and Central Atlantic and the nearby Arctic Ocean. There's even something for military history fans: near Vík lies the wreckage of the Sólheimasandur plane, abandoned by the U.S. Navy.</p>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={planeWreckImg} alt="Sólheimasandur plane wreck on Iceland's South Coast" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={planeWreckImg} alt="Sólheimasandur plane wreck on Iceland's South Coast" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Waterfalls of South Iceland</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Some of the highlights on any South Iceland itinerary are the waterfalls. A three-day trip to Vík allows you to visit several: Seljalandsfoss, Gljúfrabúi, Skógafoss, and Kvernufoss. It's worth knowing that the first two waterfalls are only about 10 minutes apart! Despite that, Gljúfrabúi is less known and less crowded, which makes for a more private, intimate experience. The secluded atmosphere is perfect for photography — Gljúfrabúi might even become your longest stop if you're taking pictures.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Speaking of hidden waterfalls ideal for photography, Kvernufoss deserves a special mention. This fourth waterfall on the list is off the beaten path, which also makes it less frequented, intimate, and beautifully integrated into wild nature. Although smaller than the better-known Seljalandsfoss or Skógafoss, many visitors consider Kvernufoss even more beautiful. It's a hidden gem for those who like to explore deeper.</p>
+        <h2 class="article-h2">Waterfalls of South Iceland</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Some of the highlights on any South Iceland itinerary are the waterfalls. A three-day trip to Vík allows you to visit several: Seljalandsfoss, Gljúfrabúi, Skógafoss, and Kvernufoss. It's worth knowing that the first two waterfalls are only about 10 minutes apart! Despite that, Gljúfrabúi is less known and less crowded, which makes for a more private, intimate experience. The secluded atmosphere is perfect for photography — Gljúfrabúi might even become your longest stop if you're taking pictures.</p>
+          <p class="lead-heading">Speaking of hidden waterfalls ideal for photography, Kvernufoss deserves a special mention. This fourth waterfall on the list is off the beaten path, which also makes it less frequented, intimate, and beautifully integrated into wild nature. Although smaller than the better-known Seljalandsfoss or Skógafoss, many visitors consider Kvernufoss even more beautiful. It's a hidden gem for those who like to explore deeper.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Iceland's Beaches – Natural Treasures</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">During your trip around Vík, you'll also see some extraordinary beaches. On your South Iceland tour, you'll visit Reynisfjara Black Sand Beach and Diamond Beach. Their names already hint at their unique aesthetics. Reynisfjara is a beach with black sand, its color coming from the basalt in volcanic lava. Eruptions from a now-dormant nearby volcano caused hot lava to meet cold ocean water, solidify, and settle on the beach as fine black particles.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Like many places in Iceland, Reynisfjara is steeped in legend — you can admire Reynisdrangar, dramatic rock formations that, according to folklore, were once trolls turned to stone for eternity.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">As for Diamond Beach, this South Iceland destination is one of the most beautiful places on Earth. It's covered in large ice chunks from the nearby Jökulsárlón glacier lagoon, scattered over the black sand for a surreal visual contrast. If you're captivated by this scene, during the three-day tour we'll also visit Jökulsárlón Glacier Lagoon and (seasonally) an ice cave beneath the Vatnajökull glacier.</p>
+      <section class="mt-9">
+        <h2 class="article-h2">Iceland's Beaches – Natural Treasures</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">During your trip around Vík, you'll also see some extraordinary beaches. On your South Iceland tour, you'll visit Reynisfjara Black Sand Beach and Diamond Beach. Their names already hint at their unique aesthetics. Reynisfjara is a beach with black sand, its color coming from the basalt in volcanic lava. Eruptions from a now-dormant nearby volcano caused hot lava to meet cold ocean water, solidify, and settle on the beach as fine black particles.</p>
+          <p class="lead-heading">Like many places in Iceland, Reynisfjara is steeped in legend — you can admire Reynisdrangar, dramatic rock formations that, according to folklore, were once trolls turned to stone for eternity.</p>
+          <p class="lead-heading">As for Diamond Beach, this South Iceland destination is one of the most beautiful places on Earth. It's covered in large ice chunks from the nearby Jökulsárlón glacier lagoon, scattered over the black sand for a surreal visual contrast. If you're captivated by this scene, during the three-day tour we'll also visit Jökulsárlón Glacier Lagoon and (seasonally) an ice cave beneath the Vatnajökull glacier.</p>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={diamondBeachImg} alt="Ice chunks on the black sand of Diamond Beach" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={diamondBeachImg} alt="Ice chunks on the black sand of Diamond Beach" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">A Tour of Vík – The South Coast of Iceland</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Join me on this special three-day tour of Iceland's South Coast, with accommodation in Vík — a town known for its tourism and its appearance in the Icelandic Netflix series Katla! Beyond the previously mentioned highlights, you'll also explore Dyrhólaey cape, Fjaðrárgljúfur canyon, and Vestrahorn mountain — ideal viewpoints and photography spots for rock, cliff, and canyon lovers.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Since this is a photography-focused trip, you'll receive a full photo session package from the places you've visited — a priceless souvenir! Also priceless are the experiences and extra activities offered along the way, including horseback riding on a black sand beach, snowmobiling on a glacier, and visiting spots under the Northern Lights.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">So, what do you say — shall we meet in this magical landscape? Feel free to get in touch!</p>
+        <h2 class="article-h2">A Tour of Vík – The South Coast of Iceland</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Join me on this special three-day tour of Iceland's South Coast, with accommodation in Vík — a town known for its tourism and its appearance in the Icelandic Netflix series Katla! Beyond the previously mentioned highlights, you'll also explore Dyrhólaey cape, Fjaðrárgljúfur canyon, and Vestrahorn mountain — ideal viewpoints and photography spots for rock, cliff, and canyon lovers.</p>
+          <p class="lead-heading">Since this is a photography-focused trip, you'll receive a full photo session package from the places you've visited — a priceless souvenir! Also priceless are the experiences and extra activities offered along the way, including horseback riding on a black sand beach, snowmobiling on a glacier, and visiting spots under the Northern Lights.</p>
+          <p class="lead-heading">So, what do you say — shall we meet in this magical landscape? Feel free to get in touch!</p>
         </div>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Ready for South Iceland?</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Tell us your dates and we'll build your three-day itinerary from Vík.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="cta-panel-title">Ready for South Iceland?</h2>
+          <p class="lead-on-dark">Tell us your dates and we'll build your three-day itinerary from Vík.</p>
         </div>
         <Button variant="primary" href="/contact">Check Availability</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

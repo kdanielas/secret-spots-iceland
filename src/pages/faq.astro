@@ -92,7 +92,7 @@ const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items);
       {FAQ_CATEGORIES.map((cat, c) => (
         <div style="display:flex;flex-direction:column;gap:var(--space-8)">
           <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">{cat.category}</h2>
-          <div style="display:flex;flex-direction:column;width:100%">
+          <div class="stack w-full">
             {cat.items.map((item, i) => (
               <FaqItem question={item.question} answer={item.answer} defaultOpen={c === 0 && i === 0} />
             ))}
