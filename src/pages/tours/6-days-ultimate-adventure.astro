@@ -199,8 +199,8 @@ const schema = await tourPageSchema(Astro.url.pathname, {
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
               <div class="stack gap-2 text-left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+                <span class="stat-value">{s.label}</span>
+                <span class="stat-label">{s.sub}</span>
               </div>
             </div>
           </>
@@ -300,10 +300,10 @@ const schema = await tourPageSchema(Astro.url.pathname, {
       <div class="row gap-2">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
-      <p style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"Our group had varying ages and activity levels and Luke did a great job planning our days. He was organized, responsive, and thoughtfully bought us some local treats. We made an album of our trip and loved the great photos he took!"</p>
+      <p class="pull-quote">"Our group had varying ages and activity levels and Luke did a great job planning our days. He was organized, responsive, and thoughtfully bought us some local treats. We made an album of our trip and loved the great photos he took!"</p>
       <div class="stack gap-2 items-center">
         <span class="label-14">Sahsla</span>
-        <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">Family · Secret Spots of Iceland Review</span>
+        <span class="meta-12 underline">Family · Secret Spots of Iceland Review</span>
       </div>
     </div>
   </section>

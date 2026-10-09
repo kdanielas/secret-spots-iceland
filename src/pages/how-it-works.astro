@@ -33,11 +33,11 @@ const SERVICES = [
     <section class="page-hero-dark" style="--page-hero-h:329px">
       <div class="stack gap-8 items-center" style="max-width:857px">
         <div class="stack gap-8 items-center text-center">
-          <h1 class="how-it-works-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">How It Works</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">No fixed schedules, no strangers, no compromises</p>
+          <h1 class="how-it-works-hero-title blog-hero-title">How It Works</h1>
+          <p class="blog-hero-lead">No fixed schedules, no strangers, no compromises</p>
         </div>
-        <a href="#services" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-2);color:var(--amber-400);text-decoration:none">
-          <span style="font:700 15px/1 var(--font-sans)">See how it works</span>
+        <a class="platform-link" href="#services">
+          <span class="hero-cta-label">See how it works</span>
           <Icon name="chevron-down" size={20} color="var(--amber-400)" />
         </a>
       </div>
@@ -46,7 +46,7 @@ const SERVICES = [
 
   <Breadcrumbs trail={[{ label: 'How it works' }]} />
 
-  <section class="how-row" style="background:var(--surface-page)">
+  <section class="how-row bg-page">
     <div class="how-row-inner">
       <div class="how-row-media media-frame" style="flex:0 0 413px;border-radius:32px;overflow:hidden;aspect-ratio:413/620">
         <Image class="cover" src={stepsImg} alt="Steam rising over a hot spring in the Icelandic winter" width={700} quality={80} loading="lazy" />
@@ -58,7 +58,7 @@ const SERVICES = [
     </div>
   </section>
 
-  <section id="services" class="how-row" style="background:var(--surface-page)">
+  <section id="services" class="how-row bg-page">
     <div style="display:flex;flex-direction:column;gap:var(--space-8);width:100%;max-width:856px">
       <h2 style="font:400 2.5rem/1.1 var(--font-display);color:#312c27;margin:0;text-align:center">Our Services</h2>
       <div data-faq-group style="display:flex;flex-direction:column;width:100%;border-top:1px solid #817b73">
@@ -69,7 +69,7 @@ const SERVICES = [
     </div>
   </section>
 
-  <section class="how-row" style="background:var(--surface-page)">
+  <section class="how-row bg-page">
     <div class="how-row-inner">
       <div class="how-row-media media-frame" style="flex:0 0 686px;border-radius:32px;overflow:hidden;aspect-ratio:686/458">
         <Image class="cover" src={vehiclesImg} alt="4x4 vehicle on the road along Iceland's South Coast" width={900} quality={80} loading="lazy" />

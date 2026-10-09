@@ -102,8 +102,8 @@ const schema = await tourPageSchema(Astro.url.pathname, {
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
               <div class="stack gap-2 text-left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+                <span class="stat-value">{s.label}</span>
+                <span class="stat-label">{s.sub}</span>
               </div>
             </div>
           </>
@@ -176,10 +176,10 @@ const schema = await tourPageSchema(Astro.url.pathname, {
       <div class="row gap-2">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
-      <p style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"The areas Luke took us were definitely off the beaten path. No tour buses or tourists. One particular waterfall was so grand that in all my travels, it was the most beautiful sight I've ever seen!!"</p>
+      <p class="pull-quote">"The areas Luke took us were definitely off the beaten path. No tour buses or tourists. One particular waterfall was so grand that in all my travels, it was the most beautiful sight I've ever seen!!"</p>
       <div class="stack gap-2 items-center">
         <span class="label-14">Kathy H</span>
-        <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted);text-decoration:underline">Couples</span>
+        <span class="meta-12 underline">Couples</span>
       </div>
     </div>
   </section>

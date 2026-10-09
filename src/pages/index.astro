@@ -109,10 +109,10 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         {FEATURED_TOURS.map((t) => (
           <div class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7)">
             <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
-              <div data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="position:relative;aspect-ratio:2/1;overflow:hidden">
+              <div class="media-2-1" data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)}>
                 <Image class="inset-fill cover" src={t.image} alt="" width={700} quality={80} loading="lazy" />
                 <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)"></div>
-                <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{t.duration}</span>
+                <span class="media-badge">{t.duration}</span>
                 <span style="position:absolute;bottom:16px;right:16px;color:var(--cream-50);text-align:right">
                   <span style="display:block;font:400 13px/1 var(--font-sans);opacity:.9;margin-bottom:4px">From</span>
                   <span style="display:block;font:700 22px/1 var(--font-sans)">{formatPrice(t.priceUsd)}<span style="font:400 13px/1 var(--font-sans)"> /group</span></span>
@@ -200,7 +200,7 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
         <div style="display:flex;flex-direction:column;gap:var(--space-7);align-items:flex-start">
           <div class="stack gap-5">
             <Eyebrow>How it works</Eyebrow>
-            <h2 class="sh-lg" style="color:var(--text-heading);margin:0">From first message to the photos in your hands</h2>
+            <h2 class="sh-lg title-ink">From first message to the photos in your hands</h2>
           </div>
           <div class="stack w-full">
             {STEPS.map((s) => (

@@ -22,7 +22,7 @@ const controlStyle = `width:100%;box-sizing:border-box;font:var(--type-body);col
   {type === 'textarea' ? (
     <textarea name={name} placeholder={placeholder} rows={rows} class="field-control" style={`${controlStyle};height:auto;padding:12px 14px;resize:vertical;font-family:var(--font-sans)`}></textarea>
   ) : type === 'select' ? (
-    <span style="position:relative;display:block">
+    <span class="block-rel">
       <select name={name} class="field-control" style={`${controlStyle};appearance:none;padding-right:40px;font-family:var(--font-sans)`}>
         {(options || []).map((o) => <option value={o}>{o}</option>)}
       </select>

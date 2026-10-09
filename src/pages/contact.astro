@@ -254,7 +254,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
                 <span class="label-13">Email <span class="req-mark">*</span></span>
-                <span style="position:relative;display:block">
+                <span class="block-rel">
                   <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="mail" size={16} />
                   </span>
@@ -272,7 +272,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <div class="contact-field-row" style="display:grid;grid-template-columns:220px 1fr;gap:var(--space-5);margin-bottom:var(--space-7)">
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span class="label-13">Country code <span class="req-mark">*</span></span>
-                  <span style="position:relative;display:block">
+                  <span class="block-rel">
                     <select name="countryCode" required class="contact-input" style="padding-right:34px">
                       {COUNTRY_CODES.map((c) => <option value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
                     </select>
@@ -284,7 +284,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
                   <span class="label-13">Phone <span class="req-mark">*</span></span>
-                  <span style="position:relative;display:block">
+                  <span class="block-rel">
                     <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="phone" size={16} />
                     </span>
@@ -304,18 +304,18 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
             <div data-step="2" style="display:none">
               <button type="button" id="back-to-step-1" style="display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font:600 13px/1 var(--font-sans);color:var(--text-muted);margin-bottom:var(--space-6)">
-                <Icon name="arrow-right" size={14} style="transform:rotate(180deg)" />
+                <Icon class="flip-180" name="arrow-right" size={14} />
                 Back
               </button>
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
                 <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel data <span class="sr-only">&#8201;— step 2 of 2</span></h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Your plans can be flexible</span>
+                <span class="meta-12">Your plans can be flexible</span>
               </div>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
                 <span class="label-13">Which tour are you interested in? <span class="req-mark">*</span></span>
-                <span style="position:relative;display:block">
+                <span class="block-rel">
                   <select name="tour" required class="contact-input" style="padding-right:34px">
                     {TOUR_OPTIONS.map((t) => <option value={t.title} data-tour={t.slug}>{t.title}</option>)}
                   </select>
@@ -335,7 +335,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-7)">
                 <div style="display:flex;flex-direction:column;gap:2px">
                   <span style="font:700 14px/1.2 var(--font-sans);color:var(--text-heading)">Number of Guests</span>
-                  <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">You can update this later</span>
+                  <span class="meta-12">You can update this later</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:var(--space-5)">
                   <button type="button" class="guest-stepper-btn" data-action="decrement" aria-label="Decrease guests">
@@ -355,8 +355,8 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="card-title" style="color:var(--text-heading);margin:0">How did you find us?</h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Choose one <span class="req-mark">*</span></span>
+                <h2 class="card-title title-ink">How did you find us?</h2>
+                <span class="meta-12">Choose one <span class="req-mark">*</span></span>
               </div>
 
               <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-7)">
@@ -389,7 +389,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <div style="margin-bottom:var(--space-7)">
                 <label style="display:flex;align-items:flex-start;gap:10px">
                   <input type="checkbox" name="privacyConsent" id="privacy-consent" required style="margin-top:3px;width:16px;height:16px;flex:0 0 auto" />
-                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a href="/privacy-policy" target="_blank" style="color:var(--blue-500);text-decoration:underline">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
+                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a class="text-accent underline" href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
                 </label>
                 <span class="field-error" id="err-privacyConsent" role="alert" hidden></span>
               </div>

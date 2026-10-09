@@ -15,6 +15,6 @@ const { datePublished, dateline, class: className, style } = Astro.props;
 {/* Deliberately below the opening paragraph rather than in the hero: the first
     text after a post's <h1> should answer it, so a search engine excerpting a
     snippet gets the answer instead of the author's name and the date. */}
-<p class:list={['blog-byline', className]} style={style}>
+<p class:list={['meta-sm', className]} style={style}>
   By {BLOG_AUTHOR} · <time datetime={datePublished}>{dateline}</time>
 </p>

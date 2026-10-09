@@ -116,8 +116,8 @@ const schema = await tourPageSchema(Astro.url.pathname, {
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
               <div class="stack gap-2 text-left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+                <span class="stat-value">{s.label}</span>
+                <span class="stat-label">{s.sub}</span>
               </div>
             </div>
           </>

@@ -50,8 +50,8 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     <section class="page-hero-dark">
       <div class="stack gap-8 items-center" style="max-width:857px">
         <div class="stack gap-8 items-center text-center">
-          <h1 class="photo-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Iceland Photography Guide — Best Locations &amp; Photo Spots</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">Iceland is one of the world's most rewarding places to shoot — if you know where to go and when. This guide walks through the locations, light, and moments Luke looks for after nearly 20 years photographing the island, from the Northern Lights and glacier lagoons to black sand beaches and hidden waterfalls few visitors ever find.</p>
+          <h1 class="photo-hero-title blog-hero-title">Iceland Photography Guide — Best Locations &amp; Photo Spots</h1>
+          <p class="blog-hero-lead">Iceland is one of the world's most rewarding places to shoot — if you know where to go and when. This guide walks through the locations, light, and moments Luke looks for after nearly 20 years photographing the island, from the Northern Lights and glacier lagoons to black sand beaches and hidden waterfalls few visitors ever find.</p>
         </div>
         <Button variant="primary" href="/tours">See All Our Iceland Photography Tours</Button>
       </div>
@@ -84,7 +84,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       </div>
       <div style="display:flex;justify-content:flex-end;gap:var(--space-4);width:100%">
         <button type="button" class="locations-arrow" data-dir="prev" aria-label="Previous location">
-          <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
+          <Icon class="flip-180" name="arrow-right" size={18} />
         </button>
         <button type="button" class="locations-arrow" data-dir="next" aria-label="Next location">
           <Icon name="arrow-right" size={18} />
@@ -93,7 +93,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       <div class="locations-carousel">
         {LOCATIONS.map((l) => (
           <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
-            <div data-ev="click_image" data-ev-text={l.title} style="position:relative;aspect-ratio:2/1;overflow:hidden">
+            <div class="media-2-1" data-ev="click_image" data-ev-text={l.title}>
               <Image class="inset-fill cover" src={l.image} alt="" width={500} quality={80} loading="lazy" />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">
