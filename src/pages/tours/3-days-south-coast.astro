@@ -122,14 +122,14 @@ const schema = await tourPageSchema(Astro.url.pathname, {
       </div>
       <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-4)">
-          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the 3-Day South Coast Tour</h2>
-          <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
+          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading-deep);margin:0">What to Expect on the 3-Day South Coast Tour</h2>
+          <p style="font:var(--type-lead);color:var(--text-heading-deep);margin:0">{TOUR_INTRO}</p>
         </div>
         <div style="display:flex;flex-direction:column;width:100%">
           {EXPECT.map((item) => (
             <div style="display:flex;gap:var(--space-4);align-items:center;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
               <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto" />
-              <p style="font:var(--type-lead);color:#081824;margin:0">{item}</p>
+              <p style="font:var(--type-lead);color:var(--text-heading-deep);margin:0">{item}</p>
             </div>
           ))}
         </div>
@@ -149,7 +149,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Who This 3-Day South Coast Tour Is For</h2>
         <div style="display:flex;flex-direction:column;width:100%">
           {WHO_FOR.map((item) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
+            <div style="padding:var(--space-6) 0;border-bottom:1px solid var(--border-sand)">
               <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
             </div>
           ))}

@@ -139,7 +139,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
             data-ev-text={it.label}
             data-menu={it.label}
             data-href={it.href}
-            style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:0`}
+            style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? 'var(--blue-500)' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:0`}
           >
             {it.label}
             <Icon name="chevron-down" size={16} class="nav-dropdown-chevron" />
@@ -155,7 +155,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           href={it.href || '#'}
           data-ev="click_nav"
           data-ev-text={it.label}
-          style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? '#38627F' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
+          style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? 'var(--blue-500)' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
         >
           {it.label}
         </a>
@@ -244,7 +244,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   /* overlay headers lift out of the flow so the hero shows through behind them */
   :global(.site-header.site-header-overlay) { position: absolute; top: 0; left: 0; right: 0; }
   :global(.site-header.nav-hidden) { transform: translateY(-100%); }
-  :global(.site-header:has(.nav-dropdown-item[data-open="true"])) { background: #F8F7F3 !important; }
+  :global(.site-header:has(.nav-dropdown-item[data-open="true"])) { background: var(--surface-page-soft) !important; }
   /* mobile: the whole menu panel shares one background, so the header row
      above it should switch to that same color while it's open instead of
      staying transparent over the hero image behind it */
@@ -259,7 +259,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
 
   :global(.nav-dropdown-chevron) { transition: transform var(--dur-base, 180ms) ease; }
   :global(.nav-dropdown-item[data-open="true"] .nav-dropdown-chevron) { transform: rotate(180deg); }
-  .nav-dropdown-item[data-open="true"] .nav-dropdown-trigger { color: #38627F !important; }
+  .nav-dropdown-item[data-open="true"] .nav-dropdown-trigger { color: var(--blue-500) !important; }
 
   .nav-megamenu {
     position: absolute;
@@ -267,7 +267,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
     left: 0;
     right: 0;
     z-index: var(--z-dropdown);
-    background: #F8F7F3;
+    background: var(--surface-page-soft);
     border-radius: 0 0 24px 24px;
     padding: var(--space-9);
     text-align: left;

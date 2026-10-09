@@ -145,7 +145,7 @@ const REVIEW_SOURCES = [
 
 <Layout title="Iceland private tours reviews | Secret Spots" description="Read honest reviews from travelers who explored Iceland's hidden gems with Luke. Private tours and photography experiences — see what others discovered." active="Reviews">
   <div class="container-pad" style="padding-bottom:var(--space-8)">
-    <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
+    <section style="background:var(--surface-dark-deep);border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
       <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
         <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
           <h1 class="reviews-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Real Experiences. Real Memories. Real Iceland.</h1>
@@ -165,7 +165,7 @@ const REVIEW_SOURCES = [
       <div class="why-grid">
         {WHY_CHOOSE.map((w) => (
           <div class="why-card">
-            <span class="why-icon"><Icon name={w.icon} size={26} color="#081824" /></span>
+            <span class="why-icon"><Icon name={w.icon} size={26} color="var(--text-heading-deep)" /></span>
             <span class="why-title">{w.title}</span>
           </div>
         ))}
@@ -355,7 +355,7 @@ const REVIEW_SOURCES = [
 
   .quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); width: 100%; }
   .quote-card {
-    background: #F8F7F3;
+    background: var(--surface-page-soft);
     border-top: 4px solid var(--amber-400);
     border-radius: 20px;
     padding: var(--space-8);
@@ -383,7 +383,7 @@ const REVIEW_SOURCES = [
     box-shadow: 0 2px 8px rgba(8, 24, 36, .04);
     transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
   }
-  .guest-chip:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(8, 24, 36, .1); background: #F8F7F3; }
+  .guest-chip:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(8, 24, 36, .1); background: var(--surface-page-soft); }
   .guest-chip-icon {
     width: 26px;
     height: 26px;

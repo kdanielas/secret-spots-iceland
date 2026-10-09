@@ -65,7 +65,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-6)">A Golden Circle tour in Iceland (Gullni hringurinn) is a journey through natural and cultural landmarks. Its core features are three must-see attractions:</p>
         <div style="display:flex;flex-direction:column;width:100%">
           {ATTRACTIONS.map((a) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
+            <div style="padding:var(--space-6) 0;border-bottom:1px solid var(--border-sand)">
               <p style="font:700 17px/1.3 var(--font-sans);color:var(--text-heading);margin:0 0 6px">{a.name}</p>
               <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{a.description}</p>
             </div>
@@ -92,7 +92,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         </div>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
+      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-3)">
           <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">See Iceland's classics in a day</h2>
           <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Tell us your dates and we'll build your Golden Circle day around you.</p>

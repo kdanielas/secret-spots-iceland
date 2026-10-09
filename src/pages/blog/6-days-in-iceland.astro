@@ -56,7 +56,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-6)">To make the "Iceland in a week" plan work, you need to craft a smart route — one that allows you to keep moving forward without backtracking or covering the same areas repeatedly. There's no time to waste, and there's so much to see in Iceland! The 6 Days Ultimate Adventure from Reykjavik tour includes:</p>
         <div style="display:flex;flex-direction:column;width:100%">
           {STOPS.map((s) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
+            <div style="padding:var(--space-6) 0;border-bottom:1px solid var(--border-sand)">
               <p style="font:700 17px/1.3 var(--font-sans);color:var(--text-heading);margin:0 0 6px">
                 {s.href ? <a href={s.href} style="color:inherit;text-decoration:underline">{s.name}</a> : s.name}
               </p>
@@ -89,7 +89,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
         </div>
       </figure>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
+      <div style="margin-top:var(--space-11);padding:var(--space-9);background:var(--surface-dark-deep);border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
         <div style="display:flex;flex-direction:column;gap:var(--space-3)">
           <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Ready for a week in Iceland?</h2>
           <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Get in touch with me and check available dates!</p>
