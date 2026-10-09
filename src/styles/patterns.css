@@ -1,0 +1,321 @@
+/* Repeated style= patterns, lifted out of the pages (issue #77).
+
+   Before this file the pages carried ~1.170 `style=""` attributes, 460 KB of
+   the built HTML. 329 of them were distinct and 786 of them were one of the
+   ~60 shapes below, repeated verbatim across pages — so a colour, a gap or a
+   type size could only be changed by find-and-replace across 5.800 lines of
+   .astro. The same declarations live here once instead.
+
+   Five sections, and the order between them is load-bearing:
+
+     1. primitives  — flex shells, gaps, alignment. Compose them:
+                      `class="stack gap-5"`, `class="row-center gap-4"`.
+     2. type        — the paragraph and heading shapes the pages repeat.
+     3. components  — a named block that is always the same thing: the
+                      in-article CTA panel, a page hero, a spec row.
+     4. spacing     — after 2 and 3, because those set `margin: 0` in a
+                      shorthand and a shorthand beats an earlier longhand.
+     5. tour shell  — the layout the six tour pages used to each declare.
+
+   What stays in `style=""`: values that genuinely differ per instance —
+   `--media-ratio`, `animation-delay`, a computed `opacity`, a one-off
+   `max-width`. That is the line; a value repeated more than ~5 times belongs
+   here.
+
+   Loaded before responsive.css so that file's media queries keep winning
+   against anything declared here. */
+
+/* ============================================================
+   1 — layout primitives
+   ============================================================ */
+
+.stack { display: flex; flex-direction: column; }
+.row { display: flex; }
+.row-center { display: flex; align-items: center; }
+
+/* Gaps come off the space scale and serve .stack, .row and grids alike. */
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-5 { gap: var(--space-5); }
+.gap-6 { gap: var(--space-6); }
+.gap-7 { gap: var(--space-7); }
+.gap-8 { gap: var(--space-8); }
+.gap-9 { gap: var(--space-9); }
+.gap-11 { gap: var(--space-11); }
+
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.w-full { width: 100%; }
+.underline { text-decoration: underline; }
+.block-rel { position: relative; display: block; }
+.bg-page { background: var(--surface-page); }
+/* Chevron or arrow pointing the other way. */
+.flip-180 { transform: rotate(180deg); }
+
+/* ============================================================
+   2 — type
+   ============================================================ */
+
+/* Lead paragraph, by the colour it carries. --type-lead is the token; the
+   four variants exist because the pages genuinely use four inks for it. */
+.lead-heading { font: var(--type-lead); color: var(--text-heading); margin: 0; }
+.lead-body { font: var(--type-lead); color: var(--text-body); margin: 0; }
+.lead-deep { font: var(--type-lead); color: var(--text-heading-deep); margin: 0; }
+.lead-on-dark { font: var(--type-lead); color: rgba(255, 255, 255, .8); margin: 0; }
+
+/* --- the Prata scale (issue #157) ---
+   Size and leading for every display heading, and the only place either is
+   written. A heading picks a step here and nothing else: the classes below it
+   carry ink and spacing, never a font.
+
+   The pages used to write their own sizes — 40, 32, 26 and 24px alongside the
+   36 and 28 the tokens define, so an <h2> meant five different things
+   depending on the page, and on seven pages it was *larger* than that page's
+   own <h1>. Those four sizes are gone; each landed on its nearest step.
+
+   The mobile step is here too, which is why these classes and not an inline
+   font: at 360px a 36px headline is a tenth of the viewport. */
+.sh-xl { font: var(--type-display-lg); }   /* 52px — page title */
+.sh-lg { font: var(--type-display-md); }   /* 36px — section headline */
+.sh-md { font: var(--type-display-sm); }   /* 28px — subsection, panel title */
+.sh-xs { font: var(--type-display-xs); }   /* 22px — heading inside an article */
+@media (max-width: 768px) {
+  .sh-xl { font-size: 2rem; line-height: 1.18; }
+  .sh-lg { font-size: 1.65rem; line-height: 1.22; }
+  .sh-md { font-size: 1.4rem; line-height: 1.24; }
+  .sh-xs { font-size: 1.2rem; line-height: 1.3; }
+}
+
+/* Ink and spacing for a heading that has already taken a size from .sh-*.
+   Kept after the scale's media query so a leading these set on purpose — the
+   pull quote's — survives at every width. */
+.title-ink { color: var(--text-heading); margin: 0; }
+.title-ink-deep { color: var(--text-heading-deep); margin: 0; }
+.title-ink-warm { color: var(--text-heading-warm); margin: 0; }
+.title-on-dark { color: var(--text-on-dark); margin: 0; }
+/* Heading that opens a section inside a blog post: needs the gap below it. */
+.article-h2 { color: var(--text-heading); margin: 0 0 var(--space-5); }
+.article-h3 { color: var(--text-heading); margin: 0; }
+
+/* Lato labels, likewise off the --type-label token (14px/1.4): the pages use
+   15/1.3, 14/1 and 13/1. */
+.label-15 { font: 700 15px/1.3 var(--font-sans); color: var(--text-heading); }
+.label-14 { font: 700 14px/1 var(--font-sans); color: var(--text-heading); }
+.label-13 { font: 700 13px/1 var(--font-sans); color: var(--text-heading); }
+.meta-xs { font: var(--type-body-xs); color: var(--text-muted); }
+.meta-sm { font: var(--type-body-sm); color: var(--text-muted); margin: 0; }
+.meta-12 { font: 400 12px/1 var(--font-sans); color: var(--text-muted); }
+
+/* Colour-only, for a link or a <strong> inside running text. */
+.text-accent { color: var(--blue-500); }
+/* Accented note paragraph — the "Best for:" and "Behind the camera:" lines. */
+.note-accent { font: 700 15px/1.5 var(--font-sans); color: var(--blue-500); margin: 0; }
+/* Centred Prata pull quote inside an article. */
+/* Centred Prata pull quote inside an article — .sh-md for the size, and a
+   looser leading than a heading of the same size would take. */
+.pull-quote { line-height: 1.4; color: var(--text-heading); margin: 0; text-align: center; max-width: 900px; }
+
+/* ============================================================
+   3 — components
+   ============================================================ */
+
+/* Every <Icon> — the two declarations the component used to write inline on
+   each of the 77 icons the page set renders. */
+.icon { display: inline-block; flex: 0 0 auto; }
+
+/* Photo or video filling its frame. 57 copies of the three declarations, on
+   <Image> and <video> alike. */
+.cover { width: 100%; height: 100%; object-fit: cover; }
+/* …and the same thing absolutely positioned behind a scrim. */
+.inset-fill { position: absolute; inset: 0; }
+
+/* 16:10 rounded media box used by the blog and tour card rows. */
+.card-media { border-radius: var(--radius-card); overflow: hidden; aspect-ratio: 16 / 10; }
+
+/* The media column of a tour content row. Its desktop aspect ratio is the one
+   thing that varies per row, so --media-ratio stays inline (issue #78) and
+   everything else lives here. This used to be four inline declarations plus a
+   duplicate rule in each of the six tour pages' own <style> block. */
+.tour-row-media { flex: 0 0 450px; border-radius: 32px; overflow: hidden; aspect-ratio: var(--media-ratio, 450/800); }
+
+/* Text column beside a media column: grows, caps at a readable measure. */
+.text-col { flex: 1; display: flex; flex-direction: column; gap: var(--space-7); max-width: 600px; }
+
+/* The dark near-black panel that closes a blog post with a CTA. Ten pages,
+   byte-identical. */
+.cta-panel {
+  padding: var(--space-9);
+  background: var(--surface-dark-deep);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+.cta-panel-title { color: var(--cream-50); margin: 0; }
+
+/* Page hero: a near-black band with the title sitting on its bottom edge.
+   Its height is the only difference between the six pages that use it, so
+   that one value arrives as --page-hero-h. */
+.page-hero-dark {
+  background: var(--surface-dark-deep);
+  border-radius: 32px;
+  min-height: var(--page-hero-h, 420px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-11) var(--space-9);
+}
+
+/* Title and standfirst of a blog post, over the near-black hero band. */
+.blog-hero-title { font: 400 3rem/1.1 var(--font-display); color: var(--cream-100); margin: 0; overflow-wrap: anywhere; }
+.blog-hero-lead { font: 400 18px/1.6 var(--font-sans); color: rgba(255, 255, 255, .9); margin: 0; }
+/* The label inside a hero's call to action. */
+.hero-cta-label { font: 700 15px/1 var(--font-sans); }
+
+/* A number and its caption in a stat row; neither wraps. */
+.stat-value { font: 700 16px/1.15 var(--font-sans); color: var(--text-heading); white-space: nowrap; }
+.stat-label { font: 500 13px/1 var(--font-sans); color: var(--text-body); white-space: nowrap; }
+
+/* 2:1 media box, and the floating caption chip that sits on top of one. */
+.media-2-1 { position: relative; aspect-ratio: 2 / 1; overflow: hidden; }
+.media-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(29, 45, 68, .54);
+  color: var(--cream-50);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font: 700 13px/1 var(--font-sans);
+}
+
+/* A review platform's logo and name, stacked, in the featured-on bar. */
+.platform-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--amber-400);
+  text-decoration: none;
+}
+
+/* Bone-white pull-out card on the sand page background (blog asides, the
+   contact form). -lg is the same card with the wider inner padding. */
+.soft-panel { background: var(--surface-page-soft); border-radius: var(--radius-card); padding: var(--space-8); }
+.soft-panel-lg { padding: var(--space-9); }
+
+/* Author line under an article, above the CTA panel. */
+.byline-row {
+  margin-top: var(--space-9);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Round initials avatar used where there is no author photo. */
+.avatar-initials {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background: var(--avatar-red);
+  color: var(--cream-50);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 16px/1 var(--font-sans);
+  flex: 0 0 auto;
+}
+
+/* Sand disc behind a single icon, in a bullet list or a benefit row. */
+.icon-disc {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-chip);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+/* A row in a tour's spec list — the opaque sand rule is deliberate: the alpha
+   --border-subtle disappears against the deeper sand these sit on. */
+.spec-row { padding: var(--space-6) 0; border-bottom: 1px solid var(--border-sand); }
+
+/* A row in a feature list on the page background, where the alpha rule works. */
+.feature-row {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================
+   4 — spacing utilities
+   ------------------------------------------------------------
+   Last on purpose. A type or component class above sets `margin: 0` as part of
+   its shorthand, and a shorthand beats a longhand declared earlier at the same
+   specificity — so `class="blog-byline mt-6"` only gets its top margin if these
+   come after. Inline styles never had this problem; classes do, and the order
+   of this file is the fix.
+   ============================================================ */
+
+.mt-6 { margin-top: var(--space-6); }
+.mt-9 { margin-top: var(--space-9); }
+.mt-11 { margin-top: var(--space-11); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-10 { margin-bottom: var(--space-10); }
+/* The shorthand, not two longhands: <figure> has a 40px UA side margin that the
+   inline `margin:var(--space-11) 0` used to zero out. */
+.my-11 { margin: var(--space-11) 0; }
+.pb-8 { padding-bottom: var(--space-8); }
+
+
+/* ============================================================
+   5 — tour page shell
+   ------------------------------------------------------------
+   Five of the six tour pages carried a byte-identical <style> block and the
+   sixth carried it plus three extra rules. It lives here once; golden-circle
+   keeps only its own extras. The !important that the media queries used to
+   need is gone with the inline flex shorthand it was fighting.
+   ============================================================ */
+
+.tour-block { padding: var(--space-8); }
+.tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
+
+.tour-info-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-7);
+  background: var(--cream-50);
+  border-radius: 100px;
+  padding: var(--space-5) var(--space-7);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
+.tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
+
+@media (max-width: 1024px) {
+  .tour-row { gap: var(--space-8); }
+  .tour-row-media { flex-basis: 320px; }
+}
+@media (max-width: 768px) {
+  .tour-row { flex-direction: column; align-items: stretch; }
+  .tour-row-media { flex-basis: auto; width: 100%; order: -1; aspect-ratio: 1/1; }
+  .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
+  .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .tour-info-bar-dot { display: none; }
+  .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
+}

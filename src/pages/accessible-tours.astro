@@ -32,12 +32,12 @@ const FAQS = [
   active="Accessible Tours"
   schema={[faqPageNode(canonicalUrl(Astro.url.pathname), FAQS)]}
 >
-  <div class="container-pad" style="padding-bottom:var(--space-8)">
-    <section style="background:#081824;border-radius:32px;min-height:420px;display:flex;align-items:flex-end;justify-content:center;padding:var(--space-11) var(--space-9)">
-      <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;max-width:857px">
-        <div style="display:flex;flex-direction:column;gap:var(--space-8);align-items:center;text-align:center">
-          <h1 class="acc-hero-title" style="font:400 3rem/1.1 var(--font-display);color:var(--cream-100);margin:0;overflow-wrap:anywhere">Accessible Tours in Iceland — Real Experience, Not Just a Promise</h1>
-          <p style="font:400 18px/1.6 var(--font-sans);color:rgba(255,255,255,.9);margin:0">Traveling with limited mobility shouldn't mean settling for a watered-down version of Iceland. It means finding a guide who's actually done it — and knows how to make the remote, rugged, and breathtaking parts of this country reachable for you.</p>
+  <div class="container-pad pb-8">
+    <section class="page-hero-dark">
+      <div class="stack gap-8 items-center" style="max-width:857px">
+        <div class="stack gap-8 items-center text-center">
+          <h1 class="acc-hero-title blog-hero-title">Accessible Tours in Iceland — Real Experience, Not Just a Promise</h1>
+          <p class="blog-hero-lead">Traveling with limited mobility shouldn't mean settling for a watered-down version of Iceland. It means finding a guide who's actually done it — and knows how to make the remote, rugged, and breathtaking parts of this country reachable for you.</p>
         </div>
         <Button variant="primary" href="/contact">Book Your Accessible Tour</Button>
       </div>
@@ -49,10 +49,10 @@ const FAQS = [
   <Section tight style="padding-top:var(--space-7)">
     <div class="acc-row">
       <div class="acc-row-media media-frame" style="flex:0 0 460px;border-radius:32px;overflow:hidden;aspect-ratio:460/620">
-        <Image src={introImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        <Image class="cover" src={introImg} alt="Traveller in a wheelchair by a glacier lagoon in Iceland" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Accessibility isn't an afterthought here — it's something I've built real experience with over the years, guiding older travelers and guests with limited mobility across some of Iceland's most remote locations.</p>
+      <div class="text-col">
+        <p class="lead-heading">Accessibility isn't an afterthought here — it's something I've built real experience with over the years, guiding older travelers and guests with limited mobility across some of Iceland's most remote locations.</p>
         <div style="border-left:3px solid var(--amber-400);padding-left:var(--space-6);display:flex;flex-direction:column;gap:var(--space-4)">
           <p style="font:400 20px/1.5 var(--font-display);color:var(--text-heading);margin:0">&ldquo;I've had several older guests and guests with limited mobility over the years. One guest was in a wheelchair, and we traveled around Iceland together for 12 days. We even did two helicopter tours, which made it possible to experience places that would otherwise have been inaccessible.&rdquo;</p>
           <span style="font:700 14px/1 var(--font-sans);color:var(--text-muted)">— Luke</span>
@@ -62,8 +62,8 @@ const FAQS = [
   </Section>
 
   <Section tone="page">
-    <div style="display:flex;flex-direction:column;gap:var(--space-9);align-items:center">
-      <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">How We Adapt Your Tour</h2>
+    <div class="stack gap-9 items-center">
+      <h2 class="sh-lg title-ink text-center">How We Adapt Your Tour</h2>
       <div class="icons-grid">
         {ADAPT.map((a) => (
           <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:flex-start">
@@ -81,8 +81,8 @@ const FAQS = [
 
   <Section tone="page">
     <div style="display:flex;flex-direction:column;align-items:center;gap:var(--space-11);max-width:700px;margin:0 auto">
-      <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">FAQ</h2>
-      <div data-faq-group style="display:flex;flex-direction:column;width:100%">
+      <h2 class="sh-lg title-ink text-center">FAQ</h2>
+      <div class="stack w-full" data-faq-group>
         {FAQS.map((q) => <FaqItem question={q.question} answer={q.answer} defaultOpen={q.defaultOpen} />)}
       </div>
     </div>
@@ -90,13 +90,13 @@ const FAQS = [
 
   <Section tone="page">
     <div class="quote-panel">
-      <div style="display:flex;gap:4px">
+      <div class="row gap-2">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
-      <p style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"Has a FANTASTIC 12 days with Luke enjoying the scenery, culture, people and food of Iceland 🇮🇸."</p>
-      <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-        <span style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">Jerry Jensen</span>
-        <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Verified traveller</span>
+      <p class="sh-md pull-quote">"Has a FANTASTIC 12 days with Luke enjoying the scenery, culture, people and food of Iceland 🇮🇸."</p>
+      <div class="stack gap-2 items-center">
+        <span class="label-14">Jerry Jensen</span>
+        <span class="meta-12">Verified traveller</span>
       </div>
     </div>
   </Section>

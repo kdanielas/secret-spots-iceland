@@ -9,10 +9,19 @@
 --white:#FFFFFF;
 --star-gold:#F4B04B;
 --avatar-red:#9B2C2C;
---surface-footer:#081824;
+--ink-950:#081824;
+--sand-400:#DBD6C5;--sand-500:#C2B8AB;
 
 /* --- semantic: text --- */
 --text-heading:var(--ink-900);
+/* The darker heading ink the tour and legal pages use instead of --text-heading.
+   Two near-blacks for headings is one too many; reconciling them is a design
+   decision, so #081824 keeps its own token rather than being folded in here. */
+--text-heading-deep:var(--ink-950);
+/* Y un tercero, más cálido, en un solo titular (How It Works). Tiene token para
+   que no viva suelto en una página, no porque el sitio necesite tres negros de
+   titular: unificarlo con uno de los otros dos es una decisión de diseño. */
+--text-heading-warm:#312C27;
 --text-body:rgba(39,51,60,.82);
 --text-muted:var(--gray-700);
 --text-eyebrow:var(--blue-500);
@@ -29,7 +38,15 @@
 --surface-card:var(--sand-200);
 --surface-card-light:var(--cream-50);
 --surface-chip:var(--sand-100);
+--surface-footer:var(--ink-950);
 --surface-dark:#132533;
+/* The near-black panel behind a page hero or an in-article CTA. Same value as
+   the footer, named apart because it is a panel, not the footer. */
+--surface-dark-deep:var(--ink-950);
+/* Off-white card on the sand page background (blog pull-outs, contact form). */
+--surface-page-soft:#F8F7F3;
+/* Deeper sand, for the panel that has to read as a step down from the page. */
+--surface-sand-deep:var(--sand-400);
 --surface-dark-panel:var(--ink-700);
 --surface-dark-field:rgba(251,246,240,.06);
 --scrim-image:linear-gradient(180deg,rgba(23,32,40,.68) 0%,rgba(23,32,40,.48) 45%,rgba(23,32,40,.74) 100%); /* @kind other */
@@ -37,6 +54,8 @@
 
 /* --- semantic: borders --- */
 --border-subtle:rgba(39,51,60,.12);
+/* Opaque sand rule — the subtle alpha border disappears on --surface-sand-deep. */
+--border-sand:var(--sand-500);
 --border-strong:rgba(39,51,60,.28);
 --border-field:rgba(39,51,60,.55);
 --border-on-dark:rgba(251,246,240,.28);
@@ -46,7 +65,7 @@
 --action-primary-bg:var(--amber-400);
 --action-primary-bg-hover:var(--amber-500);
 --action-primary-fg:var(--espresso-900);
---action-dark-bg:#081824;
+--action-dark-bg:var(--ink-950);
 --action-dark-bg-hover:#0f2636;
 --action-dark-fg:var(--cream-50);
 --action-outline-fg:var(--ink-900);

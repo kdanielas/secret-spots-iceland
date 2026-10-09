@@ -38,10 +38,10 @@ if (!/\b(?:fill|stroke)=/.test(attrs)) attrs += ' fill="currentColor"';
 
 const a11y = label ? `role="img" aria-label="${label}"` : `aria-hidden="true"`;
 
-const inlineStyle = `display:inline-block;flex:0 0 auto;${color ? `color:${color};` : ''}${style}`;
-const svg = `<svg ${attrs} width="${size}" height="${size}" ${a11y}${
-  className ? ` class="${className}"` : ''
-} style="${inlineStyle}">${body}`;
+// display and flex live in the .icon class rather than being repeated inline on
+// all 77 icons in the page set; only a caller-supplied colour or style is inline.
+const inlineStyle = `${color ? `color:${color};` : ''}${style}`;
+const svg = `<svg ${attrs} width="${size}" height="${size}" ${a11y} class="icon${ className ? ` ${className}` : '' }"${inlineStyle ? ` style="${inlineStyle}"` : ''}>${body}`;
 ---
 
 <Fragment set:html={svg} />

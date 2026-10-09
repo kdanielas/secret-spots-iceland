@@ -107,13 +107,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         {STATS.map((s, i) => (
           <>
             {i > 0 ? <span aria-hidden="true" class="tour-info-bar-dot"></span> : null}
-            <div style="display:flex;align-items:center;gap:var(--space-4)">
-              <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <div class="row-center gap-4">
+              <span class="icon-disc">
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
-              <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+              <div class="stack gap-2 text-left">
+                <span class="stat-value">{s.label}</span>
+                <span class="stat-label">{s.sub}</span>
               </div>
             </div>
           </>
@@ -128,14 +128,14 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   <section class="tour-block tour-block-pb-lg">
     <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-7);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Golden Circle Tour</h2>
-        <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
+        <h2 class="sh-lg title-ink-deep">What to Expect on the Golden Circle Tour</h2>
+        <p class="lead-deep">{TOUR_INTRO}</p>
       </div>
-      <div style="display:flex;flex-direction:column;width:100%">
+      <div class="stack w-full">
         {EXPECT.map((item) => (
-          <div style="display:flex;gap:var(--space-4);align-items:center;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
-            <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto" />
-            <p style="font:var(--type-lead);color:#081824;margin:0">{item}</p>
+          <div class="feature-row">
+            <Icon name="check" size={20} color="var(--blue-500)" />
+            <p class="lead-deep">{item}</p>
           </div>
         ))}
       </div>
@@ -147,14 +147,14 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block who-for-section">
     <div style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">This tour is perfect for</h2>
+      <h2 class="sh-lg title-ink text-center">This tour is perfect for</h2>
       <div class="who-for-grid">
         {WHO_FOR.map((item) => (
           <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:center;text-align:center">
-            <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <span class="icon-disc">
               <Icon name={item.icon} size={24} color="var(--blue-500)" />
             </span>
-            <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item.text}</p>
+            <p class="lead-heading">{item.text}</p>
           </div>
         ))}
       </div>
@@ -165,15 +165,15 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     <ReviewCarousel reviews={REVIEWS} label="Golden Circle guest reviews" />
   </section>
 
-  <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
+  <section class="tour-block tour-block-row mb-8">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
-        <Image src={photographyImg} alt="Two women posing by the Brúarfoss waterfall on the Golden Circle route" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:590/886">
+        <Image class="cover" src={photographyImg} alt="Two women posing by the Brúarfoss waterfall on the Golden Circle route" width={900} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photographing the Golden Circle</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Golden Circle is one of Earth's most photographed routes — but the best images come from timing, perspective, and knowing where to stand. Geysers erupting in golden light, waterfalls with rainbows, tectonic plates framing the landscape, steam vents at sunrise — every location has a perfect moment.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Whether you're shooting with a professional camera or your phone, every stop on this tour is chosen with composition and light in mind. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story.</p>
+      <div class="text-col items-start">
+        <h2 class="sh-lg title-ink">Photographing the Golden Circle</h2>
+        <p class="lead-body">The Golden Circle is one of Earth's most photographed routes — but the best images come from timing, perspective, and knowing where to stand. Geysers erupting in golden light, waterfalls with rainbows, tectonic plates framing the landscape, steam vents at sunrise — every location has a perfect moment.</p>
+        <p class="lead-body">Whether you're shooting with a professional camera or your phone, every stop on this tour is chosen with composition and light in mind. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
       </div>
     </div>
@@ -190,11 +190,11 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 </Layout>
 
 <style>
-  .tour-block { padding: var(--space-8); }
+  /* Only golden-circle's own rules stay scoped — the tour shell the six pages
+     share lives in src/styles/patterns.css. .tour-block-pb-lg still has to beat
+     the shared .tour-block padding shorthand, which the [data-astro-cid] on a
+     scoped selector handles. */
   .who-for-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-9); }
-  /* Overrides of .tour-block's padding shorthand have to be scoped like it is —
-     a global utility loses to Astro's [data-astro-cid] specificity. Values come
-     from the shared tokens so only the breakpoints repeat. */
   .tour-block-pb-lg { padding-bottom: var(--panel-py); }
   .who-for-section { padding-top: var(--section-py); padding-bottom: var(--section-py); }
   @media (max-width: 1024px) {
@@ -206,37 +206,5 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     .who-for-grid { grid-template-columns: 1fr; }
     .tour-block-pb-lg { padding-bottom: var(--space-9); }
     .who-for-section { padding-top: var(--space-10); padding-bottom: var(--space-10); }
-  }
-  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
-  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
-     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
-  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
-
-  .tour-info-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-7);
-    background: var(--cream-50);
-    border-radius: 100px;
-    padding: var(--space-5) var(--space-7);
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
-
-  @media (max-width: 1024px) {
-    .tour-row { gap: var(--space-8); }
-    .tour-row-media { flex-basis: 320px !important; }
-  }
-  @media (max-width: 768px) {
-    .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
-    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
-    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
-    .tour-info-bar-dot { display: none; }
-    .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
   }
 </style>

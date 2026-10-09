@@ -7,15 +7,16 @@ interface Props {
   trail: Crumb[];
   /** Set when the trail sits inside a content column that already handles width and padding. */
   inline?: boolean;
+  class?: string;
   style?: string;
 }
-const { trail, inline = false, style = '' } = Astro.props;
+const { trail, inline = false, class: className, style = '' } = Astro.props;
 
 const crumbs: Crumb[] = [{ label: 'Home', href: '/' }, ...trail];
 const schema = { '@context': 'https://schema.org', ...breadcrumbNode(canonicalUrl(Astro.url.pathname), crumbs) };
 ---
 
-<nav class:list={['breadcrumbs', !inline && 'container-pad breadcrumbs-page']} aria-label="Breadcrumb" style={style}>
+<nav class:list={['breadcrumbs', !inline && 'container-pad breadcrumbs-page', className]} aria-label="Breadcrumb" style={style}>
   <ol>
     {crumbs.map((crumb, i) => (
       <li>

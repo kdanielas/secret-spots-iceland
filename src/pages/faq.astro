@@ -87,12 +87,12 @@ const faqEntries = FAQ_CATEGORIES.flatMap((cat) => cat.items);
     <Fragment slot="title">FAQs</Fragment>
   </Hero>
 
-  <section class="section-py" style="background:var(--surface-page)">
+  <section class="section-py bg-page">
     <div data-faq-group style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-13);padding:0 var(--space-8)">
       {FAQ_CATEGORIES.map((cat, c) => (
         <div style="display:flex;flex-direction:column;gap:var(--space-8)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">{cat.category}</h2>
-          <div style="display:flex;flex-direction:column;width:100%">
+          <h2 class="sh-md title-ink text-center">{cat.category}</h2>
+          <div class="stack w-full">
             {cat.items.map((item, i) => (
               <FaqItem question={item.question} answer={item.answer} defaultOpen={c === 0 && i === 0} />
             ))}

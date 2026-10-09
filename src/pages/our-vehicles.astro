@@ -50,16 +50,16 @@ const VEHICLES = [
 
   <section class="section-py">
     <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-11);align-items:center;padding:0 var(--space-8)">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:700px">The Right Vehicle for Every Adventure</h2>
+      <h2 class="sh-lg title-ink text-center" style="max-width:700px">The Right Vehicle for Every Adventure</h2>
       <div class="vehicles-grid">
         {VEHICLES.map((v) => (
           <article style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
             <div style="position:relative;aspect-ratio:1/1;overflow:hidden">
-              <Image src={v.image} alt={v.title} width={700} quality={80} loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
-              <span style="position:absolute;top:16px;left:16px;background:rgba(29,45,68,.54);color:var(--cream-50);padding:8px 14px;border-radius:20px;font:700 13px/1 var(--font-sans)">{v.capacity}</span>
+              <Image class="inset-fill cover" src={v.image} alt={v.title} width={700} quality={80} loading="lazy" />
+              <span class="media-badge">{v.capacity}</span>
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-8);padding:0 var(--space-6);flex:1">
-              <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+              <div class="stack gap-3">
                 <h3 style="font:600 20px/1.2 var(--font-sans);color:var(--text-heading);margin:0">{v.title}</h3>
                 <p style="font:400 14px/1.5 var(--font-sans);color:var(--text-heading);margin:0">{v.description}</p>
               </div>
@@ -74,10 +74,10 @@ const VEHICLES = [
   <div class="container-pad" style="padding-top:0;padding-bottom:var(--space-11)">
     <div style="background:var(--cream-50);border-radius:32px;padding:var(--space-9);display:flex;align-items:center;gap:var(--space-11)" class="vehicle-why-row">
       <div class="media-frame" style="flex:1 1 0;border-radius:32px;overflow:hidden;aspect-ratio:737/414">
-        <Image src={jeepImg} alt="4x4 vehicle crossing a river in the Icelandic highlands" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        <Image class="cover" src={jeepImg} alt="4x4 vehicle crossing a river in the Icelandic highlands" width={900} quality={80} loading="lazy" />
       </div>
       <div style="flex:1 1 0;display:flex;flex-direction:column;gap:var(--space-7)">
-        <h2 style="font:400 2.25rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Why the Right Vehicle Matters</h2>
+        <h2 class="sh-lg title-ink">Why the Right Vehicle Matters</h2>
         <p style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:0">Iceland's landscapes are vast, and many of the country's most beautiful locations are reached by scenic drives through changing terrain and weather conditions. That's why comfort matters.</p>
         <p style="font:400 16px/1.7 var(--font-sans);color:var(--text-body);margin:0">Whether you're traveling for a day tour, a photography adventure, or a multi-day private journey, our goal is to ensure you enjoy the same level of comfort and quality on the road as you do at every destination.</p>
       </div>

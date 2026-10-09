@@ -17,7 +17,7 @@ const { reviews, label = 'Guest reviews' } = Astro.props;
 ---
 
 <div class="review-carousel quote-panel" role="group" aria-roledescription="carousel" aria-label={label}>
-  <div style="display:flex;gap:4px">
+  <div class="row gap-2">
     {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
   </div>
   <!-- aria-live starts off: while the carousel rotates on its own, announcing a
@@ -25,10 +25,10 @@ const { reviews, label = 'Guest reviews' } = Astro.props;
        script turns it to "polite" as soon as rotation stops, so manual paging
        and the reduced-motion case are announced. -->
   <div class="review-live" aria-live="off" aria-atomic="true">
-    <p class="review-quote" style="font:400 28px/1.4 var(--font-display);color:var(--text-heading);margin:0;text-align:center;max-width:900px">"{reviews[0].quote}"</p>
-    <div style="display:flex;flex-direction:column;gap:4px;align-items:center">
-      <span class="review-name" style="font:700 14px/1 var(--font-sans);color:var(--text-heading)">{reviews[0].name}</span>
-      <span class="review-type" style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">{reviews[0].type}</span>
+    <p class="review-quote sh-md pull-quote">"{reviews[0].quote}"</p>
+    <div class="stack gap-2 items-center">
+      <span class="review-name label-14">{reviews[0].name}</span>
+      <span class="review-type meta-12">{reviews[0].type}</span>
     </div>
   </div>
   <!-- Hidden until the script wires it up: none of these controls does anything
@@ -36,7 +36,7 @@ const { reviews, label = 'Guest reviews' } = Astro.props;
        than no button. -->
   <div class="review-controls" hidden>
     <button type="button" class="testimonial-arrow" data-dir="prev" aria-label="Previous review">
-      <Icon name="arrow-right" size={18} style="transform:rotate(180deg)" />
+      <Icon class="flip-180" name="arrow-right" size={18} />
     </button>
     <button type="button" class="testimonial-arrow review-pause" data-paused="false" aria-label="Pause review rotation">
       <span class="review-pause-icon"><Icon name="pause" size={18} /></span>

@@ -105,13 +105,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         {STATS.map((s, i) => (
           <>
             {i > 0 ? <span aria-hidden="true" class="tour-info-bar-dot"></span> : null}
-            <div style="display:flex;align-items:center;gap:var(--space-4)">
-              <span style="width:48px;height:48px;border-radius:var(--radius-pill);background:var(--surface-chip);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto">
+            <div class="row-center gap-4">
+              <span class="icon-disc">
                 <Icon name={s.icon} size={20} color="var(--text-heading)" />
               </span>
-              <div style="display:flex;flex-direction:column;gap:4px;text-align:left">
-                <span style="font:700 16px/1.15 var(--font-sans);color:var(--text-heading);white-space:nowrap">{s.label}</span>
-                <span style="font:500 13px/1 var(--font-sans);color:var(--text-body);white-space:nowrap">{s.sub}</span>
+              <div class="stack gap-2 text-left">
+                <span class="stat-value">{s.label}</span>
+                <span class="stat-label">{s.sub}</span>
               </div>
             </div>
           </>
@@ -125,19 +125,19 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={expectImg} alt="Couple standing above the deep gorge of Háifoss waterfall in the Icelandic Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:450/800">
+        <Image class="cover" src={expectImg} alt="Couple standing above the deep gorge of Háifoss waterfall in the Icelandic Highlands" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-4)">
-          <h2 style="font:400 2.5rem/1.2 var(--font-display);color:#081824;margin:0">What to Expect on the Highlands Tour</h2>
-          <p style="font:var(--type-lead);color:#081824;margin:0">{TOUR_INTRO}</p>
+      <div class="text-col items-start">
+        <div class="stack gap-4">
+          <h2 class="sh-lg title-ink-deep">What to Expect on the Highlands Tour</h2>
+          <p class="lead-deep">{TOUR_INTRO}</p>
         </div>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {EXPECT.map((item) => (
-            <div style="display:flex;gap:var(--space-4);align-items:center;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
-              <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto" />
-              <p style="font:var(--type-lead);color:#081824;margin:0">{item}</p>
+            <div class="feature-row">
+              <Icon name="check" size={20} color="var(--blue-500)" />
+              <p class="lead-deep">{item}</p>
             </div>
           ))}
         </div>
@@ -150,15 +150,15 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:590/886">
-        <Image src={whoForImg} alt="Guide standing at the rim of a colorful geothermal valley in the Icelandic Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:590/886">
+        <Image class="cover" src={whoForImg} alt="Guide standing at the rim of a colorful geothermal valley in the Icelandic Highlands" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Who This Highlands Tour Is For</h2>
-        <div style="display:flex;flex-direction:column;width:100%">
+      <div class="text-col items-start">
+        <h2 class="sh-lg title-ink">Who This Highlands Tour Is For</h2>
+        <div class="stack w-full">
           {WHO_FOR.map((item) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+            <div class="spec-row">
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
@@ -168,13 +168,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block tour-block-row">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:450/800">
-        <Image src={anotherPlanetImg} alt="Travelers lying at the edge of the cliff overlooking Háifoss waterfall in the Highlands" width={700} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:450/800">
+        <Image class="cover" src={anotherPlanetImg} alt="Travelers lying at the edge of the cliff overlooking Háifoss waterfall in the Highlands" width={700} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Iceland's most remote and mystical landscapes.</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Icelandic Highlands are where nature reveals its rawest power — dramatic waterfalls plunging 122 meters into canyons, colorful rhyolite mountains, Viking ruins buried in time, and lava formations that look like another planet. But the Highlands are only accessible in summer, and only to those with the right vehicle and local knowledge.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">This private Iceland tour takes you deep into Iceland's heart — far from tour buses and crowds — to places most visitors never reach. With Luke's expertise navigating F-roads in a rugged 4x4 vehicle, you'll discover the geological drama, ancient history, and surreal beauty that makes the Highlands the ultimate Icelandic adventure.</p>
+      <div class="text-col">
+        <h2 class="sh-lg title-ink">Iceland's most remote and mystical landscapes.</h2>
+        <p class="lead-body">The Icelandic Highlands are where nature reveals its rawest power — dramatic waterfalls plunging 122 meters into canyons, colorful rhyolite mountains, Viking ruins buried in time, and lava formations that look like another planet. But the Highlands are only accessible in summer, and only to those with the right vehicle and local knowledge.</p>
+        <p class="lead-body">This private Iceland tour takes you deep into Iceland's heart — far from tour buses and crowds — to places most visitors never reach. With Luke's expertise navigating F-roads in a rugged 4x4 vehicle, you'll discover the geological drama, ancient history, and surreal beauty that makes the Highlands the ultimate Icelandic adventure.</p>
       </div>
     </div>
   </section>
@@ -183,15 +183,15 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     <ReviewCarousel reviews={REVIEWS} label="Highlands Adventure guest reviews" />
   </section>
 
-  <section class="tour-block tour-block-row" style="margin-bottom:var(--space-8)">
+  <section class="tour-block tour-block-row mb-8">
     <div class="tour-row">
-      <div class="tour-row-media media-frame" style="flex:0 0 450px;border-radius:32px;overflow:hidden;--media-ratio:603/903">
-        <Image src={photographyImg} alt="Couple sitting above Háifoss waterfall with a rainbow rising from the mist" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <div class="tour-row-media media-frame" style="--media-ratio:603/903">
+        <Image class="cover" src={photographyImg} alt="Couple sitting above Háifoss waterfall with a rainbow rising from the mist" width={900} quality={80} loading="lazy" />
       </div>
-      <div style="flex:1;display:flex;flex-direction:column;gap:var(--space-7);max-width:600px;align-items:flex-start">
-        <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Photographing the Highlands</h2>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">The Highlands are where Iceland's most dramatic and cinematic landscapes exist — but only for those who can reach them and know where to look. Waterfalls backlit by rare Highlands sunlight, colorful mountains in impossible hues, lava formations framing sky and water, moody Highlands weather creating theatrical lighting.</p>
-        <p style="font:var(--type-lead);color:var(--text-body);margin:0">Whether you're a professional photographer or capturing memories on your phone, every location on this tour is chosen for its visual drama and photographic potential. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story of Iceland's wildest side.</p>
+      <div class="text-col items-start">
+        <h2 class="sh-lg title-ink">Photographing the Highlands</h2>
+        <p class="lead-body">The Highlands are where Iceland's most dramatic and cinematic landscapes exist — but only for those who can reach them and know where to look. Waterfalls backlit by rare Highlands sunlight, colorful mountains in impossible hues, lava formations framing sky and water, moody Highlands weather creating theatrical lighting.</p>
+        <p class="lead-body">Whether you're a professional photographer or capturing memories on your phone, every location on this tour is chosen for its visual drama and photographic potential. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story of Iceland's wildest side.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
       </div>
     </div>
@@ -206,39 +206,3 @@ const schema = await tourPageSchema(Astro.url.pathname, {
     imageAlt="Family enjoying a geothermal steam vent in North Iceland"
   />
 </Layout>
-
-<style>
-  .tour-block { padding: var(--space-8); }
-  .tour-row { display: flex; align-items: center; gap: var(--space-11); max-width: var(--container-max); margin: 0 auto; }
-  /* Issue #78: la proporción de escritorio viaja en --media-ratio para que el
-     breakpoint móvil la pueda sustituir por 1/1 sin recurrir a !important. */
-  .tour-row-media { aspect-ratio: var(--media-ratio, 450/800); }
-
-  .tour-info-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-7);
-    background: var(--cream-50);
-    border-radius: 100px;
-    padding: var(--space-5) var(--space-7);
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-  }
-  .tour-info-bar-stats { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
-  .tour-info-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-900); flex: 0 0 auto; }
-
-  @media (max-width: 1024px) {
-    .tour-row { gap: var(--space-8); }
-    .tour-row-media { flex-basis: 320px !important; }
-  }
-  @media (max-width: 768px) {
-    .tour-row { flex-direction: column; align-items: stretch; }
-    .tour-row-media { flex-basis: auto !important; width: 100%; order: -1; aspect-ratio: 1/1; }
-    .tour-info-bar { flex-direction: column; border-radius: 32px; justify-content: center; }
-    .tour-info-bar-stats { flex-direction: column; align-items: flex-start; justify-content: center; }
-    .tour-info-bar-dot { display: none; }
-    .tour-block { padding-left: var(--space-6); padding-right: var(--space-6); }
-  }
-</style>

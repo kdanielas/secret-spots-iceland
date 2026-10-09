@@ -119,7 +119,7 @@ const canonical = canonicalUrl(path);
     <!-- Consentimiento (#26): los valores por defecto de Consent Mode v2, ANTES
          que el dataLayer y que Tag Manager. Si van después, GA4 escribe sus
          cookies antes de que la persona haya dicho nada. -->
-    <ConsentMode />
+    <ConsentMode/>
     <!-- Medición (#84): el dataLayer y las variables de página, ANTES que Tag Manager.
          Si van después, la primera página vista llega a GA4 sin page_type. -->
     <script define:vars={{ pageType, tourName }}>
@@ -162,7 +162,7 @@ const canonical = canonicalUrl(path);
     <JsonLd schema={jsonLd} />
     <script is:inline>document.documentElement.classList.add('js-reveal-ready');</script>
   </head>
-  <body style="background:var(--surface-page)">
+  <body>
     {GTM_ID && (
       <noscript><iframe src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`} height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     )}
@@ -175,7 +175,7 @@ const canonical = canonicalUrl(path);
     <!-- Consentimiento (#26). Va al principio del body para que con teclado o
          lector de pantalla se llegue al aviso antes que al resto de la página;
          el CSS lo coloca abajo visualmente. -->
-    <CookieConsent />
+    <CookieConsent/>
     <div style={transparentNav ? 'position:relative' : undefined}>
       {hideNav ? null : <Navbar active={active} transparent={transparentNav} showContact overlay={transparentNav} contactHref={navContactHref} />}
       <!-- Accesibilidad (#70): el contenido de cada página vive dentro de un
@@ -184,7 +184,7 @@ const canonical = canonicalUrl(path);
            permite que el foco aterrice aquí al activarlo; sin él, algunos
            navegadores solo hacen scroll y el siguiente tabulador vuelve al menú. -->
       <main id="main" tabindex="-1">
-        <slot />
+        <slot/>
       </main>
     </div>
     {hideContactPanel ? null : <ContactPanel style={contactPanelStyle} />}

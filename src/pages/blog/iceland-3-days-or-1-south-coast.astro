@@ -34,69 +34,69 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Your journey through Iceland can last six days, three days — or even just one. Regardless of how much time you have or the style of travel you choose, every well-organized tour lets you experience the most important, beautiful, and unique highlights of Iceland.</p>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Today, I want to convince you that Iceland is worth visiting even if you only have one day. In under 24 hours, you can feel the magic of this land — and perhaps live one of the most unforgettable adventures of your life! Interested?</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">Your journey through Iceland can last six days, three days — or even just one. Regardless of how much time you have or the style of travel you choose, every well-organized tour lets you experience the most important, beautiful, and unique highlights of Iceland.</p>
+        <p class="lead-heading">Today, I want to convince you that Iceland is worth visiting even if you only have one day. In under 24 hours, you can feel the magic of this land — and perhaps live one of the most unforgettable adventures of your life! Interested?</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Exploring Iceland in 1 Day</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">A full-day tour of Iceland allows you to explore the most iconic and breathtaking highlights of the South Coast. This includes attractions like Seljalandsfoss Waterfall, Skógafoss Waterfall, Sólheimajökull Glacier, and the black sand beach of Reynisfjara.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">What makes this trip stand out? A thoughtfully designed itinerary featuring not only the most famous South Coast landmarks but also hidden gems off the beaten path, far from the usual tourist routes. It's a private tour — just you and your travel companions, setting your own pace. And it's a personalized experience: want to skip one of the stops, or visit something not on the list? Just let me know, and I'll tailor the plan.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">It's also worth mentioning that this South Coast Adventure is far from your typical tour. This is a photographic journey, meaning you'll receive stunning professional photos of the places you visit. A souvenir like that is simply priceless!</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">Exploring Iceland in 1 Day</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">A full-day tour of Iceland allows you to explore the most iconic and breathtaking highlights of the South Coast. This includes attractions like Seljalandsfoss Waterfall, Skógafoss Waterfall, Sólheimajökull Glacier, and the black sand beach of Reynisfjara.</p>
+          <p class="lead-heading">What makes this trip stand out? A thoughtfully designed itinerary featuring not only the most famous South Coast landmarks but also hidden gems off the beaten path, far from the usual tourist routes. It's a private tour — just you and your travel companions, setting your own pace. And it's a personalized experience: want to skip one of the stops, or visit something not on the list? Just let me know, and I'll tailor the plan.</p>
+          <p class="lead-heading">It's also worth mentioning that this South Coast Adventure is far from your typical tour. This is a photographic journey, meaning you'll receive stunning professional photos of the places you visit. A souvenir like that is simply priceless!</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9);background:#F8F7F3;border-radius:24px;padding:var(--space-8)">
-        <h2 style="font:400 1.375rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Dreaming of a longer trip through Iceland?</h2>
+      <section class="mt-9 soft-panel">
+        <h2 class="sh-xs article-h2">Dreaming of a longer trip through Iceland?</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-4)">Check out the 3-day or even 6-day tour options:</p>
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+        <div class="stack gap-3">
           <a href="/blog/3-days-in-south-iceland" style="color:var(--blue-500);text-decoration:underline;font:var(--type-lead)">3 Days in South Iceland – What Can You See?</a>
           <a href="/blog/6-days-in-iceland" style="color:var(--blue-500);text-decoration:underline;font:var(--type-lead)">Iceland in a Week – What to See and Experience?</a>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={puffinImg} alt="Puffin at Dyrhólaey Nature Reserve on Iceland's South Coast" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={puffinImg} alt="Puffin at Dyrhólaey Nature Reserve on Iceland's South Coast" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">One-Day Tour of Iceland — What Will You See and Experience?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The itinerary for a one-day trip through Iceland depends on you — your preferences, the season, time of year, and the weather. Highlights may include a glacier walk, visits to local museums or exhibitions, or a stop at Dyrhólaey Nature Reserve, especially popular for wildlife watching (particularly seabirds).</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">As mentioned earlier, this tour is private and fully personalized — you'll visit only what you want to see, and you'll travel at a pace that suits you.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">There's no overnight stay included in a one-day tour, but a local meal is definitely part of the experience! Enjoy traditional Icelandic cuisine in the charming village of Vík, where you'll have the chance to try classic fish dishes or other local meats.</p>
+        <h2 class="sh-md article-h2">One-Day Tour of Iceland — What Will You See and Experience?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">The itinerary for a one-day trip through Iceland depends on you — your preferences, the season, time of year, and the weather. Highlights may include a glacier walk, visits to local museums or exhibitions, or a stop at Dyrhólaey Nature Reserve, especially popular for wildlife watching (particularly seabirds).</p>
+          <p class="lead-heading">As mentioned earlier, this tour is private and fully personalized — you'll visit only what you want to see, and you'll travel at a pace that suits you.</p>
+          <p class="lead-heading">There's no overnight stay included in a one-day tour, but a local meal is definitely part of the experience! Enjoy traditional Icelandic cuisine in the charming village of Vík, where you'll have the chance to try classic fish dishes or other local meats.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Makes a One-Day Tour of Iceland So Special?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">My tours are unique not just because of the photographic memories, but also because of the locations I choose. By combining the most popular tourist spots with lesser-known hidden gems, I give you a fresh, intimate perspective of Iceland — far from the crowds.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Yes, Iceland's waterfalls — like Seljalandsfoss and Skógafoss — are breathtaking. But they're even more magical when you witness them surrounded by the sounds of nature, not the noise of large tour groups.</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">What Makes a One-Day Tour of Iceland So Special?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">My tours are unique not just because of the photographic memories, but also because of the locations I choose. By combining the most popular tourist spots with lesser-known hidden gems, I give you a fresh, intimate perspective of Iceland — far from the crowds.</p>
+          <p class="lead-heading">Yes, Iceland's waterfalls — like Seljalandsfoss and Skógafoss — are breathtaking. But they're even more magical when you witness them surrounded by the sounds of nature, not the noise of large tour groups.</p>
         </div>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Get in touch, choose your date</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Experience the South Coast for yourself — one day or three.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="sh-md cta-panel-title">Get in touch, choose your date</h2>
+          <p class="lead-on-dark">Experience the South Coast for yourself — one day or three.</p>
         </div>
         <Button variant="primary" href="/contact">Check Availability</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

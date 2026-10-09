@@ -208,12 +208,12 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 ---
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
-  <section class="contact-hero" style="position:relative;overflow:hidden;background:#081824;padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
-    <Image src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+  <section class="contact-hero" style="position:relative;overflow:hidden;background:var(--surface-dark-deep);padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
+    <Image class="inset-fill cover" src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" />
     <div class="contact-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,24,36,.78) 0%, rgba(8,24,36,.82) 100%)"></div>
     <div class="container-1200" style="position:relative">
       <div class="contact-grid">
-        <div data-reveal class="contact-form-card" style="width:100%;background:#F8F7F3;border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box">
+        <div data-reveal class="contact-form-card" style="width:100%;background:var(--surface-page-soft);border-radius:24px;padding:var(--space-9);box-shadow:var(--shadow-float);box-sizing:border-box">
           <form id="contact-form" action="/api/contact" method="post" novalidate>
             {/* Honeypot (#21): no human sees or tabs into this, so anything in it
                 means a bot and the submission is dropped server-side. */}
@@ -235,26 +235,26 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
             <div data-step="1">
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Personal data <span class="sr-only">&#8201;— step 1 of 2</span></h2>
+                <h2 class="step-heading sh-xs title-ink" tabindex="-1">Personal data <span class="sr-only">&#8201;— step 1 of 2</span></h2>
                 <span style="font:600 14px/1 var(--font-sans);color:var(--text-muted)"><span class="req-mark">*</span> Required fields</span>
               </div>
 
               <div class="contact-field-row" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-bottom:var(--space-5)">
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">First Name <span class="req-mark">*</span></span>
+                  <span class="label-13">First Name <span class="req-mark">*</span></span>
                   <input type="text" name="firstName" required class="contact-input" />
                   <span class="field-error" id="err-firstName" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Last Name <span class="req-mark">*</span></span>
+                  <span class="label-13">Last Name <span class="req-mark">*</span></span>
                   <input type="text" name="lastName" required class="contact-input" />
                   <span class="field-error" id="err-lastName" role="alert" hidden></span>
                 </label>
               </div>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Email <span class="req-mark">*</span></span>
-                <span style="position:relative;display:block">
+                <span class="label-13">Email <span class="req-mark">*</span></span>
+                <span class="block-rel">
                   <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                     <Icon name="mail" size={16} />
                   </span>
@@ -264,15 +264,15 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-5)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Tell us about your ideal Iceland experience <span class="req-mark">*</span></span>
+                <span class="label-13">Tell us about your ideal Iceland experience <span class="req-mark">*</span></span>
                 <textarea name="experience" required rows={4} class="contact-input" style="resize:vertical;font-family:var(--font-sans)"></textarea>
                 <span class="field-error" id="err-experience" role="alert" hidden></span>
               </label>
 
               <div class="contact-field-row" style="display:grid;grid-template-columns:220px 1fr;gap:var(--space-5);margin-bottom:var(--space-7)">
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Country code <span class="req-mark">*</span></span>
-                  <span style="position:relative;display:block">
+                  <span class="label-13">Country code <span class="req-mark">*</span></span>
+                  <span class="block-rel">
                     <select name="countryCode" required class="contact-input" style="padding-right:34px">
                       {COUNTRY_CODES.map((c) => <option value={c.code}>{c.flag} {c.name} ({c.code})</option>)}
                     </select>
@@ -283,8 +283,8 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
                   <span class="field-error" id="err-countryCode" role="alert" hidden></span>
                 </label>
                 <label style="display:flex;flex-direction:column;gap:6px">
-                  <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Phone <span class="req-mark">*</span></span>
-                  <span style="position:relative;display:block">
+                  <span class="label-13">Phone <span class="req-mark">*</span></span>
+                  <span class="block-rel">
                     <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);display:flex;pointer-events:none;color:var(--text-muted)">
                       <Icon name="phone" size={16} />
                     </span>
@@ -304,18 +304,18 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
             <div data-step="2" style="display:none">
               <button type="button" id="back-to-step-1" style="display:inline-flex;align-items:center;gap:8px;background:none;border:none;padding:0;cursor:pointer;font:600 13px/1 var(--font-sans);color:var(--text-muted);margin-bottom:var(--space-6)">
-                <Icon name="arrow-right" size={14} style="transform:rotate(180deg)" />
+                <Icon class="flip-180" name="arrow-right" size={14} />
                 Back
               </button>
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="step-heading" tabindex="-1" style="font:400 1.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0">Travel data <span class="sr-only">&#8201;— step 2 of 2</span></h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Your plans can be flexible</span>
+                <h2 class="step-heading sh-xs title-ink" tabindex="-1">Travel data <span class="sr-only">&#8201;— step 2 of 2</span></h2>
+                <span class="meta-12">Your plans can be flexible</span>
               </div>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Which tour are you interested in? <span class="req-mark">*</span></span>
-                <span style="position:relative;display:block">
+                <span class="label-13">Which tour are you interested in? <span class="req-mark">*</span></span>
+                <span class="block-rel">
                   <select name="tour" required class="contact-input" style="padding-right:34px">
                     {TOUR_OPTIONS.map((t) => <option value={t.title} data-tour={t.slug}>{t.title}</option>)}
                   </select>
@@ -327,7 +327,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               </label>
 
               <label style="display:flex;flex-direction:column;gap:6px;margin-bottom:var(--space-6)">
-                <span style="font:700 13px/1 var(--font-sans);color:var(--text-heading)">Preferred tour date <span class="req-mark">*</span></span>
+                <span class="label-13">Preferred tour date <span class="req-mark">*</span></span>
                 <input type="date" name="tourDate" required class="contact-input contact-input-date" min={TODAY_ISO} />
                 <span class="field-error" id="err-tourDate" role="alert" hidden></span>
               </label>
@@ -335,7 +335,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-7)">
                 <div style="display:flex;flex-direction:column;gap:2px">
                   <span style="font:700 14px/1.2 var(--font-sans);color:var(--text-heading)">Number of Guests</span>
-                  <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">You can update this later</span>
+                  <span class="meta-12">You can update this later</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:var(--space-5)">
                   <button type="button" class="guest-stepper-btn" data-action="decrement" aria-label="Decrease guests">
@@ -355,8 +355,8 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <hr style="border:none;border-top:1px solid var(--border-subtle);margin:0 0 var(--space-7)" />
 
               <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:var(--space-6)">
-                <h2 class="card-title" style="color:var(--text-heading);margin:0">How did you find us?</h2>
-                <span style="font:400 12px/1 var(--font-sans);color:var(--text-muted)">Choose one <span class="req-mark">*</span></span>
+                <h2 class="card-title title-ink">How did you find us?</h2>
+                <span class="meta-12">Choose one <span class="req-mark">*</span></span>
               </div>
 
               <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-7)">
@@ -389,7 +389,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               <div style="margin-bottom:var(--space-7)">
                 <label style="display:flex;align-items:flex-start;gap:10px">
                   <input type="checkbox" name="privacyConsent" id="privacy-consent" required style="margin-top:3px;width:16px;height:16px;flex:0 0 auto" />
-                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a href="/privacy-policy" target="_blank" style="color:var(--blue-500);text-decoration:underline">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
+                  <span style="font:400 13px/1.5 var(--font-sans);color:var(--text-heading)">I agree to the <a class="text-accent underline" href="/privacy-policy" target="_blank">Privacy Policy</a> and consent to Secret Spots of Iceland storing my information to respond to this inquiry. <span class="req-mark">*</span></span>
                 </label>
                 <span class="field-error" id="err-privacyConsent" role="alert" hidden></span>
               </div>
@@ -417,16 +417,16 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
           </form>
         </div>
 
-        <div data-reveal class="contact-text" style="display:flex;flex-direction:column;gap:var(--space-6)">
+        <div data-reveal class="contact-text stack gap-6">
           <span style="font:700 13px/1 var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--amber-400)">Get in touch</span>
-          <h1 style="font:400 2.5rem/1.2 var(--font-display);color:#E9E6DD;margin:0">Let's start planning your Secret Spots of Iceland adventure</h1>
+          <h1 style="font:400 2.5rem/1.2 var(--font-display);color:var(--sand-200);margin:0">Let's start planning your Secret Spots of Iceland adventure</h1>
           <p style="font:var(--type-body);color:#E9E6DD;margin:0;max-width:460px">Tell us your travel dates and what you'd love to discover — a private photography tour, a custom itinerary, or one tailored to your mobility needs.</p>
 
           {/* Prefer not to use the form? Call or write to Luke directly (#8). */}
           <div class="contact-direct">
             {DIRECT_CONTACT.map((c) => (
               <a href={c.href} class="contact-direct-link" data-ev={c.ev} data-ev-text={c.label} aria-label={`${c.label}: ${c.text}`}>
-                <Icon name={c.icon} size={18} color="#E9E6DD" />
+                <Icon name={c.icon} size={18} color="var(--sand-200)" />
                 <span>{c.text}</span>
               </a>
             ))}
@@ -443,7 +443,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
               { icon: 'shield-check', label: 'Trusted by 300+ travelers' },
             ].map((item) => (
               <div class="contact-bullet" style="display:flex;flex-direction:column;gap:8px;min-width:0">
-                <Icon name={item.icon} size={22} color="#E9E6DD" />
+                <Icon name={item.icon} size={22} color="var(--sand-200)" />
                 <span style="font:400 12px/1.35 var(--font-sans);color:#E9E6DD">{item.label}</span>
               </div>
             ))}
@@ -519,7 +519,7 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
   }
 
   /* Errors live in the page, not in the browser's native bubble, so they survive
-     a scroll or a tap and can be re-read. #b3261e is 6.1:1 on the #F8F7F3 card. */
+     a scroll or a tap and can be re-read. #b3261e is 6.1:1 on the --surface-page-soft card. */
   .field-error { display: block; font: 400 12px/1.4 var(--font-sans); color: #b3261e; }
   .field-error[hidden] { display: none; }
   .contact-input[aria-invalid='true'],

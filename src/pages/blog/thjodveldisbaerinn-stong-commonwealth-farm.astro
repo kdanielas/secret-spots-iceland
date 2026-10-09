@@ -34,63 +34,63 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Are you fascinated by Vikings? Know very little about them and want to learn more? Or maybe you're already well-versed in Viking history, but have never had a chance to experience the physical remnants of their everyday life? In either case, a trip to Þjóðveldisbærinn Stöng (The Commonwealth Farm) is the perfect solution. This reconstructed Viking farm lets you walk in the footsteps of Norsemen who once talked, ate, and prepared for battle here nearly a thousand years ago!</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">Are you fascinated by Vikings? Know very little about them and want to learn more? Or maybe you're already well-versed in Viking history, but have never had a chance to experience the physical remnants of their everyday life? In either case, a trip to Þjóðveldisbærinn Stöng (The Commonwealth Farm) is the perfect solution. This reconstructed Viking farm lets you walk in the footsteps of Norsemen who once talked, ate, and prepared for battle here nearly a thousand years ago!</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Is Þjóðveldisbærinn Stöng (The Commonwealth Farm)?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Þjóðveldisbærinn Stöng, also known as The Commonwealth Farm, is a Viking homestead composed of three buildings, including a longhouse at Stöng. It's not only a site for sightseeing and photography, but also a place where you can literally step into the shoes of medieval Vikings. During your visit, you can dress in traditional Norse clothing, play Viking-era games, try your hand at weaving on a loom, and even debate strategies at a table just like the ones where Viking warriors once planned their battles.</p>
-          <p style="font:400 15px/1.6 var(--font-sans);color:#38627F;margin:0">Fun fact: The Commonwealth Farm was featured in Game of Thrones.</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">What Is Þjóðveldisbærinn Stöng (The Commonwealth Farm)?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Þjóðveldisbærinn Stöng, also known as The Commonwealth Farm, is a Viking homestead composed of three buildings, including a longhouse at Stöng. It's not only a site for sightseeing and photography, but also a place where you can literally step into the shoes of medieval Vikings. During your visit, you can dress in traditional Norse clothing, play Viking-era games, try your hand at weaving on a loom, and even debate strategies at a table just like the ones where Viking warriors once planned their battles.</p>
+          <p style="font:400 15px/1.6 var(--font-sans);color:var(--blue-500);margin:0">Fun fact: The Commonwealth Farm was featured in Game of Thrones.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Is Þjóðveldisbærinn Stöng (The Commonwealth Farm) Original?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The current Commonwealth Farm is not the actual Viking farm that once stood here — but it's a faithful historical reconstruction. It was built based on the archaeological ruins of the original farm in Stöng, using traditional materials like stone and turf, and following historical layouts in terms of size, structure, and floor plan. The interior design, which could not be preserved from the ruins, is based on historical records of medieval life in Iceland.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The original homestead at Stöng is believed to have been destroyed by the eruption of Mount Hekla in 1104, when volcanic rock buried the entire site.</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">Is Þjóðveldisbærinn Stöng (The Commonwealth Farm) Original?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">The current Commonwealth Farm is not the actual Viking farm that once stood here — but it's a faithful historical reconstruction. It was built based on the archaeological ruins of the original farm in Stöng, using traditional materials like stone and turf, and following historical layouts in terms of size, structure, and floor plan. The interior design, which could not be preserved from the ruins, is based on historical records of medieval life in Iceland.</p>
+          <p class="lead-heading">The original homestead at Stöng is believed to have been destroyed by the eruption of Mount Hekla in 1104, when volcanic rock buried the entire site.</p>
         </div>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={highlandsImg} alt="Colourful mountains in the Icelandic Highlands near Þjóðveldisbærinn Stöng" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={highlandsImg} alt="Colourful mountains in the Icelandic Highlands near Þjóðveldisbærinn Stöng" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Was the Stöng Longhouse and the Þjóðveldisbærinn Stöng Homestead?</h2>
-        <div style="display:flex;flex-direction:column;gap:var(--space-5)">
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">Although the daily lives of Þjóðveldisbærinn Stöng's residents remain something of a mystery, the Stöng longhouse is mentioned in historical and cultural texts — such as The Saga of Gaukur á Stöng. According to legend, the farm once belonged to Gaukur Trandilsson, a gentle but brave warrior skilled in runes. Sadly, the saga of Gaukur Trandilsson has been lost, adding to the mystery and allure for fans of Icelandic folklore.</p>
-          <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The reconstructed Commonwealth Farm is modeled after this very home, excavated from beneath layers of volcanic debris.</p>
+        <h2 class="sh-md article-h2">What Was the Stöng Longhouse and the Þjóðveldisbærinn Stöng Homestead?</h2>
+        <div class="stack gap-5">
+          <p class="lead-heading">Although the daily lives of Þjóðveldisbærinn Stöng's residents remain something of a mystery, the Stöng longhouse is mentioned in historical and cultural texts — such as The Saga of Gaukur á Stöng. According to legend, the farm once belonged to Gaukur Trandilsson, a gentle but brave warrior skilled in runes. Sadly, the saga of Gaukur Trandilsson has been lost, adding to the mystery and allure for fans of Icelandic folklore.</p>
+          <p class="lead-heading">The reconstructed Commonwealth Farm is modeled after this very home, excavated from beneath layers of volcanic debris.</p>
         </div>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">How to Get to The Commonwealth Farm?</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The Viking homestead is located not far from Reykjavík, which can serve as your starting point. To make the most of your day and explore as many of Iceland's wonders as possible, I recommend a Highlands Adventure: waterfalls, canyons and Viking echoes. During this journey, I'll guide you through The Commonwealth Farm and other breathtaking locations, such as Háifoss — Iceland's second-highest waterfall, Sigöldugljúfur Canyon, and the colorful Landmannalaugar mountains with their natural hot springs.</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">How to Get to The Commonwealth Farm?</h2>
+        <p class="lead-heading">The Viking homestead is located not far from Reykjavík, which can serve as your starting point. To make the most of your day and explore as many of Iceland's wonders as possible, I recommend a Highlands Adventure: waterfalls, canyons and Viking echoes. During this journey, I'll guide you through The Commonwealth Farm and other breathtaking locations, such as Háifoss — Iceland's second-highest waterfall, Sigöldugljúfur Canyon, and the colorful Landmannalaugar mountains with their natural hot springs.</p>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-5) 0 0">Because this is also a photography tour, you'll return home with a full set of professional photos of yourself against Iceland's stunning landscapes. And you'll take with you an original keepsake — from a Viking house!</p>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">Walk in the footsteps of the Vikings</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Tell us your dates and we'll build a Highlands itinerary around The Commonwealth Farm.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="sh-md cta-panel-title">Walk in the footsteps of the Vikings</h2>
+          <p class="lead-on-dark">Tell us your dates and we'll build a Highlands itinerary around The Commonwealth Farm.</p>
         </div>
         <Button variant="primary" href="/contact">Check Availability</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>

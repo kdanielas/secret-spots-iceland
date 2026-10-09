@@ -47,64 +47,64 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
   <article class="blog-article container-pad">
     <div class="blog-article-col">
-      <Breadcrumbs inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} style="margin-bottom:var(--space-10)" />
+      <Breadcrumbs class="mb-10" inline trail={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-6)">
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">The Golden Circle in Iceland is one of the most popular tourist routes in this picturesque country. In today's article, I'll answer questions such as: Where does the name "Golden Circle" come from? What does the Golden Circle route in Iceland include? And why is it a great choice for exploring Iceland? Let's dive in!</p>
+      <div class="stack gap-6">
+        <p class="lead-heading">The Golden Circle in Iceland is one of the most popular tourist routes in this picturesque country. In today's article, I'll answer questions such as: Where does the name "Golden Circle" come from? What does the Golden Circle route in Iceland include? And why is it a great choice for exploring Iceland? Let's dive in!</p>
       </div>
 
-      <BlogByline datePublished={post.datePublished} dateline={dateline} style="margin-top:var(--space-6)" />
+      <BlogByline class="mt-6" datePublished={post.datePublished} dateline={dateline} />
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Is the Golden Circle in Iceland?</h2>
-        <p style="font:var(--type-lead);color:var(--text-heading);margin:0">As mentioned in the introduction, the Golden Circle (Iceland) is a popular tourist route — one of the most frequently and eagerly chosen. It's located in the southwestern part of the country and not only allows you to visit scenic and culturally important places in Iceland but also covers three of the country's top attractions. What's more, the Golden Circle in Iceland (Icelandic: Gullni hringurinn) lets you see all of these in just one day — my Golden Circle tour lasts eight hours and starts in Reykjavík. The route is fully drivable, making it suitable for families with children, seniors, or those who prefer not to walk for extended periods.</p>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">What Is the Golden Circle in Iceland?</h2>
+        <p class="lead-heading">As mentioned in the introduction, the Golden Circle (Iceland) is a popular tourist route — one of the most frequently and eagerly chosen. It's located in the southwestern part of the country and not only allows you to visit scenic and culturally important places in Iceland but also covers three of the country's top attractions. What's more, the Golden Circle in Iceland (Icelandic: Gullni hringurinn) lets you see all of these in just one day — my Golden Circle tour lasts eight hours and starts in Reykjavík. The route is fully drivable, making it suitable for families with children, seniors, or those who prefer not to walk for extended periods.</p>
       </section>
 
-      <section style="margin-top:var(--space-9)">
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">What Does the Golden Circle in Iceland Include?</h2>
+      <section class="mt-9">
+        <h2 class="sh-md article-h2">What Does the Golden Circle in Iceland Include?</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-6)">A Golden Circle tour in Iceland (Gullni hringurinn) is a journey through natural and cultural landmarks. Its core features are three must-see attractions:</p>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <div class="stack w-full">
           {ATTRACTIONS.map((a) => (
-            <div style="padding:var(--space-6) 0;border-bottom:1px solid #c2b8ab">
+            <div class="spec-row">
               <p style="font:700 17px/1.3 var(--font-sans);color:var(--text-heading);margin:0 0 6px">{a.name}</p>
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{a.description}</p>
+              <p class="lead-heading">{a.description}</p>
             </div>
           ))}
         </div>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:var(--space-6) 0 0">Every Golden Circle tour in Iceland can differ slightly depending on the organizer. On my tour, you'll also see the colorful Kerið crater and the natural hot spring Secret Lagoon. You can also enjoy a local food tasting during lunch at the Friðheimar tomato farm and experience unique attractions like snowmobiling on the Langjökull glacier or horseback riding in the surrounding area. I tailor the Golden Circle tour to my clients' preferences.</p>
       </section>
 
-      <figure style="margin:var(--space-11) 0">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/10">
-          <Image src={keridImg} alt="Kerið volcanic crater on the Golden Circle route" width={900} quality={80} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+      <figure class="my-11">
+        <div class="card-media">
+          <Image class="cover" src={keridImg} alt="Kerið volcanic crater on the Golden Circle route" width={900} quality={80} loading="lazy" />
         </div>
       </figure>
 
       <section>
-        <h2 style="font:400 1.625rem/1.3 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">Golden Circle in Iceland – Tour Benefits</h2>
-        <div style="display:flex;flex-direction:column;width:100%">
+        <h2 class="sh-md article-h2">Golden Circle in Iceland – Tour Benefits</h2>
+        <div class="stack w-full">
           {BENEFITS.map((item) => (
             <div style="display:flex;gap:var(--space-4);align-items:flex-start;padding:var(--space-5) 0;border-bottom:1px solid var(--border-subtle)">
               <Icon name="check" size={20} color="var(--blue-500)" style="flex:0 0 auto;margin-top:2px" />
-              <p style="font:var(--type-lead);color:var(--text-heading);margin:0">{item}</p>
+              <p class="lead-heading">{item}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <div style="margin-top:var(--space-11);padding:var(--space-9);background:#081824;border-radius:24px;display:flex;flex-direction:column;gap:var(--space-6);align-items:flex-start">
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h2 style="font:400 2rem/1.2 var(--font-display);color:var(--cream-50);margin:0">See Iceland's classics in a day</h2>
-          <p style="font:var(--type-lead);color:rgba(255,255,255,.8);margin:0">Tell us your dates and we'll build your Golden Circle day around you.</p>
+      <div class="mt-11 cta-panel">
+        <div class="stack gap-3">
+          <h2 class="sh-md cta-panel-title">See Iceland's classics in a day</h2>
+          <p class="lead-on-dark">Tell us your dates and we'll build your Golden Circle day around you.</p>
         </div>
         <Button variant="primary" href="/contact">Check Availability</Button>
       </div>
 
-      <div style="margin-top:var(--space-9);padding-top:var(--space-7);border-top:1px solid var(--border-subtle);display:flex;align-items:center;gap:var(--space-4)">
-        <span style="width:44px;height:44px;border-radius:var(--radius-pill);background:var(--avatar-red);color:var(--cream-50);display:inline-flex;align-items:center;justify-content:center;font:700 16px/1 var(--font-sans);flex:0 0 auto">L</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font:700 15px/1.3 var(--font-sans);color:var(--text-heading)">Luke EM</span>
-          <span style="font:var(--type-body-xs);color:var(--text-muted)">Founder &amp; guide, Secret Spots of Iceland</span>
+      <div class="byline-row">
+        <span class="avatar-initials">L</span>
+        <div class="stack">
+          <span class="label-15">Luke EM</span>
+          <span class="meta-xs">Founder &amp; guide, Secret Spots of Iceland</span>
         </div>
       </div>
     </div>
