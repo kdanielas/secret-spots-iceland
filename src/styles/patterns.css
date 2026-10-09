@@ -67,17 +67,39 @@
 .lead-deep { font: var(--type-lead); color: var(--text-heading-deep); margin: 0; }
 .lead-on-dark { font: var(--type-lead); color: rgba(255, 255, 255, .8); margin: 0; }
 
-/* Prata headings written by the pages rather than taken from the
-   --type-display-* scale: 40px, 36px, 32px, 26px and 24px, where the tokens
-   offer 52, 36, 28 and 22. The values below are the ones that were inline, so
-   nothing moves on screen — but the off-scale sizes are now visible in one
-   place instead of being spread over 5.800 lines, which is what reconciling
-   them with the tokens needs as a first step. */
-.page-section-title { font: 400 2.5rem/1.2 var(--font-display); color: var(--text-heading); margin: 0; }
-.page-section-title-deep { font: 400 2.5rem/1.2 var(--font-display); color: var(--text-heading-deep); margin: 0; }
-.page-subsection-title { font: 400 2.25rem/1.2 var(--font-display); color: var(--text-heading); margin: 0; }
-.article-h2 { font: 400 1.625rem/1.3 var(--font-display); color: var(--text-heading); margin: 0 0 var(--space-5); }
-.article-h3 { font: 400 1.5rem/1.3 var(--font-display); color: var(--text-heading); margin: 0; }
+/* --- the Prata scale (issue #157) ---
+   Size and leading for every display heading, and the only place either is
+   written. A heading picks a step here and nothing else: the classes below it
+   carry ink and spacing, never a font.
+
+   The pages used to write their own sizes — 40, 32, 26 and 24px alongside the
+   36 and 28 the tokens define, so an <h2> meant five different things
+   depending on the page, and on seven pages it was *larger* than that page's
+   own <h1>. Those four sizes are gone; each landed on its nearest step.
+
+   The mobile step is here too, which is why these classes and not an inline
+   font: at 360px a 36px headline is a tenth of the viewport. */
+.sh-xl { font: var(--type-display-lg); }   /* 52px — page title */
+.sh-lg { font: var(--type-display-md); }   /* 36px — section headline */
+.sh-md { font: var(--type-display-sm); }   /* 28px — subsection, panel title */
+.sh-xs { font: var(--type-display-xs); }   /* 22px — heading inside an article */
+@media (max-width: 768px) {
+  .sh-xl { font-size: 2rem; line-height: 1.18; }
+  .sh-lg { font-size: 1.65rem; line-height: 1.22; }
+  .sh-md { font-size: 1.4rem; line-height: 1.24; }
+  .sh-xs { font-size: 1.2rem; line-height: 1.3; }
+}
+
+/* Ink and spacing for a heading that has already taken a size from .sh-*.
+   Kept after the scale's media query so a leading these set on purpose — the
+   pull quote's — survives at every width. */
+.title-ink { color: var(--text-heading); margin: 0; }
+.title-ink-deep { color: var(--text-heading-deep); margin: 0; }
+.title-ink-warm { color: var(--text-heading-warm); margin: 0; }
+.title-on-dark { color: var(--text-on-dark); margin: 0; }
+/* Heading that opens a section inside a blog post: needs the gap below it. */
+.article-h2 { color: var(--text-heading); margin: 0 0 var(--space-5); }
+.article-h3 { color: var(--text-heading); margin: 0; }
 
 /* Lato labels, likewise off the --type-label token (14px/1.4): the pages use
    15/1.3, 14/1 and 13/1. */
@@ -90,12 +112,12 @@
 
 /* Colour-only, for a link or a <strong> inside running text. */
 .text-accent { color: var(--blue-500); }
-/* A heading that takes its size from a .sh-* class and only needs the ink. */
-.title-ink { color: var(--text-heading); margin: 0; }
 /* Accented note paragraph — the "Best for:" and "Behind the camera:" lines. */
 .note-accent { font: 700 15px/1.5 var(--font-sans); color: var(--blue-500); margin: 0; }
 /* Centred Prata pull quote inside an article. */
-.pull-quote { font: 400 28px/1.4 var(--font-display); color: var(--text-heading); margin: 0; text-align: center; max-width: 900px; }
+/* Centred Prata pull quote inside an article — .sh-md for the size, and a
+   looser leading than a heading of the same size would take. */
+.pull-quote { line-height: 1.4; color: var(--text-heading); margin: 0; text-align: center; max-width: 900px; }
 
 /* ============================================================
    3 — components
@@ -134,7 +156,7 @@
   gap: var(--space-6);
   align-items: flex-start;
 }
-.cta-panel-title { font: 400 2rem/1.2 var(--font-display); color: var(--cream-50); margin: 0; }
+.cta-panel-title { color: var(--cream-50); margin: 0; }
 
 /* Page hero: a near-black band with the title sitting on its bottom edge.
    Its height is the only difference between the six pages that use it, so
@@ -249,6 +271,7 @@
 .mt-6 { margin-top: var(--space-6); }
 .mt-9 { margin-top: var(--space-9); }
 .mt-11 { margin-top: var(--space-11); }
+.mb-6 { margin-bottom: var(--space-6); }
 .mb-8 { margin-bottom: var(--space-8); }
 .mb-10 { margin-bottom: var(--space-10); }
 /* The shorthand, not two longhands: <figure> has a 40px UA side margin that the

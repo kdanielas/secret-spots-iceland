@@ -219,7 +219,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
       </div>
       <div class="text-col items-start">
         <div class="stack gap-4">
-          <h2 class="page-section-title-deep">What to Expect on the 6-Day Adventure</h2>
+          <h2 class="sh-lg title-ink-deep">What to Expect on the 6-Day Adventure</h2>
           <p class="lead-deep">{TOUR_INTRO}</p>
         </div>
         <div class="stack w-full">
@@ -239,13 +239,13 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block">
     <div style="display:flex;flex-direction:column;gap:var(--space-10);max-width:var(--container-max);margin:0 auto">
-      <h2 class="page-section-title">6-Day Itinerary</h2>
+      <h2 class="sh-lg title-ink">6-Day Itinerary</h2>
       <div class="stack">
         {DAYS.map((d) => (
           <div style="display:flex;flex-direction:column;gap:var(--space-5);padding:var(--space-8) 0;border-bottom:1px solid var(--border-subtle)">
             <div style="display:flex;flex-direction:column;gap:var(--space-2)">
               <span style="font:700 13px/1 var(--font-sans);color:var(--blue-500);letter-spacing:.04em;text-transform:uppercase">Day {d.day}</span>
-              <h3 style="font:400 1.75rem/1.25 var(--font-display);color:var(--text-heading);margin:0">{d.location}</h3>
+              <h3 class="sh-md title-ink">{d.location}</h3>
               <p style="font:600 15px/1.4 var(--font-sans);color:var(--text-muted);margin:0">{d.subtitle}</p>
             </div>
             <p style="font:var(--type-lead);color:var(--text-body);margin:0;max-width:800px">{d.description}</p>
@@ -270,7 +270,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <Image class="cover" src={whoForImg} alt="A woman sitting near a geothermal area with steam rising behind her in Iceland" width={700} quality={80} loading="lazy" />
       </div>
       <div class="text-col items-start">
-        <h2 class="page-section-title">Who This 6-Day Adventure Is For</h2>
+        <h2 class="sh-lg title-ink">Who This 6-Day Adventure Is For</h2>
         <div class="stack w-full">
           {WHO_FOR.map((item) => (
             <div class="spec-row">
@@ -288,7 +288,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <Image class="cover" src={completeExperienceImg} alt="A couple standing in front of a red helicopter with snow-capped mountains and glacier in the background" width={700} quality={80} loading="lazy" />
       </div>
       <div class="text-col">
-        <h2 class="page-section-title">The complete Iceland experience in one unforgettable journey</h2>
+        <h2 class="sh-lg title-ink">The complete Iceland experience in one unforgettable journey</h2>
         <p class="lead-body">In 6 days you can experience the essence of Iceland — from volcanic landscapes and geothermal wonders to thundering waterfalls, otherworldly glaciers, and remote Highlands. But only if you have a guide who knows where to go, when to go, and how to experience it all without the crowds.</p>
         <p class="lead-body">This private Iceland tour combines everything Iceland is famous for — the Golden Circle, South Coast waterfalls, glacier lagoons, Viking history — with the hidden gems, flexible timing, and professional photography that transform a famous route into a personal adventure. You'll stay 3 nights based in Reykjavík and 2 nights on the South Coast, giving you the perfect pace to explore without rushing.</p>
       </div>
@@ -300,7 +300,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
       <div class="row gap-2">
         {Array.from({ length: 5 }).map(() => <Icon name="star" size={20} color="var(--star-gold)" />)}
       </div>
-      <p class="pull-quote">"Our group had varying ages and activity levels and Luke did a great job planning our days. He was organized, responsive, and thoughtfully bought us some local treats. We made an album of our trip and loved the great photos he took!"</p>
+      <p class="sh-md pull-quote">"Our group had varying ages and activity levels and Luke did a great job planning our days. He was organized, responsive, and thoughtfully bought us some local treats. We made an album of our trip and loved the great photos he took!"</p>
       <div class="stack gap-2 items-center">
         <span class="label-14">Sahsla</span>
         <span class="meta-12 underline">Family · Secret Spots of Iceland Review</span>
@@ -314,7 +314,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <Image class="cover" src={photographyImg} alt="Colorful mountains with patches of snow and small lakes in Landmannalaugar, Iceland" width={900} quality={80} loading="lazy" />
       </div>
       <div class="text-col items-start">
-        <h2 class="page-section-title">Photographing 6 Days of Iceland</h2>
+        <h2 class="sh-lg title-ink">Photographing 6 Days of Iceland</h2>
         <p class="lead-body">Six days exploring Iceland means six days of constantly changing light, weather, and landscapes. From golden hour at waterfalls to moody Highlands lighting, from glacier blue to geothermal colors — every moment is a potential masterpiece.</p>
         <p class="lead-body">Professional photography guidance is included throughout all 6 days. Luke will help you capture the dramatic moments, find the best angles, time the light perfectly, and go home with images that tell the real story of your Iceland adventure — not just the Instagram version, but the authentic experience you lived.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>

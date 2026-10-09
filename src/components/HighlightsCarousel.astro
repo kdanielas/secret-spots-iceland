@@ -17,7 +17,7 @@ const { title, highlights } = Astro.props;
 <section class="panel-py" style="background:var(--ink-900);overflow:hidden">
   <div style="display:flex;flex-direction:column;gap:var(--space-11);max-width:var(--container-max);margin:0 auto">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-8)">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--cream-100);margin:0">{title}</h2>
+      <h2 class="sh-lg title-on-dark">{title}</h2>
       <div style="display:flex;gap:var(--space-4)">
         <button type="button" class="highlights-arrow" data-dir="prev" aria-label="Previous highlight">
           <Icon class="flip-180" name="arrow-right" size={18} />

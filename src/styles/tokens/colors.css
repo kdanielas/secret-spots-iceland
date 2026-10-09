@@ -18,6 +18,10 @@
    Two near-blacks for headings is one too many; reconciling them is a design
    decision, so #081824 keeps its own token rather than being folded in here. */
 --text-heading-deep:var(--ink-950);
+/* Y un tercero, más cálido, en un solo titular (How It Works). Tiene token para
+   que no viva suelto en una página, no porque el sitio necesite tres negros de
+   titular: unificarlo con uno de los otros dos es una decisión de diseño. */
+--text-heading-warm:#312C27;
 --text-body:rgba(39,51,60,.82);
 --text-muted:var(--gray-700);
 --text-eyebrow:var(--blue-500);

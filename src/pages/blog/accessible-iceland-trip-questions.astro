@@ -134,7 +134,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
       {QUESTIONS.slice(0, 5).map((item) => (
         <section class="mt-9">
-          <h2 class="article-h2">{item.q}</h2>
+          <h2 class="sh-md article-h2">{item.q}</h2>
           <div class="stack gap-5">
             {item.a.map((p) => <p class="lead-heading">{p}</p>)}
           </div>
@@ -150,7 +150,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
       {QUESTIONS.slice(5, 10).map((item) => (
         <section class="mt-9">
-          <h2 class="article-h2">{item.q}</h2>
+          <h2 class="sh-md article-h2">{item.q}</h2>
           <div class="stack gap-5">
             {item.a.map((p) => <p class="lead-heading">{p}</p>)}
           </div>
@@ -158,7 +158,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       ))}
 
       <section class="mt-11 soft-panel soft-panel-lg">
-        <h2 class="article-h2">The question nobody has ever asked us, and we wish they would</h2>
+        <h2 class="sh-md article-h2">The question nobody has ever asked us, and we wish they would</h2>
         <p style="font:var(--type-lead);color:var(--text-heading);margin:0 0 var(--space-5)">There is one question that probably only someone who has organized many trips like this can answer:</p>
         <p style="font:400 22px/1.5 var(--font-display);color:var(--text-heading);margin:0 0 var(--space-5)">&ldquo;After all your experience with travelers who have reduced mobility, what do you wish travelers would ask you before booking?&rdquo;</p>
         <p class="lead-heading">It is a question worth asking any operator. Not only because the answer can give you useful information, but because how they respond can show you how well they actually understand their travelers' needs.</p>
@@ -172,7 +172,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       </figure>
 
       <section class="mt-9">
-        <h2 class="article-h2">What role does travel insurance play?</h2>
+        <h2 class="sh-md article-h2">What role does travel insurance play?</h2>
         <div class="stack gap-5">
           <p class="lead-heading">Travel insurance can matter a great deal when there are medical conditions or specific mobility needs involved. However, coverage varies a lot between policies, so you should not assume that any insurance will automatically cover a cancellation, a medical emergency, transporting a wheelchair, or an evacuation.</p>
           <p class="lead-heading">Before you travel, ask your insurance company exactly which situations are covered and what documentation you would need if you had to cancel or change the trip.</p>
@@ -181,7 +181,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
       </section>
 
       <section class="mt-9">
-        <h2 class="article-h2">What 8 years of traveling with people who have limited mobility have taught us</h2>
+        <h2 class="sh-md article-h2">What 8 years of traveling with people who have limited mobility have taught us</h2>
         <div class="stack gap-5">
           <p class="lead-heading">After 8 years organizing trips and traveling alongside people with reduced mobility, we have learned that accessibility is not simply about finding a place you can get to. It is about understanding the person, listening to their needs, and adapting the trip to their pace.</p>
           <p class="lead-heading">We have learned to stop, breathe, and enjoy the moment. Not everything has to be rushed, and there is no need to check off a list of places at any cost. Sometimes it means spending more time in one spot, making fewer stops, or simply giving the person the time they need to feel comfortable.</p>
@@ -199,7 +199,7 @@ const { post, dateline, schema } = await blogPageMeta(Astro.url.pathname, heroIm
 
       <div class="mt-11 cta-panel">
         <div class="stack gap-3">
-          <h2 class="cta-panel-title">Ready to ask us these questions?</h2>
+          <h2 class="sh-md cta-panel-title">Ready to ask us these questions?</h2>
           <p class="lead-on-dark">Tell us about your trip and we'll walk you through exactly how we'd plan it around you.</p>
         </div>
         <Button variant="primary" href="/contact">Plan Your Accessible Iceland Trip</Button>

@@ -128,7 +128,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
   <section class="tour-block tour-block-pb-lg">
     <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:var(--space-7);align-items:center">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);align-items:center;text-align:center">
-        <h2 class="page-section-title-deep">What to Expect on the Golden Circle Tour</h2>
+        <h2 class="sh-lg title-ink-deep">What to Expect on the Golden Circle Tour</h2>
         <p class="lead-deep">{TOUR_INTRO}</p>
       </div>
       <div class="stack w-full">
@@ -147,7 +147,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
 
   <section class="tour-block who-for-section">
     <div style="max-width:var(--container-max);margin:0 auto;display:flex;flex-direction:column;gap:var(--space-9)">
-      <h2 style="font:400 2.5rem/1.2 var(--font-display);color:var(--text-heading);margin:0;text-align:center">This tour is perfect for</h2>
+      <h2 class="sh-lg title-ink text-center">This tour is perfect for</h2>
       <div class="who-for-grid">
         {WHO_FOR.map((item) => (
           <div style="display:flex;flex-direction:column;gap:var(--space-5);align-items:center;text-align:center">
@@ -171,7 +171,7 @@ const schema = await tourPageSchema(Astro.url.pathname, {
         <Image class="cover" src={photographyImg} alt="Two women posing by the Brúarfoss waterfall on the Golden Circle route" width={900} quality={80} loading="lazy" />
       </div>
       <div class="text-col items-start">
-        <h2 class="page-section-title">Photographing the Golden Circle</h2>
+        <h2 class="sh-lg title-ink">Photographing the Golden Circle</h2>
         <p class="lead-body">The Golden Circle is one of Earth's most photographed routes — but the best images come from timing, perspective, and knowing where to stand. Geysers erupting in golden light, waterfalls with rainbows, tectonic plates framing the landscape, steam vents at sunrise — every location has a perfect moment.</p>
         <p class="lead-body">Whether you're shooting with a professional camera or your phone, every stop on this tour is chosen with composition and light in mind. Professional photography guidance is included throughout — this is not just a tour, it's an experience designed for travellers who want to come home with images that tell a real story.</p>
         <Button variant="outline" href="/iceland-photography" iconAfter="arrow-right">See Our Photography Guide</Button>
