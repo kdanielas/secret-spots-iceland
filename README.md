@@ -71,6 +71,22 @@ Dos ficheros concentran casi todo el contenido editable:
 
 `SITE_URL` en `src/data/site.ts` y `site` en `astro.config.mjs` tienen que coincidir.
 
+### Iconos
+
+Los SVG de `src/icons/` están copiados a mano, no vienen de ningún paquete de npm: el
+componente `Icon.astro` los lee con `import.meta.glob` y los inserta en línea, así que
+un icono no cuesta ninguna petición. Para añadir uno, deja el fichero en `src/icons/` y
+úsalo con `<Icon name="<nombre-del-fichero>" />`.
+
+- **Iconos de interfaz** (`arrow-right`, `clock`, `map-pin`, `star`…) — [Lucide](https://lucide.dev)
+  v0.544.0, licencia ISC. Trazo de 2px sobre rejilla de 24px, `stroke="currentColor"`,
+  siempre de contorno. Varios conservan la cabecera `<!-- @license lucide-static … -->`.
+- **Marcas** (`facebook`, `instagram`, `tiktok`, `tripadvisor`, `trustpilot`, `google`,
+  `x-logo`, `youtube`) — [Simple Icons](https://simpleicons.org) v16.29.0, licencia CC0.
+  Un único `path` relleno con `currentColor` y un `<title>` con el nombre de la marca.
+- `public/icons/*-color.svg` son las versiones con el color corporativo de la marca, para
+  los sellos de reseñas; esas sí se sirven como fichero porque van en un `<img>`.
+
 ## Despliegue
 
 Vercel, rama `main`. Cada push a `main` publica. Las ramas de trabajo generan un
