@@ -17,7 +17,7 @@ import ContactPanel from '../../components/ContactPanel.astro';
 import ctaImg from '../../assets/images/north-iceland-hot-steam-family.webp';
 
 import highlight1 from '../../assets/images/Web images/golden-circle/thingvellir-national-park.webp';
-import highlight2 from '../../assets/images/Web images/golden-circle/secret-lagoon.webp';
+import highlight2 from '../../assets/images/Web images/golden-circle/bruarfoss-golden-circle-turquoise.webp';
 import highlight3 from '../../assets/images/Web images/golden-circle/strokkur-geyser.webp';
 import highlight4 from '../../assets/images/Web images/golden-circle/fridheimar-tomato-farm.webp';
 import highlight5 from '../../assets/images/Web images/golden-circle/gullfoss-waterfall-backlit.webp';
@@ -49,8 +49,11 @@ const EXPECT = [
 ];
 
 const HIGHLIGHTS = [
-  { image: highlight1, alt: 'Traveller leaning on a wooden bridge rail above the bright turquoise cascades of Brúarfoss, on the Golden Circle in Iceland', title: 'Þingvellir (Thingvellir) National Park', description: 'A UNESCO World Heritage site where the North American and Eurasian tectonic plates visibly meet — you can stand between two continents. Beyond the geology, this is where Icelandic democracy began in 930 AD. Most visitors see the main viewpoint; Luke knows the alternative walks and perspectives that reveal the true drama of this landscape.' },
-  { image: highlight2, alt: 'Two travellers on the wooden viewing deck at Þingvellir National Park, looking out over the rift valley and Lake Þingvallavatn', title: 'Secret Lagoon (Hvítárvatn)', description: "Iceland's oldest natural hot spring, where you can soak in warm geothermal water surrounded by steam vents and raw Icelandic wilderness. Unlike the famous Blue Lagoon, this is authentic, peaceful, and genuinely secret. Luke gives you as much time as you want to relax and enjoy." },
+  { image: highlight1, alt: 'Two travellers on the wooden viewing deck at Þingvellir National Park, looking out over the rift valley and Lake Þingvallavatn', title: 'Þingvellir (Thingvellir) National Park', description: 'A UNESCO World Heritage site where the North American and Eurasian tectonic plates visibly meet — you can stand between two continents. Beyond the geology, this is where Icelandic democracy began in 930 AD. Most visitors see the main viewpoint; Luke knows the alternative walks and perspectives that reveal the true drama of this landscape.' },
+  // OJO: la foto es Brúarfoss, no la Secret Lagoon. Era la menos mala de las
+  // dos que estaban cruzadas; en el repo no hay ninguna del baño geotermal.
+  // Cuando Luke pase una, cámbiala aquí y reescribe el alt.
+  { image: highlight2, alt: 'Traveller leaning on a wooden bridge rail above the bright turquoise cascades of Brúarfoss, on the Golden Circle in Iceland', title: 'Secret Lagoon (Hvítárvatn)', description: "Iceland's oldest natural hot spring, where you can soak in warm geothermal water surrounded by steam vents and raw Icelandic wilderness. Unlike the famous Blue Lagoon, this is authentic, peaceful, and genuinely secret. Luke gives you as much time as you want to relax and enjoy." },
   { image: highlight3, alt: 'Visitors watching the Strokkur geyser send a column of boiling water into the air at Haukadalur, on the Golden Circle', title: 'Strokkur Geyser', description: "The world's most reliable geyser — it erupts 20+ meters into the air every few minutes, never failing to amaze. Luke knows the best angles for photography and the perfect timing to capture the eruption with the best light and composition." },
   { image: highlight4, alt: 'Young traveller standing on a rocky rise above a green geothermal field dotted with steaming vents in southwest Iceland', title: 'Friðheimar Tomato Farm Lunch', description: "A unique experience — lunch inside a working greenhouse where tomatoes grow year-round heated by geothermal energy. Taste fresh tomato soup, salad, and bread while surrounded by the warmth and life of this ingenious operation. It's the kind of authentic Iceland experience most visitors miss." },
   { image: highlight5, alt: 'Gullfoss waterfall backlit by a low sun, spray rising from the canyon on the Golden Circle in Iceland', title: 'Gullfoss Waterfall', description: "One of Iceland's most powerful and iconic waterfalls, created by the melting water of Langjökull glacier. Thundering down a narrow canyon in two dramatic stages, Gullfoss is nature at its most spectacular. Luke guides you to the best vantage points and shares the history and geology that makes it unforgettable." },
