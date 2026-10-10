@@ -1,4 +1,9 @@
 *,*::before,*::after{box-sizing:border-box}
+/* Al saltar a un ancla la cabecera pegajosa taparía el titular de la sección
+   destino, así que el scroll se detiene --scroll-offset más arriba. Va en html
+   para que valga en las cuatro páginas con enlaces internos, en el enlace de
+   salto al contenido y en cualquier ancla que se añada después (#71). */
+html{scroll-padding-top:var(--scroll-offset)}
 body{margin:0;background:var(--surface-page);color:var(--text-body);font:var(--type-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 h1,h2,h3,h4{margin:0;color:var(--text-heading);font-weight:400;text-wrap:pretty}
 h1{font:var(--type-display-lg)}h2{font:var(--type-display-md)}h3{font:var(--type-display-sm)}h4{font:var(--type-display-xs)}

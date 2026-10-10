@@ -208,9 +208,6 @@ const canonical = canonicalUrl(path);
       }
       .skip-link:focus { top: var(--space-5); }
 
-      /* Al activar el enlace, la cabecera pegajosa taparía el principio del
-         contenido: el mismo desplazamiento que ya usan los anclajes de /tours. */
-      #main { scroll-margin-top: 110px; }
       /* <main> solo recibe el foco desde el enlace de salto, nunca tabulando, y
          un recuadro alrededor de toda la página se lee como un fallo de pintado. */
       #main:focus { outline: none; box-shadow: none; }

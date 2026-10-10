@@ -14,6 +14,11 @@
 --grid-gap:24px;
 --stack-gap:16px;
 
+/* Desplazamiento que los destinos de ancla dejan libre por encima: la cabecera
+   pegajosa mide 82px (54 de logo + 14 de padding arriba y abajo) y el resto es
+   aire para que el titular no quede pegado al borde (#71). */
+--scroll-offset:90px;
+
 --control-h-sm:36px;--control-h-md:44px;--control-h-lg:52px;
 --control-px-sm:16px;--control-px-md:24px;--control-px-lg:32px;
 --card-pad:24px;
