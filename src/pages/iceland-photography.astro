@@ -34,17 +34,36 @@ import video1 from '../assets/images/glacier-hiking-crevasse-aerial-b-iceland.mp
 import video2 from '../assets/images/geothermal-steam-field-couple-iceland.mp4?url';
 
 const LOCATIONS = [
-  { image: northernLightsImg, title: 'Northern Lights Photography in Iceland', description: 'Capturing the Northern Lights requires the right conditions, location, and timing. Luke helps travelers find the best viewpoints away from crowds, combining local experience with photography knowledge to create unforgettable aurora images.', tours: ['6 Days Ultimate Adventure'] },
-  { image: blackSandImg, title: 'Black Sand Beach Photography', description: 'The volcanic coastline of Iceland creates some of the most recognizable landscapes in the world. Capture dramatic black sand beaches, basalt columns, sea stacks, and Atlantic waves along the South Coast.', tours: ['South Coast Adventure', '3 Days South Coast'] },
-  { image: waterfallImg, title: 'Waterfall Photography in Iceland', description: "Iceland's waterfalls are among its most iconic photography locations. From powerful cascades like Skógafoss and Seljalandsfoss to hidden waterfalls in remote valleys, each location offers unique compositions and dramatic landscapes.", tours: ['South Coast Adventure', '3 Days South Coast', 'Highlands Adventure'] },
-  { image: highlandsImg, title: 'Highlands Photography Locations in Iceland', description: 'The Icelandic Highlands offer some of the most remote and untouched photography locations in the country. Colorful mountains, lava fields, canyons, and hidden waterfalls create landscapes that feel like another planet.', tours: ['Highlands Adventure', '6 Days Ultimate Adventure'] },
+  { image: northernLightsImg, alt: 'Lone traveller with a headlamp standing in a snow-filled canyon in Iceland under a faint green aurora and a sky full of stars', title: 'Northern Lights Photography in Iceland', description: 'Capturing the Northern Lights requires the right conditions, location, and timing. Luke helps travelers find the best viewpoints away from crowds, combining local experience with photography knowledge to create unforgettable aurora images.', tours: ['6 Days Ultimate Adventure'] },
+  { image: blackSandImg, alt: 'Traveller on the black sand of Reynisfjara watching the Atlantic break against the Reynisdrangar sea stacks, South Coast of Iceland', title: 'Black Sand Beach Photography', description: 'The volcanic coastline of Iceland creates some of the most recognizable landscapes in the world. Capture dramatic black sand beaches, basalt columns, sea stacks, and Atlantic waves along the South Coast.', tours: ['South Coast Adventure', '3 Days South Coast'] },
+  { image: waterfallImg, alt: 'Smiling couple in front of the twin falls of Hjálparfoss, framed by dark basalt cliffs in the Icelandic Highlands', title: 'Waterfall Photography in Iceland', description: "Iceland's waterfalls are among its most iconic photography locations. From powerful cascades like Skógafoss and Seljalandsfoss to hidden waterfalls in remote valleys, each location offers unique compositions and dramatic landscapes.", tours: ['South Coast Adventure', '3 Days South Coast', 'Highlands Adventure'] },
+  { image: highlandsImg, alt: 'Steam rising from orange rhyolite mountains streaked with snow in the Icelandic Highlands, with three hikers on the trail below', title: 'Highlands Photography Locations in Iceland', description: 'The Icelandic Highlands offer some of the most remote and untouched photography locations in the country. Colorful mountains, lava fields, canyons, and hidden waterfalls create landscapes that feel like another planet.', tours: ['Highlands Adventure', '6 Days Ultimate Adventure'] },
   // La foto es vertical y el caballo queda abajo del encuadre: sin este
   // object-position el recorte 2:1 de la tarjeta lo deja fuera.
-  { image: glacierImg, position: 'center 80%', title: 'Glacier & Ice Cave Photography', description: 'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.', tours: ['3 Days South Coast', '6 Days Ultimate Adventure'] },
+  { image: glacierImg, alt: 'White Icelandic horse standing in a river below a frozen waterfall hung with icicles, South Coast of Iceland in winter', position: 'center 80%', title: 'Glacier & Ice Cave Photography', description: 'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.', tours: ['3 Days South Coast', '6 Days Ultimate Adventure'] },
 ];
 
-const MOMENTS = [moment1, moment2, moment3, moment4, moment5, moment6];
-const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
+// Las dos rejillas de abajo eran listas de imágenes sin más, así que no había
+// dónde escribir el alt (#45). Ahora cada foto lleva su descripción al lado.
+const MOMENTS = [
+  { src: moment1, alt: 'Aerial view of a crevassed glacier tongue reaching a brown meltwater lagoon in Iceland' },
+  { src: moment2, alt: 'Couple embracing in front of the twin falls of Hjálparfoss, in the Icelandic Highlands' },
+  { src: moment3, alt: 'Group of travellers smiling beside a stream below a mossy cliff and a thin waterfall on the South Coast of Iceland' },
+  { src: moment4, alt: 'Mother and daughter in a grassy coastal meadow on the South Coast of Iceland, mountains behind them' },
+  { src: moment5, alt: 'Couple in blue jackets at the rim of Háifoss waterfall, a rainbow in the spray below them' },
+  { src: moment6, alt: 'Couple embracing on the grass at golden hour, with Reykjanesviti lighthouse and geothermal steam behind them' },
+];
+
+const GEMS = [
+  { src: gem1, alt: 'Silhouette of a traveller watching a river of glowing lava and red-lit steam during a night eruption on the Reykjanes Peninsula' },
+  { src: gem2, alt: 'Large translucent blue iceberg stranded on the black sand of Diamond Beach, Iceland' },
+  { src: gem3, alt: 'Four travellers in orange helmets inside a blue ice cave striped with volcanic ash, daylight falling through an opening above' },
+  { src: gem4, alt: 'Two travellers in front of the Sólheimasandur DC-3 plane wreck on the black sand of the South Coast of Iceland' },
+  { src: gem5, alt: 'Aerial view of the rust, orange and green rhyolite mountains of Landmannalaugar, with turquoise pools between the ridges' },
+  { src: gem6, alt: 'Traveller standing on a rock ledge above the turquoise water of Kerið crater lake, ringed by red volcanic walls' },
+  { src: gem7, alt: 'Traveller on the viewing path above the Hvítá river as it thunders into the Gullfoss gorge, on the Golden Circle' },
+  { src: gem8, alt: 'Two travellers on the shore of Jökulsárlón glacier lagoon, icebergs floating in the water and the glacier behind them' },
+];
 ---
 
 <Layout title="How to Photograph Iceland: Seasons, Light, Gear & Timing" description="A photographer's guide to Iceland's best locations — Northern Lights, glaciers, black sand beaches and hidden waterfalls, from local guide Luke." active="Photography Guide">
@@ -96,7 +115,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
         {LOCATIONS.map((l) => (
           <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
             <div class="media-2-1" data-ev="click_image" data-ev-text={l.title}>
-              <Image class="inset-fill cover" src={l.image} alt="" width={500} quality={80} loading="lazy" style={l.position ? `object-position:${l.position}` : undefined} />
+              <Image class="inset-fill cover" src={l.image} alt={l.alt} width={500} quality={80} loading="lazy" style={l.position ? `object-position:${l.position}` : undefined} />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">
               <div class="stack gap-3">
@@ -127,7 +146,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       <div class="photo-carousel">
         {MOMENTS.map((m) => (
           <div class="photo-carousel-card">
-            <Image class="cover" src={m} alt="" width={500} quality={80} loading="lazy" />
+            <Image class="cover" src={m.src} alt={m.alt} width={500} quality={80} loading="lazy" />
           </div>
         ))}
       </div>
@@ -143,7 +162,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       <div class="photo-carousel">
         {GEMS.map((g) => (
           <div class="photo-carousel-card">
-            <Image class="cover" src={g} alt="" width={500} quality={80} loading="lazy" />
+            <Image class="cover" src={g.src} alt={g.alt} width={500} quality={80} loading="lazy" />
           </div>
         ))}
       </div>

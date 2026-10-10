@@ -28,7 +28,7 @@ import { POSTS, formatPostDate } from '../../data/blog-posts';
         {POSTS.map((p) => (
           <a href={p.href} class="card-clickable" aria-label={`Read the article: ${p.title}`} data-ev="click_link" data-ev-text={p.title} style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);text-decoration:none;color:inherit">
             <div class="media-2-1">
-              <Image class="inset-fill cover" src={p.image} alt="" width={500} quality={80} loading="lazy" />
+              <Image class="inset-fill cover" src={p.image} alt={p.imageAlt} width={500} quality={80} loading="lazy" />
               <time class="media-badge" datetime={p.datePublished}>{formatPostDate(p.datePublished)}</time>
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6);flex:1">

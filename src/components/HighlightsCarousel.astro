@@ -4,6 +4,12 @@ import Icon from './Icon.astro';
 
 interface Highlight {
   image: ImageMetadata;
+  /**
+   * Descripción de la foto (#45). Es obligatoria a propósito: estas imágenes
+   * son contenido, no decoración, así que una página nueva no compila hasta
+   * que describe lo que se ve en cada una.
+   */
+  alt: string;
   title: string;
   description: string;
 }
@@ -31,7 +37,7 @@ const { title, highlights } = Astro.props;
       {highlights.map((h) => (
         <div class="highlight-card">
           <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/10">
-            <Image class="cover" src={h.image} alt="" width={500} quality={80} loading="lazy" />
+            <Image class="cover" src={h.image} alt={h.alt} width={500} quality={80} loading="lazy" />
           </div>
           <div class="stack gap-3">
             <span style="font:600 24px/1.2 var(--font-sans);color:var(--cream-100)">{h.title}</span>

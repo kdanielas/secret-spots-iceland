@@ -54,6 +54,7 @@ const DAYS = [
     location: 'Reykjanes Peninsula',
     subtitle: 'Volcanic Craters & Geothermal Wonders',
     image: day1Img,
+    imageAlt: 'Aerial view of the Brimketill lava rock pool at the ocean edge on the Reykjanes Peninsula, with a traveller in red standing beside it',
     description: 'Step into another world just an hour from Reykjavík. Explore dramatic sea cliffs, ancient volcanic craters, and otherworldly lava fields — all away from tourist hotspots.',
     stops: [
       'Valahnúkamöl Sea Cliffs — Towering basalt cliffs and roaring Atlantic waves',
@@ -70,6 +71,7 @@ const DAYS = [
     location: 'Snæfellsnes Peninsula',
     subtitle: 'Iceland in Miniature',
     image: day2Img,
+    imageAlt: 'Two travellers on a wooden footbridge below Bjarnarfoss waterfall on the Snæfellsnes Peninsula, Iceland',
     description: 'Explore the diverse beauty of the Snæfellsnes Peninsula — charming fishing villages, iconic peaks, lava fields, and black sand beaches, all beneath the mystical Snæfellsjökull glacier volcano.',
     stops: [
       "Kirkjufell Mountain & Kirkjufellsfoss — Iceland's most photographed peak",
@@ -84,6 +86,7 @@ const DAYS = [
     location: 'The Golden Circle',
     subtitle: "Iceland's Iconic Trio + Hidden Hot Springs",
     image: day3Img,
+    imageAlt: 'Traveller on the viewing path above the Hvítá river as it thunders into the Gullfoss gorge, on the Golden Circle',
     description: "Discover Iceland's most famous route with a private twist — extra stops, insider insights, and a soak in a hidden geothermal pool away from crowds.",
     stops: [
       'Þingvellir National Park — UNESCO site where tectonic plates visibly meet',
@@ -99,6 +102,7 @@ const DAYS = [
     location: 'South Coast',
     subtitle: 'Waterfalls, Beaches & Glacial Power',
     image: day4Img,
+    imageAlt: 'Two travellers in front of the Sólheimasandur DC-3 plane wreck on the black sand of the South Coast of Iceland',
     description: "Head southeast to Iceland's famous South Coast, where fire meets ice. A day packed with majestic waterfalls, black sand beaches, and jaw-dropping coastlines.",
     stops: [
       'Seljalandsfoss — A waterfall you can walk behind',
@@ -115,6 +119,7 @@ const DAYS = [
     location: 'Glaciers',
     subtitle: 'Ice Caves & Highlands Adventure',
     image: day5Img,
+    imageAlt: 'Group in orange snowsuits and helmets resting beside their snowmobiles on a sunlit glacier in Iceland',
     description: "Get closer to Iceland's icy heart. Today's journey includes glacier views, lagoon stops, and optional adrenaline activities in some of Iceland's most dramatic terrain.",
     stops: [
       'Fjaðrárgljúfur Canyon — A winding green canyon straight out of a fantasy',
@@ -129,6 +134,7 @@ const DAYS = [
     location: 'Highlands',
     subtitle: 'Hidden Gems + Return to Reykjavík',
     image: day6Img,
+    imageAlt: 'Bright turquoise river running through a narrow lava canyon in the Icelandic Highlands, with a lone walker on the rim',
     description: 'On the way back, explore the less-visited gems of the Icelandic Highlands — weather and road permitting. Stunning volcanic valleys, canyons, and waterfalls that few visitors ever reach.',
     stops: [
       'Hjálparfoss — Twin waterfalls in a lava field',
@@ -144,6 +150,7 @@ const DAYS = [
 
 const HIGHLIGHTS = DAYS.map((d) => ({
   image: d.image,
+  alt: d.imageAlt,
   title: `Day ${d.day} — ${d.location}`,
   description: d.description,
 }));

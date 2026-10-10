@@ -18,6 +18,11 @@ export interface Tour {
   priceUsd: number;
   description: string;
   image: ImageMetadata;
+  /**
+   * Descripción de `image` (#45). La tarjeta del tour sale en /tours y en la
+   * home, así que una sola frase sirve a los dos sitios y a Google Imágenes.
+   */
+  imageAlt: string;
   /** Shown in the two-card row on the homepage. */
   featured?: boolean;
 }
@@ -38,6 +43,8 @@ export const TOURS: Tour[] = [
     description:
       'Volcanic craters, geothermal fields and dramatic sea cliffs near Reykjavik, with professional photography guidance.',
     image: reykjanesImg,
+    imageAlt:
+      'Silhouette of a traveller watching a river of glowing lava and red-lit steam during a night eruption on the Reykjanes Peninsula',
   },
   {
     slug: 'south-coast-waterfalls',
@@ -48,6 +55,8 @@ export const TOURS: Tour[] = [
     description:
       'Black sand beaches, glacier views and thundering waterfalls along the Ring Road, timed for the best light.',
     image: southCoastImg,
+    imageAlt:
+      'Photographer in a red jacket with a tripod among black sand dunes below the snow-covered Vestrahorn mountain in Iceland',
   },
   {
     slug: 'golden-circle-secrets',
@@ -58,6 +67,8 @@ export const TOURS: Tour[] = [
     description:
       'The classic route reimagined — geysers, waterfalls and craters, with detours to the spots most visitors skip.',
     image: goldenCircleImg,
+    imageAlt:
+      'Traveller standing on a rock ledge above the turquoise water of Kerið crater lake, ringed by red volcanic walls on the Golden Circle',
   },
   {
     slug: 'highlands-adventure',
@@ -68,6 +79,8 @@ export const TOURS: Tour[] = [
     description:
       'Remote highland routes, hot rivers and volcanic landscapes most tours never reach — summer only.',
     image: highlandsImg,
+    imageAlt:
+      'Group in orange snowsuits and helmets resting beside their snowmobiles on a sunlit glacier in Iceland',
     featured: true,
   },
   {
@@ -79,6 +92,8 @@ export const TOURS: Tour[] = [
     description:
       'Three days along the South Coast with two nights in Vík — glaciers, hidden canyons and waterfalls at a relaxed pace.',
     image: threeDaysImg,
+    imageAlt:
+      'Lone photographer among black sand dunes beneath the snow-covered Vestrahorn mountain on the South Coast of Iceland',
   },
   {
     slug: 'ring-road-northern-lights',
@@ -89,6 +104,8 @@ export const TOURS: Tour[] = [
     description:
       'A full loop of Iceland shaped around your pace, with dedicated nights chasing the aurora.',
     image: sixDaysImg,
+    imageAlt:
+      'Aerial view of Jökulsárlón glacier lagoon, icebergs drifting in dark water below the glacier and the mountains of the South Coast',
     featured: true,
   },
 ];

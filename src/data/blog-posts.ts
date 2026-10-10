@@ -12,6 +12,11 @@ import goldenCircleImg from '../assets/images/kerid-crater-golden-circle.webp';
 
 export interface BlogPost {
   image: ImageMetadata;
+  /**
+   * Descripción de `image` (#45). La portada de cada post es contenido, no
+   * decoración: describe la foto en sí, no el titular, que ya va en el <h2>.
+   */
+  imageAlt: string;
   /** ISO 8601 publication date — the machine-readable source for <time> and JSON-LD. */
   datePublished: string;
   title: string;
@@ -29,6 +34,8 @@ export interface BlogPost {
 export const POSTS: BlogPost[] = [
   {
     image: accessibleImg,
+    imageAlt:
+      'Smiling traveller in a wheelchair on the gravel shore of Jökulsárlón glacier lagoon, icebergs and the glacier behind him',
     datePublished: '2026-09-23',
     title: 'Planning an Accessible Trip to Iceland: 10 Questions You Should Ask Any Operator',
     excerpt: 'Before you book an accessible trip to Iceland, here are the questions we think you should ask any operator — from vehicles and cancellation policies to what happens when the plan has to change.',
@@ -37,6 +44,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: photoGuideImg,
+    imageAlt:
+      'Lone photographer among black sand dunes beneath the snow-covered Vestrahorn mountain on the South Coast of Iceland',
     datePublished: '2026-09-01',
     title: 'Best Time to Photograph Iceland: A Month-by-Month Guide',
     excerpt: 'From winter aurora to endless summer light — what to expect and where to point your camera, month by month.',
@@ -45,6 +54,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: wheelchair12DayImg,
+    imageAlt:
+      'Guide pushing a traveller in a wheelchair along the paved viewing platform at Goðafoss waterfall in north Iceland, on a rainy day',
     datePublished: '2026-07-17',
     title: 'How We Made Iceland Accessible: A 12-Day Wheelchair Tour',
     excerpt: 'The story behind one of our most ambitious private tours — 12 days across Iceland, built around one traveller in a wheelchair.',
@@ -53,6 +64,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: photoTipsImg,
+    imageAlt:
+      'Luke in a yellow jacket standing on a rhyolite ridge in the Icelandic Highlands, mist over the mountains behind him',
     datePublished: '2026-06-24',
     title: 'Iceland Photography Tips',
     excerpt: "Simple, practical tips from a working photographer for getting Iceland's landscapes and light right, whatever camera you're carrying.",
@@ -61,6 +74,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: southCoast1DayImg,
+    imageAlt:
+      'Black 4x4 on a snow-dusted track crossing black sand towards the snow-covered Vestrahorn mountain in Iceland',
     datePublished: '2025-07-15',
     title: 'Iceland in 3 Days or Just 1? The South Coast of Iceland',
     excerpt: "Waterfalls, black sand beaches and glacier lagoons — how much of the South Coast you can really see, depending on how much time you have.",
@@ -69,6 +84,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: sixDaysImg,
+    imageAlt:
+      'Aerial view of Jökulsárlón glacier lagoon, icebergs drifting in dark water below the glacier and the mountains of the South Coast',
     datePublished: '2025-07-15',
     title: '6 Days in Iceland – What to See and Experience?',
     excerpt: 'A full loop of Iceland shaped around your pace — what a six-day private itinerary can actually cover.',
@@ -77,6 +94,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: stongImg,
+    imageAlt:
+      'Steam rising from orange rhyolite mountains streaked with snow in the Icelandic Highlands, with hikers on the trail below',
     datePublished: '2025-06-16',
     title: 'Þjóðveldisbærinn Stöng - The Commonwealth Farm',
     excerpt: 'A reconstructed Viking-age farmstead buried by a 1104 eruption — one of the Highlands’ quieter historical stops.',
@@ -85,6 +104,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: threeDaysImg,
+    imageAlt:
+      'Four travellers in orange helmets inside a blue ice cave striped with volcanic ash, daylight falling through an opening above',
     datePublished: '2025-06-16',
     title: '3 Days in South Iceland – What Can You See?',
     excerpt: 'A three-day private itinerary along the South Coast, built around the light, the weather and what you actually want to see.',
@@ -93,6 +114,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: reykjanesSecretsImg,
+    imageAlt:
+      'Silhouette of a traveller watching a river of glowing lava and red-lit steam during a night eruption on the Reykjanes Peninsula',
     datePublished: '2019-03-11',
     title: 'What Secrets Does the Reykjanes Peninsula Hide?',
     excerpt: 'Just a short trip outside Reykjavík lies a peninsula of hidden lava fields, geothermal areas and coastlines most visitors never see.',
@@ -101,6 +124,8 @@ export const POSTS: BlogPost[] = [
   },
   {
     image: goldenCircleImg,
+    imageAlt:
+      'Traveller standing on a rock ledge above the turquoise water of Kerið crater lake, ringed by red volcanic walls on the Golden Circle',
     datePublished: '2019-03-11',
     title: 'What Is the Golden Circle in Iceland and Why Is It Worth Visiting?',
     excerpt: "Where the name comes from, what the route includes, and why it's still one of the best ways to see Iceland in a day.",
