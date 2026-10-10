@@ -263,22 +263,3 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     .customer-reviews-grid-item { flex: 0 0 85%; min-width: 0; scroll-snap-align: start; }
   }
 </style>
-
-<script>
-  const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video.lazy-video[data-src]');
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const video = entry.target as HTMLVideoElement;
-          video.src = video.dataset.src ?? '';
-          video.load();
-          video.play().catch(() => {});
-          io.unobserve(video);
-        }
-      });
-    },
-    { rootMargin: '200px' }
-  );
-  lazyVideos.forEach((video) => io.observe(video));
-</script>

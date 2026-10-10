@@ -158,10 +158,10 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       </div>
       <div class="video-grid">
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/9">
-          <video class="lazy-video cover" data-src={video1} muted loop playsinline autoplay></video>
+          <video class="lazy-video cover" data-src={video1} muted loop playsinline></video>
         </div>
         <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/9">
-          <video class="lazy-video cover" data-src={video2} muted loop playsinline autoplay></video>
+          <video class="lazy-video cover" data-src={video2} muted loop playsinline></video>
         </div>
       </div>
     </div>
@@ -275,21 +275,4 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
       }, 120);
     });
   }
-
-  const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video.lazy-video[data-src]');
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const video = entry.target as HTMLVideoElement;
-          video.src = video.dataset.src ?? '';
-          video.load();
-          video.play().catch(() => {});
-          io.unobserve(video);
-        }
-      });
-    },
-    { rootMargin: '200px' }
-  );
-  lazyVideos.forEach((video) => io.observe(video));
 </script>
