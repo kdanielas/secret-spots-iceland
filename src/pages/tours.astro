@@ -28,12 +28,12 @@ const tourSlug = (href: string) => (href.startsWith('/tours/') ? href.split('/')
     </section>
   </div>
 
-  <Section id="tours" tight style="padding-top:var(--space-7);scroll-margin-top:110px">
+  <Section id="tours" tight style="padding-top:var(--space-7)">
     <div class="stack gap-11 items-center">
       <h2 class="sh-lg" style="color:var(--text-heading);margin:0;text-align:center">All Our Private Iceland Tours</h2>
       <div class="grid-tours">
         {TOURS.map((t) => (
-          <div id={t.slug} class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7);scroll-margin-top:110px">
+          <div id={t.slug} class="card-clickable" style="display:flex;flex-direction:column;gap:var(--space-6);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-7)">
             <a href={t.href} data-ev="click_link" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)} style="display:contents;text-decoration:none;color:inherit">
               <div class="media-2-1" data-ev="click_image" data-ev-text={t.title} data-ev-tour={tourSlug(t.href)}>
                 <Image class="inset-fill cover" src={t.image} alt="" width={500} quality={80} loading="lazy" />
