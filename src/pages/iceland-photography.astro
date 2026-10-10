@@ -6,39 +6,41 @@ import Section from '../components/Section.astro';
 import Icon from '../components/Icon.astro';
 import Button from '../components/Button.astro';
 
-import introImg from '../assets/images/south-coast-vestrahorn-photographer.webp';
+import introImg from '../assets/images/canyon-waterfall-couple-iceland.webp';
 
 import northernLightsImg from '../assets/images/northern-lights-iceland.webp';
-import blackSandImg from '../assets/images/vestrahorn-black-sand-dunes.webp';
-import waterfallImg from '../assets/images/south-coast-horse-skogafoss-tour.webp';
+import blackSandImg from '../assets/images/reynisfjara-black-sand-traveller.webp';
+import waterfallImg from '../assets/images/highlands-twin-waterfall-couple.webp';
 import highlandsImg from '../assets/images/landmannalaugar-iceland-highlands.webp';
-import glacierImg from '../assets/images/glacier-lagoon-iceland.jpg';
+import glacierImg from '../assets/images/south-coast-horse-skogafoss-tour.webp';
 
 import moment1 from '../assets/images/couple-highlands-overlook-landmannalaugar-iceland-a.webp';
-import moment2 from '../assets/images/couple-private-tour-iceland.webp';
-import moment3 from '../assets/images/south-coast-family-tour.jpg';
-import moment4 from '../assets/images/south-coast-mother-daughter.jpg';
-import moment5 from '../assets/images/highlands-couple-iceland.jpg';
-import moment6 from '../assets/images/engagment-couple-reykjanes.jpg';
+import moment2 from '../assets/images/waterfall-couple-embrace-iceland.webp';
+import moment3 from '../assets/images/south-coast-family-tour.webp';
+import moment4 from '../assets/images/south-coast-mother-daughter.webp';
+import moment5 from '../assets/images/highlands-couple-iceland.webp';
+import moment6 from '../assets/images/engagment-couple-reykjanes.webp';
 
 import gem1 from '../assets/images/reykjanes-eruption-night.webp';
-import gem2 from '../assets/images/diamond-beach-iceland.jpg';
+import gem2 from '../assets/images/diamond-beach-iceland.webp';
 import gem3 from '../assets/images/katla-glacier-hike-south-coast.webp';
 import gem4 from '../assets/images/plane-wreck-south-coast.webp';
 import gem5 from '../assets/images/highlands-aerial-rainbow-mountains.webp';
 import gem6 from '../assets/images/kerid-crater-golden-circle.webp';
-import gem7 from '../assets/images/gullfoss-golden-circle-iceland.jpg';
-import gem8 from '../assets/images/south-coast-glacier-lagoon.jpg';
+import gem7 from '../assets/images/gullfoss-golden-circle-iceland.webp';
+import gem8 from '../assets/images/south-coast-glacier-lagoon.webp';
 
-import video1 from '../assets/images/hidden-waterfall-canyon-hiker-iceland.mp4?url';
-import video2 from '../assets/images/volcano-eruption-lava-flow-vertical-iceland.mp4?url';
+import video1 from '../assets/images/glacier-hiking-crevasse-aerial-b-iceland.mp4?url';
+import video2 from '../assets/images/geothermal-steam-field-couple-iceland.mp4?url';
 
 const LOCATIONS = [
   { image: northernLightsImg, title: 'Northern Lights Photography in Iceland', description: 'Capturing the Northern Lights requires the right conditions, location, and timing. Luke helps travelers find the best viewpoints away from crowds, combining local experience with photography knowledge to create unforgettable aurora images.', tours: ['6 Days Ultimate Adventure'] },
   { image: blackSandImg, title: 'Black Sand Beach Photography', description: 'The volcanic coastline of Iceland creates some of the most recognizable landscapes in the world. Capture dramatic black sand beaches, basalt columns, sea stacks, and Atlantic waves along the South Coast.', tours: ['South Coast Adventure', '3 Days South Coast'] },
   { image: waterfallImg, title: 'Waterfall Photography in Iceland', description: "Iceland's waterfalls are among its most iconic photography locations. From powerful cascades like Skógafoss and Seljalandsfoss to hidden waterfalls in remote valleys, each location offers unique compositions and dramatic landscapes.", tours: ['South Coast Adventure', '3 Days South Coast', 'Highlands Adventure'] },
   { image: highlandsImg, title: 'Highlands Photography Locations in Iceland', description: 'The Icelandic Highlands offer some of the most remote and untouched photography locations in the country. Colorful mountains, lava fields, canyons, and hidden waterfalls create landscapes that feel like another planet.', tours: ['Highlands Adventure', '6 Days Ultimate Adventure'] },
-  { image: glacierImg, title: 'Glacier & Ice Cave Photography', description: 'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.', tours: ['3 Days South Coast', '6 Days Ultimate Adventure'] },
+  // La foto es vertical y el caballo queda abajo del encuadre: sin este
+  // object-position el recorte 2:1 de la tarjeta lo deja fuera.
+  { image: glacierImg, position: 'center 80%', title: 'Glacier & Ice Cave Photography', description: 'Glaciers, ice caves, and glacier lagoons create constantly changing photography opportunities. From floating icebergs to ancient ice formations, these landscapes showcase Iceland at its most dramatic.', tours: ['3 Days South Coast', '6 Days Ultimate Adventure'] },
 ];
 
 const MOMENTS = [moment1, moment2, moment3, moment4, moment5, moment6];
@@ -63,7 +65,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
   <Section tight style="padding-top:var(--space-7)">
     <div class="photo-row">
       <div class="photo-row-media media-frame" style="flex:0 0 460px;border-radius:32px;overflow:hidden;aspect-ratio:460/560">
-        <Image class="cover" src={introImg} alt="Luke photographing the South Coast of Iceland" width={700} quality={80} loading="lazy" />
+        <Image class="cover" src={introImg} alt="Couple in front of a waterfall inside a mossy canyon on a private Iceland photography tour" width={700} quality={80} loading="lazy" />
       </div>
       <div class="text-col">
         <h2 class="sh-lg title-ink">What Makes Photography in Iceland Different</h2>
@@ -94,7 +96,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
         {LOCATIONS.map((l) => (
           <article class="location-card" style="display:flex;flex-direction:column;gap:var(--space-5);background:var(--cream-50);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);padding-bottom:var(--space-6)">
             <div class="media-2-1" data-ev="click_image" data-ev-text={l.title}>
-              <Image class="inset-fill cover" src={l.image} alt="" width={500} quality={80} loading="lazy" />
+              <Image class="inset-fill cover" src={l.image} alt="" width={500} quality={80} loading="lazy" style={l.position ? `object-position:${l.position}` : undefined} />
             </div>
             <div style="display:flex;flex-direction:column;gap:var(--space-4);padding:0 var(--space-6)">
               <div class="stack gap-3">
@@ -155,10 +157,10 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
         <p class="lead-body">Discover the authentic beauty that makes every tour unforgettable.</p>
       </div>
       <div class="video-grid">
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:9/16">
+        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/9">
           <video class="lazy-video cover" data-src={video1} muted loop playsinline autoplay></video>
         </div>
-        <div style="border-radius:24px;overflow:hidden;aspect-ratio:9/16">
+        <div style="border-radius:24px;overflow:hidden;aspect-ratio:16/9">
           <video class="lazy-video cover" data-src={video2} muted loop playsinline autoplay></video>
         </div>
       </div>
@@ -185,7 +187,10 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     scroll-snap-align: start;
   }
 
-  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-7); max-width: 600px; width: 100%; }
+  /* Se sale a proposito del contenedor de 1200px: el padre es un flex column
+     centrado, asi que el desborde queda simetrico. El min() con 100vw evita
+     que aparezca scroll horizontal en pantallas angostas. */
+  .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-7); width: min(1320px, calc(100vw - 2rem)); max-width: none; }
 
   .locations-carousel {
     display: flex;
@@ -230,7 +235,7 @@ const GEMS = [gem1, gem2, gem3, gem4, gem5, gem6, gem7, gem8];
     .photo-hero-title { font-size: 2rem !important; }
     /* Issue #78: a dos columnas los vídeos 9:16 se quedan en ~150px de ancho y no
        se ven; apilados y acotados dan un ancho usable sin ocupar toda la pantalla. */
-    .video-grid { grid-template-columns: 1fr; max-width: 300px; }
+    .video-grid { grid-template-columns: 1fr; width: 100%; max-width: 560px; }
   }
 </style>
 
