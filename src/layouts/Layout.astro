@@ -235,6 +235,65 @@ const canonical = canonicalUrl(path);
       }
     </script>
     <script>
+      // ─── Vídeos en bucle (#69): un único gestor para toda la web ─────────────
+      // Son bucles decorativos de más de 5 s sin control de pausa, así que con
+      // `prefers-reduced-motion: reduce` no deben arrancar. El `autoplay` del
+      // markup no se puede condicionar a una media query, de modo que los vídeos
+      // llevan `data-autoplay` (héroes) o `data-src` (perezosos) y los arranca
+      // este script. Vivía copiado en index, tours e iceland-photography; aquí la
+      // comprobación de la preferencia está en un solo sitio.
+
+      const reduceVideoMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Héroes: por encima del pliegue, con `poster` y `preload="auto"`, así que
+      // la descarga ya ha arrancado al parsear. Con preferencia de reducción
+      // quitamos la fuente y recargamos: eso aborta la descarga y devuelve el
+      // poster a la vista, que es la imagen fija de la misma sección.
+      document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((video) => {
+        if (!reduceVideoMotion) {
+          video.play().catch(() => {});
+          return;
+        }
+        video.removeAttribute('src');
+        video.querySelectorAll('source').forEach((source) => source.remove());
+        video.load();
+      });
+
+      // Perezosos: la fuente se asigna al entrar en pantalla. Estos no tienen
+      // poster, así que con preferencia de reducción sí los cargamos —un hueco
+      // vacío dentro del marco redondeado parecería un fallo de carga— pero los
+      // dejamos parados en el primer fotograma. El salto mínimo fuerza a
+      // pintarlo: sin él, Safari en iOS deja el recuadro en gris.
+      const lazyVideos = document.querySelectorAll<HTMLVideoElement>('video.lazy-video[data-src]');
+
+      const startLazyVideo = (video: HTMLVideoElement) => {
+        video.src = video.dataset.src ?? '';
+        video.load();
+        if (reduceVideoMotion) {
+          video.addEventListener('loadedmetadata', () => { video.currentTime = 0.01; }, { once: true });
+          return;
+        }
+        video.play().catch(() => {});
+      };
+
+      if (!('IntersectionObserver' in window)) {
+        lazyVideos.forEach(startLazyVideo);
+      } else {
+        const videoObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                startLazyVideo(entry.target as HTMLVideoElement);
+                videoObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '200px' }
+        );
+        lazyVideos.forEach((video) => videoObserver.observe(video));
+      }
+    </script>
+    <script>
       // ─── Medición (#85): un único listener para toda la web ──────────────────
       // Lee los atributos data-ev* del elemento pulsado y empuja el evento al
       // dataLayer. Vive SOLO aquí: copiado en un componente que se repite,

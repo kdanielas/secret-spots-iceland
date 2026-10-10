@@ -38,8 +38,11 @@ const posterSrc = framedVideo ? (await getImage({ src: framedImage, width: 1600,
 
 <div class="home-hero-wrap container-pad pb-8">
   <section class:list={['hero-frame', { 'hero-frame-compact': compact }]} style="position:relative;min-height:85vh;border-radius:32px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center">
+    {/* no `autoplay`: started by the shared script in Layout, which skips it
+       under prefers-reduced-motion and drops the source so the poster stays
+       (issue #69). */}
     {framedVideo ? (
-      <video class="inset-fill cover" autoplay muted loop playsinline preload="auto" poster={posterSrc}>
+      <video class="inset-fill cover" data-autoplay muted loop playsinline preload="auto" poster={posterSrc}>
         {/* desktop/tablet only — on mobile no <source> matches, so the browser
            never requests the video and just shows the poster as a still image.
            A `media` attribute can't be written mobile-first, so this is the
