@@ -114,6 +114,13 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   });
   return links;
 }
+
+// The dropdown a trigger opens is rendered twice: as the mega-menu panel that
+// spans the header above 1024px, and as the inline submenu inside the item
+// below it (see CSS). Both need a stable id so aria-controls can name them.
+function menuId(label: string): string {
+  return label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
 ---
 
 <header
@@ -134,7 +141,10 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
           <button
             type="button"
             class="nav-dropdown-trigger"
+            id={`nav-trigger-${menuId(it.label)}`}
             aria-expanded="false"
+            aria-controls={`nav-megamenu-${menuId(it.label)} nav-submenu-${menuId(it.label)}`}
+            aria-current={active === it.label ? 'page' : undefined}
             data-ev="click_nav"
             data-ev-text={it.label}
             data-menu={it.label}
@@ -144,7 +154,12 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
             {it.label}
             <Icon name="chevron-down" size={16} class="nav-dropdown-chevron" />
           </button>
-          <div class="nav-mobile-submenu">
+          <div
+            class="nav-mobile-submenu"
+            id={`nav-submenu-${menuId(it.label)}`}
+            role="group"
+            aria-labelledby={`nav-trigger-${menuId(it.label)}`}
+          >
             {flattenMegaMenu(it.megaMenu).map((link) => (
               <a href={link.href} class="nav-mobile-submenu-link">{link.label}</a>
             ))}
@@ -153,6 +168,7 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
       ) : (
         <a
           href={it.href || '#'}
+          aria-current={active === it.label ? 'page' : undefined}
           data-ev="click_nav"
           data-ev-text={it.label}
           style={`font:var(--type-nav);font-weight:${active === it.label ? 'var(--weight-bold)' : 'var(--weight-regular)'};color:${active === it.label ? 'var(--blue-500)' : textColor};white-space:nowrap;display:inline-flex;align-items:center;gap:4px`}
@@ -169,7 +185,14 @@ function flattenMegaMenu(menu: MegaMenu): ListLink[] {
   </nav>
 
   {NAV.filter((it) => it.megaMenu).map((it) => (
-    <div class="nav-megamenu" data-menu-panel={it.label} data-open="false">
+    <div
+      class="nav-megamenu"
+      id={`nav-megamenu-${menuId(it.label)}`}
+      role="group"
+      aria-labelledby={`nav-trigger-${menuId(it.label)}`}
+      data-menu-panel={it.label}
+      data-open="false"
+    >
       <div class:list={['nav-megamenu-inner', { 'nav-megamenu-dividers': it.megaMenu!.dividers }]}>
         {it.megaMenu!.columns.map((col) => (
           col.type === 'intro' ? (
