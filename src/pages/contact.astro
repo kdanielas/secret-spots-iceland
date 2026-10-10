@@ -209,6 +209,9 @@ const RECAPTCHA_SITE_KEY = import.meta.env.PUBLIC_RECAPTCHA_SITE_KEY;
 
 <Layout title="Plan Your Iceland Adventure - Contact Us | Secret Spots" description="Ready to explore Iceland? Get in touch with Luke to plan your private tour — custom itineraries, hidden gems and professional photography, tailored to you." active="Contact us" transparentNav hideContactPanel footerStyle="border:none;border-top:1px solid rgba(255,255,255,.12)">
   <section class="contact-hero" style="position:relative;overflow:hidden;background:var(--surface-dark-deep);padding-top:calc(var(--space-13) + 64px);padding-bottom:var(--space-13)">
+    {/* Decorativa a propósito (#45): la foto va detrás de un degradado casi
+        opaco y no aporta nada que leer. El alt vacío la saca del lector de
+        pantalla en vez de interrumpir con una descripción que no se ve. */}
     <Image class="inset-fill cover" src={contactBgImg} alt="" width={1920} quality={80} loading="eager" fetchpriority="high" />
     <div class="contact-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,24,36,.78) 0%, rgba(8,24,36,.82) 100%)"></div>
     <div class="container-1200" style="position:relative">

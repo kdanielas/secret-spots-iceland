@@ -255,6 +255,7 @@ const REVIEW_SOURCES = [
               data-ev-text={`reviews_${s.platform.toLowerCase()}`}
             >
               <span class="review-source-icon">
+                {/* Decorativo (#45): el nombre de la plataforma va en el texto de al lado. */}
                 <img src={`/icons/${s.icon}.svg`} alt="" width="20" height="20" style="width:20px;height:20px;object-fit:contain" />
               </span>
               All reviews on {s.platform}
